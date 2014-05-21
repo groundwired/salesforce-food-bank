@@ -1,0 +1,44 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" title="Jasmine Test Runner">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Jasmine Test Runner</title>  
+        
+        <!-- JASMINE -->
+        <link class="user" rel="stylesheet" type="text/css" 
+            href="{!URLFOR($Resource.Angular, 'vendor/jasmine-2.0.0/jasmine.css')}"></link>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/jasmine-2.0.0/jasmine.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/jasmine-2.0.0/jasmine-html.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/jasmine-2.0.0/boot.js')}"></script>
+
+        <!-- lodash underscore utilities -->
+        <script src="{!URLFOR($Resource.Angular, 'vendor/lodash.min.js')}"></script>
+
+        <!-- ANGULAR SOURCE FILES -->
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular-resource.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular-route.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular-cookies.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular-mocks.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular-ui/ui-bootstrap-0.11.0.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular-ui/ui-bootstrap-tpls-0.11.0.min.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.tpl.js')}"></script>
+
+        <!-- APPLICATION SOURCE FILES -->
+        <script src="{!URLFOR($Resource.Angular, 'js/controllers.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'js/directives.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'js/filters.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'js/services.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'js/app.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'js/serverDataStub.js')}"></script>
+
+        <!-- TEST SPEC FILES -->
+        <script src="{!URLFOR($Resource.Angular, 'test/controllersSpec.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'test/servicesSpec.js')}"></script>
+        <script src="{!URLFOR($Resource.Angular, 'test/directivesSpec.js')}"></script>
+
+        <title>Jasmine Spec Runner v2.0.0</title>
+    </head>
+    <body>
+    </body>
+</apex:page>

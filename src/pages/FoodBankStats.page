@@ -1,0 +1,105 @@
+<apex:page controller="FoodBankStats" showHeader="false" sidebar="false" standardStylesheets="false" action="{!loadStats}" renderAs="pdf">
+
+    <div class="container" style="margin-left: 3em;">
+        <h1 style="margin-top: 4em;">Food Bank Statistics</h1>
+        <p><b><i>Report Date:</i></b>&nbsp;&nbsp;<apex:outputText value="{0, date, long}"><apex:param value="{!TODAY()}" /></apex:outputText></p>
+        <p><b><i>Timeframe:</i></b>&nbsp;&nbsp;{!timeframe}</p>
+
+		<h3 style="margin-top:2em;"><i>Households Served</i></h3>
+		<table>
+			<thead>
+		  	<tr>
+		  		<th style="width:8em;"></th>
+		  		<th style="width:6em; text-align:center;">Dupl.</th>
+		  		<th style="width:6em;text-align:center;">Undup.</th>
+		  		<th style="width:6em;text-align:center;">Total</th>
+		  	</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th style="text-align:right;">One Person</th>
+					<td style="text-align:center;">{!onePerson[0]}</td>
+					<td style="text-align:center;">{!onePerson[1]}</td>
+					<td style="text-align:center;">{!onePerson[2]}</td>
+				</tr>
+				<tr>
+					<th style="text-align:right;">More Than One</th>
+					<td style="text-align:center;">{!overOnePerson[0]}</td>
+					<td style="text-align:center;">{!overOnePerson[1]}</td>
+					<td style="text-align:center;">{!overOnePerson[2]}</td>
+				</tr>
+			</tbody>
+			<tfooter>
+		  	<tr>
+		  		<th  style="text-align:right;">Total</th>
+					<td style="text-align:center;">{!hhVisits[0]}</td>
+					<td style="text-align:center;">{!hhVisits[1]}</td>
+					<td style="text-align:center;">{!hhVisits[2]}</td>
+		  	</tr>
+			</tfooter>
+		</table>
+
+	  <h3 style="margin-top:2em;"><i>Individuals Served</i></h3>
+	  <table>
+	  	<thead>
+		  	<tr class="text-center">
+		  		<th style="width:8em;"></th>
+		  		<th style="width:6em; text-align:center;">Dupl.</th>
+		  		<th style="width:6em;text-align:center;">Undup.</th>
+		  		<th style="width:6em;text-align:center;">Total</th>
+		  	</tr>
+	  	</thead>
+	  	<tbody>
+	  		<tr>
+	  			<th style="text-align:right;">Adults</th>
+	  			<td style="text-align:center;">{!adults[0]}</td>
+	  			<td style="text-align:center;">{!adults[1]}</td>
+	  			<td style="text-align:center;">{!adults[2]}</td>
+	  		</tr>
+	  		<tr>
+	  			<th style="text-align:right;">Children</th>
+	  			<td style="text-align:center;">{!children[0]}</td>
+	  			<td style="text-align:center;">{!children[1]}</td>
+	  			<td style="text-align:center;">{!children[2]}</td>
+	  		</tr>
+	  		<tr>
+	  			<th style="text-align:right;">Infants</th>
+	  			<td style="text-align:center;">{!infants[0]}</td>
+	  			<td style="text-align:center;">{!infants[1]}</td>
+	  			<td style="text-align:center;">{!infants[2]}</td>
+	  		</tr>
+	  		<tr>
+	  			<th style="text-align:right;">Seniors</th>
+	  			<td style="text-align:center;">{!seniors[0]}</td>
+	  			<td style="text-align:center;">{!seniors[1]}</td>
+	  			<td style="text-align:center;">{!seniors[2]}</td>
+	  		</tr>
+	  	</tbody>
+	  	<tfooter>
+		  	<tr>
+		  		<th style="text-align:right;">Total</th>
+	  			<td style="text-align:center;">{!total[0]}</td>
+	  			<td style="text-align:center;">{!total[1]}</td>
+	  			<td style="text-align:center;">{!total[2]}</td>
+		  	</tr>
+		  	<tr>
+		  		<th style="text-align:right; padding-top:9px;">Homeless</th>
+	  			<td style="text-align:center; padding-top:10px;">{!homeless[0]}</td>
+	  			<td style="text-align:center; padding-top:10px;">{!homeless[1]}</td>
+	  			<td style="text-align:center; padding-top:10px;">{!homeless[2]}</td>
+		  	</tr>
+	  	</tfooter>
+	  </table>
+
+	 <h3 style="margin-top:2em;"><i>Distribution Summary</i></h3>
+
+	  <table>
+	  	<tbody>
+	  		<tr>
+	  			<th style="width:8em;">Points Used</th>
+	  			<td style="width:6em; text-align:center;">{!pointsUsed}</td>
+	  		</tr>
+		</tbody>
+		</table>
+	</div>
+</apex:page>

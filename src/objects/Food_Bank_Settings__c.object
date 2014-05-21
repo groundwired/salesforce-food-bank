@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <description>General settings for food bank application</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Allow_Box_Size_Override__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, staff has the option to specify the box size to provide, overriding the default for the family size.</inlineHelpText>
+        <label>Allow Bag/Box Size Override</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Allow_Overage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, staff can override the alert that monthly point or visit limits have been exceeded.</inlineHelpText>
+        <label>Allow Overage</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Monthly_Base_Points__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of monthly points for a one-person household.  Leave blank if you do not limit points.</inlineHelpText>
+        <label>Monthly Base Points</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monthly_Points_Per_Adult__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Additional monthly points per adult over one.</inlineHelpText>
+        <label>Monthly Points Per Adult</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monthly_Points_Per_Child__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Additional monthly points per child in household.</inlineHelpText>
+        <label>Monthly Points Per Child</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Monthly_Visit_Limit__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Total number of visits allowed per month.  Leave blank if there is no limit.</inlineHelpText>
+        <label>Monthly Visit Limit</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Proof_of_Address_Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this to require proof of address for new client households.</inlineHelpText>
+        <label>Proof of Address Required</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Proof_of_Address_Update_Interval__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of months after which updated proof of address is required for existing households.</inlineHelpText>
+        <label>Proof of Address Update Interval</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Require_Unique_Address__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box to prevent users from adding duplicate addresses.  If unchecked, users are still alerted when entering a duplicate, but can choose to continue.</inlineHelpText>
+        <label>Require Unique Address</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Track_Points__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if you track monthly points. If unchecked, application will track bag/box size instead.</inlineHelpText>
+        <label>Track Points</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Weekly_Visit_Limit__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Total number of visits allowed per week. Leave blank if there is no limit, or if you limit visits by month.</inlineHelpText>
+        <label>Weekly Visit Limit</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Welcome_Alert__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Optional alert that will be shown prominently on Food Bank intake tab.</inlineHelpText>
+        <label>Welcome Alert</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Welcome_Message__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Shown at top of Food Bank intake tab</inlineHelpText>
+        <label>Welcome Message</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Food Bank Settings</label>
+</CustomObject>

@@ -1,0 +1,13 @@
+.project
+.settings
+salesforce.schema
+Referenced Packages
+salesforce-food-bank.sublime-project
+salesforce-food-bank.sublime-settings
+salesforce-food-bank.sublime-workspace
+/resource-bundles/Angular.resource/mm.log
+/config/
+/apex-scripts/
+/.DS_Store
+
+/resource-bundles/.DS_Store

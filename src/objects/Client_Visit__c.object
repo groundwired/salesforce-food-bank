@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <fields>
+        <fullName>Adults__c</fullName>
+        <externalId>false</externalId>
+        <label>Adults</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Box_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Bag/Box Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Small</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Large</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Extra-Large</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Special Diet</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Children__c</fullName>
+        <externalId>false</externalId>
+        <label>Children</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Commodity_Usage_JSON__c</fullName>
+        <description>JSON List showing amount of each commodity item used this visit.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>JSON List showing amount of each commodity item used this visit.</inlineHelpText>
+        <label>Commodity Usage JSON</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>External_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>External ID</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Visit_This_Year__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>A trigger automatically checks this box for the household&apos;s first visit in the calendar year.</inlineHelpText>
+        <label>First Visit This Year</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Homeless_Counter__c</fullName>
+        <description>Allows us to summarize homeless visits.</description>
+        <externalId>false</externalId>
+        <formula>IF(Homeless__c, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Allows us to summarize homeless visits.</inlineHelpText>
+        <label>Homeless Counter</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Homeless__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Homeless</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Household__c</fullName>
+        <externalId>false</externalId>
+        <label>Household</label>
+        <referenceTo>Client_Household__c</referenceTo>
+        <relationshipName>Visits</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Infants__c</fullName>
+        <externalId>false</externalId>
+        <label>Infants</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>More_Than_One_Person__c</fullName>
+        <description>If the household had one person, this is 0; if more than one person, it is 1.  Allows us to compile statistics for more than one person.</description>
+        <externalId>false</externalId>
+        <formula>IF(Total_People__c &gt; 1, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If the household had one person, this is 0; if more than one person, it is 1.  Allows us to compile statistics for more than one person.</inlineHelpText>
+        <label>More Than One Person</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Points_Used__c</fullName>
+        <externalId>false</externalId>
+        <label>Points Used</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Seniors__c</fullName>
+        <externalId>false</externalId>
+        <label>Seniors</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_People__c</fullName>
+        <externalId>false</externalId>
+        <formula>Adults__c + Children__c + Seniors__c + Infants__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total People</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Date__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <externalId>false</externalId>
+        <label>Visit Date</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <label>Client Visit</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Household__c</columns>
+        <columns>Visit_Date__c</columns>
+        <columns>Total_People__c</columns>
+        <columns>Points_Used__c</columns>
+        <columns>First_Visit_This_Year__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Past7</fullName>
+        <columns>NAME</columns>
+        <columns>Household__c</columns>
+        <columns>Visit_Date__c</columns>
+        <columns>Total_People__c</columns>
+        <columns>Points_Used__c</columns>
+        <columns>First_Visit_This_Year__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Visit_Date__c</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:7</value>
+        </filters>
+        <label>Past 7 Days</label>
+    </listViews>
+    <nameField>
+        <displayFormat>V-{00000000}</displayFormat>
+        <label>Visit Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Client Visits</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Household__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Visit_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Total_People__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Points_Used__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>First_Visit_This_Year__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Visit_Date__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Household__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Visit_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Total_People__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Points_Used__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>First_Visit_This_Year__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

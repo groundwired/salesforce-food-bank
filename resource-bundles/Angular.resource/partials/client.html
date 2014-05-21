@@ -1,0 +1,43 @@
+<!-- Client check-in page -->
+<div class="col-md-12" id="checkInBox">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-7">
+                    <div ng-show="data.household">
+                        <h3 style="margin-top:8px;">{{data.household.name}}</h3>
+                        <p>Client Since {{data.household.firstVisitDate | date:'yyyy'}}<br />
+                           Most Recent Visit: 
+                           <span style="font-weight:500">{{data.household.mostRecentVisitDate | date:'MMMM dd, yyyy \'at\' h:mm a'}}</span></p>
+                    </div>
+                </div>
+                <div class="col-md-5 text-right" style="margin-top:8px;">
+                    <span class="label label-primary" ng-show="data.household.homeless">Homeless</span>
+                    <span class="label label-primary">No Cook</span>
+                    <span class="label label-primary">Special Diet</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-btnbar text-center" ng-show="data.household">
+            <a class="btn btn-primary" ng-click="checkIn()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Check In</a>
+            <a class="btn btn-success" ng-href="#/log_visit/{{data.household.id}}" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
+            <a class="btn btn-default" ng-click="cancelEdit()">Cancel</a>
+        </div>
+        <div class="panel-body" ng-show="data.household">
+            <div class="col-md-7">
+                <div ng-include="pathTo('partials/address.html')"></div>
+                <div ng-include="pathTo('partials/members.html')"></div>
+                <div ng-include="pathTo('partials/notes.html')"></div>
+                <div ng-include="pathTo('partials/history.html')"></div>
+            </div>
+            <div class="col-md-5">
+                <div ng-include="pathTo('partials/available.html')"></div>
+            </div>
+        </div>
+        <div class="panel-footer text-center" ng-show="data.household">
+            <a class="btn btn-primary" ng-click="checkIn()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Check In</a>
+            <a class="btn btn-success" ng-href="#/log_visit/{{data.household.id}}" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
+            <a class="btn btn-default" ng-click="cancelEdit()">Cancel</a>
+        </div>
+    </div>
+</div>

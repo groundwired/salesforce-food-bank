@@ -1,0 +1,60 @@
+<!-- 
+- Home page for the Food Bank Manager app when running outside Salesforce.com
+-->
+<html ng-app="foodBankApp" ng-controller="mainController">
+    <head>
+        <title>Food Bank Manager</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link class="user" rel="stylesheet" type="text/css" href="css/bootstrap-namespaced.css" />
+        <link class="user" rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+        <link class="user" rel="stylesheet" type="text/css" href="css/foodbank.css" />
+
+        <!-- lodash underscore utilities -->
+        <script src="vendor/lodash.min.js"></script>
+
+        <!-- load the angular javascript libraries -->
+        <script src="vendor/angular/angular.min.js"></script>
+        <script src="vendor/angular/angular-resource.min.js"></script>
+        <script src="vendor/angular/angular-route.min.js"></script>
+        <script src="vendor/angular/angular-cookies.min.js"></script>
+        <script src="vendor/angular-ui/ui-bootstrap-0.11.0.min.js"></script>
+        <script src="vendor/angular-ui/ui-bootstrap-tpls-0.11.0.min.js"></script>
+        <script src="vendor/angular-strap/angular-strap.js"></script>
+        <script src="vendor/angular-strap/angular-strap.tpl.js"></script>
+
+        <!-- our angular javascript app -->
+        <script src="js/controllers.js"></script>
+        <script src="js/directives.js"></script>
+        <!--<script src="js/filters.js"></script>-->
+        <script src="js/services.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/serverDataStub.js"></script>
+    </head>
+    <div class="bootstrap"> 
+        <div class="container" style="min-height:800px;" ng-controller="mainController">
+
+            <!-- shared page header  -->
+            <div class="page-header" style="margin-top:30px;">
+                <h1 style="margin-bottom: 5px;">
+                    <img style="margin: 0 3px 7px 2px;" height="32" width="32" 
+                        ng-src="{{basePath}}/img/shoppingCart32.png" />
+                    Food Bank Manager
+                </h1>
+            </div>
+
+            <!-- display alerts here  -->
+            <div class="alertContainer"></div>
+
+            <!-- loading spinner -->
+            <div class="center-overlay" ng-show="status.loading" >
+              <img ng-src="{{basePath}}/img/loading-white.gif" alt="Loading..." />
+              <div>Loading</div>
+            </div>
+
+            <!-- display our angular page here  -->
+            <div class="ng-view"></div>
+        </div>
+    </div>
+</html>
