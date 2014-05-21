@@ -3,7 +3,7 @@
     
     <div class="panel-heading">
         <div class="row">
-            <div class="col-sm-6" style="font-size:16px; vertical-align:middle; font-weight:500;">
+            <div class="col-sm-6">
                 Address &amp; Phone
             </div>
             <div class="col-sm-6 text-right">
@@ -12,7 +12,7 @@
                 <button class="btn btn-success btn-sm panel-button"
                     ng-click="editAddress();" ng-show="!status.editingAddress"><i  style="line-height: 1.3em;" class="fa fa-pencil"></i></button>
 
-                <button class="btn btn-success btn-sm panel-button" style=""
+                <button class="btn btn-success btn-sm panel-button"
                     ng-click="saveAddress()" ng-show="status.editingAddress" 
                     ng-disabled="status.savingAddress">Save<i ng-show="status.savingAddress" 
                     class="fa fa-refresh fa-spin" style="margin-left:6px;"></i></button>

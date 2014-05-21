@@ -45,3 +45,8 @@ body { margin:0px; }
 .bootstrap .alert:focus, .bootstrap .dropdown-menu:focus {
   outline: 0px;
 }
+.bootstrap .panel .panel .panel-heading, .bootstrap .panel .panel .panel-heading .row div {
+  font-size:16px; 
+  vertical-align:middle; 
+  font-weight:500;
+}

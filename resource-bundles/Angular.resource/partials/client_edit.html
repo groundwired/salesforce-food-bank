@@ -13,11 +13,6 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-5 text-right" style="margin-top:8px;">
-                    <span class="label label-primary" ng-show="data.household.homeless">Homeless</span>
-                    <span class="label label-primary">No Cook</span>
-                    <span class="label label-primary">Special Diet</span>
-                </div>
             </div>
         </div>
         <div class="panel-btnbar text-center" ng-show="data.household">
@@ -27,56 +22,10 @@
         </div>
         <div class="panel-body" ng-show="data.household">
             <div class="col-lg-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-sm-6" style="font-size:16px; vertical-align:middle; font-weight:500;">
-                                Address &amp; Phone
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group col-sm-8">
-                            <label>Address</label>
-                            <input type="text" class="form-control" name="address" placeholder="0000 Main St" 
-                                ng-maxlength="50" ng-model="data.household.address" 
-                                ng-disabled="data.household.homeless" autofocus="autofocus">
-                        </div>
-                        <div class="form-group col-sm-4 text-right">
-                            <input type="checkbox" name="homeless" ng-model="data.household.homeless"></input>&nbsp;
-                            <label>Homeless</label>
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label>City</label>
-                            <input type="text" class="form-control" name="city" placeholder="Anytown"
-                                ng-maxlength="50" ng-model="data.household.city">
-                        </div>
-                        <div class="form-group col-sm-2">
-                            <label>St</label>
-                            <input type="text" class="form-control" name="state" placeholder="US"
-                                ng-maxlength="50" ng-model="data.household.state">
-                        </div>
-                        <div class="form-group col-sm-4">
-                            <label>Zip</label>
-                            <input type="text" class="form-control" name="postalCode" placeholder="00000"
-                                ng-maxlength="20" ng-model="data.household.postalCode">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label>Phone</label>
-                            <input type="text" class="form-control" name="phone" placeholder="(000) 000-0000"
-                                ng-maxlength="50" ng-model="data.household.phone">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label>Proof of Address</label>
-                            <input type="text" class="form-control" name="proof" placeholder="Initials / type of proof"
-                                ng-maxlength="50" >
-                        </div>
-                    </div>
-                </div>
                 <div class="panel panel-default" ng-controller="memberListController" >
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-sm-6" style="font-size:16px; vertical-align:middle; font-weight:500;">
+                            <div class="col-sm-6">
                                 Household Members
                             </div>
                         </div>
@@ -146,12 +95,74 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Address &amp; Phone
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group col-sm-8">
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="0000 Main St" 
+                                ng-maxlength="50" ng-model="data.household.address" 
+                                ng-disabled="data.household.homeless" autofocus="autofocus">
+                        </div>
+                        <div class="form-group col-sm-4 text-right">
+                            <input type="checkbox" name="homeless" ng-model="data.household.homeless"></input>&nbsp;
+                            <label>Homeless</label>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>City</label>
+                            <input type="text" class="form-control" name="city" placeholder="Anytown"
+                                ng-maxlength="50" ng-model="data.household.city">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label>St</label>
+                            <input type="text" class="form-control" name="state" placeholder="US"
+                                ng-maxlength="50" ng-model="data.household.state">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>Zip</label>
+                            <input type="text" class="form-control" name="postalCode" placeholder="00000"
+                                ng-maxlength="20" ng-model="data.household.postalCode">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="(000) 000-0000"
+                                ng-maxlength="50" ng-model="data.household.phone">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Proof of Address</label>
+                            <input type="text" class="form-control" name="proof" placeholder="Initials / type of proof"
+                                ng-maxlength="50" >
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Tags
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <span class="label label-primary" ng-show="data.household.homeless">Homeless</span>
+                            <span class="label label-primary">No Cook</span>
+                            <span class="label label-primary">Special Diet</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default" ng-controller="notesController">
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-sm-6" style="font-size:16px; vertical-align:middle; font-weight:500;">
+                            <div class="col-sm-6">
                                 Notes
                             </div>
                         </div>
