@@ -5,7 +5,11 @@ Food Bank Manager built on Salesforce using Angular.js
 
 This is a Salesforce.com and AngularJS application that tracks clients and service delivery for food banks.
 
-http://youtu.be/vzvGtpBY08E
+![Food Bank App Check-in Screen](foodbankmgr.png)
+
+## Intro Video
+
+Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
 
 
 ##Getting Started
