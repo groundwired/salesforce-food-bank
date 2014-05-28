@@ -29,10 +29,11 @@ angular.module('appServices')
                 deferred.resolve(result);
               } else {
                 // need to check for server disconnect
-                if (!navigator.onLine || !event.message || event.message.indexOf('Unable to connect to the server') > 0) {
+                if (!navigator.onLine || !event.message || event.message.indexOf('Unable to connect to the server') >= 0) {
                   $rootScope.$broadcast('alert:offline', event);
-                } else if (event.message == 'Invalid session.  Re-login and retry.' ||
-                           event.message == 'Error parsing json response: \n\n \'Unexpected token <\'.  Logged in?' ) {
+                } else if (event.message.indexOf('Invalid session') >= 0 ||
+                           event.message.indexOf('Error parsing json response') >= 0 ||
+                           event.message.indexOf('Remoting request invalid for your session') >= 0) {
                   $rootScope.$broadcast('alert:nosession', event);
                 }
                 deferred.reject(event);
