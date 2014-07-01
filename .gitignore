@@ -11,3 +11,6 @@ salesforce-food-bank.sublime-workspace
 /.DS_Store
 
 /resource-bundles/.DS_Store
+
+/resource-bundles/Angular.resource/mmui.log
+/resource-bundles/Angular.resource/mmst.log
