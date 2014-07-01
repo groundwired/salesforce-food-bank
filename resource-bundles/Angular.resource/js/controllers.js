@@ -281,8 +281,12 @@ angular.module('appControllers')
             duration: 1.5
           });
           $timeout(function(){
-            $location.url('/');
-          }, 1500);      
+            if ($routeParams.action) {
+              $location.url('/' + $routeParams.action + '/' + result.id);
+            } else {
+              $location.url('/client/' + result.id);
+            }
+          }, 1500);
         },
         function(reason){
           $scope.status.savingClient = false;
