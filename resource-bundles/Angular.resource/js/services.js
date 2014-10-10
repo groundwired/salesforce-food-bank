@@ -150,7 +150,6 @@ angular.module('appServices')
       },
       getSObject: function( hh ) {
         var sobj = {
-          Id: hh.id,
           Client_Names__c: hh.name,
           Full_Address__c: hh.fullAddress,
           Total_Visits__c: hh.totalVisits,
@@ -178,18 +177,20 @@ angular.module('appServices')
           Proof_of_Address__c: hh.proofOfAddress,
           Inactive__c: hh.inactive
         };
+        if (hh.id) sobj.Id = hh.id;
         return sobj;
       },
 
-      getMemberSObject : function( v ) {
+      getMemberSObject : function( mobj ) {
+        var v = mobj.memberData;
         var sobj = {
-          Id: v.id,
           First_Name__c: v.firstName,
           Last_Name__c: v.lastName,
           Age_Group__c: v.ageGroup,
           Age__c: v.age //,
           //Birthdate__c: new Date(v.birthdate)
         };
+        if (v.id) sobj.Id = v.id;
         return sobj;
       },
 
