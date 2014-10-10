@@ -2,7 +2,10 @@
 
 /* Controllers */
 
-angular.module('appControllers', []);
+angular.module('appControllers', [
+    'ngRoute',
+    'mgcrea.ngStrap'
+  ]);
 
 angular.module('appControllers')
   .controller('mainController', ['$scope', '$rootScope', 'basePath', '$alert', '$timeout', '$window',
@@ -447,8 +450,8 @@ angular.module('appControllers')
   }]);
 
 angular.module('appControllers')
-  .controller('memberListController', ['$scope', '$alert', 'fbSaveHouseholdMembers',
-    function($scope, $alert, fbSaveHouseholdMembers) {
+  .controller('memberListController', ['$scope', '$alert', '$modal', 'basePath', 'fbSaveHouseholdMembers',
+    function($scope, $alert, $modal, basePath, fbSaveHouseholdMembers) {
 
     $scope.status.editingMembers = false;
     $scope.status.savingMembers = false;
@@ -460,8 +463,24 @@ angular.module('appControllers')
       $scope.status.editingMembers = true;
     };
 
+    var deleteModal;
     $scope.deleteMember = function(i) {
-      $scope.data.memberList.splice(i, 1);
+      if (!!$scope.data.memberList[i].memberData.id) {
+        deleteModal = $modal({title: 'Delete Household Member', contentTemplate: basePath + '/partials/delete_modal.html', show: false, scope: $scope});
+        deleteModal.memberIndex = i;
+        debugger;
+        deleteModal.show();
+      } else {
+        $scope.data.memberList.splice(i, 1);
+      }
+    };
+
+    $scope.deleteClient = function() {
+      $scope.data.memberList.splice(deleteModal.memberIndex, 1);
+    };
+
+    $scope.moveClient = function() {
+      $scope.data.memberList.splice(deleteModal.memberIndex, 1);
     };
 
     $scope.saveMembers = function() {
