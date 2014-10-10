@@ -321,7 +321,7 @@ angular.module('appServices')
   .factory('fbSaveHouseholdAndMembers', ['jsRemoting', 'fbHouseholdDetail', function(jsRemoting, fbHouseholdDetail) {
     return function( hh, members ) {
       var memberList = _.map(members, fbHouseholdDetail.getMemberSObject);
-      return jsRemoting.invoke('saveHouseholdMembers', [fbHouseholdDetail.getSObject(hh), memberList], fbHouseholdDetail.translate);
+      return jsRemoting.invoke('saveHouseholdAndMembers', [fbHouseholdDetail.getSObject(hh), memberList], fbHouseholdDetail.translate);
     };
   }]);
 
