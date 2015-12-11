@@ -133,7 +133,7 @@
                 </div>
             </div>   
             <div class="panel-footer text-center">
-                <a class="btn btn-success" ng-click="recordVisit();" ng-disabled="logging || (pointsRemaining == 0)" >
+                <a class="btn btn-success" ng-click="recordVisit();" ng-disabled="logging || (pointsRemaining == 0) || visitForm.$invalid || commForm.$invalid" >
                     Record Visit
                     <i ng-show="logging" class="fa fa-refresh fa-spin"></i>
                 </a>
