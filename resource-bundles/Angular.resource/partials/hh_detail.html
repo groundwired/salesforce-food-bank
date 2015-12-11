@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="panel-body" ng-show="household">
-        <dl class="dl-horizontal">
+        <dl class="dl-horizontal" ng-show="data.household.totalVisits">
           <dt>Client Since</dt>
           <dd>{{household.firstVisitDate | date:'yyyy'}}</dd>
           <dt>Most Recent Visit</dt>
