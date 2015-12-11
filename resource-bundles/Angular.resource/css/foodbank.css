@@ -50,3 +50,10 @@ body { margin:0px; }
   vertical-align:middle; 
   font-weight:500;
 }
+.bootstrap .input-group-sm input.input-sm {
+  width:6em;
+}
+.bootstrap .input-group .help-block {
+  margin-bottom: 0;
+  font-size:smaller;
+}
