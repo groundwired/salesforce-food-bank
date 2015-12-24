@@ -30,6 +30,7 @@ public with sharing class FoodBankSettings {
 					general.Require_Unique_Address__c = false;
 					general.Track_Points__c = true;
 					general.Weekly_Visit_Limit__c = null;
+                    general.Tags__c = 'Special Diet; Spanish Speaker';
 					general.Welcome_Alert__c = 'Hello!';
 					general.Welcome_Message__c = 'Welcome to the food bank.';
 				}

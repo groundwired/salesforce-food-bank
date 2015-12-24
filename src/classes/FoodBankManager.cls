@@ -34,8 +34,8 @@ public with sharing class FoodBankManager {
         Client_Household__c hh = 
             [select Id, Name, CreatedDate, LastModifiedDate, First_Visit__c, Most_Recent_Visit__c, 
                 Total_Visits__c, Proof_of_Address_Date__c, Homeless__c, Address__c, City__c, State__c, Postal_Code__c, 
-                Inactive__c, Notes__c, Special_Diet__c, Source__c, External_ID__c, No_Cook__c, Adults__c, 
-                Children__c, Infants__c, Seniors__c, Client_Names__c, Full_Address__c, 
+                Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c, 
+                Children__c, Infants__c, Seniors__c, Client_Names__c, Full_Address__c, Tags__c,
                 Staff_Notes__c, Infant_Card_Expires__c, Phone__c,
                 (select Id, Name, First_Name__c, Last_Name__c, Age_Group__c, Age__c, Birthdate__c from Clients__r),
                 (select Points_Used__c, Commodity_Usage_JSON__c from Visits__r where Visit_Date__c = THIS_MONTH)

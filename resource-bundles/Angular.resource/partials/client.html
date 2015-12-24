@@ -16,12 +16,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-5 text-right" style="margin-top:8px;">
+<!--                 <div class="col-md-5 text-right" style="margin-top:8px;">
                     <span class="label label-primary" ng-show="data.household.homeless">Homeless</span>
                     <span class="label label-primary">No Cook</span>
                     <span class="label label-primary">Special Diet</span>
                 </div>
-            </div>
+ -->
+             </div>
         </div>
         <div class="panel-btnbar text-center" ng-show="data.household">
             <a class="btn btn-primary" ng-click="checkIn()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Check In</a>
@@ -36,6 +37,7 @@
                 <div ng-include="pathTo('partials/history.html')"></div>
             </div>
             <div class="col-md-5">
+                <div ng-include="pathTo('partials/tags.html')" ng-if="settings.tags"></div>
                 <div ng-include="pathTo('partials/available.html')"></div>
             </div>
         </div>

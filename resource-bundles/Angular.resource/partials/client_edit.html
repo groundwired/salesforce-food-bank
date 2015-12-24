@@ -146,7 +146,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="panel panel-default" >
+                <div class="panel panel-default" ng-if="settings.tags">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -155,10 +155,19 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        <div class="pull-right">
+                            <div ng-dropdown-multiselect="" 
+                                    options="tagDropdown.options" 
+                                    selected-model="tagDropdown.selected" 
+                                    events="tagDropdown.events"
+                                    extra-settings="tagDropdown.settings"></div>
+                        </div>
+
                         <div class="form-group">
-                            <span class="label label-primary" ng-show="data.household.homeless">Homeless</span>
-                            <span class="label label-primary">No Cook</span>
-                            <span class="label label-primary">Special Diet</span>
+                            <span ng-if="data.household.tags.length == 0"><i>No tags set</i></span>
+                            <span ng-repeat="tag in data.household.tags">
+                                <span class="label label-primary label-large">{{tag}}</span>
+                            </span>
                         </div>
                     </div>
                 </div>

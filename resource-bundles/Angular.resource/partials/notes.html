@@ -12,12 +12,12 @@
 
                 <button class="btn btn-success btn-sm panel-button"
                     ng-click="saveNotes()" ng-show="status.editingNotes" 
-                    ng-disabled="status.savingAddress">Save</span><i ng-show="status.savingAddress" 
+                    ng-disabled="status.savingNotes">Save</span><i ng-show="status.savingNotes" 
                     class="fa fa-refresh fa-spin" style="margin-left:6px;"></i></button>
                 
                 <button class="btn btn-sm panel-button"
                     ng-click="cancelNotes();" ng-show="status.editingNotes" 
-                    ng-disabled="status.savingAddress"><span class="glyphicon glyphicon-remove" style="line-height: 1.3em;"></span></button>
+                    ng-disabled="status.savingNotes"><span class="glyphicon glyphicon-remove" style="line-height: 1.3em;"></span></button>
             </div>
         </div>
     </div>

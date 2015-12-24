@@ -118,6 +118,8 @@ angular.module('appServices')
             settings.general.welcomeAlert = result.general.Welcome_Alert__c;
             settings.general.welcomeMessage = result.general.Welcome_Message__c;
             
+            settings.tags = (result.general.Tags__c) ? (_.map(result.general.Tags__c.split(';'), _.trim)) : [];
+
             settings.commodities = [];
             _.forEach(result.commodities, function(c){
               settings.commodities.push({
@@ -134,6 +136,7 @@ angular.module('appServices')
                 'minimumFamilySize': c.Minimum_Family_Size__c
               });
             });
+
             return settings;
           });
         }
@@ -154,8 +157,7 @@ angular.module('appServices')
           Full_Address__c: hh.fullAddress,
           Total_Visits__c: hh.totalVisits,
           Monthly_Points_Available__c: hh.monthlyPointsAvailable,
-          No_Cook__c: hh.noCook,
-          Special_Diet__c: hh.specialDiet,
+          Tags__c: hh.tags ? hh.tags.join(';') : null,
           Address__c: hh.address,
           City__c: hh.city,
           State__c: hh.state,
@@ -201,8 +203,7 @@ angular.module('appServices')
           fullAddress: result.Full_Address__c,
           totalVisits: result.Total_Visits__c,
           monthlyPointsAvailable: result.Monthly_Points_Available__c,
-          noCook: result.No_Cook__c,
-          specialDiet: result.Special_Diet__c,
+          tags: (result.Tags__c) ? (_.map(result.Tags__c.split(';'), _.trim)) : [],
           address: result.Address__c,
           city: result.City__c,
           state: result.State__c,
