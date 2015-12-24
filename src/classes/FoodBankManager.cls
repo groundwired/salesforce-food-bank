@@ -155,8 +155,6 @@ public with sharing class FoodBankManager {
 
     @RemoteAction
     public static void checkIn( Id hhid ) {
-        if ( Food_Bank_Checkin__c.getInstance( hhid ) != null )
-            return;
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
 
@@ -168,7 +166,7 @@ public with sharing class FoodBankManager {
         if (Food_Bank_Checkin__c.getInstance( hhid ) != null) {
             throw new FoodBankException('Already checked in.');
         } else {
-            fbc.name = hh.id;
+            fbc.name = hhid;
             fbc.Client_Name__c = hh.client_names__c;
             fbc.Points_Remaining__c = getMonthlyPoints( hh );
             for (Client_Visit__c cv : hh.Visits__r)
