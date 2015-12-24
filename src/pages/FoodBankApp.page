@@ -32,6 +32,7 @@
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular-ui/ui-bootstrap-tpls-0.11.0.min.js')}"></script>
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.js')}"></script>
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.tpl.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'vendor/angularjs-dropdown-multiselect.js')}"></script>            
 
             <!-- our angular javascript app -->
             <script src="{!URLFOR($Resource.Angular, 'js/controllers.js')}"></script>

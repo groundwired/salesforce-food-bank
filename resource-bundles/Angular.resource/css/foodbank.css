@@ -50,3 +50,25 @@ body { margin:0px; }
   vertical-align:middle; 
   font-weight:500;
 }
+.bootstrap .input-group-sm input.input-sm {
+  width:6em;
+}
+.bootstrap .input-group .help-block {
+  margin-bottom: 0;
+  font-size:smaller;
+}
+.bootstrap .label-large {
+  font-size: 13px;
+  margin-right: 3px;
+  line-height: 2.1;
+}
+.bootstrap .dropdown-multiselect .btn-default {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+.bootstrap .dropdown-multiselect ul li {
+  margin-left: 2px;
+}

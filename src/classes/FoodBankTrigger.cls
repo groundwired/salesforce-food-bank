@@ -104,7 +104,7 @@ Commodity_Usage_JSON__c, Full_Address__c from Client_Household__c
 				[select Id, Full_Address__c, Client_Names__c, Adults__c, Seniors__c, Children__c, Infants__c,
 					(select Id, Name, First_Name__c, Last_Name__c, Age__c, Age_Entry_Date__c, Birthdate__c, 
 						Client_Household__c from Clients__r
-						where Id not in : clientList order by createdDate, Age__c desc)
+						where Id not in : clientList order by createdDate, Id, Age__c desc)
 					from Client_Household__c where id in : triggerHHMap.keyset()] ) {
 
 			list<Client__c> allMembers = new list<Client__c>();

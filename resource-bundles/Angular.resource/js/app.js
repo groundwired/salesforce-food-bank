@@ -7,10 +7,11 @@ angular.module('foodBankApp', [
     'ngCookies',
     'ui.bootstrap',
     'mgcrea.ngStrap',
+    'angularjs-dropdown-multiselect',
     'appServerData',
     'appServices',
     'appControllers',
-    'appDirectives'
+    'appDirectives',
   ])
   .config(['$alertProvider', function($alertProvider) {
     _.extend($alertProvider.defaults, {

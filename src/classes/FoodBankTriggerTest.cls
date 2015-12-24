@@ -38,7 +38,7 @@ public with sharing class FoodBankTriggerTest {
 		Client__c c7 = [select id, age__c, name, client_household__r.client_names__c, client_household__r.adults__c, client_household__r.children__c
 							from Client__c where id =: c6.id];
 		system.assertEquals('Andrew Testy', c7.name );
-		system.assertEquals('Jane and Bob Test and Andrew Testy', c7.client_household__r.client_names__c );
+		system.assertEquals('Jane and Bob Test', c7.client_household__r.client_names__c );
 		system.assertEquals(3, c7.client_household__r.adults__c );
 		system.assertEquals(1, c7.client_household__r.children__c );
 

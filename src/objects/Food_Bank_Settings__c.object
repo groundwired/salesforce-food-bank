@@ -10,6 +10,7 @@
         <externalId>false</externalId>
         <inlineHelpText>If checked, staff has the option to specify the box size to provide, overriding the default for the family size.</inlineHelpText>
         <label>Allow Bag/Box Size Override</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -18,6 +19,7 @@
         <externalId>false</externalId>
         <inlineHelpText>If checked, staff can override the alert that monthly point or visit limits have been exceeded.</inlineHelpText>
         <label>Allow Overage</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -28,6 +30,7 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -39,6 +42,7 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -50,6 +54,7 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -61,6 +66,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -70,6 +76,7 @@
         <externalId>false</externalId>
         <inlineHelpText>Check this to require proof of address for new client households.</inlineHelpText>
         <label>Proof of Address Required</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -80,6 +87,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -89,7 +97,20 @@
         <externalId>false</externalId>
         <inlineHelpText>Check this box to prevent users from adding duplicate addresses.  If unchecked, users are still alerted when entering a duplicate, but can choose to continue.</inlineHelpText>
         <label>Require Unique Address</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Tags__c</fullName>
+        <description>Semi-colon delimited list of tags for client households.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Semi-colon delimited list of tags for client households. Example:  Special Diet; Spanish Speaker</inlineHelpText>
+        <label>Tags</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Track_Points__c</fullName>
@@ -97,6 +118,7 @@
         <externalId>false</externalId>
         <inlineHelpText>Check this box if you track monthly points. If unchecked, application will track bag/box size instead.</inlineHelpText>
         <label>Track Points</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -107,6 +129,7 @@
         <precision>1</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -117,6 +140,7 @@
         <label>Welcome Alert</label>
         <length>255</length>
         <required>false</required>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -127,6 +151,7 @@
         <label>Welcome Message</label>
         <length>255</length>
         <required>false</required>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>

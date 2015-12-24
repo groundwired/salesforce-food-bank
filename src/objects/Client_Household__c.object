@@ -5,6 +5,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>Clone</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -17,11 +21,19 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -32,17 +44,22 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>Address__c</fullName>
         <externalId>false</externalId>
         <label>Address</label>
         <required>false</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>TextArea</type>
     </fields>
     <fields>
@@ -53,6 +70,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -64,6 +82,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -74,6 +93,7 @@
         <length>50</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -87,6 +107,7 @@
         <length>255</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -97,6 +118,7 @@
         <label>Commodity Usage JSON</label>
         <length>32768</length>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
     </fields>
@@ -112,6 +134,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -125,6 +148,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -136,6 +160,7 @@
         <length>20</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
     </fields>
@@ -147,6 +172,7 @@
         <summaryForeignKey>Client_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>min</summaryOperation>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Summary</type>
     </fields>
     <fields>
@@ -157,6 +183,7 @@
         <label>Full Address</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -166,6 +193,7 @@
         <externalId>false</externalId>
         <label>Homeless</label>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -174,6 +202,7 @@
         <externalId>false</externalId>
         <label>Inactive</label>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -182,6 +211,7 @@
         <label>Infant Card Expires</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
@@ -192,6 +222,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -204,6 +235,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -215,6 +247,7 @@
         <summaryForeignKey>Client_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>max</summaryOperation>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Summary</type>
     </fields>
     <fields>
@@ -223,6 +256,7 @@
         <externalId>false</externalId>
         <label>No Cook</label>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -231,6 +265,7 @@
         <label>Notes</label>
         <length>32768</length>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
     </fields>
@@ -240,6 +275,7 @@
         <label>Phone</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Phone</type>
     </fields>
     <fields>
@@ -249,6 +285,7 @@
         <length>10</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -258,6 +295,7 @@
         <label>Proof of Address Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
     <fields>
@@ -268,6 +306,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -315,6 +354,7 @@
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -324,6 +364,7 @@
         <inlineHelpText>Indicate dietary restrictions in notes field.</inlineHelpText>
         <label>Special Diet</label>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -332,6 +373,7 @@
         <label>Staff Notes</label>
         <length>32768</length>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
     </fields>
@@ -342,8 +384,37 @@
         <length>2</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tags__c</fullName>
+        <externalId>false</externalId>
+        <label>Tags</label>
+        <picklist>
+            <picklistValues>
+                <fullName>No Cook</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Special Diet</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
     </fields>
     <fields>
         <fullName>Total_Visits__c</fullName>
@@ -352,6 +423,7 @@
         <summaryForeignKey>Client_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
         <type>Summary</type>
     </fields>
     <label>Client Household</label>

@@ -73,8 +73,8 @@
                                 <dl class="dl-horizontal" ng-show="settings.general.trackPoints" >
                                   <dt style="margin-top:5px;">Points Used Today</dt>
                                   <dd>
-                                    <div ng-class="{ 'input-group': true, 'has-error': visitForm.ptsUsed.$invalid }">
-                                        <input class="form-control" style="width:9em;" type="number" ng-model="ptsUsed" min="0" max="{{ptsRemaining}}" 
+                                    <div ng-class="{ 'input-group': true, 'input-group-small': true, 'has-error': visitForm.ptsUsed.$invalid }">
+                                        <input class="form-control" type="number" ng-model="ptsUsed" min="0" max="{{ptsRemaining}}" 
                                             autofocus="autofocus" required="required" name="ptsUsed" ></input>
                                         <span ng-show="visitForm.ptsUsed.$error.required" class="help-block">Please enter a number</span>
                                         <span ng-show="visitForm.ptsUsed.$error.min" class="help-block">Points cannot be negative</span>
@@ -107,18 +107,19 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="comm in commodities" 
-                                            ng-class="{danger: !comm.remaining, warning: (comm.remaining > 0 && comm.remaining < comm.monthlyLimit)}">
+                                            ng-class="{danger: !comm.remaining, warning: (comm.remaining > 0 && comm.remaining < comm.monthlyLimit)}"
+                                            ng-form="commForm">
                                             
                                             <td style="vertical-align: middle;">{{comm.name}}</td>
                                             <td class="text-center" style="vertical-align: middle;">{{comm.remaining}}</td>
                                             <td class="text-center">
-                                                <div ng-class="{ 'input-group': true, 'has-error': isInvalid(comm.name) }" style="width:8em;margin-left:3em;">
-                                                    <input class="form-control input-sm" style="width:6em;" type="number" 
-                                                        ng-model="comm.ptsUsed" min="0" max="{{comm.remaining}}" name="{{comm.name}}"
+                                                <div ng-class="{ 'input-group': true, 'input-group-sm': true, 'has-error': commForm.ptsUsed.$invalid }" style="width:8em;margin-left:3em;">
+                                                    <input class="form-control input-sm" type="number" 
+                                                        ng-model="comm.ptsUsed" min="0" max="{{comm.remaining}}" name="ptsUsed"
                                                         required="required" ></input>
-                                                    <span ng-show="comm.ptsUsed.$error.required" class="help-block">Please enter a number</span>
-                                                    <span ng-show="comm.ptsUsed.$error.min" class="help-block">Cannot be negative</span>
-                                                    <span ng-show="comm.ptsUsed.$error.max" class="help-block">Only {{comm.remaining}} available</span>
+                                                    <span ng-show="commForm.ptsUsed.$error.required" class="help-block">Enter a number</span>
+                                                    <span ng-show="commForm.ptsUsed.$error.min" class="help-block">Cannot be negative</span>
+                                                    <span ng-show="commForm.ptsUsed.$error.max" class="help-block">Only {{comm.remaining}} available</span>
                                                     <!--<select class="form-control" ng-model="comm.ptsUsed" 
                                                         ng-options="v for v in rangeFromZeroTo(comm.remaining)" style="height:30px;" ng-disabled="!comm.remaining"></select> -->
                                                 </div>
@@ -132,7 +133,7 @@
                 </div>
             </div>   
             <div class="panel-footer text-center">
-                <a class="btn btn-success" ng-click="recordVisit();" ng-disabled="logging || (pointsRemaining == 0)" >
+                <a class="btn btn-success" ng-click="recordVisit();" ng-disabled="logging || (pointsRemaining == 0) || visitForm.$invalid || commForm.$invalid" >
                     Record Visit
                     <i ng-show="logging" class="fa fa-refresh fa-spin"></i>
                 </a>

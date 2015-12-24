@@ -4,7 +4,8 @@
 
 angular.module('appControllers', [
     'ngRoute',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'angularjs-dropdown-multiselect'
   ]);
 
 angular.module('appControllers')
@@ -252,6 +253,27 @@ angular.module('appControllers')
     $scope.data.boxType = foundHousehold.defaultBox;
     $scope.data.commodities = foundHousehold.commodityAvailability;
 
+    $scope.updateTags = function() {
+      $scope.data.household.tags = _.intersection(
+        $scope.tagDropdown.allTags, _.pluck($scope.tagDropdown.selected, 'id') );
+      $scope.clientForm.$setDirty();
+    };
+
+    $scope.tagDropdown = {
+      allTags: _.union(foundSettings.tags, foundHousehold.tags),
+      options: _.map(_.union(foundSettings.tags, foundHousehold.tags), 
+                        function(v) { return {id: v, label: v}; }),
+      selected: _.map(foundHousehold.tags, function(v) { return {id: v, label: v}; }),
+      events: {
+        onItemSelect: $scope.updateTags,
+        onItemDeselect: $scope.updateTags
+      },
+      settings: {
+        showCheckAll: false,
+        showUncheckAll: false
+      }
+    };
+
     $scope.data.memberList = [];
     _.forEach(foundHousehold.members, function(v) {
       $scope.data.memberList.push({
@@ -446,6 +468,69 @@ angular.module('appControllers')
 
     $scope.cancelNotes = function() {
       $scope.status.editingNotes = false;
+    };
+  }]);
+
+angular.module('appControllers')
+  .controller('tagsController', ['$scope', 'fbSaveHousehold', '$alert',
+    function($scope, fbSaveHousehold, $alert) {
+
+    $scope.status.editingTags = false;
+    $scope.status.savingTags = false;
+
+    $scope.data.tagsData = {
+      id: $scope.data.household.id,
+      tags: $scope.data.household.tags,
+    };
+
+    $scope.updateTags = function() {
+      $scope.data.tagsData.tags = _.intersection(
+        $scope.tagDropdown.allTags, _.pluck($scope.tagDropdown.selected, 'id') );
+      $scope.clientForm.$setDirty();
+    };
+
+    $scope.tagDropdown = {
+      allTags: _.union($scope.settings.tags, $scope.data.household.tags),
+      options: _.map(_.union($scope.settings.tags, $scope.data.household.tags), 
+                        function(v) { return {id: v, label: v}; }),
+      selected: _.map($scope.data.household.tags, function(v) { return {id: v, label: v}; }),
+      events: {
+        onItemSelect: $scope.updateTags,
+        onItemDeselect: $scope.updateTags
+      },
+      settings: {
+        showCheckAll: false,
+        showUncheckAll: false
+      }
+    };
+
+    $scope.editTags = function() {
+      $scope.status.editingTags = true;
+    };
+
+    $scope.saveTags = function() {
+      $scope.status.savingTags = true;
+      fbSaveHousehold($scope.data.tagsData).then(
+        function(result){
+          $scope.data.household = result;
+          $scope.status.savingTags = false;
+          $scope.status.editingTags = false;
+        },
+        function(reason){
+          $scope.status.savingTags = false;
+          $alert({
+            title: 'Failed to save changes.',
+            content: reason.message,
+            type: 'danger'
+          });
+        }
+      );
+    };
+
+    $scope.cancelTags = function() {
+      $scope.data.tagsData.tags = $scope.data.household.tags;
+      $scope.tagDropdown.selected = _.map($scope.data.household.tags, function(v) { return {id: v, label: v}; });
+      $scope.status.editingTags = false;
     };
   }]);
 
