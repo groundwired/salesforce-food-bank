@@ -20,8 +20,9 @@
             <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.Angular, 'css/font-awesome.min.css')}" />
             <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.Angular, 'css/foodbank.css')}" />
 
-            <!-- lodash underscore utilities -->
+            <!-- lodash underscore and moment date utilities -->
             <script src="{!URLFOR($Resource.Angular, 'vendor/lodash.min.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'vendor/moment.min.js')}"></script>
 
             <!-- load the angular javascript libraries -->
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular.min.js')}"></script>
