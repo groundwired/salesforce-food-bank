@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>Hierarchy</customSettingsType>
-    <customSettingsVisibility>Protected</customSettingsVisibility>
     <description>General settings for food bank application</description>
     <enableFeeds>false</enableFeeds>
     <fields>
@@ -19,6 +18,15 @@
         <externalId>false</externalId>
         <inlineHelpText>If checked, staff can override the alert that monthly point or visit limits have been exceeded.</inlineHelpText>
         <label>Allow Overage</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Check_in_Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Cehck this box if your food bank requires clients to check-in before shopping</inlineHelpText>
+        <label>Check-in Required</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -156,4 +164,5 @@
         <unique>false</unique>
     </fields>
     <label>Food Bank Settings</label>
+    <visibility>Protected</visibility>
 </CustomObject>
