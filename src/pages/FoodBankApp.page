@@ -36,11 +36,17 @@
             <script src="{!URLFOR($Resource.Angular, 'vendor/angularjs-dropdown-multiselect.js')}"></script>            
 
             <!-- our angular javascript app -->
-            <script src="{!URLFOR($Resource.Angular, 'js/controllers.js')}"></script>
-            <script src="{!URLFOR($Resource.Angular, 'js/directives.js')}"></script>
-            <!--<script src="{!URLFOR($Resource.Angular, 'js/filters.js')}"></script>-->
-            <script src="{!URLFOR($Resource.Angular, 'js/services.js')}"></script>
-            <script src="{!URLFOR($Resource.Angular, 'js/app.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/app.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/directives.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/services.js')}"></script>
+            <!--<script src="{!URLFOR($Resource.Angular, 'app/filters.js')}"></script>-->
+            <!--<script src="{!URLFOR($Resource.Angular, 'app/animations.js')}"></script>-->
+            <script src="{!URLFOR($Resource.Angular, 'app/serverDataStub.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/main.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/home/home.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/client/client.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/client_edit/client_edit.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'app/log_visit/log_visit.js')}"></script>
 
             <!-- store the resource path and all Visualforce remoting actions for use by Angular -->
             <script>

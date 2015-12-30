@@ -15,8 +15,9 @@ describe('controllers', function() {
       ctrl = $controller('mainController', {$scope: scope});
     }));
 
-    it('should set partial path', function() {
-      expect(scope.pathTo('file.html')).toBe('/file.html');
+    it('should set base path and status', function() {
+      expect(scope.basePath).toBe('');
+      expect(scope.status.loading).toBe(false);
     });
   });
 

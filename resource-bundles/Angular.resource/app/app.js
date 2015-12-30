@@ -10,8 +10,12 @@ angular.module('foodBankApp', [
     'angularjs-dropdown-multiselect',
     'appServerData',
     'appServices',
-    'appControllers',
     'appDirectives',
+    'mainController',
+    'homeController',
+    'clientController',
+    'clientEditController',
+    'logVisitController'
   ])
   .config(['$alertProvider', function($alertProvider) {
     _.extend($alertProvider.defaults, {
@@ -21,7 +25,7 @@ angular.module('foodBankApp', [
   .config(['$routeProvider', 'basePath', function($routeProvider, basePath) {
     $routeProvider
       .when('/', {
-        templateUrl: basePath + '/partials/home.html',
+        templateUrl: basePath + '/app/home/home.html',
         controller: 'homeController',
         resolve: {
           foundSettings: function(fbSettings) {
@@ -30,7 +34,7 @@ angular.module('foodBankApp', [
         }
       })
       .when('/client/:clientId/:action?', {
-        templateUrl: basePath + '/partials/client.html',
+        templateUrl: basePath + '/app/client/client.html',
         controller: 'clientController',
         resolve: {
           foundSettings: function(fbSettings) {
@@ -42,7 +46,7 @@ angular.module('foodBankApp', [
         }
       })
       .when('/edit_client/:clientId/:action?', {
-        templateUrl: basePath + '/partials/client_edit.html',
+        templateUrl: basePath + '/app/client_edit/client_edit.html',
         controller: 'clientEditController',
         resolve: {
           foundSettings: function(fbSettings) {
@@ -54,7 +58,7 @@ angular.module('foodBankApp', [
         }
       })
       .when('/new_client/:fullName?', {
-        templateUrl: basePath + '/partials/client_edit.html',
+        templateUrl: basePath + '/app/client_edit/client_edit.html',
         controller: 'clientEditController',
         resolve: {
           foundSettings: function(fbSettings) {
@@ -69,7 +73,7 @@ angular.module('foodBankApp', [
         }
       })
       .when('/log_visit/:clientId', {
-        templateUrl: basePath + '/partials/log_visit.html',
+        templateUrl: basePath + '/app/log_visit/log_visit.html',
         controller: 'logVisitController',
         resolve: {
           foundSettings: function(fbSettings) {

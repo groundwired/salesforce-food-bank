@@ -31,14 +31,14 @@
         </div>
         <div class="panel-body" ng-show="data.household">
             <div class="col-md-7">
-                <div ng-include="pathTo('partials/address.html')"></div>
-                <div ng-include="pathTo('partials/members.html')"></div>
-                <div ng-include="pathTo('partials/notes.html')"></div>
-                <div ng-include="pathTo('partials/history.html')"></div>
+                <div ng-include="basePath + '/app/client/address.html'"></div>
+                <div ng-include="basePath + '/app/client/members.html'"></div>
+                <div ng-include="basePath + '/app/client/notes.html'"></div>
+                <div ng-include="basePath + '/app/client/history.html'"></div>
             </div>
             <div class="col-md-5">
-                <div ng-include="pathTo('partials/tags.html')" ng-if="settings.tags"></div>
-                <div ng-include="pathTo('partials/available.html')"></div>
+                <div ng-include="basePath + '/app/client/tags.html'" ng-if="settings.tags"></div>
+                <div ng-include="basePath + '/app/client/available.html'"></div>
             </div>
         </div>
         <div class="panel-footer text-center" ng-show="data.household">
