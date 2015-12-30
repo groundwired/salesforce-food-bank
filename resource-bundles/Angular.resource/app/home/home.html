@@ -31,8 +31,8 @@
                 </div>
               </div>
               <div class="form-group text-center">
-                <a ng-show="settings.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Check In</a>
-                <a ng-show="!settings.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Record Visit</a>
+                <a ng-if="settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Check In</a>
+                <a ng-if="!settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Record Visit</a>
                 <a class="btn btn-success" href="#/new_client/{{selected}}">New Client</a>
               </div>
             </form>
