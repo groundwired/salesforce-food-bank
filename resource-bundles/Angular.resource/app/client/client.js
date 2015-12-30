@@ -194,7 +194,8 @@ angular.module('clientController')
       },
       settings: {
         showCheckAll: false,
-        showUncheckAll: false
+        showUncheckAll: false,
+        dynamicTitle: false
       }
     };
 
