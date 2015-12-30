@@ -10,6 +10,7 @@
         <externalId>false</externalId>
         <inlineHelpText>If checked, staff will be alerted when clients use more than the limit, but can choose to overlook the warning.</inlineHelpText>
         <label>Allow Overage</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -19,6 +20,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -29,6 +31,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
