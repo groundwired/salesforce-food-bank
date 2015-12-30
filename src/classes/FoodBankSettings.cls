@@ -25,6 +25,7 @@ public with sharing class FoodBankSettings {
 					general.Monthly_Points_Per_Adult__c = 10;
 					general.Monthly_Points_Per_Child__c = 10;
 					general.Monthly_Visit_Limit__c = null;
+                    general.Check_in_Required__c = false;
 					general.Proof_of_Address_Required__c = true;
 					general.Proof_of_Address_Update_Interval__c = 12;
 					general.Require_Unique_Address__c = false;

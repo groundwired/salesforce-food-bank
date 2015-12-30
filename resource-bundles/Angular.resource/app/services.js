@@ -113,6 +113,7 @@ angular.module('appServices')
             settings.general.proofOfAddressRequired = result.general.Proof_of_Address_Required__c;
             settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
             settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
+            settings.general.checkInRequired = result.general.Check_in_Required__c;
             settings.general.trackPoints = result.general.Track_Points__c;
             settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
             settings.general.welcomeAlert = result.general.Welcome_Alert__c;
