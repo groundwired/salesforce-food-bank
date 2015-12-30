@@ -226,6 +226,16 @@ angular.module('appServices')
           inactive: result.Inactive__c
         };
 
+        // do we need proof of address?
+        var today = new Date();
+        var proofOfAddressCutoffDate = 
+          (fbSettings.proofOfAddressUpdateInterval == null || !fbSettings.proofOfAddressRequired) ? null : 
+          new Date(today.getYear(), today.getMonth() - fbSettings.proofOfAddressUpdateInterval, today.getDay());
+        
+        client.proofOfAddressNeeded = (fbSettings.proofOfAddressRequired && 
+          (fbSettings.proofOfAddressUpdateInterval == null || 
+            (result.proofOfAddressDate < proofOfAddressCutoffDate)));
+
         // add up the household members
         if (!client.adults) { client.adults = 0; }
         if (!client.seniors) { client.seniors = 0; }
