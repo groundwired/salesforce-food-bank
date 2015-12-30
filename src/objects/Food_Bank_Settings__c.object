@@ -25,7 +25,7 @@
         <fullName>Check_in_Required__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <inlineHelpText>Cehck this box if your food bank requires clients to check-in before shopping</inlineHelpText>
+        <inlineHelpText>Check this box if your food bank requires clients to check in before shopping and check out afterward</inlineHelpText>
         <label>Check-in Required</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
