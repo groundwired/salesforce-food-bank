@@ -35,17 +35,42 @@ angular.module('clientController')
       });
     });
 
+    $scope.somethingIsBeingEdited = function() {
+      return ($scope.status.editingTags || $scope.status.editingNotes || $scope.status.editingMembers || $scope.status.editingAddress ||
+        $scope.status.savingTags || $scope.status.savingNotes || $scope.status.savingMembers || $scope.status.savingAddress) ;
+    };
+
     $scope.checkIn = function() {
-      fbCheckIn($scope.data.household.id);
-      $window.scrollTo(0,0);
-      $alert({
-        title: 'Checked in!',
-        type: 'success',
-        duration: 2
-      });
-      $timeout(function(){
-        $location.url('/');
-      }, 2000);
+      if ($scope.somethingIsBeingEdited()) {
+        $alert({
+          title: 'Before checking in, please save your changes to sections below.',
+          type: 'danger',
+          duration: 2
+        });        
+      } else {
+        fbCheckIn($scope.data.household.id);
+        $window.scrollTo(0,0);
+        $alert({
+          title: 'Checked in!',
+          type: 'success',
+          duration: 2
+        });
+        $timeout(function(){
+          $location.url('/');
+        }, 2000);
+      }
+    };
+
+    $scope.recordVisit = function() {
+      if ($scope.somethingIsBeingEdited()) {
+        $alert({
+          title: 'Before recording a visit, please save your changes to sections below.',
+          type: 'danger',
+          duration: 2
+        });        
+      } else {
+        $location.url('/log_visit/' + $scope.data.household.id);
+      }
     };
 
     $scope.addMember = function() {
@@ -56,7 +81,15 @@ angular.module('clientController')
     };
 
     $scope.cancelEdit = function() {
-      $location.url('/');  // might want to go somewhere based on routing param
+      if ($scope.somethingIsBeingEdited()) {
+        $alert({
+          title: 'Before canceling, please save or cancel your changes to sections below.',
+          type: 'danger',
+          duration: 2
+        });        
+      } else {
+        $location.url('/');  // might want to go somewhere based on routing param
+      }
     };
 
     $scope.queryVisits = function() {

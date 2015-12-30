@@ -42,6 +42,12 @@ body { margin:0px; }
 .bootstrap .panel .table .warning {
   font-weight: normal;
 }
+.bootstrap .panel-warning {
+  border-color: #e2d1af;
+}
+.bootstrap .panel-warning .panel-heading {
+  background-color: #fbf2d2;
+}
 .bootstrap .alert:focus, .bootstrap .dropdown-menu:focus {
   outline: 0px;
 }
@@ -62,12 +68,15 @@ body { margin:0px; }
   margin-right: 3px;
   line-height: 2.1;
 }
+.bootstrap .dropdown-multiselect {
+  margin-left: 3px;
+}
 .bootstrap .dropdown-multiselect .btn-default {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
-  padding: 5px 10px;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  padding: 5px 15px;
+  background-color: #F9E7A6;
+  border-color: #EACB5A;
 }
 .bootstrap .dropdown-multiselect ul li {
   margin-left: 2px;
