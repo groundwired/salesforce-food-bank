@@ -158,7 +158,7 @@ angular.module('appServices')
           Full_Address__c: hh.fullAddress,
           Total_Visits__c: hh.totalVisits,
           Monthly_Points_Available__c: hh.monthlyPointsAvailable,
-          Tags__c: hh.tags ? hh.tags.join(';') : null,
+          Tags__c: hh.tags ? hh.tags.join(';') : undefined,
           Address__c: hh.address,
           City__c: hh.city,
           State__c: hh.state,
@@ -176,7 +176,6 @@ angular.module('appServices')
           CreatedDate: hh.createdDate,
           First_Visit__c: hh.firstVisitDate,
           Most_Recent_Visit__c: hh.mostRecentVisitDate,
-          Proof_of_Address_Date__c: hh.proofOfAddressDate,
           Proof_of_Address__c: hh.proofOfAddress,
           Inactive__c: hh.inactive
         };
@@ -204,7 +203,7 @@ angular.module('appServices')
           fullAddress: result.Full_Address__c,
           totalVisits: result.Total_Visits__c,
           monthlyPointsAvailable: result.Monthly_Points_Available__c,
-          tags: (result.Tags__c) ? (_.map(result.Tags__c.split(';'), _.trim)) : [],
+          tags: (result.Tags__c) ? (_.map(result.Tags__c.split(';'), _.trim)) : null,
           address: result.Address__c,
           city: result.City__c,
           state: result.State__c,
@@ -293,6 +292,23 @@ angular.module('appServices')
                 client.defaultBox = v.name;
               }
             });
+
+            // do we need proof of address?
+            if (settings.general.proofOfAddressRequired) {
+
+              var proofOfAddressCutoffDate = 
+                (settings.general.proofOfAddressUpdateInterval == null) ? null : 
+                moment().subtract(settings.general.proofOfAddressUpdateInterval, 'months');
+              
+              client.proofOfAddressNeeded = 
+                (!proofOfAddressCutoffDate || client.proofOfAddressDate == undefined || 
+                  moment(client.proofOfAddressDate).isBefore(proofOfAddressCutoffDate));
+
+              // if the proof is old, clear it out
+              if (client.proofOfAddressNeeded) {
+                client.proofOfAddress = null;
+              }
+            }
           }
         );
         return client;

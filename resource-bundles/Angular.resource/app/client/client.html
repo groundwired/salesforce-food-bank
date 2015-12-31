@@ -6,27 +6,21 @@
                 <div class="col-md-7">
                     <div ng-show="data.household">
                         <h3 style="margin-top:8px;">{{data.household.name}}</h3>
-                        <p ng-show="data.household.totalVisits">
+                        <p ng-if="data.household.totalVisits">
                             Client Since {{data.household.firstVisitDate | date:'yyyy'}}<br />
                             Most Recent Visit: 
                             <span style="font-weight:500">{{data.household.mostRecentVisitDate | date:'MMMM dd, yyyy \'at\' h:mm a'}}</span>
                         </p>
-                        <p ng-show="!data.household.totalVisits">
+                        <p ng-if="!data.household.totalVisits">
                             First-time Visitor
                         </p>
                     </div>
                 </div>
-<!--                 <div class="col-md-5 text-right" style="margin-top:8px;">
-                    <span class="label label-primary" ng-show="data.household.homeless">Homeless</span>
-                    <span class="label label-primary">No Cook</span>
-                    <span class="label label-primary">Special Diet</span>
-                </div>
- -->
              </div>
         </div>
         <div class="panel-btnbar text-center" ng-show="data.household">
             <a ng-if="settings.general.checkInRequired" class="btn btn-primary" ng-click="checkIn()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Check In</a>
-            <a class="btn btn-success" ng-href="#/log_visit/{{data.household.id}}" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
+            <a class="btn btn-success" ng-click="recordVisit()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
             <a class="btn btn-default" ng-click="cancelEdit()">Cancel</a>
         </div>
         <div class="panel-body" ng-show="data.household">

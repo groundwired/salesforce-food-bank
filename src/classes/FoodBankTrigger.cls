@@ -29,6 +29,20 @@ Current_Points_Used__c, Monthly_Points_Available__c, Current_Points_Remaining__c
 Commodity_Usage_JSON__c, Full_Address__c from Client_Household__c
 */
 
+	public void updateProofDates( list<Client_Household__c> hhList, map<id, Client_Household__c> oldMap ) {
+
+		// set the proof of address date
+		for (Client_Household__c hh : hhList) {
+			if (String.isBlank(hh.Proof_of_Address__c)) {
+				hh.Proof_of_Address_Date__c = null;
+			} else {
+				if (oldMap == null || hh.Proof_of_Address__c != oldMap.get(hh.id).Proof_of_Address__c ) {
+					hh.Proof_of_Address_Date__c = system.today();
+				}
+			}
+		}
+	}
+
 	public void updateClientName( list<Client__c> clientList, map<id, Client__c> oldMap ) {
 
 		for (Client__c cl : clientList) {

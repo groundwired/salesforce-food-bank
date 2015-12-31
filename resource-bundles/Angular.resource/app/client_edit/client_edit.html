@@ -25,7 +25,7 @@
         </div>
         <div class="panel-body" ng-show="data.household">
             <div class="col-lg-8">
-                <div class="panel panel-default" ng-controller="memberListController" >
+                <div class="panel panel-warning" ng-controller="memberListController" >
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-warning">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -137,16 +137,16 @@
                             <input type="text" class="form-control" name="phone" placeholder="(000) 000-0000"
                                 ng-maxlength="50" ng-model="data.household.phone">
                         </div>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group col-sm-6" ng-if="settings.general.proofOfAddressRequired">
                             <label>Proof of Address</label>
                             <input type="text" class="form-control" name="proof" placeholder="Initials / type of proof"
-                                ng-maxlength="50" >
+                                ng-model="data.household.proofOfAddress" ng-maxlength="50">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="panel panel-default" ng-if="settings.tags">
+                <div class="panel panel-warning" ng-if="settings.tags">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -163,15 +163,17 @@
                                     extra-settings="tagDropdown.settings"></div>
                         </div>
 
-                        <div class="form-group">
-                            <span ng-if="data.household.tags.length == 0"><i>No tags set</i></span>
-                            <span ng-repeat="tag in data.household.tags">
+                        <div ng-show="data.tagsData.tags && data.tagsData.tags.length != 0">
+                            <span ng-repeat="tag in data.tagsData.tags">
                                 <span class="label label-primary label-large">{{tag}}</span>
                             </span>
                         </div>
+                        <div ng-show="!data.tagsData.tags || data.tagsData.tags.length == 0">
+                            <i>No tags set</i>
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default" ng-controller="notesController">
+                <div class="panel panel-warning" ng-controller="notesController">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-6">
@@ -180,11 +182,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            <textarea class="form-control" name="notes" placeholder="About this client" 
-                                style="height:150px;" ng-maxlength="1000" ng-model="data.household.notes">
-                            </textarea>
-                        </div>
+                        <textarea class="form-control" name="notes" placeholder="About this client" 
+                            style="height:150px;" ng-maxlength="1000" ng-model="data.household.notes">
+                        </textarea>
                     </div>
                 </div>
             </div>

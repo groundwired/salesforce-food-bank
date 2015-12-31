@@ -27,7 +27,7 @@
         <name>CustomObject</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Angular</members>
         <name>StaticResource</name>
     </types>
     <version>31.0</version>

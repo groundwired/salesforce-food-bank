@@ -26,24 +26,30 @@ angular.module('clientEditController')
     $scope.data.boxType = foundHousehold.defaultBox;
     $scope.data.commodities = foundHousehold.commodityAvailability;
 
+    $scope.data.tagsData = {
+      id: $scope.data.household.id,
+      tags: $scope.data.household.tags,
+    };
+
     $scope.updateTags = function() {
-      $scope.data.household.tags = _.intersection(
+      $scope.data.tagsData.tags = _.intersection(
         $scope.tagDropdown.allTags, _.pluck($scope.tagDropdown.selected, 'id') );
       $scope.clientForm.$setDirty();
     };
 
     $scope.tagDropdown = {
-      allTags: _.union(foundSettings.tags, foundHousehold.tags),
-      options: _.map(_.union(foundSettings.tags, foundHousehold.tags), 
+      allTags: _.union($scope.settings.tags, $scope.data.household.tags),
+      options: _.map(_.union($scope.settings.tags, $scope.data.household.tags), 
                         function(v) { return {id: v, label: v}; }),
-      selected: _.map(foundHousehold.tags, function(v) { return {id: v, label: v}; }),
+      selected: _.map($scope.data.household.tags, function(v) { return {id: v, label: v}; }),
       events: {
         onItemSelect: $scope.updateTags,
         onItemDeselect: $scope.updateTags
       },
       settings: {
         showCheckAll: false,
-        showUncheckAll: false
+        showUncheckAll: false,
+        dynamicTitle: false
       }
     };
 
