@@ -117,7 +117,7 @@ angular.module('appServices')
             settings.general.trackPoints = result.general.Track_Points__c;
             settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
             settings.general.welcomeAlert = result.general.Welcome_Alert__c;
-            settings.general.welcomeMessage = result.general.Welcome_Message__c;
+            settings.general.welcomeMessage = result.general.Welcome_Message__c; 
             
             settings.tags = (result.general.Tags__c) ? (_.map(result.general.Tags__c.split(';'), _.trim)) : [];
 
