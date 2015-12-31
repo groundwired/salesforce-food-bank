@@ -140,7 +140,7 @@
                         <div class="form-group col-sm-6">
                             <label>Proof of Address</label>
                             <input type="text" class="form-control" name="proof" placeholder="Initials / type of proof"
-                                ng-maxlength="50" >
+                                ng-model="data.household.proofOfAddress" ng-maxlength="50" ng-required="settings.general.proofOfAddressRequired">
                         </div>
                     </div>
                 </div>

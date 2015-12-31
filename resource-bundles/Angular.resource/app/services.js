@@ -226,16 +226,6 @@ angular.module('appServices')
           inactive: result.Inactive__c
         };
 
-        // do we need proof of address?
-        var today = new Date();
-        var proofOfAddressCutoffDate = 
-          (fbSettings.proofOfAddressUpdateInterval == null || !fbSettings.proofOfAddressRequired) ? null : 
-          new Date(today.getYear(), today.getMonth() - fbSettings.proofOfAddressUpdateInterval, today.getDay());
-        
-        client.proofOfAddressNeeded = (fbSettings.proofOfAddressRequired && 
-          (fbSettings.proofOfAddressUpdateInterval == null || 
-            (result.proofOfAddressDate < proofOfAddressCutoffDate)));
-
         // add up the household members
         if (!client.adults) { client.adults = 0; }
         if (!client.seniors) { client.seniors = 0; }
@@ -302,6 +292,23 @@ angular.module('appServices')
                 client.defaultBox = v.name;
               }
             });
+
+            // do we need proof of address?
+            if (settings.general.proofOfAddressRequired) {
+
+              var proofOfAddressCutoffDate = 
+                (settings.general.proofOfAddressUpdateInterval == null) ? null : 
+                moment().subtract(settings.general.proofOfAddressUpdateInterval, 'months');
+              
+              client.proofOfAddressNeeded = 
+                (!proofOfAddressCutoffDate || client.proofOfAddressDate == undefined || 
+                  moment(client.proofOfAddressDate).isBefore(proofOfAddressCutoffDate));
+
+              // if the proof is old, clear it out
+              if (client.proofOfAddressNeeded) {
+                client.proofOfAddress = null;
+              }
+            }
           }
         );
         return client;

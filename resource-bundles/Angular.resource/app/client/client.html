@@ -6,12 +6,12 @@
                 <div class="col-md-7">
                     <div ng-show="data.household">
                         <h3 style="margin-top:8px;">{{data.household.name}}</h3>
-                        <p ng-show="data.household.totalVisits">
+                        <p ng-if="data.household.totalVisits">
                             Client Since {{data.household.firstVisitDate | date:'yyyy'}}<br />
                             Most Recent Visit: 
                             <span style="font-weight:500">{{data.household.mostRecentVisitDate | date:'MMMM dd, yyyy \'at\' h:mm a'}}</span>
                         </p>
-                        <p ng-show="!data.household.totalVisits">
+                        <p ng-if="!data.household.totalVisits">
                             First-time Visitor
                         </p>
                     </div>
