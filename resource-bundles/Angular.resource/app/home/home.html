@@ -31,14 +31,15 @@
                 </div>
               </div>
               <div class="form-group text-center">
-                <a class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Check In</a>
+                <a ng-if="settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Check In</a>
+                <a ng-if="!settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Record Visit</a>
                 <a class="btn btn-success" href="#/new_client/{{selected}}">New Client</a>
               </div>
             </form>
         </div>
     </div>
     
-    <div class="panel panel-default">
+    <div ng-show="settings.general.checkInRequired" class="panel panel-default">
         <div class="panel-heading">
             <div class="pull-right">
                 <a class="btn btn-default" ng-click="refresh()"><i ng-class="{'fa': true, 'fa-refresh': true, 'fa-spin': callingOut}"></i></a>
