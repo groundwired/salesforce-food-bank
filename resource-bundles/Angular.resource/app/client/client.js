@@ -35,6 +35,26 @@ angular.module('clientController')
       });
     });
 
+    //determine if this client has exceeded the food bank visit frequency limit and set warning message appropriately
+    $scope.visitorWarningMsg = function() {
+      if (foundSettings.general.visitFrequencyLimit) {
+        if (foundSettings.general.visitFrequencyLimit === "Weekly") {
+
+        } else if (foundSettings.general.visitFrequencyLimit === "Biweekly") {
+
+        } else if (foundSettings.general.visitFrequencyLimit === "Monthly") {
+
+        } else if (foundSettings.general.visitFrequencyLimit === "Twice Monthly") {
+
+        } else if (foundSettings.general.visitFrequencyLimit.match(/^Every.*$/)) {
+
+        }
+
+      } else {
+        return null;
+      }
+    };
+
     $scope.somethingIsBeingEdited = function() {
       return ($scope.status.editingTags || $scope.status.editingNotes || $scope.status.editingMembers || $scope.status.editingAddress ||
         $scope.status.savingTags || $scope.status.savingNotes || $scope.status.savingMembers || $scope.status.savingAddress) ;

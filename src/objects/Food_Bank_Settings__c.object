@@ -130,6 +130,17 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Visit_Frequency_Limit__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Restrictions on the number of visits over a ceratain time period. Accepted values for this setting are Weekly, Biweekly, Monthly, Twice Monthly, Every XX Days (where XX is a minimum number of days allwoed between visits)</inlineHelpText>
+        <label>Visit Frequency Limit</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Weekly_Visit_Limit__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>Total number of visits allowed per week. Leave blank if there is no limit, or if you limit visits by month.</inlineHelpText>
