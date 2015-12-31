@@ -11,7 +11,7 @@
               <div class="form-group">
                 <label for="clientSearch" class="col-sm-4 control-label">Client Name/Address <i ng-show="loadingClients" class="glyphicon glyphicon-refresh"></i></label>
                 <div class="col-sm-8">
-                    <input id="clientSearch" type="text" ng-model="selected" class="form-control" placeholder="Search" 
+                    <input id="clientSearch" autocomplete="off" type="text" ng-model="selected" class="form-control" placeholder="Search" 
                         typeahead="client as client.name for client in searchClients($viewValue) | filter:$viewValue" 
                         typeahead-min-length="2"
                         typeahead-wait-ms="150"
