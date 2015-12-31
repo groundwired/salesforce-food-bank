@@ -9,8 +9,8 @@ angular.module('clientController', [
   ]);
 
 angular.module('clientController')
-  .controller('clientController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', 'foundSettings', 'foundHousehold', 'fbHouseholdDetail', 'fbSaveHousehold', 'fbCheckIn', 'fbVisitHistory',
-  function($scope, $location, $timeout, $window, $routeParams, $alert, foundSettings, foundHousehold, fbHouseholdDetail, fbSaveHousehold, fbCheckIn, fbVisitHistory) {
+  .controller('clientController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', '$q', 'foundSettings', 'foundHousehold', 'fbHouseholdDetail', 'fbSaveHousehold', 'fbSaveHouseholdMembers', 'fbSaveHouseholdAndMembers', 'fbCheckIn', 'fbVisitHistory',
+  function($scope, $location, $timeout, $window, $routeParams, $alert, $q, foundSettings, foundHousehold, fbHouseholdDetail, fbSaveHousehold, fbCheckIn, fbVisitHistory) {
 
     $scope.settings = foundSettings;
 
@@ -36,18 +36,110 @@ angular.module('clientController')
     });
 
     $scope.somethingIsBeingEdited = function() {
-      return ($scope.status.editingTags || $scope.status.editingNotes || $scope.status.editingMembers || $scope.status.editingAddress ||
-        $scope.status.savingTags || $scope.status.savingNotes || $scope.status.savingMembers || $scope.status.savingAddress) ;
+      return ($scope.status.editingAddress && $scope.status.editingNotes && $scope.status.editingTags && $scope.status.editingMembers);
+    };
+
+    $scope.saveAll = function() {
+      var soon = $q.defer();
+      $scope.data.allData = {};
+      if ($scope.status.editingAddress) {
+        _.assign($scope.data.allData, $scope.data.addressData);
+        $scope.status.savingAddress = true;
+      }
+      if ($scope.status.editingTags) {
+        _.assign($scope.data.allData, $scope.data.tagsData);
+        $scope.status.savingTags = true;
+      }
+      if ($scope.status.editingNotes) {
+        _.assign($scope.data.allData, $scope.data.notesData);
+        $scope.status.savingNotes = true;
+      }
+      if ($scope.status.editingMembers) {
+        $scope.status.savingMembers = true;
+
+        if (_.isEqual($scope.data.allData, {})) {
+          fbSaveHouseholdMembers($scope.data.household.id, _.map($scope.data.memberList, 'memberDataEditable')).then(
+            function(result){
+              $scope.data.household = result;
+              $scope.data.memberList = [];
+              _.forEach(result.members, function(v) {
+                $scope.data.memberList.push({
+                  memberData: _.clone(v)
+                });
+              });
+              $scope.status.savingMembers = false;
+              $scope.status.editingMembers = false;
+              $scope.$parent.$digest();
+              soon.resolve();
+            },
+            function(reason){
+              $scope.status.savingClient = false;
+              $alert({
+                title: 'Failed to save changes.',
+                content: reason.message,
+                type: 'danger'
+              });
+              soon.reject();
+            }
+          );
+        } else {
+          fbSaveHouseholdAndMembers($scope.data.allData, _.map($scope.data.memberList, 'memberDataEditable')).then(
+            function(result){
+              $scope.data.household = result;
+              $scope.data.memberList = [];
+              _.forEach(foundHousehold.members, function(v) {
+                $scope.data.memberList.push({
+                  memberData: _.clone(v)
+                });
+              });
+              $scope.status.savingMembers = false;
+              $scope.status.editingMembers = false;
+              $scope.$parent.$digest();
+              soon.resolve();
+            },
+            function(reason){
+              $scope.status.savingClient = false;
+              $alert({
+                title: 'Failed to save changes.',
+                content: reason.message,
+                type: 'danger'
+              });
+              soon.reject();
+            }
+          );
+        }
+      } else if (!_.isEqual($scope.data.allData, {})) {
+        fbSaveHousehold($scope.data.allData, $scope.settings).then(
+          function(result) {
+            $scope.data.household = result;
+            $scope.status.savingAddress = false;
+            $scope.status.editingAddress = false;
+            $scope.status.savingTags = false;
+            $scope.status.editingTags = false;
+            $scope.status.savingNotes = false;
+            $scope.status.editingNotes = false;
+            soon.resolve();
+          },
+          function(reason) {
+            $scope.status.savingAddress = false;
+            $scope.status.savingTags = false;
+            $scope.status.savingNotes = false;
+            $alert({
+              title: 'Failed to save changes.',
+              content: reason.message,
+              type: 'danger'
+            });
+            soon.reject();
+          }
+        );
+      } else {
+        soon.resolve();
+      }
+      return soon.promise;
     };
 
     $scope.checkIn = function() {
-      if ($scope.somethingIsBeingEdited()) {
-        $alert({
-          title: 'Before checking in, please save your changes to sections below.',
-          type: 'danger',
-          duration: 2
-        });        
-      } else {
+      $scope.saveAll().then(function() {
         fbCheckIn($scope.data.household.id);
         $window.scrollTo(0,0);
         $alert({
@@ -58,19 +150,13 @@ angular.module('clientController')
         $timeout(function(){
           $location.url('/');
         }, 2000);
-      }
+      });
     };
 
     $scope.recordVisit = function() {
-      if ($scope.somethingIsBeingEdited()) {
-        $alert({
-          title: 'Before recording a visit, please save your changes to sections below.',
-          type: 'danger',
-          duration: 2
-        });        
-      } else {
+      $scope.saveAll().then(function() {
         $location.url('/log_visit/' + $scope.data.household.id);
-      }
+      });
     };
 
     $scope.addMember = function() {
@@ -81,15 +167,7 @@ angular.module('clientController')
     };
 
     $scope.cancelEdit = function() {
-      if ($scope.somethingIsBeingEdited()) {
-        $alert({
-          title: 'Before canceling, please save or cancel your changes to sections below.',
-          type: 'danger',
-          duration: 2
-        });        
-      } else {
-        $location.url('/');  // might want to go somewhere based on routing param
-      }
+      $location.url('/');  // might want to go somewhere based on routing param
     };
 
     $scope.queryVisits = function() {
