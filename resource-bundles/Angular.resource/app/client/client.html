@@ -24,6 +24,13 @@
             <a class="btn btn-default" ng-click="cancelEdit()">Cancel</a>
         </div>
         <div class="panel-body" ng-show="data.household">
+            <div ng-if="visitorWarningMsg()" class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>
+                  <span class="sr-only">Warning:</span>
+                  {{visitorWarningMsg()}}
+                </div>
+            </div>
             <div class="col-md-7">
                 <div ng-include="basePath + '/app/client/address.html'"></div>
                 <div ng-include="basePath + '/app/client/members.html'"></div>

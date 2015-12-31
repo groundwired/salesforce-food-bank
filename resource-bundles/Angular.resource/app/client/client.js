@@ -35,6 +35,40 @@ angular.module('clientController')
       });
     });
 
+    //determine if this client has exceeded the food bank visit frequency limit and set warning message appropriately
+    $scope.visitorWarningMsg = function() {
+      if (foundSettings.general.visitFrequencyLimit.toUpperCase() === "WEEKLY") {
+        //we assume weekly means a visit once per calendar week, with the week starting on Sunday
+        //first determine the day of th week of today
+        if (moment().week() === moment($scope.data.household.mostRecentVisitDate).week() && (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 7)) {
+          return "Heads up! This client has already visited in the past calendar week.";
+        } else {
+          return;
+        }
+      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === "BIWEEKLY") {
+        if ( ((moment().week() === moment($scope.data.household.mostRecentVisitDate).week()) || (moment().subtract(1,'weeks').week() === moment($scope.data.household.mostRecentVisitDate).week())) && (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 14)) {
+          return "Heads up! This client has already visited in the past two calendar weeks.";
+        } else {
+          return;
+        }
+      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === "MONTHLY") {
+        if (moment().month() === moment($scope.data.household.mostRecentVisitDate).month() && (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 31)) {
+          return "Heads up! This client has already visited in the past calendar month.";
+        } else {
+          return;
+        }
+      } else if (foundSettings.general.visitFrequencyLimit && foundSettings.general.visitFrequencyLimit.toUpperCase().match(/^EVERY\s+.*$/)) {
+        var noOfDays = parseInt(/\d+/.exec(foundSettings.general.visitFrequencyLimit));
+        if (moment().diff($scope.data.household.mostRecentVisitDate,'days') < noOfDays) {
+          return "Heads up! This client has already visited in the past " + noOfDays + " days.";
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+    };
+
     $scope.somethingIsBeingEdited = function() {
       return ($scope.status.editingTags || $scope.status.editingNotes || $scope.status.editingMembers || $scope.status.editingAddress ||
         $scope.status.savingTags || $scope.status.savingNotes || $scope.status.savingMembers || $scope.status.savingAddress) ;
