@@ -33,8 +33,12 @@ Commodity_Usage_JSON__c, Full_Address__c from Client_Household__c
 
 		// set the proof of address date
 		for (Client_Household__c hh : hhList) {
-			if (hh.Proof_of_Address__c != null && (oldMap == null || hh.Proof_of_Address__c != oldMap.get(hh.id).Proof_of_Address__c )) {
-				hh.Proof_of_Address_Date__c = system.today();
+			if (String.isBlank(hh.Proof_of_Address__c)) {
+				hh.Proof_of_Address_Date__c = null;
+			} else {
+				if (oldMap == null || hh.Proof_of_Address__c != oldMap.get(hh.id).Proof_of_Address__c ) {
+					hh.Proof_of_Address_Date__c = system.today();
+				}
 			}
 		}
 	}

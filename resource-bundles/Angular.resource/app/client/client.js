@@ -213,7 +213,6 @@ angular.module('clientController')
     $scope.updateTags = function() {
       $scope.data.tagsData.tags = _.intersection(
         $scope.tagDropdown.allTags, _.pluck($scope.tagDropdown.selected, 'id') );
-      $scope.clientForm.$setDirty();
     };
 
     $scope.tagDropdown = {

@@ -30,11 +30,13 @@
                     extra-settings="tagDropdown.settings"></div>
         </div>
 
-        <div class="form-group">
-            <span ng-if="data.tagsData.tags.length == 0"><i>No tags set</i></span>
+        <div ng-show="data.tagsData.tags && data.tagsData.tags.length != 0">
             <span ng-repeat="tag in data.tagsData.tags">
                 <span class="label label-primary label-large">{{tag}}</span>
             </span>
+        </div>
+        <div ng-show="!data.tagsData.tags || data.tagsData.tags.length == 0">
+            <i>No tags set</i>
         </div>
     </div>
 </div>
