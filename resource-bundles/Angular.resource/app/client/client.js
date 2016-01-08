@@ -10,7 +10,7 @@ angular.module('clientController', [
 
 angular.module('clientController')
   .controller('clientController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', '$q', 'foundSettings', 'foundHousehold', 'fbHouseholdDetail', 'fbSaveHousehold', 'fbSaveHouseholdMembers', 'fbSaveHouseholdAndMembers', 'fbCheckIn', 'fbVisitHistory',
-  function($scope, $location, $timeout, $window, $routeParams, $alert, $q, foundSettings, foundHousehold, fbHouseholdDetail, fbSaveHousehold, fbCheckIn, fbVisitHistory) {
+  function($scope, $location, $timeout, $window, $routeParams, $alert, $q, foundSettings, foundHousehold, fbHouseholdDetail, fbSaveHousehold, fbSaveHouseholdMembers, fbSaveHouseholdAndMembers, fbCheckIn, fbVisitHistory) {
 
     $scope.settings = foundSettings;
 
@@ -69,7 +69,6 @@ angular.module('clientController')
               });
               $scope.status.savingMembers = false;
               $scope.status.editingMembers = false;
-              $scope.$parent.$digest();
               soon.resolve();
             },
             function(reason){
@@ -94,7 +93,6 @@ angular.module('clientController')
               });
               $scope.status.savingMembers = false;
               $scope.status.editingMembers = false;
-              $scope.$parent.$digest();
               soon.resolve();
             },
             function(reason){
