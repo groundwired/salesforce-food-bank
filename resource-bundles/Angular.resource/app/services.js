@@ -185,15 +185,14 @@ angular.module('appServices')
       },
 
       getMemberSObject : function( mobj ) {
-        var v = mobj.memberData;
         var sobj = {
-          First_Name__c: v.firstName,
-          Last_Name__c: v.lastName,
-          Age_Group__c: v.ageGroup,
-          Age__c: v.age //,
-          //Birthdate__c: new Date(v.birthdate)
+          First_Name__c: mobj.firstName,
+          Last_Name__c: mobj.lastName,
+          Age_Group__c: mobj.ageGroup,
+          Age__c: mobj.age //,
+          //Birthdate__c: new Date(mobj.birthdate)
         };
-        if (v.id) sobj.Id = v.id;
+        if (mobj.id) sobj.Id = mobj.id;
         return sobj;
       },
 
