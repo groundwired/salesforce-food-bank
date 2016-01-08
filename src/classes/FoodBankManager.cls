@@ -5,7 +5,7 @@ public with sharing class FoodBankManager {
     private map<String, String> params = ApexPages.CurrentPage().getParameters();
 
     public Class ClientCheckin {
-        public String clientId { get; private set; }
+        public Id clientId { get; private set; }
         public String clientName { get; private set; }
         public Decimal pointsRemaining { get; private set; }
         public String boxSize { get; private set; }
