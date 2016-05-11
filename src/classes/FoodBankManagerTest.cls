@@ -66,36 +66,48 @@ public with sharing class FoodBankManagerTest {
 
 	@isTest
 	private static void testCheckInsVisits() {
-		Client_Household__c cHh = new Client_Household__c(
+		Client_Household__c household1 = new Client_Household__c(
 			Inactive__c = false
 		);
 		
 		// Check insert of Household
-		cHh = FoodBankManager.saveHousehold(cHh);
+		household1 = FoodBankManager.saveHousehold(household1);
 
-		List<Food_Bank_Checkin__c> fBChkIns = new List<Food_Bank_Checkin__c>();
-		for (Integer i = 0; i < 10; i++) {
-			Food_Bank_Checkin__c fBChkIn = new Food_Bank_Checkin__c(
-				Name = 'ClientName: ' + i,
-	            Client_Name__c = 'ClientName: ' + i,
-	            Points_Remaining__c = 15,
-	            Box_Size__c = 'small',
-	            Check_In_Time__c = Datetime.now()
-	        );
-			fBChkIns.add(fBChkIn);
-		}
-		insert(fBChkIns);
+		Food_Bank_Checkin__c checkin1 = new Food_Bank_Checkin__c(
+			Name = household1.Id,
+            Client_Name__c = 'Household 1',
+            Points_Remaining__c = 15,
+            Box_Size__c = 'small',
+            Check_In_Time__c = Datetime.now()
+        );
+		insert checkin1;
+
+		Client_Household__c household2 = new Client_Household__c(
+			Inactive__c = false
+		);
+		
+		// Check insert of Household
+		household2 = FoodBankManager.saveHousehold(household2);
+
+		Food_Bank_Checkin__c checkin2 = new Food_Bank_Checkin__c(
+			Name = household2.Id,
+            Client_Name__c = 'Household 2',
+            Points_Remaining__c = 15,
+            Box_Size__c = 'small',
+            Check_In_Time__c = Datetime.now()
+        );
+		insert checkin2;
 
 		List<FoodBankManager.ClientCheckin> cc = FoodBankManager.getCheckedInList();
-		System.assertEquals(cc.size(), 10);
+		System.assertEquals(2, cc.size(), 'Two households are currently checked in');
 
 		Map<String, Integer> commU = new Map<String, Integer>();
 		commU.put('Meat', 2);
 		commU.put('Bread', 1);
-		Id cVId = FoodBankManager.logVisit(cHh.Id, 'Big', 5, commU, 'These are notes');
+		Id cVId = FoodBankManager.logVisit(household1.Id, 'Big', 5, commU, 'These are notes');
 		System.assert(cVId != null);
 
-		List<Client_Visit__c> cV = FoodBankManager.getVisitHistory(cHh.Id);
+		List<Client_Visit__c> cV = FoodBankManager.getVisitHistory(household1.Id);
 		system.assert(cV.size() == 1);	
 	}	
 }
