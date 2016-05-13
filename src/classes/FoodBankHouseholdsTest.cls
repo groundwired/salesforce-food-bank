@@ -36,26 +36,6 @@ private class FoodBankHouseholdsTest {
         System.assertEquals('Amber Smith', household.Client_Names__c, 'Household name should match client name when there\'s only one person');
     }
 
-    // names have changed
-    @isTest static void testRecalculateName() {
-        Client_Household__c household = new Client_Household__c();
-        insert household;
-
-        List<Client__c> clients = new List<Client__c>();
-        clients.add(createClient(household.Id, 'Amber', 'Smith', 57));
-        insert clients;
-
-        household.Client_Names__c = 'Something else';
-        update household;
-
-        System.assertEquals('Something else', household.Client_Names__c);
-
-        FoodBankHouseholds.runBatchManually();
-
-        household = [ SELECT Client_Names__c FROM Client_Household__c WHERE Id = :household.Id ];
-        System.assertEquals('Amber Smith', household.Client_Names__c, 'Household name should match client name when there\'s only one person');
-    }
-
     // there's just one person with just a last name
     @isTest static void testSingleNameLastNameOnly() {
         Client_Household__c household = new Client_Household__c();
