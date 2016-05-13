@@ -1,5 +1,6 @@
 public with sharing class FoodBankHouseholds implements Database.Batchable<SObject>, Schedulable {
 
+	@TestVisible
 	private static integer MAX_NAMES_IN_HH_NAME = 2;
 
 	public Database.QueryLocator start(Database.BatchableContext BC) {
