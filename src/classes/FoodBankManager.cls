@@ -1,6 +1,6 @@
 public with sharing class FoodBankManager {
 
-    public class FoodBankException extends Exception {} 
+    public class FoodBankException extends Exception {}
 
     private map<String, String> params = ApexPages.CurrentPage().getParameters();
 
@@ -31,13 +31,14 @@ public with sharing class FoodBankManager {
 
     @RemoteAction
     public static Client_Household__c getHouseholdDetail( Id hhid ) {
-        Client_Household__c hh = 
-            [select Id, Name, CreatedDate, LastModifiedDate, First_Visit__c, Most_Recent_Visit__c, 
-                Total_Visits__c, Homeless__c, Address__c, City__c, State__c, Postal_Code__c, 
-                Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c, 
+        Client_Household__c hh =
+            [select Id, Name, CreatedDate, LastModifiedDate, First_Visit__c, Most_Recent_Visit__c,
+                Total_Visits__c, Homeless__c, Address__c, City__c, State__c, Postal_Code__c,
+                Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c,
                 Children__c, Infants__c, Seniors__c, Client_Names__c, Full_Address__c, Tags__c,
-                Staff_Notes__c, Infant_Card_Expires__c, Phone__c, Proof_of_Address__c, Proof_of_Address_Date__c,
-                (select Id, Name, First_Name__c, Last_Name__c, Age_Group__c, Age__c, Birthdate__c from Clients__r),
+                Staff_Notes__c, Phone__c, Proof_of_Address__c, Proof_of_Address_Date__c,
+                (select Id, Name, First_Name__c, Last_Name__c, Age_Group__c, Age__c, Birthdate__c, Proof_of_Infant__c
+                    from Clients__r),
                 (select Points_Used__c, Commodity_Usage_JSON__c from Visits__r where Visit_Date__c = THIS_MONTH)
                 from Client_Household__c where id = :hhid];
 
@@ -62,7 +63,7 @@ public with sharing class FoodBankManager {
 
     @RemoteAction
     public static list<Client_Visit__c> getVisitHistory( Id hhid ) {
-        return 
+        return
             [select Id, Visit_Date__c, Points_Used__c, Notes__c
                 from Client_Visit__c
                 where Household__c = :hhid
@@ -95,15 +96,15 @@ public with sharing class FoodBankManager {
 
     @RemoteAction
     public static Client_Household__c saveHouseholdMembers( Id hhid, list<Client__c> clients ) {
-        
+
         if (clients != null) {
             list<Client__c> clientsToInsert = new list<Client__c>();
             list<Client__c> clientsToUpdate = new list<Client__c>();
             set<Id> clientIds = new set<Id>();
-            
+
             for (Client__c client : clients) {
                 if (client.Last_Name__c != null) {
-                    client.Client_Household__c = hhid;              
+                    client.Client_Household__c = hhid;
                     if (client.Id == null) {
                         clientsToInsert.add(client.clone());
                     } else {
@@ -117,9 +118,9 @@ public with sharing class FoodBankManager {
 
             if (!clientsToDelete.isEmpty())
                 delete clientsToDelete;
-            if (!clientsToUpdate.isEmpty()) 
+            if (!clientsToUpdate.isEmpty())
                 update clientsToUpdate;
-            if (!clientsToInsert.isEmpty()) 
+            if (!clientsToInsert.isEmpty())
                 insert clientsToInsert;
         }
 
@@ -158,7 +159,7 @@ public with sharing class FoodBankManager {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
 
-        Client_Household__c hh = 
+        Client_Household__c hh =
             [select id, client_names__c, Adults__c, Seniors__c, Children__c, Infants__c,
                 (select Points_Used__c from Visits__r where Visit_Date__c = THIS_MONTH)
                 from Client_Household__c where id = :hhid];
@@ -196,13 +197,13 @@ public with sharing class FoodBankManager {
         public String value;
         public String name;
         public String addr;
-        //public list<String> tags; 
+        //public list<String> tags;
     }
 
     @RemoteAction
     public static list<ClientHousehold> queryHouseholds( String query){//, Boolean includeInactive ) {
         list<ClientHousehold> hhRet = new list<ClientHousehold>();
-        List<List<SObject>> resultList = 
+        List<List<SObject>> resultList =
             //(includeInactive) ?
             //  [FIND :(query + '*') RETURNING Client_Household__c( Id, Client_Names__c, Address__c, Full_Address__c
    //               WHERE Client_Names__c != null ORDER BY Client_Names__c )] :
@@ -217,7 +218,7 @@ public with sharing class FoodBankManager {
             chh.name = rec.Client_Names__c;
             chh.value = rec.Client_Names__c + ((rec.Address__c != null) ? (' (' + rec.Address__c + ')') : '');
             chh.addr = rec.Full_Address__c;
-            hhRet.add( chh );   
+            hhRet.add( chh );
         }
         return hhRet;
     }
@@ -231,7 +232,7 @@ public with sharing class FoodBankManager {
 
     @RemoteAction
     public static AppSettings getAppSettings() {
-        AppSettings s = new AppSettings(); 
+        AppSettings s = new AppSettings();
         s.general = FoodBankSettings.general;
         s.commodities = FoodBankSettings.commodities;
         s.boxes = FoodBankSettings.boxes;
@@ -242,7 +243,7 @@ public with sharing class FoodBankManager {
     public static Id logVisit( Id hhId, String boxType, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes ) {
 
         // get the HH detail
-        Client_Household__c[] hhs = 
+        Client_Household__c[] hhs =
             [select Id, Name, Adults__c, Children__c, Infants__c, Seniors__c, Homeless__c, Inactive__c
                 from Client_Household__c where id = :hhid];
 
@@ -252,7 +253,7 @@ public with sharing class FoodBankManager {
         }
 
         Client_Household__c hh = hhs[0];
-    
+
         // TODO: validate remaining points? non-negative and under limit (unless setting allows exception)
 
         // TODO: activate inactive client? or disallow visit?
