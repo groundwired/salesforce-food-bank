@@ -1,15 +1,15 @@
 public with sharing class FoodBankSettings {
 
     /**************************************************************************
-    * The pattern is to create a static property for each settings object   
+    * The pattern is to create a static property for each settings object
     * and provide defaults if it is a test. Each setting will be instantiated
     * only once per transaction.
     *
     * To refer to a setting in the first section below, use:
     *   FoodBankSettings.general.Monthly_Visit_Limit__c
-    * 
+    *
     * For a list setting, specify the value you want:
-    *   FoodBankSettings.commodity('Bread').Monthly_Limit__c 
+    *   FoodBankSettings.commodity('Bread').Monthly_Limit__c
     *
     ***************************************************************************/
 
@@ -28,6 +28,7 @@ public with sharing class FoodBankSettings {
                     general.Proof_of_Address_Required__c = true;
                     general.Proof_of_Address_Update_Interval__c = 12;
                     general.Require_Unique_Address__c = false;
+                    general.Proof_of_Infant_Required__c = true;
                     general.Track_Points__c = true;
                     general.Tags__c = 'Special Diet; Spanish Speaker';
                     general.Welcome_Alert__c = 'Hello!';

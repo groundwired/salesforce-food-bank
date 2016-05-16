@@ -59,7 +59,9 @@ angular.module('clientController')
 
     //determine if this client has exceeded the food bank visit frequency limit and set warning message appropriately
     $scope.visitorWarningMsg = function() {
-      if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'WEEKLY') {
+      if (!$scope.data.household.mostRecentVisitDate) {
+        return;
+      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'WEEKLY') {
         //we assume weekly means a visit once per calendar week, with the week starting on Sunday
         //first determine the day of th week of today
         if (moment().week() === moment($scope.data.household.mostRecentVisitDate).week() &&
