@@ -418,7 +418,6 @@ angular.module('clientController')
           });
           $scope.status.savingMembers = false;
           $scope.status.editingMembers = false;
-          $scope.$parent.$digest();
         },
         function(reason){
           $scope.status.savingMembers = false;
