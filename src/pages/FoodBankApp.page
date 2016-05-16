@@ -1,12 +1,12 @@
-<!-- 
+<!--
 - Visualforce landing page for the Food Bank Manager app
-- 
+-
 - Loads the Angular.js libraries and our app code from a static resource
 - Uses Javascript remoting to query and save data from Salesforce
 -
 - If you open in a Salesforce tab or specify param header=1, you get the salesforce UI
 -->
-<apex:page controller="FoodBankManager" title="Food Bank Manager" 
+<apex:page controller="FoodBankManager" title="Food Bank Manager"
     standardStylesheets="false" sidebar="false" docType="html-5.0"
     showHeader="{!OR(NOT(ISBLANK($CurrentPage.parameters.sfdc.tabName)), AND(NOT(ISBLANK($CurrentPage.parameters.header)),$CurrentPage.parameters.header != '0'))}" >
 
@@ -31,9 +31,9 @@
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular/angular-cookies.min.js')}"></script>
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular-ui/ui-bootstrap-0.11.0.min.js')}"></script>
             <script src="{!URLFOR($Resource.Angular, 'vendor/angular-ui/ui-bootstrap-tpls-0.11.0.min.js')}"></script>
-            <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.js')}"></script>
-            <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.tpl.js')}"></script>
-            <script src="{!URLFOR($Resource.Angular, 'vendor/angularjs-dropdown-multiselect.js')}"></script>            
+            <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.min.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'vendor/angular-strap/angular-strap.tpl.min.js')}"></script>
+            <script src="{!URLFOR($Resource.Angular, 'vendor/angularjs-dropdown-multiselect.js')}"></script>
 
             <!-- our angular javascript app -->
             <script src="{!URLFOR($Resource.Angular, 'app/app.js')}"></script>
@@ -54,13 +54,13 @@
                     .constant('controllerName', 'FoodBankManager');
             </script>
         </head>
-        <div class="bootstrap"> 
+        <div class="bootstrap">
             <div class="container" style="min-height:800px;" ng-controller="mainController">
 
                 <!-- shared page header  -->
                 <div class="page-header" style="margin-top:30px;">
                     <h1 style="margin-bottom: 5px;">
-                        <img style="margin: 0 3px 7px 2px;" height="32" width="32" 
+                        <img style="margin: 0 3px 7px 2px;" height="32" width="32"
                             ng-src="{{basePath}}/img/shoppingCart32.png" />
                         Food Bank Manager
                     </h1>
