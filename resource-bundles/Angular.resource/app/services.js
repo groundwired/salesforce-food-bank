@@ -251,12 +251,12 @@ angular.module('appServices')
         });
 
         // add up points and commodities used in previous visits this month
-        client.currentPointsUsed = 0;
+        var pointsUsed = 0;
         client.commodityUsage = {};
         client.visitsThisMonth = (result.Visits__r ? result.Visits__r.length : 0);
         _.forEach( result.Visits__r, function(v) {
           if (v.Points_Used__c) {
-            client.currentPointsUsed += v.Points_Used__c;
+            pointsUsed += v.Points_Used__c;
           }
 
           // TODO: try catch? json could be bogus
@@ -270,7 +270,6 @@ angular.module('appServices')
             });
           }
         });
-        client.currentPointsRemaining = client.monthlyPointsAvailable - client.currentPointsUsed;
 
         // subtract commodity usage to get the current available commodities
         fbSettings.get().then(
@@ -311,6 +310,11 @@ angular.module('appServices')
               if (proofOfAddressNeeded) {
                 client.proofOfAddress = null;
               }
+            }
+            
+            if (settings.general.trackPoints) {
+              client.currentPointsUsed = pointsUsed;
+              client.currentPointsRemaining = client.monthlyPointsAvailable - pointsUsed;              
             }
           }
         );
@@ -362,6 +366,7 @@ angular.module('appServices')
         _.forEach(result, function(result){
           visits.push({
             'date': result.Visit_Date__c,
+            'boxType': result.Box_Type__c,
             'ptsUsed': result.Points_Used__c,
             'notes': result.Notes__c
           });

@@ -64,7 +64,7 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static list<Client_Visit__c> getVisitHistory( Id hhid ) {
         return
-            [select Id, Visit_Date__c, Points_Used__c, Notes__c
+            [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Notes__c
                 from Client_Visit__c
                 where Household__c = :hhid
                 order by Visit_Date__c DESC limit 20];

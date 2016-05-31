@@ -31,7 +31,7 @@
                                 Visit Detail
                             </div>
                             <div class="panel-body" style="padding-right:16px;" ng-show="household">
-                                <dl class="dl-horizontal" ng-show="!settings.general.trackPoints" >
+                                <dl class="dl-horizontal" ng-if="settings.boxes" >
                                   <dt style="margin-top:5px;">Box Type/Size</dt>
                                   <dd>
                                     <div class="input-group" style="width:14em;">
@@ -40,7 +40,7 @@
                                     </div>
                                   </dd>
                                 </dl>
-                                <dl class="dl-horizontal" style="margin-top:12px;" ng-show="settings.general.trackPoints" >
+                                <dl class="dl-horizontal" style="margin-top:12px;" ng-if="settings.general.trackPoints" >
                                   <dt>Points Available</dt>
                                   <dd>
                                     <div class="progress" ng-show="ptsRemaining > 0 && ratio >= 25">
@@ -93,11 +93,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5" ng-if="commodities">
                         <div class="panel panel-default">
                             <div class="panel-heading">Commodities</div>
                             <div class="panel-body" ng-show="household">
-                                <table class="table table-condensed" style="vertical-align:middle;font-size:13px;">
+                                <table class="table table-condensed" style="vertical-align:middle; font-size:13px; margin-top: 6px;">
                                     <thead>
                                         <tr>
                                             <th>Item</th>

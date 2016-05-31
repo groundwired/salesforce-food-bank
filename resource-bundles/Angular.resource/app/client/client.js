@@ -25,11 +25,16 @@ angular.module('clientController')
     $scope.status = {};
     $scope.commodities = [];
 
-    $scope.data.ptsRemaining = foundHousehold.currentPointsRemaining;
-    $scope.data.ptsMonthly = foundHousehold.monthlyPointsAvailable;
-    $scope.data.ratio =  Math.floor(foundHousehold.currentPointsRemaining * 100 / foundHousehold.monthlyPointsAvailable);
+    if ($scope.settings.general.trackPoints) {
+      $scope.data.ptsRemaining = foundHousehold.currentPointsRemaining;
+      $scope.data.ptsMonthly = foundHousehold.monthlyPointsAvailable;
+      $scope.data.ratio =  Math.floor(foundHousehold.currentPointsRemaining * 100 / foundHousehold.monthlyPointsAvailable);
+    }
+    
     $scope.data.boxType = foundHousehold.defaultBox;
-    $scope.data.commodities = foundHousehold.commodityAvailability;
+    if (foundHousehold.commodityAvailability && foundHousehold.commodityAvailability.length > 0) {
+      $scope.data.commodities = foundHousehold.commodityAvailability;      
+    }
     $scope.data.visits = [];
     $scope.status.queriedVisits = false;
 
@@ -39,11 +44,6 @@ angular.module('clientController')
         memberData: _.clone(v)
       });
     });
-
-    $scope.status.proofOfAddressNeeded = function() {
-      return ($scope.settings.general.proofOfAddressRequired &&
-                !$scope.data.addressData.proofOfAddress);
-    };
 
     $scope.status.hasInfant = function() {
       var members = _.map($scope.data.memberList, ($scope.status.editingMembers ? 'memberDataEditable' : 'memberData'));
@@ -257,6 +257,12 @@ angular.module('clientController')
 
     $scope.status.editingAddress = false;
     $scope.status.savingAddress = false;
+
+    $scope.status.proofOfAddressNeeded = function() {
+      return ($scope.settings.general.proofOfAddressRequired &&
+                ((!$scope.data.addressData && !$scope.data.household.proofOfAddress) ||
+                 ($scope.data.addressData && !$scope.data.addressData.proofOfAddress)));
+    };
 
     $scope.editAddress = function() {
       $scope.data.addressData = {

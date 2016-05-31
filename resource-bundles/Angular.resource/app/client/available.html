@@ -3,7 +3,7 @@
         Available This Month
     </div>
     <div class="panel-body" ng-show="data.household">
-        <div ng-show="settings.general.trackPoints">
+        <div ng-if="settings.general.trackPoints" style="margin-bottom:24px;">
             <p><b>Food Bank Points</b></p>
             <div class="progress" ng-show="data.ptsRemaining > 0 && data.ratio >= 25">
               <div class="progress-bar progress-bar-success" 
@@ -31,7 +31,7 @@
               </div>
             </div>
         </div>
-        <table class="table table-condensed" style="margin-top:24px;">
+        <table ng-if="data.commodities" class="table table-condensed" style="margin-top:6px;">
             <thead>
                 <tr>
                     <th>Item</th>

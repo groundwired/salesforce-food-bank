@@ -34,12 +34,13 @@
             <div class="col-md-7">
                 <div ng-include="basePath + '/app/client/address.html'"></div>
                 <div ng-include="basePath + '/app/client/members.html'"></div>
-                <div ng-include="basePath + '/app/client/notes.html'"></div>
+                <div ng-include="basePath + '/app/client/notes.html'" ng-if="data.commodities || settings.general.trackPoints"></div>
                 <div ng-include="basePath + '/app/client/history.html'"></div>
             </div>
             <div class="col-md-5">
                 <div ng-include="basePath + '/app/client/tags.html'" ng-if="settings.tags"></div>
-                <div ng-include="basePath + '/app/client/available.html'"></div>
+                <div ng-include="basePath + '/app/client/available.html'" ng-if="data.commodities || settings.general.trackPoints"></div>
+                <div ng-include="basePath + '/app/client/notes.html'" ng-if="!(data.commodities || settings.general.trackPoints)"></div>
             </div>
         </div>
         <div class="panel-footer text-center" ng-show="data.household">

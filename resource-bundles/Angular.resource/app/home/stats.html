@@ -82,13 +82,14 @@
                 </tr>
             </tfooter>
           </table>
-         <h5><i>Distribution Summary</i></h5>
+          <div ng-if="settings.general.trackPoints">
+            <h5><i>Distribution Summary</i></h5>
 
             <dl class="dl-horizontal">
               <dt>Total Points Used</dt>
               <dd data-field="pointsUsed">{{stats.pointsUsed}}</dd>
             </dl>
-
+          </div>
         </div>
     </div>
 </div>
