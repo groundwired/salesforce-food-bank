@@ -1,7 +1,7 @@
 'use strict';
+/* global _ */
 
 /* Controllers for client edit page */
-
 angular.module('clientEditController', [
     'ngRoute',
     'mgcrea.ngStrap',
@@ -28,7 +28,7 @@ angular.module('clientEditController')
 
     $scope.data.tagsData = {
       id: $scope.data.household.id,
-      tags: $scope.data.household.tags,
+      tags: $scope.data.household.tags
     };
 
     $scope.updateTags = function() {
