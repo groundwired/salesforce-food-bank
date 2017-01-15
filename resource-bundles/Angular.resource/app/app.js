@@ -1,22 +1,23 @@
 'use strict';
+/* global _ */
 
 /* Angular app definition */
 
 angular.module('foodBankApp', [
-    'ngRoute',
-    'ngCookies',
-    'ui.bootstrap',
-    'mgcrea.ngStrap',
-    'angularjs-dropdown-multiselect',
-    'appServerData',
-    'appServices',
-    'appDirectives',
-    'mainController',
-    'homeController',
-    'clientController',
-    'clientEditController',
-    'logVisitController'
-  ])
+  'ngRoute',
+  'ngCookies',
+  'ui.bootstrap',
+  'mgcrea.ngStrap',
+  'angularjs-dropdown-multiselect',
+  'appServerData',
+  'appServices',
+  'appDirectives',
+  'mainController',
+  'homeController',
+  'clientController',
+  'clientEditController',
+  'logVisitController'
+])
   .config(['$alertProvider', function($alertProvider) {
     _.extend($alertProvider.defaults, {
       container: '.alertContainer'
