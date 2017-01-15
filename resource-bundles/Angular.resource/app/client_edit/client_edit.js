@@ -69,6 +69,7 @@ angular.module('clientEditController')
 
     $scope.saveClient = function() {
       $scope.status.savingClient = true;
+      _.assign($scope.data.household, $scope.data.tagsData);
       fbSaveHouseholdAndMembers($scope.data.household, _.map($scope.data.memberList, 'memberData')).then(
         function(result){
           $scope.data.household = result;
@@ -78,6 +79,10 @@ angular.module('clientEditController')
               memberData: _.clone(v)
             });
           });
+          $scope.data.tagsData = {
+            id: $scope.data.household.id,
+            tags: $scope.data.household.tags
+          };
           $alert({
             title: 'Saved.',
             type: 'success',
