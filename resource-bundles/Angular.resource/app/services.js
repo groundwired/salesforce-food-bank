@@ -104,47 +104,48 @@ angular.module('appServices')
           deferred.resolve(settings);
           return deferred.promise;
         } else {
-          return jsRemoting.invoke('getAppSettings', [], function(result) {
-            settings.general = {};
-            settings.general.allowBoxSizeOverride = result.general.Allow_Box_Size_Override__c;
-            settings.general.allowOverage = result.general.Allow_Overage__c;
-            settings.general.checkInRequired = result.general.Check_in_Required__c;
-            settings.general.monthlyBasePoints = result.general.Monthly_Base_Points__c;
-            settings.general.monthlyPointsPerAdult = result.general.Monthly_Points_Per_Adult__c;
-            settings.general.monthlyPointsPerChild = result.general.Monthly_Points_Per_Child__c;
-            settings.general.monthlyVisitLimit = result.general.Monthly_Visit_Limit__c;
-            settings.general.proofOfAddressRequired = result.general.Proof_of_Address_Required__c;
-            settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
-            settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
-            settings.general.proofOfInfantRequired = result.general.Proof_of_Infant_Required__c;
-            settings.general.trackPoints = result.general.Track_Points__c;
-            settings.general.visitFrequencyLimit = result.general.Visit_Frequency_Limit__c;
-            settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
-            settings.general.welcomeAlert = result.general.Welcome_Alert__c;
-            settings.general.welcomeMessage = result.general.Welcome_Message__c;
-
-            settings.tags = (result.general.Tags__c) ? (_.map(result.general.Tags__c.split(';'), _.trim)) : [];
-
-            settings.commodities = [];
-            _.forEach(result.commodities, function(c){
-              settings.commodities.push({
-                'name': c.Name,
-                'allowOverage': c.Allow_Overage__c,
-                'monthlyLimit': c.Monthly_Limit__c
-              });
-            });
-
-            settings.boxes = [];
-            _.forEach(result.boxes, function(c){
-              settings.boxes.push({
-                'name': c.Name,
-                'minimumFamilySize': c.Minimum_Family_Size__c
-              });
-            });
-
-            return settings;
-          });
+          return jsRemoting.invoke('getAppSettings', [], this.translate);
         }
+      },
+      translate : function(result) {
+        settings.general = {};
+        settings.general.allowBoxSizeOverride = result.general.Allow_Box_Size_Override__c;
+        settings.general.allowOverage = result.general.Allow_Overage__c;
+        settings.general.checkInRequired = result.general.Check_in_Required__c;
+        settings.general.monthlyBasePoints = result.general.Monthly_Base_Points__c;
+        settings.general.monthlyPointsPerAdult = result.general.Monthly_Points_Per_Adult__c;
+        settings.general.monthlyPointsPerChild = result.general.Monthly_Points_Per_Child__c;
+        settings.general.monthlyVisitLimit = result.general.Monthly_Visit_Limit__c;
+        settings.general.proofOfAddressRequired = result.general.Proof_of_Address_Required__c;
+        settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
+        settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
+        settings.general.proofOfInfantRequired = result.general.Proof_of_Infant_Required__c;
+        settings.general.trackPoints = result.general.Track_Points__c;
+        settings.general.visitFrequencyLimit = result.general.Visit_Frequency_Limit__c;
+        settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
+        settings.general.welcomeAlert = result.general.Welcome_Alert__c;
+        settings.general.welcomeMessage = result.general.Welcome_Message__c;
+
+        settings.tags = (result.general.Tags__c) ? (_.map(result.general.Tags__c.split(';'), _.trim)) : [];
+
+        settings.commodities = [];
+        _.forEach(result.commodities, function(c){
+          settings.commodities.push({
+            'name': c.Name,
+            'allowOverage': c.Allow_Overage__c,
+            'monthlyLimit': c.Monthly_Limit__c
+          });
+        });
+
+        settings.boxes = [];
+        _.forEach(result.boxes, function(c){
+          settings.boxes.push({
+            'name': c.Name,
+            'minimumFamilySize': c.Minimum_Family_Size__c
+          });
+        });
+
+        return settings;
       }
     };
   }]);

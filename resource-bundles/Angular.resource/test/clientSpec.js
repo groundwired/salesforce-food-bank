@@ -3,98 +3,39 @@
 
 describe('client', function() {
 
-  var $rootScope, mockData;
-  var clientData = {
-    'household':{
-      'id':'a00i000000DzX4eAAF',
-      'name':'Evan Callahan',
-      'fullAddress':'3540 Quade Rd, Clinton, WA 98236',
-      'totalVisits':6,
-      'monthlyPointsAvailable':80,
-      'tags':['No Cook','Spanish'],
-      'address':'3540 Quade Rd',
-      'city':'Clinton',
-      'state':'WA',
-      'postalCode':'98236',
-      'phone':'(360) 555-1212',
-      'notes':'Lorem ipsum dolor sit amet sunt mollit anim id est laborum.',
-      'adults':1,
-      'children':0,
-      'infants':1,
-      'seniors':0,
-      'createdDate':1387437126000,
-      'firstVisitDate':1326188100000,
-      'mostRecentVisitDate':1466521048435,
-      'proofOfAddressDate':1466348248435,
-      'proofOfAddress':'ejc',
-      'inactive':false,
-      'totalMembers':2,
-      'members':[
-        {'id':'a02i000000A9AYPAA3',
-          'name':'Evan Callahan',
-          'firstName':'Evan',
-          'lastName':'Callahan',
-          'ageGroup':'Adult',
-          'age':48,
-          'birthdate':-123984000000},
-        {'id':'a02i000000A9AYXAA3',
-        'name':'Baby Callahan',
-        'firstName':'Baby',
-        'lastName':'Callahan',
-        'ageGroup':'Infant',
-        'age':1}
-      ],
-      'commodityUsage':{},
-      'visitsThisMonth':0
-    },
-    'visits':[],
-    'memberList':[
-      {'memberData':{'id':'a02i000000A9AYPAA3',
-      'name':'Evan Callahan',
-      'firstName':'Evan',
-      'lastName':'Callahan',
-      'ageGroup':'Adult',
-      'age':48,
-      'birthdate':-123984000000}},
-      {'memberData':{'id':'a02i000000A9AYXAA3',
-      'name':'Baby Callahan',
-      'firstName':'Baby',
-      'lastName':'Callahan',
-      'ageGroup':'Infant',
-      'age':1}}
-    ]
+  var $rootScope, settingsData, householdData;
+  
+  var mockData = function(method, index) {
+    return Visualforce.remoting.mockData['FoodBankManager.' + method][index].result;
   };
-    
-  var settingsData = {
-    'boxes':[{'Name':'Small','Id':'a05i000000AQtoeAAD','Minimum_Family_Size__c':1},{'Name':'Large','Id':'a05i000000AQtojAAD','Minimum_Family_Size__c':3},{'Name':'Extra-Large','Id':'a05i000000AQtooAAD','Minimum_Family_Size__c':4},{'Name':'No Cook','Id':'a05i000000AQtotAAD'}],
-    'commodities':[{'Name':'Chili','Id':'a04i00000095u5IAAQ','Allow_Overage__c':false,'Monthly_Limit__c':3},{'Name':'Chicken','Id':'a04i00000095u5NAAQ','Allow_Overage__c':false,'Monthly_Limit__c':2},{'Name':'Ground Beef','Id':'a04i00000098ADOAA2','Allow_Overage__c':false,'Monthly_Limit__c':3},{'Name':'Toilet Paper','Id':'a04i000000BjhkoAAB','Allow_Overage__c':false,'Monthly_Limit__c':2},{'Name':'Paper Towels','Id':'a04i000000BjhkjAAB','Allow_Overage__c':false,'Monthly_Limit__c':1}],
-    'general':{'Proof_of_Address_Update_Interval__c':12,'Check_in_Required__c':true,'Visit_Frequency_Limit__c':'Biweekly','LastModifiedById':'005i000000256L7AAI','Track_Points__c':false,'Monthly_Base_Points__c':70,'LastModifiedDate':1387495440000,'Allow_Overage__c':false,'Allow_Box_Size_Override__c':false,'Name':'a03i0000008CrsF','Monthly_Points_Per_Adult__c':10,'SetupOwnerId':'00Di0000000icjVEAQ','Welcome_Alert__c':'Please give your feedback on our new paperless food bank tracking system. Thank you for your cooperation as we try to serve you better.','Welcome_Message__c':'Welcome to Good Cheer!','Monthly_Points_Per_Child__c':10,'SystemModstamp':1387495440000,'Require_Unique_Address__c':true,'CreatedById':'005i000000256L7AAI','CreatedDate':1387495440000,'IsDeleted':false,'Id':'a03i0000008CrsFAAS','Proof_of_Address_Required__c':true,'Proof_of_Infant_Required__c':true,'Tags__c':'Special Diet; No Cook;Spanish; Vietnamese;Thai'}
-  };
-
+  
   beforeEach(module('foodBankApp'));
-  beforeEach(inject(function(_$rootScope_) {
+  beforeEach(inject(function(_$rootScope_, fbHouseholdDetail, fbSettings) {
+    
+    settingsData = fbSettings.translate(mockData('getAppSettings', 0));
+    householdData = fbHouseholdDetail.translate(mockData('getHouseholdDetail', 0));
+    
     $rootScope = _$rootScope_;
-    $rootScope.status = {};
-    $rootScope.data = clientData;
     $rootScope.settings = settingsData;
-
-    // TODO: need to feed the data through the filter
-    mockData = function(method, index) {
-      return Visualforce.remoting.mockData['FoodBankManager.' + method][index].result;
-    };
+    $rootScope.status = {};
+    $rootScope.data = {
+      'household': householdData,
+      'visits':[],
+      'memberList':[]
+    };    
   }));
 
   describe('clientController', function(){
     var ctrl, scope, settings, household;
 
-    beforeEach(inject(function($controller, fbHouseholdDetail) {
+    beforeEach(inject(function($controller) {
       scope = $rootScope.$new();
-      settings = mockData('getAppSettings', 0);
-      household = fbHouseholdDetail.translate(mockData('getHouseholdDetail', 0));
+      
+      household = householdData;
       ctrl = $controller('clientController', {
         $scope: scope, 
-        foundSettings: settings,
-        foundHousehold: household
+        foundSettings: settingsData,
+        foundHousehold: householdData
       });
     }));
 
@@ -103,75 +44,224 @@ describe('client', function() {
       expect(scope.data.household.totalVisits).toBe(6);
       expect(scope.data.memberList.length).toBe(2);
     });
+
+    xit('should set points', function() {
+      
+    });
+
+    xit('should set commodities', function() {
+      
+    });
+
+    xit('should report whether there is an infant', function() {
+      
+    });
+
+    xit('should report that infant proof is required', function() {
+      
+    });
+
+    xit('should not warn if the client has not visited recently', function() {
+      
+    });
+
+    xit('should warn if the client has visited too recently', function() {
+      
+    });
+
+    xit('should be able to edit and cancel editing', function() {
+      
+    });
+    
+    xit('should validate form before saving', function() {
+
+    });
+
+    xit('should save all sections of the form', function() {
+      
+    });
+
+    xit('should check the client in', function() {
+      
+    });
+
+    xit('should record a visit', function() {
+      
+    });
+
+    xit('should query for visits', function() {
+      
+    });
+
   });
 
   describe('addressController', function(){
-    var ctrl, scope;
+    var ctrl, scope, fbSaveHousehold;
 
-    beforeEach(inject(function($controller) {
+    beforeEach(inject(function($controller, _$q_) {
       scope = $rootScope.$new();
       ctrl = $controller('addressController', {
         $scope: scope, 
-        fbSaveHousehold: {}
-      });
+        fbSaveHousehold: function() { 
+          var deferred = _$q_.defer();
+          deferred.resolve( householdData );
+          return deferred.promise;
+        }
+      });      
     }));
 
-    it('should initialize', function() {
-      expect(scope.status.editingAddress).toBe(false);
-    });
-
     it('should edit and save address', function() {
+      // eventListener = jasmine.createSpy();
+      // spyOn(window, "FileReader").and.returnValue({
+      
+      expect(scope.data.household.city).toBe('Clinton');
+      expect(scope.status.editingAddress).toBe(false);
       scope.editAddress();
       expect(scope.status.editingAddress).toBe(true);
+      expect(scope.data.addressData.city).toBe('Clinton');
+      scope.data.addressData.city = 'Seattle';
+      scope.saveAddress();
+      $rootScope.$apply();
+      expect(scope.status.editingAddress).toBe(false);
+      
+      // expect(eventListener.calls.mostRecent().args[0]).toEqual('loadend');
     });
   });
   
   describe('tagsController', function(){
     var ctrl, scope;
 
-    beforeEach(inject(function($controller) {
+    beforeEach(inject(function($controller, _$q_) {
       scope = $rootScope.$new();
       ctrl = $controller('tagsController', {
         $scope: scope, 
-        fbSaveHousehold: {}
+        fbSaveHousehold: function() { 
+          var deferred = _$q_.defer();
+          deferred.resolve( householdData );
+          return deferred.promise;
+        }
       });
     }));
 
-    it('should do something', function() {
-      expect(true).toBe(true);
+    it('should edit and save tags', function() {
+      expect(scope.tagDropdown.options.length).toBe(5);
+      expect(scope.tagDropdown.selected.length).toBe(2);
+      scope.editTags();
+      expect(scope.status.editingTags).toBe(true);
+      scope.updateTags();
+      scope.saveTags();
+      expect(scope.status.savingTags).toBe(true);
+      $rootScope.$apply();
+      expect(scope.status.savingTags).toBe(false);
+      expect(scope.status.editingTags).toBe(false);
+    });
+
+    it('should add tag to the list', function() {
+      expect(scope.tagDropdown.options.length).toBe(5);
+      expect(scope.tagDropdown.selected.length).toBe(2);
+      expect(scope.data.household.tags.length).toBe(2);
+      expect(scope.data.tagsData.tags.length).toBe(2);
+      scope.editTags();
+      scope.tagDropdown.selected.push({id: 'Vietnamese', label: 'Vietnamese'});
+      expect(scope.data.tagsData.tags.length).toBe(2);
+      scope.updateTags();
+      expect(scope.data.tagsData.tags.length).toBe(3);
+      scope.saveTags();
+      $rootScope.$apply();
+    });
+
+    it('should remove a tag from the list', function() {
+      expect(scope.tagDropdown.options.length).toBe(5);
+      expect(scope.tagDropdown.selected.length).toBe(2);
+      expect(scope.data.household.tags.length).toBe(2);
+      expect(scope.data.tagsData.tags.length).toBe(2);
+      scope.editTags();
+      scope.tagDropdown.selected.pop();
+      expect(scope.data.tagsData.tags.length).toBe(2);
+      scope.updateTags();
+      expect(scope.data.tagsData.tags.length).toBe(1);
+      scope.saveTags();
+      $rootScope.$apply();
+    });
+
+    it('should cancel tag edits', function() {
+      scope.editTags();
+      expect(scope.status.editingTags).toBe(true);
+      scope.tagDropdown.selected.push({id: 'Vietnamese', label: 'Vietnamese'});
+      scope.updateTags();
+      expect(scope.data.tagsData.tags.length).toBe(3);
+      scope.cancelTags();
+      expect(scope.data.tagsData.tags.length).toBe(2);
     });
   });
   
   describe('memberListController', function(){
     var ctrl, scope, settings, household;
 
-    beforeEach(inject(function($controller) {
+    beforeEach(inject(function($controller, _$q_) {
       scope = $rootScope.$new();
       ctrl = $controller('memberListController', {
         $scope: scope, 
         basePath: '',
-        fbSaveHouseholdMembers: {}
+        fbSaveHouseholdMembers: function() { 
+          var deferred = _$q_.defer();
+          deferred.resolve( householdData );
+          return deferred.promise;
+        }
       });
     }));
 
-    it('should do something', function() {
-      expect(true).toBe(true);
+    it('should edit and save members', function() {
+      expect(scope.status.editingMembers).toBe(false);
+      scope.editMembers();
+      expect(scope.status.editingMembers).toBe(true);
+      scope.saveMembers();
+      expect(scope.status.savingMembers).toBe(true);
+      $rootScope.$apply();
+      expect(scope.status.savingMembers).toBe(false);
+      expect(scope.status.editingMembers).toBe(false);
     });
+
+    xit('should add a member to the list', function() {
+      
+    });
+
+    xit('should delete a member from the list', function() {
+      
+    });
+
+    xit('should cancel member edits', function() {
+      
+    });
+
   });
   
   describe('notesController', function(){
-    var ctrl, scope, settings, household;
+    var ctrl, scope;
 
-    beforeEach(inject(function($controller) {
+    beforeEach(inject(function($controller, _$q_) {
       scope = $rootScope.$new();
       ctrl = $controller('notesController', {
         $scope: scope, 
-        fbSaveHousehold: {}
-      });
+        fbSaveHousehold: function() { 
+          var deferred = _$q_.defer();
+          deferred.resolve( householdData );
+          return deferred.promise;
+        }
+      });      
     }));
 
-    it('should do something', function() {
-      expect(true).toBe(true);
+    it('should edit and save notes', function() {
+      expect(scope.status.editingNotes).toBe(false);
+      scope.editNotes();
+      expect(scope.status.editingNotes).toBe(true);
+      expect(scope.data.household.notes).toBeDefined();
+      scope.data.household.notes = 'New notes';
+      scope.saveNotes();
+      expect(scope.status.savingNotes).toBe(true);
+      $rootScope.$apply();
+      expect(scope.status.savingNotes).toBe(false);
+      expect(scope.status.editingNotes).toBe(false);
     });
   });
 });

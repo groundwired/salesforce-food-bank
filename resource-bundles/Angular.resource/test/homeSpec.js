@@ -30,7 +30,7 @@ describe('home', function() {
     });
   });
 
-  describe('homeController - no points', function(){
+  describe('homeController - not tracking points', function(){
     var ctrl, scope, settings;
 
     beforeEach(inject(function($controller) {
@@ -47,12 +47,12 @@ describe('home', function() {
 
   
   describe('statsController', function(){
-    var ctrl, scope, stats, $q;
+    var ctrl, scope, mockStatsFunction, $q;
   
     beforeEach(inject(function($controller, _$q_) {
       scope = $rootScope.$new();
       $q = _$q_;
-      stats = { 
+      mockStatsFunction = { 
         get: function(tf){ 
           var deferred = $q.defer();
           deferred.resolve( mockData('getStats', 1) );
@@ -61,7 +61,7 @@ describe('home', function() {
       };      
       ctrl = $controller('statsController', {
         $scope: scope, 
-        fbStats: stats
+        fbStats: mockStatsFunction
       });
       $rootScope.$apply();
     }));

@@ -1,7 +1,7 @@
 'use strict';
 /* global describe, beforeEach, it, inject, expect, module, jasmine, Visualforce */
 
-describe('client_edit', function() {
+describe('client_new', function() {
 
   var $rootScope, mockData;
 
@@ -17,10 +17,10 @@ describe('client_edit', function() {
   describe('clentEditController', function(){
     var ctrl, scope, settings, household;
 
-    beforeEach(inject(function($controller, fbHouseholdDetail, fbSettings) {
+    beforeEach(inject(function($controller, fbSettings) {
       scope = $rootScope.$new();
       settings = fbSettings.translate(mockData('getAppSettings', 0));
-      household = fbHouseholdDetail.translate(mockData('getHouseholdDetail', 0));
+      household = {name: 'New Client', members: [{ firstName: 'John Doe', lastName: 'John Doe' }]};
       ctrl = $controller('clientEditController', {
         $scope: scope, 
         foundSettings: settings,
@@ -35,7 +35,7 @@ describe('client_edit', function() {
     });
 
     xit('should update tags', function() {
-
+      expect(scope.data.tagsData).toBeDefined();
     });
 
     xit('should add and delete members', function() {

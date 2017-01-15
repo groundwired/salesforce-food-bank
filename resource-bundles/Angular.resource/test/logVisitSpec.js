@@ -35,6 +35,14 @@ describe('log_visit', function() {
       expect(scope.settings).toBeDefined();
       expect(scope.household.totalVisits).toBe(6);
     });
+    
+    xit('should validate form before saving', function() {
+
+    });
+
+    xit('should log a visit along with commodities and points used', function() {
+
+    });
   });
 
 });
