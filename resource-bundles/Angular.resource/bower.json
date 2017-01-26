@@ -12,9 +12,8 @@
     "url": "git://github.com/groundwired/salesforce-food-bank.git"
   },
   "dependencies": {
+    "jasmine": "~2.0.0",
     "lodash": "~2.4.1",
-    "bootstrap": "3.2.0",
-    "bootstrap-sf1": "~0.1.0-beta.14",
     "angular": "1.4.9",
     "angular-animate": "1.4.9",
     "angular-resource": "1.4.9",
@@ -27,7 +26,6 @@
     "angular-bootstrap": "~0.3.0",
     "angular-ui-select": "~0.7.0",
     "moment": "~2.8.3",
-    "odometer": "~0.4.0",
     "angularjs-dropdown-multiselect" : "~1.5.2"
   },
   "resolutions": {
