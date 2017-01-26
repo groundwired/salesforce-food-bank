@@ -3,8 +3,7 @@
 /* Controllers for log visit page */
 
 angular.module('logVisitController', [
-    'ngRoute',
-    'mgcrea.ngStrap'
+    'ngRoute'
   ]);
 
 angular.module('logVisitController')

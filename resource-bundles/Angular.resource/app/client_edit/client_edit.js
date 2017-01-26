@@ -4,7 +4,6 @@
 /* Controllers for client edit page */
 angular.module('clientEditController', [
     'ngRoute',
-    'mgcrea.ngStrap',
     'angularjs-dropdown-multiselect'
   ]);
 
