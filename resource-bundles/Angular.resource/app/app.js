@@ -6,6 +6,7 @@
 angular.module('foodBankApp', [
   'ngRoute',
   'ngCookies',
+  'ngAnimate',
   'ui.bootstrap',
   'mgcrea.ngStrap',
   'angularjs-dropdown-multiselect',
