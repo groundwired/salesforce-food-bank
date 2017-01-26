@@ -1,9 +1,7 @@
 'use strict';
-
-/* jasmine specs for controllers go here */
 /* global describe, beforeEach, it, inject, expect, module, jasmine */
 
-describe('controllers', function() {
+describe('main', function() {
 
   beforeEach(module('foodBankApp'));
 

@@ -1,4 +1,6 @@
 'use strict';
+/*global _*/
+/*global moment*/
 
 angular.module('appServices', ['appServerData']);
 
@@ -102,46 +104,48 @@ angular.module('appServices')
           deferred.resolve(settings);
           return deferred.promise;
         } else {
-          return jsRemoting.invoke('getAppSettings', [], function(result) {
-            settings.general = {};
-            settings.general.allowBoxSizeOverride = result.general.Allow_Box_Size_Override__c;
-            settings.general.allowOverage = result.general.Allow_Overage__c;
-            settings.general.checkInRequired = result.general.Check_in_Required__c;
-            settings.general.monthlyBasePoints = result.general.Monthly_Base_Points__c;
-            settings.general.monthlyPointsPerAdult = result.general.Monthly_Points_Per_Adult__c;
-            settings.general.monthlyPointsPerChild = result.general.Monthly_Points_Per_Child__c;
-            settings.general.monthlyVisitLimit = result.general.Monthly_Visit_Limit__c;
-            settings.general.proofOfAddressRequired = result.general.Proof_of_Address_Required__c;
-            settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
-            settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
-            settings.general.trackPoints = result.general.Track_Points__c;
-            settings.general.visitFrequencyLimit = result.general.Visit_Frequency_Limit__c;
-            settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
-            settings.general.welcomeAlert = result.general.Welcome_Alert__c;
-            settings.general.welcomeMessage = result.general.Welcome_Message__c; 
-            
-            settings.tags = (result.general.Tags__c) ? (_.map(result.general.Tags__c.split(';'), _.trim)) : [];
-
-            settings.commodities = [];
-            _.forEach(result.commodities, function(c){
-              settings.commodities.push({
-                'name': c.Name,
-                'allowOverage': c.Allow_Overage__c,
-                'monthlyLimit': c.Monthly_Limit__c
-              });
-            });
-            
-            settings.boxes = [];
-            _.forEach(result.boxes, function(c){
-              settings.boxes.push({
-                'name': c.Name,
-                'minimumFamilySize': c.Minimum_Family_Size__c
-              });
-            });
-
-            return settings;
-          });
+          return jsRemoting.invoke('getAppSettings', [], this.translate);
         }
+      },
+      translate : function(result) {
+        settings.general = {};
+        settings.general.allowBoxSizeOverride = result.general.Allow_Box_Size_Override__c;
+        settings.general.allowOverage = result.general.Allow_Overage__c;
+        settings.general.checkInRequired = result.general.Check_in_Required__c;
+        settings.general.monthlyBasePoints = result.general.Monthly_Base_Points__c;
+        settings.general.monthlyPointsPerAdult = result.general.Monthly_Points_Per_Adult__c;
+        settings.general.monthlyPointsPerChild = result.general.Monthly_Points_Per_Child__c;
+        settings.general.monthlyVisitLimit = result.general.Monthly_Visit_Limit__c;
+        settings.general.proofOfAddressRequired = result.general.Proof_of_Address_Required__c;
+        settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
+        settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
+        settings.general.proofOfInfantRequired = result.general.Proof_of_Infant_Required__c;
+        settings.general.trackPoints = result.general.Track_Points__c;
+        settings.general.visitFrequencyLimit = result.general.Visit_Frequency_Limit__c;
+        settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
+        settings.general.welcomeAlert = result.general.Welcome_Alert__c;
+        settings.general.welcomeMessage = result.general.Welcome_Message__c;
+
+        settings.tags = (result.general.Tags__c) ? (_.map(result.general.Tags__c.split(';'), _.trim)) : [];
+
+        settings.commodities = [];
+        _.forEach(result.commodities, function(c){
+          settings.commodities.push({
+            'name': c.Name,
+            'allowOverage': c.Allow_Overage__c,
+            'monthlyLimit': c.Monthly_Limit__c
+          });
+        });
+
+        settings.boxes = [];
+        _.forEach(result.boxes, function(c){
+          settings.boxes.push({
+            'name': c.Name,
+            'minimumFamilySize': c.Minimum_Family_Size__c
+          });
+        });
+
+        return settings;
       }
     };
   }]);
@@ -173,7 +177,6 @@ angular.module('appServices')
           Children__c: hh.children,
           Infants__c: hh.infants,
           Seniors__c: hh.seniors,
-          Infant_Card_Expires__c: hh.infantCardExpires,
           CreatedDate: hh.createdDate,
           First_Visit__c: hh.firstVisitDate,
           Most_Recent_Visit__c: hh.mostRecentVisitDate,
@@ -189,8 +192,9 @@ angular.module('appServices')
           First_Name__c: mobj.firstName,
           Last_Name__c: mobj.lastName,
           Age_Group__c: mobj.ageGroup,
-          Age__c: mobj.age //,
-          //Birthdate__c: new Date(mobj.birthdate)
+          Age__c: mobj.age,
+          //Birthdate__c: new Date(mobj.birthdate),
+          Proof_of_Infant__c: mobj.proofOfInfant
         };
         if (mobj.id) sobj.Id = mobj.id;
         return sobj;
@@ -217,7 +221,6 @@ angular.module('appServices')
           children: result.Children__c,
           infants: result.Infants__c,
           seniors: result.Seniors__c,
-          infantCardExpires: result.Infant_Card_Expires__c,
           createdDate: result.CreatedDate,
           firstVisitDate: result.First_Visit__c,
           mostRecentVisitDate: result.Most_Recent_Visit__c,
@@ -243,19 +246,20 @@ angular.module('appServices')
             lastName: v.Last_Name__c,
             ageGroup: v.Age_Group__c,
             age: v.Age__c,
-            birthdate: v.Birthdate__c
+            birthdate: v.Birthdate__c,
+            proofOfInfant: v.Proof_of_Infant__c
           });
         });
 
         // add up points and commodities used in previous visits this month
-        client.currentPointsUsed = 0;
+        var pointsUsed = 0;
         client.commodityUsage = {};
         client.visitsThisMonth = (result.Visits__r ? result.Visits__r.length : 0);
         _.forEach( result.Visits__r, function(v) {
           if (v.Points_Used__c) {
-            client.currentPointsUsed += v.Points_Used__c;
+            pointsUsed += v.Points_Used__c;
           }
-          
+
           // TODO: try catch? json could be bogus
           if (v.Commodity_Usage_JSON__c) {
             _.forEach( angular.fromJson( v.Commodity_Usage_JSON__c ), function(v, k) {
@@ -267,7 +271,6 @@ angular.module('appServices')
             });
           }
         });
-        client.currentPointsRemaining = client.monthlyPointsAvailable - client.currentPointsUsed;
 
         // subtract commodity usage to get the current available commodities
         fbSettings.get().then(
@@ -296,18 +299,23 @@ angular.module('appServices')
             // do we need proof of address?
             if (settings.general.proofOfAddressRequired) {
 
-              var proofOfAddressCutoffDate = 
-                (settings.general.proofOfAddressUpdateInterval == null) ? null : 
+              var proofOfAddressCutoffDate =
+                (settings.general.proofOfAddressUpdateInterval == null) ? null :
                 moment().subtract(settings.general.proofOfAddressUpdateInterval, 'months');
-              
-              client.proofOfAddressNeeded = 
-                (!proofOfAddressCutoffDate || client.proofOfAddressDate == undefined || 
+
+              var proofOfAddressNeeded =
+                (!proofOfAddressCutoffDate || client.proofOfAddressDate == undefined ||
                   moment(client.proofOfAddressDate).isBefore(proofOfAddressCutoffDate));
 
               // if the proof is old, clear it out
-              if (client.proofOfAddressNeeded) {
+              if (proofOfAddressNeeded) {
                 client.proofOfAddress = null;
               }
+            }
+            
+            if (settings.general.trackPoints) {
+              client.currentPointsUsed = pointsUsed;
+              client.currentPointsRemaining = client.monthlyPointsAvailable - pointsUsed;              
             }
           }
         );
@@ -359,6 +367,7 @@ angular.module('appServices')
         _.forEach(result, function(result){
           visits.push({
             'date': result.Visit_Date__c,
+            'boxType': result.Box_Type__c,
             'ptsUsed': result.Points_Used__c,
             'notes': result.Notes__c
           });

@@ -1,7 +1,7 @@
 'use strict';
+/* global _ */
 
 /* Controllers for client edit page */
-
 angular.module('clientEditController', [
     'ngRoute',
     'mgcrea.ngStrap',
@@ -9,8 +9,8 @@ angular.module('clientEditController', [
   ]);
 
 angular.module('clientEditController')
-  .controller('clientEditController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', 'foundSettings', 'foundHousehold', 'fbSaveHouseholdAndMembers',
-  function($scope, $location, $timeout, $window, $routeParams, $alert, foundSettings, foundHousehold, fbSaveHouseholdAndMembers) {
+  .controller('clientEditController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', '$modal', 'foundSettings', 'foundHousehold', 'basePath', 'fbSaveHouseholdAndMembers',
+  function($scope, $location, $timeout, $window, $routeParams, $alert, $modal, foundSettings, foundHousehold, basePath, fbSaveHouseholdAndMembers) {
 
     $scope.settings = foundSettings;
 
@@ -28,7 +28,7 @@ angular.module('clientEditController')
 
     $scope.data.tagsData = {
       id: $scope.data.household.id,
-      tags: $scope.data.household.tags,
+      tags: $scope.data.household.tags
     };
 
     $scope.updateTags = function() {
@@ -39,7 +39,7 @@ angular.module('clientEditController')
 
     $scope.tagDropdown = {
       allTags: _.union($scope.settings.tags, $scope.data.household.tags),
-      options: _.map(_.union($scope.settings.tags, $scope.data.household.tags), 
+      options: _.map(_.union($scope.settings.tags, $scope.data.household.tags),
                         function(v) { return {id: v, label: v}; }),
       selected: _.map($scope.data.household.tags, function(v) { return {id: v, label: v}; }),
       events: {
@@ -63,22 +63,26 @@ angular.module('clientEditController')
     $scope.addMember = function() {
       $scope.status.editingMembers = true;
       $scope.data.memberList.push({
-        memberData: {},
-        memberDataEditable: {},
+        memberData: {}
       });
     };
 
     $scope.saveClient = function() {
       $scope.status.savingClient = true;
-      fbSaveHouseholdAndMembers($scope.data.household, $scope.data.memberList).then(
+      _.assign($scope.data.household, $scope.data.tagsData);
+      fbSaveHouseholdAndMembers($scope.data.household, _.map($scope.data.memberList, 'memberData')).then(
         function(result){
           $scope.data.household = result;
           $scope.data.memberList = [];
-          _.forEach(foundHousehold.members, function(v) {
+          _.forEach(result.members, function(v) {
             $scope.data.memberList.push({
               memberData: _.clone(v)
             });
           });
+          $scope.data.tagsData = {
+            id: $scope.data.household.id,
+            tags: $scope.data.household.tags
+          };
           $alert({
             title: 'Saved.',
             type: 'success',
@@ -101,6 +105,17 @@ angular.module('clientEditController')
           });
         }
       );
+    };
+
+    var deleteModal;
+    $scope.deleteMember = function(i) {
+      if (!!$scope.data.memberList[i].memberData.id) {
+        deleteModal = $modal({title: 'Delete Household Member', contentTemplate: basePath + '/app/client/delete_modal.html', show: false, scope: $scope});
+        deleteModal.memberIndex = i;
+        deleteModal.show();
+      } else {
+        $scope.data.memberList.splice(i, 1);
+      }
     };
 
     $scope.cancelEdit = function() {

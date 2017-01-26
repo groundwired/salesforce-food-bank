@@ -46,7 +46,7 @@ body { margin:0px; }
   margin-right: 5px;
 }
 .bootstrap .panel .table {
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 .bootstrap .panel .table .warning {
   font-weight: normal;

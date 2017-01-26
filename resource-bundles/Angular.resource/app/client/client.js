@@ -1,16 +1,21 @@
 'use strict';
+/*global _*/
+/*global moment*/
 
 /* Controllers for client view page */
 
 angular.module('clientController', [
-    'ngRoute',
-    'mgcrea.ngStrap',
-    'angularjs-dropdown-multiselect'
-  ]);
+  'ngRoute',
+  'mgcrea.ngStrap',
+  'angularjs-dropdown-multiselect'
+]);
 
 angular.module('clientController')
-  .controller('clientController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', '$q', 'foundSettings', 'foundHousehold', 'fbHouseholdDetail', 'fbSaveHousehold', 'fbSaveHouseholdMembers', 'fbSaveHouseholdAndMembers', 'fbCheckIn', 'fbVisitHistory',
-  function($scope, $location, $timeout, $window, $routeParams, $alert, $q, foundSettings, foundHousehold, fbHouseholdDetail, fbSaveHousehold, fbSaveHouseholdMembers, fbSaveHouseholdAndMembers, fbCheckIn, fbVisitHistory) {
+  .controller('clientController', ['$scope', '$location', '$timeout', '$window', '$routeParams', '$alert', '$q',
+    'foundSettings', 'foundHousehold', 'fbHouseholdDetail', 'fbSaveHousehold', 'fbSaveHouseholdMembers',
+    'fbSaveHouseholdAndMembers', 'fbCheckIn', 'fbVisitHistory',
+  function($scope, $location, $timeout, $window, $routeParams, $alert, $q, foundSettings, foundHousehold,
+    fbHouseholdDetail, fbSaveHousehold, fbSaveHouseholdMembers, fbSaveHouseholdAndMembers, fbCheckIn, fbVisitHistory) {
 
     $scope.settings = foundSettings;
 
@@ -20,11 +25,16 @@ angular.module('clientController')
     $scope.status = {};
     $scope.commodities = [];
 
-    $scope.data.ptsRemaining = foundHousehold.currentPointsRemaining;
-    $scope.data.ptsMonthly = foundHousehold.monthlyPointsAvailable;
-    $scope.data.ratio =  Math.floor(foundHousehold.currentPointsRemaining * 100 / foundHousehold.monthlyPointsAvailable);
+    if ($scope.settings.general.trackPoints) {
+      $scope.data.ptsRemaining = foundHousehold.currentPointsRemaining;
+      $scope.data.ptsMonthly = foundHousehold.monthlyPointsAvailable;
+      $scope.data.ratio =  Math.floor(foundHousehold.currentPointsRemaining * 100 / foundHousehold.monthlyPointsAvailable);
+    }
+    
     $scope.data.boxType = foundHousehold.defaultBox;
-    $scope.data.commodities = foundHousehold.commodityAvailability;
+    if (foundHousehold.commodityAvailability && foundHousehold.commodityAvailability.length > 0) {
+      $scope.data.commodities = foundHousehold.commodityAvailability;      
+    }
     $scope.data.visits = [];
     $scope.status.queriedVisits = false;
 
@@ -35,32 +45,50 @@ angular.module('clientController')
       });
     });
 
+    $scope.status.hasInfant = function() {
+      var members = _.map($scope.data.memberList, ($scope.status.editingMembers ? 'memberDataEditable' : 'memberData'));
+      return _.some(members, {ageGroup:'Infant'});
+    };
+
+    $scope.status.proofOfInfantNeeded = function() {
+      var members = _.map($scope.data.memberList, ($scope.status.editingMembers ? 'memberDataEditable' : 'memberData'));
+      var infants = _.filter(members, {ageGroup:'Infant'});
+      return ($scope.settings.general.proofOfInfantRequired &&
+                !(_.isEmpty(infants)) && !(_.every(infants, 'proofOfInfant')));
+    };
+
     //determine if this client has exceeded the food bank visit frequency limit and set warning message appropriately
     $scope.visitorWarningMsg = function() {
-      if (foundSettings.general.visitFrequencyLimit.toUpperCase() === "WEEKLY") {
+      if (!$scope.data.household.mostRecentVisitDate) {
+        return;
+      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'WEEKLY') {
         //we assume weekly means a visit once per calendar week, with the week starting on Sunday
         //first determine the day of th week of today
-        if (moment().week() === moment($scope.data.household.mostRecentVisitDate).week() && (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 7)) {
-          return "Heads up! This client has already visited in the past calendar week.";
+        if (moment().week() === moment($scope.data.household.mostRecentVisitDate).week() &&
+            (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 7)) {
+          return 'Heads up! This client has already visited in the past calendar week.';
         } else {
           return;
         }
-      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === "BIWEEKLY") {
-        if ( ((moment().week() === moment($scope.data.household.mostRecentVisitDate).week()) || (moment().subtract(1,'weeks').week() === moment($scope.data.household.mostRecentVisitDate).week())) && (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 14)) {
-          return "Heads up! This client has already visited in the past two calendar weeks.";
+      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'BIWEEKLY') {
+        if ( ((moment().week() === moment($scope.data.household.mostRecentVisitDate).week()) ||
+          (moment().subtract(1,'weeks').week() === moment($scope.data.household.mostRecentVisitDate).week())) &&
+            (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 14)) {
+          return 'Heads up! This client has already visited in the past two calendar weeks.';
         } else {
           return;
         }
-      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === "MONTHLY") {
-        if (moment().month() === moment($scope.data.household.mostRecentVisitDate).month() && (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 31)) {
-          return "Heads up! This client has already visited in the past calendar month.";
+      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'MONTHLY') {
+        if (moment().month() === moment($scope.data.household.mostRecentVisitDate).month() &&
+            (moment().diff($scope.data.household.mostRecentVisitDate,'days') <= 31)) {
+          return 'Heads up! This client has already visited in the past calendar month.';
         } else {
           return;
         }
       } else if (foundSettings.general.visitFrequencyLimit && foundSettings.general.visitFrequencyLimit.toUpperCase().match(/^EVERY\s+.*$/)) {
         var noOfDays = parseInt(/\d+/.exec(foundSettings.general.visitFrequencyLimit));
         if (moment().diff($scope.data.household.mostRecentVisitDate,'days') < noOfDays) {
-          return "Heads up! This client has already visited in the past " + noOfDays + " days.";
+          return 'Heads up! This client has already visited in the past ' + noOfDays + ' days.';
         } else {
           return;
         }
@@ -194,7 +222,7 @@ angular.module('clientController')
     $scope.addMember = function() {
       $scope.data.memberList.push({
         memberData: {},
-        memberDataEditable: {},
+        memberDataEditable: {}
       });
     };
 
@@ -225,10 +253,16 @@ angular.module('clientController')
 
 angular.module('clientController')
   .controller('addressController', ['$scope', '$alert', 'fbSaveHousehold',
-    function($scope, $alert, fbSaveHousehold) {
+  function($scope, $alert, fbSaveHousehold) {
 
     $scope.status.editingAddress = false;
     $scope.status.savingAddress = false;
+
+    $scope.status.proofOfAddressNeeded = function() {
+      return ($scope.settings.general.proofOfAddressRequired &&
+                ((!$scope.data.addressData && !$scope.data.household.proofOfAddress) ||
+                 ($scope.data.addressData && !$scope.data.addressData.proofOfAddress)));
+    };
 
     $scope.editAddress = function() {
       $scope.data.addressData = {
@@ -271,7 +305,7 @@ angular.module('clientController')
 
 angular.module('clientController')
   .controller('notesController', ['$scope', 'fbSaveHousehold', '$alert',
-    function($scope, fbSaveHousehold, $alert) {
+  function($scope, fbSaveHousehold, $alert) {
 
     $scope.status.editingNotes = false;
     $scope.status.savingNotes = false;
@@ -279,7 +313,7 @@ angular.module('clientController')
     $scope.editNotes = function() {
       $scope.data.notesData = {
         id: $scope.data.household.id,
-        notes: $scope.data.household.notes,
+        notes: $scope.data.household.notes
       };
       $scope.status.editingNotes = true;
     };
@@ -310,14 +344,14 @@ angular.module('clientController')
 
 angular.module('clientController')
   .controller('tagsController', ['$scope', 'fbSaveHousehold', '$alert',
-    function($scope, fbSaveHousehold, $alert) {
+  function($scope, fbSaveHousehold, $alert) {
 
     $scope.status.editingTags = false;
     $scope.status.savingTags = false;
 
     $scope.data.tagsData = {
       id: $scope.data.household.id,
-      tags: $scope.data.household.tags,
+      tags: $scope.data.household.tags
     };
 
     $scope.updateTags = function() {
@@ -327,7 +361,7 @@ angular.module('clientController')
 
     $scope.tagDropdown = {
       allTags: _.union($scope.settings.tags, $scope.data.household.tags),
-      options: _.map(_.union($scope.settings.tags, $scope.data.household.tags), 
+      options: _.map(_.union($scope.settings.tags, $scope.data.household.tags),
                         function(v) { return {id: v, label: v}; }),
       selected: _.map($scope.data.household.tags, function(v) { return {id: v, label: v}; }),
       events: {
@@ -373,7 +407,7 @@ angular.module('clientController')
 
 angular.module('clientController')
   .controller('memberListController', ['$scope', '$alert', '$modal', 'basePath', 'fbSaveHouseholdMembers',
-    function($scope, $alert, $modal, basePath, fbSaveHouseholdMembers) {
+  function($scope, $alert, $modal, basePath, fbSaveHouseholdMembers) {
 
     $scope.status.editingMembers = false;
     $scope.status.savingMembers = false;
@@ -385,24 +419,10 @@ angular.module('clientController')
       $scope.status.editingMembers = true;
     };
 
-    var deleteModal;
     $scope.deleteMember = function(i) {
-      if (!!$scope.data.memberList[i].memberData.id) {
-        deleteModal = $modal({title: 'Delete Household Member', contentTemplate: basePath + '/partials/delete_modal.html', show: false, scope: $scope});
-        deleteModal.memberIndex = i;
-        debugger;
-        deleteModal.show();
-      } else {
+      if ($scope.data.memberList[i].memberDataEditable.id) {
         $scope.data.memberList.splice(i, 1);
       }
-    };
-
-    $scope.deleteClient = function() {
-      $scope.data.memberList.splice(deleteModal.memberIndex, 1);
-    };
-
-    $scope.moveClient = function() {
-      $scope.data.memberList.splice(deleteModal.memberIndex, 1);
     };
 
     $scope.saveMembers = function() {
@@ -418,7 +438,6 @@ angular.module('clientController')
           });
           $scope.status.savingMembers = false;
           $scope.status.editingMembers = false;
-          $scope.$parent.$digest();
         },
         function(reason){
           $scope.status.savingMembers = false;
@@ -437,8 +456,7 @@ angular.module('clientController')
   }]);
 
 angular.module('clientController')
-  .controller('datepickerCtrl', ['$scope',
-    function($scope) {
+  .controller('datepickerCtrl', ['$scope', function($scope) {
 
     $scope.openCal = function($event) {
       $scope.status.calOpen = !$scope.status.calOpen;

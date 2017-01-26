@@ -91,15 +91,17 @@
 	  	</tfooter>
 	  </table>
 
-	 <h3 style="margin-top:2em;"><i>Distribution Summary</i></h3>
+      <apex:outputPanel rendered="{!trackPoints}">
+        <h3 style="margin-top:2em;"><i>Distribution Summary</i></h3>
 
-	  <table>
-	  	<tbody>
-	  		<tr>
-	  			<th style="width:8em;">Points Used</th>
-	  			<td style="width:6em; text-align:center;">{!pointsUsed}</td>
-	  		</tr>
-		</tbody>
-		</table>
+        <table>
+            <tbody>
+                <tr>
+                    <th style="width:8em;">Points Used</th>
+                    <td style="width:6em; text-align:center;">{!pointsUsed}</td>
+                </tr>
+            </tbody>
+        </table>
+      </apex:outputPanel>    
 	</div>
 </apex:page>

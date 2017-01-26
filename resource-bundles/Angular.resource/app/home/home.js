@@ -3,9 +3,9 @@
 /* Controllers for main page */
 
 angular.module('homeController', [
-    'ngRoute',
-    'mgcrea.ngStrap'
-  ]);
+  'appServerData',
+  'appServices'    
+]);
 
 angular.module('homeController')
   .controller('homeController', ['$scope', '$location', '$timeout', '$interval', 'fbCheckInList', 'fbHouseholdSearch', 'foundSettings', '$alert',
@@ -59,17 +59,17 @@ angular.module('homeController')
   function($scope, $routeParams, $cookies, fbStats, $alert) {
 
     $scope.statsDropdown = [
-      { "text": "Today", "click": "get('Today')" },
-      { "text": "Yesterday", "click": "get('Yesterday')" },
-      { "divider": true },
-      { "text": "This Week", "click": "get('This Week')" },
-      { "text": "Last Week", "click": "get('Last Week')" },
-      { "divider": true },
-      { "text": "This Month", "click": "get('This Month')" },
-      { "text": "Last Month", "click": "get('Last Month')" },
-      { "divider": true },
-      { "text": "This Year", "click": "get('This Year')" },
-      { "text": "Last Year", "click": "get('Last Year')" }
+      { 'text': 'Today', 'click': 'get(\'Today\')' },
+      { 'text': 'Yesterday', 'click': 'get(\'Yesterday\')' },
+      { 'divider': true },
+      { 'text': 'This Week', 'click': 'get(\'This Week\')' },
+      { 'text': 'Last Week', 'click': 'get(\'Last Week\')' },
+      { 'divider': true },
+      { 'text': 'This Month', 'click': 'get(\'This Month\')' },
+      { 'text': 'Last Month', 'click': 'get(\'Last Month\')' },
+      { 'divider': true },
+      { 'text': 'This Year', 'click': 'get(\'This Year\')' },
+      { 'text': 'Last Year', 'click': 'get(\'Last Year\')' }
     ];
 
     // calculate stats for the given timeframe, such as 'Last Week'
