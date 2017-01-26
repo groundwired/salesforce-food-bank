@@ -52,6 +52,45 @@ public with sharing class FoodBankTriggerTest {
 		system.assertEquals(0, c8.client_household__r.children__c );
 	}
 
+	@isTest static void testChangeProofOfAddress() {
+		Client_Household__c household = new Client_Household__c(
+			Address__c = '123 Main Street',
+            City__c = 'Seattle',
+            State__c = 'WA',
+            Postal_Code__c = '98103',
+            Proof_of_Address__c = 'Utility bill',
+            Proof_of_Address_Date__c = System.today().addYears(-2)
+		);
+        insert household;
+
+        household.Proof_of_Address__c = 'Staff verified - JS';
+        update household;
+
+        household = [ SELECT Proof_of_Address_Date__c FROM Client_Household__c WHERE Id = :household.Id ];
+
+        System.assertEquals(System.today(), household.Proof_of_Address_Date__c, 'Proof of Address date should update to current date');
+	}
+
+	@isTest static void testUpdateClientAge() {
+		Client_Household__c household = new Client_Household__c();
+        insert household;
+
+        Client__c c1 = new Client__c(
+        	Client_Household__c = household.Id, 
+        	Name = 'Amber Smith', 
+        	Age__c = 55
+        ); 
+        insert c1;
+
+        c1.Age__c = 55;
+        c1.Age_Entry_Date__c = System.today().addYears(-2);
+        update c1;
+
+        c1 = [ SELECT Age__c, Age_Entry_Date__c FROM Client__c WHERE Id = :c1.Id ];
+        System.assertEquals(57, c1.Age__c, 'If age was 55 and was entered 2 years ago, age should be recalculated to 57');
+
+	}
+
 	@isTest
 	private static void testVisitTrigger() {
 
