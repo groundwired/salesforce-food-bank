@@ -73,7 +73,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbSettings) {
       svc = fbSettings;
-      jasmine.clock().install();
     }));
 
     it('should get settings', function() {
@@ -92,7 +91,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbHouseholdDetail) {
       svc = fbHouseholdDetail;
-      jasmine.clock().install();
     }));
 
     it('should return a household', function() {
@@ -114,7 +112,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbSaveHousehold) {
       svc = fbSaveHousehold;
-      jasmine.clock().install();
     }));
 
     it('should save a household', function() {
@@ -137,7 +134,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbSaveHouseholdMembers) {
       svc = fbSaveHouseholdMembers;
-      jasmine.clock().install();
     }));
 
     it('should save household members', function() {
@@ -160,7 +156,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbSaveHouseholdAndMembers) {
       svc = fbSaveHouseholdAndMembers;
-      jasmine.clock().install();
     }));
 
     it('should save a household and its members', function() {
@@ -184,7 +179,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbCheckIn) {
       svc = fbCheckIn;
-      jasmine.clock().install();
     }));
 
     it('should check in a visitor', function() {
@@ -203,7 +197,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbVisitHistory) {
       svc = fbVisitHistory;
-      jasmine.clock().install();
     }));
 
     it('should list visit history', function() {
@@ -222,7 +215,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbCancelCheckIn) {
       svc = fbCancelCheckIn;
-      jasmine.clock().install();
     }));
 
     it('should cancel check in', function() {
@@ -240,7 +232,6 @@ describe('services', function() {
     var svc;
     beforeEach(inject(function(fbLogVisit) {
       svc = fbLogVisit;
-      jasmine.clock().install();
     }));
 
     it('should log a visit', function() {

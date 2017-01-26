@@ -3,8 +3,7 @@
 /* Controllers */
 
 angular.module('mainController', [
-    'ngRoute',
-    'mgcrea.ngStrap'
+    'ngRoute'
   ]);
 
 angular.module('mainController')
