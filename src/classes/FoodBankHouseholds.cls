@@ -3,10 +3,11 @@ public with sharing class FoodBankHouseholds implements Database.Batchable<SObje
 	private static integer MAX_NAMES_IN_HH_NAME = 2;
 
 	public Database.QueryLocator start(Database.BatchableContext BC) {
-	    return Database.getQueryLocator([select Id, Full_Address__c, Client_Names__c, Adults__c, Seniors__c, Children__c, Infants__c,
-					(select Id, First_Name__c, Last_Name__c, Name, Age__c, Age_Entry_Date__c, Birthdate__c, Client_Household__c from Clients__r
-						 order by createdDate, Age__c desc)
-					from Client_Household__c]);
+		return Database.getQueryLocator(
+			[select Id, Full_Address__c, Client_Names__c, Adults__c, Seniors__c, Children__c, Infants__c,
+				(select Id, First_Name__c, Last_Name__c, Name, Age__c, Age_Entry_Date__c, Birthdate__c, Client_Household__c from Clients__r
+					 order by createdDate, Age__c desc)
+				from Client_Household__c]);
 	}
 
 	public void execute(Database.BatchableContext BC, List<Client_Household__c> batch) {
@@ -26,21 +27,21 @@ public with sharing class FoodBankHouseholds implements Database.Batchable<SObje
 	   // Nothing to do here.
 	}
 
-    public static void runBatchManually() {
-        FoodBankHouseholds fbh = new FoodBankHouseholds();
-        Database.executeBatch(fbh); 
-    }
+	public static void runBatchManually() {
+		FoodBankHouseholds fbh = new FoodBankHouseholds();
+		Database.executeBatch(fbh); 
+	}
 	
 	public static void scheduleProcess(String schedule) {
 		if (schedule == null) schedule = '0 0 1 * * ?';
 		FoodBankHouseholds scheduler = new FoodBankHouseholds();
-        System.schedule('FoodBankHouseholds', schedule, scheduler);
+		System.schedule('FoodBankHouseholds', schedule, scheduler);
 	}
 	
 	public void execute(SchedulableContext sc) {
-        FoodBankHouseholds fbh = new FoodBankHouseholds();
-        Database.executeBatch(fbh); 
-    }
+		FoodBankHouseholds fbh = new FoodBankHouseholds();
+		Database.executeBatch(fbh); 
+	}
 
 	public static String calculateHHName( Client_Household__c hh, list<Client__c> members ) {
 		if ( members == null ) return hh.full_address__c;
@@ -50,9 +51,12 @@ public with sharing class FoodBankHouseholds implements Database.Batchable<SObje
 			if ( (cl.Age__c == null || cl.Age__c >= 18) && (MAX_NAMES_IN_HH_NAME == null || adultMembers.size() < MAX_NAMES_IN_HH_NAME) )
 				adultMembers.add( cl );
 
+		// if there are no adults, name the household as if the children were adults
 		if ( adultMembers.size() == 0 ) {
-			return hh.full_address__c;
-		} else if ( adultMembers.size() == 1 ) {
+			adultMembers = members;
+		}
+
+		if ( adultMembers.size() == 1 ) {
 			return adultMembers[0].Name;
 		} else {
 			list<String> lastNames = new list<String>();
