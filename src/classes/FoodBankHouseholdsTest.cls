@@ -18,7 +18,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Full_Address__c, Client_Names__c FROM Client_Household__c WHERE Id = :household.Id ];
-        System.assertEquals(household.Full_Address__c, household.Client_Names__c, 'If there are no adult clients, Client Names should match Full Address');
+        System.assertEquals('Amber Smith', household.Client_Names__c, 'If there are no adult clients, treat the children as adults.');
     }
 
     // there's just one person
@@ -145,5 +145,5 @@ private class FoodBankHouseholdsTest {
         );
         return client;
     }
-	
+    
 }
