@@ -1,7 +1,5 @@
 public with sharing class FoodBankStats {
 
-	public String timeframe { get; private set; }
-
 	public list<Integer> hhVisits { get; private set; }
 	public list<Integer> onePerson { get; private set; }
 	public list<Integer> overOnePerson { get; private set; }
@@ -31,7 +29,6 @@ public with sharing class FoodBankStats {
 
 	public PageReference loadStats() {
 		map<String, String> params = ApexPages.CurrentPage().getParameters();
-		timeframe = params.get('tf');
 		String tfcode = params.get('tfcode');
 		if (tfcode != null) {
 			
