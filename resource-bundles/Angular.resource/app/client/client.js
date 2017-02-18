@@ -6,7 +6,6 @@
 
 angular.module('clientController', [
   'ngRoute',
-  'mgcrea.ngStrap',
   'angularjs-dropdown-multiselect'
 ]);
 

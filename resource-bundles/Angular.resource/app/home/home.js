@@ -4,7 +4,8 @@
 
 angular.module('homeController', [
   'appServerData',
-  'appServices'    
+  'appServices',
+  'mgcrea.ngStrap.dropdown'
 ]);
 
 angular.module('homeController')
