@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>Hierarchy</customSettingsType>
-    <customSettingsVisibility>Protected</customSettingsVisibility>
     <description>General settings for food bank application</description>
     <enableFeeds>false</enableFeeds>
     <fields>
@@ -89,6 +88,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Proof_of_Infant_Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Proof of Infant Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Require_Unique_Address__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -152,4 +159,5 @@
         <unique>false</unique>
     </fields>
     <label>Food Bank Settings</label>
+    <visibility>Protected</visibility>
 </CustomObject>
