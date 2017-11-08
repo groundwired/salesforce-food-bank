@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>List</customSettingsType>
-    <customSettingsVisibility>Protected</customSettingsVisibility>
     <enableFeeds>false</enableFeeds>
+    <label>Food Bank Current Checkins</label>
+    <visibility>Protected</visibility>
     <fields>
         <fullName>Box_Size__c</fullName>
         <externalId>false</externalId>
@@ -42,5 +43,4 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
-    <label>Food Bank Current Checkins</label>
 </CustomObject>

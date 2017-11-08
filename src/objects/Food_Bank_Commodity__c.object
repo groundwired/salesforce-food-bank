@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>List</customSettingsType>
-    <customSettingsVisibility>Protected</customSettingsVisibility>
-    <description>List of items for which the food bank tracks monthly limits and usage - for example, you get up to 3 boxes of eggs per month.</description>
     <enableFeeds>false</enableFeeds>
+    <label>Food Bank Commodity</label>
+    <visibility>Protected</visibility>
+    <description>List of items for which the food bank tracks monthly limits and usage - for example, you get up to 3 boxes of eggs per month.</description>
     <fields>
         <fullName>Allow_Overage__c</fullName>
         <defaultValue>false</defaultValue>
@@ -35,5 +36,4 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
-    <label>Food Bank Commodity</label>
 </CustomObject>
