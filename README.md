@@ -11,9 +11,24 @@ This is a Salesforce.com and AngularJS application that tracks clients and servi
 
 Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
 
-
 ##Getting Started
 
+#Visual Studio Code Setup: https://github.com/forcedotcom/salesforcedx-vscode 
+    Helpful Video: https://github.com/forcedotcom/salesforcedx-vscode/wiki 
+
+#Cumulus CI Setup: https://github.com/SalesforceFoundation/CumulusCI
+
+#Deploy to Scratch Org 
+    cci deploy run task
+
+#Open Scratch Org
+    sfdx force:org:open
+
+#Salesforce Instance Setup
+    Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Client Visit & give View/Edit permissions on all fields
+
+#Open Food Bank App (FoodBankApp Visualforce Page)
+    [instanceURL]/apex/FoodBankApp
 
 ##Running and Testing Locally
 
