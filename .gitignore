@@ -14,3 +14,12 @@ salesforce-food-bank.sublime-workspace
 
 /resource-bundles/Angular.resource/mmui.log
 /resource-bundles/Angular.resource/mmst.log
+.sfdx/tools/apex.db
+.sfdx/orgs/test-pjehpmhadp6i@salesforce-food-bank_-_dev_workspace.net/metadataTypeInfos.json
+.sfdx/orgs/test-58q9gctwzd1g@salesforce-food-bank_-_dev_workspace.net/metadataTypeInfos.json
+.sfdx/sfdx-config.json
+.vscode/settings.json
+.sfdx/orgs/test-pjehpmhadp6i@salesforce-food-bank_-_dev_workspace.net/sourcePathInfos.json
+.sfdx/orgs/test-riyncm6tlzsu@salesforce-food-bank_-_dev_workspace.net/maxrevision.json
+.sfdx/orgs/test-riyncm6tlzsu@salesforce-food-bank_-_dev_workspace.net/metadataTypeInfos.json
+.sfdx/orgs/test-riyncm6tlzsu@salesforce-food-bank_-_dev_workspace.net/sourcePathInfos.json

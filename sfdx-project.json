@@ -1,1 +1,10 @@
-{"sourceApiVersion": 38.0, "packageDirectories": [{"default": true, "path": "src"}], "namespace": null}
+{
+  "packageDirectories": [
+    {
+      "path": "src",
+      "default": true
+    }
+  ],
+  "namespace": "",
+  "sourceApiVersion": "38.0"
+}
