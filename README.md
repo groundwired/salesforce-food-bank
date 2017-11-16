@@ -17,25 +17,41 @@ Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
  
     https://github.com/forcedotcom/salesforcedx-vscode 
  
+ * **Bower Setup**
+ 
+    ```
+    In Visual Studio Code:
+      - Install the Bower Extension
+      - Ctrl+Shift+P -> Bower - Search and Install.  This will find the resource-bundles\Angular.resource\bower.json for dependencies to install.
+    ```
+
  * **Cumulus CI Setup**
  
     https://github.com/SalesforceFoundation/CumulusCI
 
  * **Deploy to Scratch Org**
 
+    ```
     cci deploy run task
+    ```
      
  * **Open Scratch Org**
 
+    ```
     sfdx force:org:open
+    ```
 
  * **Salesforce Instance Setup**
 
+    ```
     Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Client Visit & give View/Edit permissions on all fields
+    ```
 
  * **Open Food Bank App**
 
+    ```
     [instanceURL]/apex/FoodBankApp (FoodBankApp Visualforce Page)
+    ```
 
 ## Running and Testing Locally
 
@@ -44,9 +60,9 @@ There is an alternate home page, as well as a Jasmine Test Runner page.  For exa
 
  * Open a Terminal window to the food bank application root and type the following:
 
-     cd resource-bundles/Angular.resource
+    - cd resource-bundles/Angular.resource
 
-     python -m SimpleHTTPServer
+    - python -m SimpleHTTPServer
 
  * For the home page, open your web browser to: http://localhost:8000/
  * For the test runner, open to: http://localhost:8000/test/TestRunner.html
