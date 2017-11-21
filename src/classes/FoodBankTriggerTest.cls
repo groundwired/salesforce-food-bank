@@ -94,12 +94,46 @@ public with sharing class FoodBankTriggerTest {
 	@isTest
 	private static void testVisitTrigger() {
 
+		Boolean todayIsJan1 = (System.today().month() == 1 && System.today().day() == 1);
+		Integer dateOffset = (todayIsJan1 ? -1 : 0);
+
+		Client_Household__c hh = new Client_Household__c();
+		insert hh;
+
+		Client_Visit__c cv = new Client_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset - 1));
+		insert cv;
+
+		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		System.assertEquals(true, cv.First_Visit_This_Year__c);
+
+		Client_Visit__c cv2 = new Client_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset));
+		insert cv2;
+
+		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		System.assertEquals(true, cv.First_Visit_This_Year__c);
+
+		cv2 = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv2.Id ];
+		System.assertEquals(todayIsJan1, cv2.First_Visit_This_Year__c);
+	}
+
+	@isTest
+	private static void testVisitTriggerNoDates() {
+
 		Client_Household__c hh = new Client_Household__c();
 		insert hh;
 
 		Client_Visit__c cv = new Client_Visit__c(Household__c = hh.id);
 		insert cv;
 
+		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		System.assertEquals(true, cv.First_Visit_This_Year__c);
 
+		Client_Visit__c cv2 = new Client_Visit__c(Household__c = hh.id);
+		insert cv2;
+
+		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		cv2 = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv2.Id ];
+		System.assertEquals(true, cv.First_Visit_This_Year__c);
+		System.assertEquals(false, cv2.First_Visit_This_Year__c);
 	}
 }

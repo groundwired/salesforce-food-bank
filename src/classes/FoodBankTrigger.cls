@@ -198,6 +198,8 @@ Commodity_Usage_JSON__c, Full_Address__c from Client_Household__c
 
 	public void setFirstVisitCheckbox( list<Client_Visit__c> visitList, map<Id, Client_Visit__c> oldMap ) {
 
+// TODO: if no visit date, assume the create date (or today for new records)
+
 		// short circuit if this update is from this trigger itself
 		if (nowUpdatingVisitCheckbox) return;
 
@@ -219,39 +221,43 @@ Commodity_Usage_JSON__c, Full_Address__c from Client_Household__c
 			}			
 		}
 
+		// collect visit years
 		for (Client_Visit__c cv : visitList) {
-			if (cv.Visit_Date__c != null) {
-				hhSet.add(cv.Household__c);
-				yearSet.add(cv.Visit_Date__c.year());
-				String mapKey = String.valueOf(cv.Visit_Date__c.year()) + cv.Household__c;
-				if (cvMap.containsKey(mapKey))
-					cvMap.get(mapKey).add(cv);
-				else
-					cvMap.put(mapKey, new list<Client_Visit__c>{ cv });
-
-			} else {
-				cv.First_Visit_This_Year__c = false;
-			}
-			if (oldMap != null) {
-				Client_Visit__c oldCv = oldMap.get(cv.Id);
-				hhSet.add(oldCv.Household__c);
-				if (oldCv.Visit_Date__c != null)
-					yearSet.add(oldCv.Visit_Date__c.year());
-			}
+			hhSet.add(cv.Household__c);
+			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
+			yearSet.add(visitYear);
 		}
 
 		// query for all existing visits for those HHs this year and add them to the map
 		set<Id> visitIdsOutsideTriggerSet = new set<Id>();
 		for (Client_Visit__c cv : [select id, Household__c, Visit_Date__c, First_Visit_This_Year__c from Client_Visit__c 
 												where Household__c in : hhSet and CALENDAR_YEAR(Visit_Date__c) in : yearSet 
-												and Id not in : visitList]) {
+												and Id not in : visitList order by Id]) {
 
+			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
 			visitIdsOutsideTriggerSet.add(cv.Id);
-			String mapKey = String.valueOf(cv.Visit_Date__c.year()) + cv.Household__c;
+			String mapKey = String.valueOf(visitYear) + cv.Household__c;
 			if (cvMap.containsKey(mapKey))
 				cvMap.get(mapKey).add(cv);
 			else
 				cvMap.put(mapKey, new list<Client_Visit__c>{ cv });
+		}
+
+		// add visits being updated
+		for (Client_Visit__c cv : visitList) {
+			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
+			String mapKey = String.valueOf(visitYear) + cv.Household__c;
+			if (cvMap.containsKey(mapKey))
+				cvMap.get(mapKey).add(cv);
+			else
+				cvMap.put(mapKey, new list<Client_Visit__c>{ cv });
+
+			if (oldMap != null) {
+				Client_Visit__c oldCv = oldMap.get(cv.Id);
+				hhSet.add(oldCv.Household__c);
+				if (oldCv.Visit_Date__c != null)
+					yearSet.add(oldCv.Visit_Date__c.year());
+			}
 		}
 
 		// for each client/year combo, find the first visit of the year and mark it as such
