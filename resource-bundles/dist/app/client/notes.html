@@ -1,0 +1,33 @@
+<div class="panel" ng-class="{ 'panel-default': !status.editingNotes, 'panel-warning': status.editingNotes }" 
+    ng-controller="notesController">
+
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6">
+                Notes
+            </div>
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-success btn-sm panel-button"
+                    ng-click="editNotes();" ng-show="!status.editingNotes"><i class="fa fa-pencil" style="line-height: 1.3em;"></i></button>
+
+                <button class="btn btn-success btn-sm panel-button"
+                    ng-click="saveNotes()" ng-show="status.editingNotes" 
+                    ng-disabled="status.savingNotes">Save</span><i ng-show="status.savingNotes" 
+                    class="fa fa-refresh fa-spin" style="margin-left:6px;"></i></button>
+                
+                <button class="btn btn-sm panel-button"
+                    ng-click="cancelNotes();" ng-show="status.editingNotes" 
+                    ng-disabled="status.savingNotes"><span class="glyphicon glyphicon-remove" style="line-height: 1.3em;"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" ng-show="data.household.notes || status.editingNotes">
+        <div ng-show="!status.editingNotes">
+            {{data.household.notes}}
+        </div>
+        <div ng-show="status.editingNotes">
+            <textarea class="form-control" name="notes" placeholder="About this client" 
+                style="height:115px;" ng-maxlength="1000" ng-model="data.notesData.notes" />
+        </div>
+    </div>
+</div>

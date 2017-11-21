@@ -1,0 +1,92 @@
+body { margin:0px; }
+.nav, .pagination, .carousel, .panel-title a, .dropdown-menu a { cursor: pointer; }
+.center-overlay {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  margin-left: -50px;
+  z-index: 10;
+  height: 100px;
+  width: 100px;
+  text-align: center !important;
+  color: white;
+  border-radius: 5px;
+  background-color: rgba(53, 68, 82, 0.8);
+}
+.center-overlay img {
+  margin: 18px 0 7px 0;
+  height: 35px;
+  width: 35px;
+}
+.bootstrap .text-center .btn {
+  margin-right: 2px;
+}
+.bootstrap .btn.btn-sm.panel-button {
+  font-size: 13px; 
+  line-height: 1.3;
+  padding: 2px 10px; 
+  margin: 0 0 0 6px;
+}
+.bootstrap .panel-heading .btn {
+  margin: 2px 1px;
+}
+.bootstrap .progress {
+  margin-bottom: 4px;
+}
+.bootstrap .panel-btnbar {
+  padding: 8px 14px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 5px;
+}
+.bootstrap .panel-footer {
+  background-color: #f5f5f5;
+}
+.bootstrap .panel-btnbar .btn, .bootstrap .panel-footer .btn {
+  margin-right: 5px;
+}
+.bootstrap .panel .table {
+  margin-bottom: 20px;
+}
+.bootstrap .panel .table .warning {
+  font-weight: normal;
+}
+.bootstrap .panel-warning {
+  border-color: #e2d1af;
+}
+.bootstrap .panel-warning .panel-heading {
+  background-color: #fbf2d2;
+}
+.bootstrap .alert:focus, .bootstrap .dropdown-menu:focus {
+  outline: 0px;
+}
+.bootstrap .panel .panel .panel-heading, .bootstrap .panel .panel .panel-heading .row div {
+  font-size:16px; 
+  vertical-align:middle; 
+  font-weight:500;
+}
+.bootstrap .input-group-sm input.input-sm {
+  width:6em;
+}
+.bootstrap .input-group .help-block {
+  margin-bottom: 0;
+  font-size:smaller;
+}
+.bootstrap .label-large {
+  font-size: 13px;
+  margin-right: 3px;
+  line-height: 2.1;
+}
+.bootstrap .dropdown-multiselect {
+  margin-left: 3px;
+}
+.bootstrap .dropdown-multiselect .btn-default {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 5px 15px;
+  background-color: #F9E7A6;
+  border-color: #EACB5A;
+}
+.bootstrap .dropdown-multiselect ul li {
+  margin-left: 2px;
+}

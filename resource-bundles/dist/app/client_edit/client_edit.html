@@ -1,0 +1,198 @@
+<!-- Client check-in page -->
+<form class="col-md-12" id="clientForm" name="clientForm">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-7">
+                    <div ng-show="data.household">
+                        <h3 style="margin-top:8px;">{{data.household.name}}</h3>
+                        <p ng-show="data.household.totalVisits">
+                            Client Since {{data.household.firstVisitDate | date:'yyyy'}}<br />
+                            Most Recent Visit:
+                            <span style="font-weight:500">{{data.household.mostRecentVisitDate | date:'MMMM dd, yyyy \'at\' h:mm a'}}</span>
+                        </p>
+                        <p ng-show="!data.household.totalVisits">
+                            First-time Visitor
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-btnbar text-center" ng-show="data.household">
+            <a class="btn btn-primary" ng-click="saveClient()" ng-disabled="clientForm.$pristine" style="margin-right:6px;">Save
+            <i class="fa fa-refresh fa-spin" ng-show="status.savingClient"></i></a>
+            <a class="btn btn-success" ng-click="cancelEdit()">Cancel</a>
+        </div>
+        <div class="panel-body" ng-show="data.household">
+            <div class="col-lg-8">
+                <div class="panel panel-warning" >
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Household Members
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed" style="margin-bottom:12px;">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th class="text-center">Age&nbsp;Group</th>
+                                    <th class="text-center">Age</th>
+                                    <!-- <th class="text-center">Birthdate</th> -->
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="person in data.memberList" >
+                                    <td>
+                                        <input ng-model="person.memberData.firstName" type="text"
+                                            class="form-control input-sm" name="firstname"
+                                            ng-maxlength="50" ng-setfocus="true">
+                                    </td>
+                                    <td>
+                                        <input ng-model="person.memberData.lastName" type="text"
+                                            class="form-control input-sm" name="lastname"
+                                            ng-maxlength="50" ng-required>
+                                    </td>
+                                    <td class="text-center">
+                                        <select ng-model="person.memberData.ageGroup" class="form-control input-sm"
+                                            name="ageGroup" ng-options="g for g in ['Adult','Senior','Child','Infant']">
+                                            <option value="">-Select-</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center" style="width:50px;">
+                                        <input ng-model="person.memberData.age" type="number"
+                                            class="form-control input-sm"
+                                            name="age" style="width:50px;">
+                                    </td>
+                                    <!-- <td class="text-center" style="width:70px;">
+                                        <span class="input-group" ng-controller="datepickerCtrl">
+                                          <input type="text" class="form-control input-sm" datepicker-popup="M/dd/yyyy"
+                                            ng-model="person.memberData.birthdate" is-open="opened"
+                                            min="'1900-01-01'" show-weeks="false"
+                                            datepicker-options="{ 'show-button-bar': false }"
+                                            date-disabled="disabled(date, mode)" close-text="Close" style="min-width:80px;"/>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default" ng-click="open($event)" style="padding: 4px 10px;"><i class="glyphicon glyphicon-calendar"></i></button>
+                                          </span>
+                                        </span>
+                                    </td> -->
+
+                                    <td class="text-right" ng-show="data.memberList.length > 1">
+                                        <button class="btn btn-danger btn-sm"
+                                            style="font-size: 12px; padding: 4px 8px;"
+                                            ng-click="deleteMember( $index );"><i class="fa fa-minus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button class="btn btn-success btn-sm panel-button"
+                                ng-click="addMember()"
+                                ng-disabled="status.savingClient">Add member</span>&nbsp;<i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Address &amp; Phone
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group col-sm-8">
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="0000 Main St"
+                                ng-maxlength="50" ng-model="data.household.address"
+                                ng-disabled="data.household.homeless" autofocus="autofocus">
+                        </div>
+                        <div class="form-group col-sm-4 text-right">
+                            <input type="checkbox" name="homeless" ng-model="data.household.homeless"></input>&nbsp;
+                            <label>Homeless</label>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>City</label>
+                            <input type="text" class="form-control" name="city" placeholder="Anytown"
+                                ng-maxlength="50" ng-model="data.household.city">
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label>St</label>
+                            <input type="text" class="form-control" name="state" placeholder="US"
+                                ng-maxlength="50" ng-model="data.household.state">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>Zip</label>
+                            <input type="text" class="form-control" name="postalCode" placeholder="00000"
+                                ng-maxlength="20" ng-model="data.household.postalCode">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="(000) 000-0000"
+                                ng-maxlength="50" ng-model="data.household.phone">
+                        </div>
+                        <div class="form-group col-sm-6" ng-if="settings.general.proofOfAddressRequired">
+                            <label>Proof of Address</label>
+                            <input type="text" class="form-control" name="proof" placeholder="Initials / type of proof"
+                                ng-model="data.household.proofOfAddress" ng-maxlength="50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-warning" ng-if="settings.tags">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Tags
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <div ng-dropdown-multiselect=""
+                                    options="tagDropdown.options"
+                                    selected-model="tagDropdown.selected"
+                                    events="tagDropdown.events"
+                                    extra-settings="tagDropdown.settings"></div>
+                        </div>
+
+                        <div ng-show="data.tagsData.tags && data.tagsData.tags.length != 0">
+                            <span ng-repeat="tag in data.tagsData.tags">
+                                <span class="label label-primary label-large">{{tag}}</span>
+                            </span>
+                        </div>
+                        <div ng-show="!data.tagsData.tags || data.tagsData.tags.length == 0">
+                            <i>No tags set</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-warning" ng-controller="notesController">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                Notes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <textarea class="form-control" name="notes" placeholder="About this client"
+                            style="height:150px;" ng-maxlength="1000" ng-model="data.household.notes">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer text-center" ng-show="data.household">
+            <a class="btn btn-primary" ng-click="saveClient()" ng-disabled="clientForm.$pristine" style="margin-right:6px;">Save
+            <i class="fa fa-refresh fa-spin" ng-show="status.savingClient"></i></a>
+            <a class="btn btn-success" ng-click="cancelEdit()">Cancel</a>
+        </div>
+    </div>
+</form>
