@@ -9,8 +9,9 @@ salesforce-food-bank.sublime-workspace
 /config/
 /apex-scripts/
 /.DS_Store
-
 /resource-bundles/.DS_Store
-
 /resource-bundles/Angular.resource/mmui.log
 /resource-bundles/Angular.resource/mmst.log
+/resource-bundles/Angular.resource/bower_components
+.sfdx/
+.vscode/

@@ -12,6 +12,7 @@ public with sharing class FoodBankStats {
 	public Boolean trackPoints { get; private set; }
 	public Integer pointsUsed { get; private set; }
 	public map<String, Integer> boxTotals { get; private set; }
+	public String timeframe {get; private set; }
 
 	public FoodBankStats() {
 		hhVisits = new list<Integer>{ 0, 0, 0 };
