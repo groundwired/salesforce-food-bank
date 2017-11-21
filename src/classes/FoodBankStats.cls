@@ -12,7 +12,7 @@ public with sharing class FoodBankStats {
 	public Boolean trackPoints { get; private set; }
 	public Integer pointsUsed { get; private set; }
 	public map<String, Integer> boxTotals { get; private set; }
-	public String timeframe {get; private set; }
+	public String timeframe { get; private set; }
 
 	public FoodBankStats() {
 		hhVisits = new list<Integer>{ 0, 0, 0 };
@@ -30,10 +30,10 @@ public with sharing class FoodBankStats {
 
 	public PageReference loadStats() {
 		map<String, String> params = ApexPages.CurrentPage().getParameters();
-		String tfcode = params.get('tfcode');
-		if (tfcode != null) {
+		timeframe = params.get('tfcode');
+		if (timeframe != null) {
 			
-			queryStats( tfcode );
+			queryStats( timeframe );
 
 			// TODO: if we are using boxes, run a separate aggregate query for total usage
 			// if (FoodBankSettings.boxes != null && !FoodBankSettings.boxes.isEmpty()) {

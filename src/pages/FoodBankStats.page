@@ -10,8 +10,8 @@
 			<thead>
 		  	<tr>
 		  		<th style="width:8em;"></th>
-		  		<th style="width:6em; text-align:center;">Dupl.</th>
-		  		<th style="width:6em;text-align:center;">Undup.</th>
+		  		<th style="width:6em; text-align:center;">First Visit</th>
+		  		<th style="width:6em;text-align:center;">Duplicated</th>
 		  		<th style="width:6em;text-align:center;">Total</th>
 		  	</tr>
 			</thead>
@@ -44,8 +44,8 @@
 	  	<thead>
 		  	<tr class="text-center">
 		  		<th style="width:8em;"></th>
-		  		<th style="width:6em; text-align:center;">Dupl.</th>
-		  		<th style="width:6em;text-align:center;">Undup.</th>
+		  		<th style="width:6em; text-align:center;">First Visit</th>
+		  		<th style="width:6em;text-align:center;">Duplicated</th>
 		  		<th style="width:6em;text-align:center;">Total</th>
 		  	</tr>
 	  	</thead>
