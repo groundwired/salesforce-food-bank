@@ -23,6 +23,7 @@ angular.module('clientEditController')
     $scope.data.ptsMonthly = foundHousehold.monthlyPointsAvailable;
     $scope.data.ratio =  Math.floor(foundHousehold.currentPointsRemaining * 100 / foundHousehold.monthlyPointsAvailable);
     $scope.data.boxType = foundHousehold.defaultBox;
+    $scope.data.checkoutWeight = 0.0;
     $scope.data.commodities = foundHousehold.commodityAvailability;
 
     $scope.data.tagsData = {

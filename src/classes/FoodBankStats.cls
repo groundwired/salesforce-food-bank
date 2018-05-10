@@ -9,6 +9,7 @@ public with sharing class FoodBankStats {
 	public list<Integer> seniors { get; private set; }
 	public list<Integer> total { get; private set; }
 	public list<Integer> homeless { get; private set; }
+	public list<Integer> outofarea { get; private set; }
 	public Boolean trackPoints { get; private set; }
 	public Integer pointsUsed { get; private set; }
 	public map<String, Integer> boxTotals { get; private set; }
@@ -24,6 +25,7 @@ public with sharing class FoodBankStats {
 		seniors = new list<Integer>{ 0, 0, 0 };
 		total = new list<Integer>{ 0, 0, 0 };
 		homeless = new list<Integer>{ 0, 0, 0 };
+		outofarea = new list<Integer>{ 0, 0, 0 };
 		pointsUsed = 0;
 		boxTotals = new map<String, Integer>();
 	}
@@ -41,6 +43,7 @@ public with sharing class FoodBankStats {
 			// }
 		}
 		trackPoints = FoodBankSettings.general.Track_Points__c;
+		
 		return null;
 	}
 
@@ -48,7 +51,7 @@ public with sharing class FoodBankStats {
 		String q = 'SELECT First_Visit_This_Year__c Unduplicated, ' +
 					'COUNT(Id) HHVisits, SUM(Adults__c) Adults, SUM(Children__c) Children, SUM(Infants__c) Infants, ' +
 					'SUM(Seniors__c) Seniors, SUM(Total_People__c) TotalPeople, SUM(More_Than_One_Person__c) MoreThanOnePerson, ' +
-					'SUM(Homeless_Counter__c) Homeless, SUM(Points_Used__c) TotalPoints ' +
+					'SUM(Homeless_Counter__c) Homeless, SUM(Out_Of_Area_Counter__c) OutOfArea, SUM(Points_Used__c) TotalPoints ' +
 					'FROM Client_Visit__c WHERE Visit_Date__c = ' + timeframe +
 			 		' GROUP BY ROLLUP(First_Visit_This_Year__c)';
 
@@ -64,6 +67,7 @@ public with sharing class FoodBankStats {
 			seniors[i] = grabFromResult(r, 'Seniors');
 			total[i] = grabFromResult(r, 'TotalPeople');
 			homeless[i] = grabFromResult(r, 'Homeless');
+			outofarea[i] = grabFromResult(r, 'OutOfArea');
 			if (i == 2) pointsUsed = grabFromResult(r, 'TotalPoints');
 		}		
 	}

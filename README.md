@@ -1,7 +1,7 @@
 salesforce-food-bank
 ====================
 
-Food Bank Manager built on Salesforce using Angular.js
+Food Bank Service built on Salesforce using Angular.js
 
 This is a Salesforce.com and AngularJS application that tracks clients and service delivery for food banks.
 

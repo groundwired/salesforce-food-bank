@@ -28,7 +28,9 @@ public with sharing class FoodBankSettings {
                     general.Proof_of_Address_Required__c = true;
                     general.Proof_of_Address_Update_Interval__c = 12;
                     general.Require_Unique_Address__c = false;
+                    general.Show_Id__c = false;
                     general.Proof_of_Infant_Required__c = true;
+                    general.Track_Checkout_Weight__c = true;
                     general.Track_Points__c = true;
                     general.Tags__c = 'Special Diet; Spanish Speaker';
                     general.Welcome_Alert__c = 'Hello!';

@@ -26,6 +26,7 @@ describe('home', function() {
     }));
 
     it('should have settings', function() {
+      expect(scope.settings.general.Track_Checkout_Weight__c).toBe(true);
       expect(scope.settings.general.Track_Points__c).toBe(true);
     });
   });
@@ -37,11 +38,13 @@ describe('home', function() {
       scope = $rootScope.$new();
       settings = mockData('getAppSettings', 0);
       settings.general.Track_Points__c = false;
+      settings.general.Track_Checkout_Weight__c = false;
       ctrl = $controller('homeController', {$scope: scope, foundSettings: settings});
     }));
 
     it('should have settings', function() {
       expect(scope.settings.general.Track_Points__c).toBe(false);
+      expect(scope.settings.general.Track_Checkout_Weight__c).toBe(false);
     });
   });
 

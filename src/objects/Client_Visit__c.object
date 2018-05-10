@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -44,13 +40,16 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
@@ -68,27 +67,45 @@
         <fullName>Box_Type__c</fullName>
         <externalId>false</externalId>
         <label>Bag/Box Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Small</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Large</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Extra-Large</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Special Diet</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Small</fullName>
+                    <default>false</default>
+                    <label>Small</label>
+                </value>
+                <value>
+                    <fullName>Large</fullName>
+                    <default>false</default>
+                    <label>Large</label>
+                </value>
+                <value>
+                    <fullName>Extra-Large</fullName>
+                    <default>false</default>
+                    <label>Extra-Large</label>
+                </value>
+                <value>
+                    <fullName>Special Diet</fullName>
+                    <default>false</default>
+                    <label>Special Diet</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Checkout_Weight__c</fullName>
+        <externalId>false</externalId>
+        <label>Checkout Weight</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Children__c</fullName>
@@ -113,14 +130,34 @@
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
-        <fullName>External_ID__c</fullName>
+        <fullName>External_Created_Date__c</fullName>
+        <description>Store the date the external entry was created.</description>
         <externalId>false</externalId>
-        <label>External ID</label>
+        <label>External Created Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>External_Household_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>External Household Id</label>
         <length>20</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
     </fields>
     <fields>
         <fullName>First_Visit_This_Year__c</fullName>
@@ -158,7 +195,7 @@
         <fullName>Household__c</fullName>
         <externalId>false</externalId>
         <label>Household</label>
-        <referenceTo>Client_Household__c</referenceTo>
+        <referenceTo>Account</referenceTo>
         <relationshipName>Visits</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
@@ -196,10 +233,33 @@
         <fullName>Notes__c</fullName>
         <externalId>false</externalId>
         <label>Notes</label>
-        <length>32768</length>
+        <length>65534</length>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Out_Of_Area_Counter__c</fullName>
+        <description>Allows us to summarize out of area visits.</description>
+        <externalId>false</externalId>
+        <formula>IF(Out_Of_Area__c, 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Allows us to summarize out of area visits.</inlineHelpText>
+        <label>Out of Area Counter</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Out_Of_Area__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Out of Area</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Points_Used__c</fullName>
@@ -245,15 +305,61 @@
         <trackTrending>false</trackTrending>
         <type>DateTime</type>
     </fields>
+    <fields>
+        <fullName>Visit_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Visit Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Baby Pantry</fullName>
+                    <default>false</default>
+                    <label>Baby Pantry</label>
+                </value>
+                <value>
+                    <fullName>Food Bank</fullName>
+                    <default>true</default>
+                    <label>Food Bank</label>
+                </value>
+                <value>
+                    <fullName>Mobile</fullName>
+                    <default>false</default>
+                    <label>Mobile</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Visitor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Visitor</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Client Visits</relationshipLabel>
+        <relationshipName>Client_Visits</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
     <label>Client Visit</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>Household__c</columns>
+        <columns>Visitor__c</columns>
         <columns>Visit_Date__c</columns>
         <columns>Total_People__c</columns>
         <columns>Points_Used__c</columns>
-        <columns>First_Visit_This_Year__c</columns>
+        <columns>Checkout_Weight__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -261,10 +367,11 @@
         <fullName>Past7</fullName>
         <columns>NAME</columns>
         <columns>Household__c</columns>
+        <columns>Visitor__c</columns>
         <columns>Visit_Date__c</columns>
         <columns>Total_People__c</columns>
         <columns>Points_Used__c</columns>
-        <columns>First_Visit_This_Year__c</columns>
+        <columns>Checkout_Weight__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>Visit_Date__c</field>
@@ -272,6 +379,14 @@
             <value>LAST_N_DAYS:7</value>
         </filters>
         <label>Past 7 Days</label>
+    </listViews>
+    <listViews>
+        <fullName>Visits_Today</fullName>
+        <columns>NAME</columns>
+        <columns>Household__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>Visits Today</label>
     </listViews>
     <nameField>
         <displayFormat>V-{00000000}</displayFormat>
@@ -281,16 +396,19 @@
     <pluralLabel>Client Visits</pluralLabel>
     <searchLayouts>
         <customTabListAdditionalFields>Household__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Visitor__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Visit_Date__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Total_People__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Points_Used__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>First_Visit_This_Year__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Checkout_Weight__c</customTabListAdditionalFields>
         <lookupDialogsAdditionalFields>Visit_Date__c</lookupDialogsAdditionalFields>
         <searchResultsAdditionalFields>Household__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Visitor__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Visit_Date__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Total_People__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Points_Used__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>First_Visit_This_Year__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Checkout_Weight__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

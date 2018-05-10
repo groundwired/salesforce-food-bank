@@ -1,12 +1,15 @@
 public with sharing class FoodBankManager {
 
+    private static String Unknown = 'Unknown';
+
     public class FoodBankException extends Exception {}
 
     private map<String, String> params = ApexPages.CurrentPage().getParameters();
 
     public Class ClientCheckin {
         public Id clientId { get; private set; }
-        public String clientName { get; private set; }
+        public Id clientContactId { get; private set; }
+        public String name { get; private set; }
         public Decimal pointsRemaining { get; private set; }
         public String boxSize { get; private set; }
         public DateTime checkInTime { get; private set; }
@@ -16,31 +19,49 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static list<ClientCheckin> getCheckedInList() {
         list<ClientCheckin> chkList = new list<ClientCheckin>();
+
+        //for (Food_Bank_Checkin__c fbc : Food_Bank_Checkin__c.getAll().values()) {
+        //    delete fbc;
+        //}
+
         for (Food_Bank_Checkin__c fbc : Food_Bank_Checkin__c.getAll().values()) {
             ClientCheckin cc = new ClientCheckin();
             cc.clientId = fbc.name;
-            cc.clientName = fbc.Client_Name__c;
+            cc.clientContactId = fbc.Visitor__c;
+            cc.name = String.format('{0} Household', new String[]{FoodBankManager.getContactName(fbc.Visitor__c)});
             cc.pointsRemaining = fbc.Points_Remaining__c;
             cc.boxSize = fbc.Box_Size__c;
             cc.checkInTime = fbc.Check_In_Time__c;
             cc.checkinNotToday = (cc.checkInTime != null && cc.checkInTime.date() != system.today());
             chkList.add( cc );
         }
+
+        // Sort List
+        for (Integer i =0; i < chkList.size(); i++) {
+            for (Integer j = i; j > 0; j--) {
+                if (chkList[j-1].checkInTime < chkList[j].checkInTime){
+                    ClientCheckin temp = chkList[j];
+                    chkList[j] = chkList[j-1];
+                    chkList[j-1] = temp;
+                }
+            }
+        }
+
         return chkList;
     }
 
     @RemoteAction
-    public static Client_Household__c getHouseholdDetail( Id hhid ) {
-        Client_Household__c hh =
+    public static Account getHouseholdDetail( Id hhid ) {
+        Account hh =
             [select Id, Name, CreatedDate, LastModifiedDate, First_Visit__c, Most_Recent_Visit__c,
-                Total_Visits__c, Homeless__c, Address__c, City__c, State__c, Postal_Code__c,
+                Total_Visits__c, Homeless__c, Out_Of_Area__c, BillingStreet, BillingCity, BillingState, BillingPostalCode,
                 Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c,
-                Children__c, Infants__c, Seniors__c, Client_Names__c, Full_Address__c, Tags__c,
-                Staff_Notes__c, Phone__c, Proof_of_Address__c, Proof_of_Address_Date__c,
-                (select Id, Name, First_Name__c, Last_Name__c, Age_Group__c, Age__c, Birthdate__c, Proof_of_Infant__c
-                    from Clients__r),
+                Children__c, Infants__c, Seniors__c, Tags__c,
+                Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c,
+                (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Gender__c, Id_Number__c
+                    from Contacts),
                 (select Points_Used__c, Commodity_Usage_JSON__c from Visits__r where Visit_Date__c = THIS_MONTH)
-                from Client_Household__c where id = :hhid];
+                from Account where id = :hhid];
 
         if (FoodBankSettings.general.Track_Points__c)
             hh.Monthly_Points_Available__c = getMonthlyPoints( hh );
@@ -64,14 +85,17 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static list<Client_Visit__c> getVisitHistory( Id hhid ) {
         return
-            [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Notes__c
+            [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Checkout_Weight__c, Notes__c, Visitor__r.Name
                 from Client_Visit__c
                 where Household__c = :hhid
                 order by Visit_Date__c DESC limit 20];
     }
 
     @RemoteAction
-    public static Client_Household__c saveHousehold( Client_Household__c hh ) {
+    public static Account saveHousehold( Account hh ) {
+
+        if (hh.Name == null)
+            hh.Name = FoodBankManager.Unknown;
 
         if (hh.Id == null)
             insert hh;
@@ -83,7 +107,15 @@ public with sharing class FoodBankManager {
     }
 
     @RemoteAction
-    public static Client_Household__c saveHouseholdAndMembers( Client_Household__c hh, list<Client__c> clients) {
+    public static Account saveHouseholdAndMembers( Account hh, list<Contact> clients) {
+
+        if (hh.Name == null || hh.Name == FoodBankManager.Unknown)
+        {
+            if (!clients.isEmpty())
+                hh.Name = String.format('{0} Household', new String[]{clients[0].LastName});
+            else
+                hh.Name = FoodBankManager.Unknown;
+        }
 
         hh.Monthly_Points_Available__c = getMonthlyPoints( hh );  // is this by trigger?  how about the name?
         if (hh.Id == null)
@@ -95,16 +127,25 @@ public with sharing class FoodBankManager {
     }
 
     @RemoteAction
-    public static Client_Household__c saveHouseholdMembers( Id hhid, list<Client__c> clients ) {
+    public static Account saveHouseholdMembers( Id hhId, list<Contact> clients ) {
 
         if (clients != null) {
-            list<Client__c> clientsToInsert = new list<Client__c>();
-            list<Client__c> clientsToUpdate = new list<Client__c>();
+            list<Contact> clientsToInsert = new list<Contact>();
+            list<Contact> clientsToUpdate = new list<Contact>();
             set<Id> clientIds = new set<Id>();
 
-            for (Client__c client : clients) {
-                if (client.Last_Name__c != null) {
-                    client.Client_Household__c = hhid;
+            for (Contact client : clients) {
+                if (client.LastName != null) {
+
+                    client.AccountId = hhId;
+
+                    // ToDo - Integrate with NPSP Address Management 
+                    Account hh = getHouseholdDetail( hhId );
+                    client.MailingStreet = hh.BillingStreet;
+                    client.MailingCity = hh.BillingCity;
+                    client.MailingState = hh.BillingState;
+                    client.MailingPostalCode = hh.BillingPostalCode;
+
                     if (client.Id == null) {
                         clientsToInsert.add(client.clone());
                     } else {
@@ -113,7 +154,8 @@ public with sharing class FoodBankManager {
                     }
                 }
             }
-            list<Client__c> clientsToDelete = [select id from Client__c where Client_Household__c = : hhid
+            
+            list<Contact> clientsToDelete = [select id from Contact where AccountId = : hhId
                 and Id not in :clientIds];
 
             if (!clientsToDelete.isEmpty())
@@ -124,11 +166,10 @@ public with sharing class FoodBankManager {
                 insert clientsToInsert;
         }
 
-        // TODO: recalculation needed?
-        return getHouseholdDetail( hhid );
+        return getHouseholdDetail( hhId );
     }
 
-    static Decimal getMonthlyPoints( Client_Household__c hh ) {
+    static Decimal getMonthlyPoints( Account hh ) {
         Decimal pts = 0;
         if (hh != null) {
             if (FoodBankSettings.general.Monthly_Base_Points__c != null)
@@ -145,9 +186,25 @@ public with sharing class FoodBankManager {
         return pts;
     }
 
+    static String getContactName(Id contactid){
+        
+        if (contactId == null) {
+            return FoodBankManager.Unknown;
+        }
+
+		//Contact c = [select id, name from Contact where id =: contactid];
+        list<Contact> c = [select Id, AccountId, Name from Contact where id =: contactid];
+        if (!c.isEmpty()) {
+            return c[0].Name;
+        }
+
+        return FoodBankManager.Unknown;
+    }
+
+
     @RemoteAction
-    public static Client_Household__c createNewHousehold( Client_Household__c hhData, list<Client__c> clientData ) {
-        Client_Household__c hh;
+    public static Account createNewHousehold( Account hhData, list<Contact> clientData ) {
+        Account hh;
 
         // calculate points and commodity data and save
 
@@ -155,24 +212,26 @@ public with sharing class FoodBankManager {
     }
 
     @RemoteAction
-    public static void checkIn( Id hhid ) {
+    public static void checkIn( Id hhid, Id contactid) {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
 
-        Client_Household__c hh =
-            [select id, client_names__c, Adults__c, Seniors__c, Children__c, Infants__c,
+        Account hh =
+            [select id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
                 (select Points_Used__c from Visits__r where Visit_Date__c = THIS_MONTH)
-                from Client_Household__c where id = :hhid];
+                from Account where id = :hhid];
 
         if (Food_Bank_Checkin__c.getInstance( hhid ) != null) {
             throw new FoodBankException('Already checked in.');
         } else {
             fbc.name = hhid;
-            fbc.Client_Name__c = hh.client_names__c;
             fbc.Points_Remaining__c = getMonthlyPoints( hh );
             for (Client_Visit__c cv : hh.Visits__r)
                 if (cv.Points_Used__c != null) fbc.Points_Remaining__c -= cv.Points_Used__c;
+
             fbc.Check_In_Time__c = system.now();
+            fbc.Visitor__c = contactid;
+
             insert fbc;
         }
     }
@@ -191,35 +250,65 @@ public with sharing class FoodBankManager {
         return s;
     }
 
+    @RemoteAction
+    public static String getCustomLabel( String label ) {
+
+        if (label == 'Box_Type__c')
+            return System.Label.Food_Bank_Box_Type;
+
+        return 'Undefined';
+    }
+
 // TODO: REFACTOR FOR CONSISTENCY????
     public Class ClientHousehold {
         public String id;
+        public String contactid;
         public String value;
         public String name;
         public String addr;
         //public list<String> tags;
     }
 
+    // queryHouseholds
+    //  
+    // query: User entered string in UI (e.g., name, address, partial address)  
     @RemoteAction
     public static list<ClientHousehold> queryHouseholds( String query){//, Boolean includeInactive ) {
         list<ClientHousehold> hhRet = new list<ClientHousehold>();
+
+        // Id Number search: back part of the Id can frequently change so stripe off back half of query to try for match
+        String halfquery = query;
+        if (halfquery.length() >= 16) {
+            query.left(query.length() / 2);
+        }
+
+        // Expand to return all Clients for a household
         List<List<SObject>> resultList =
-            //(includeInactive) ?
-            //  [FIND :(query + '*') RETURNING Client_Household__c( Id, Client_Names__c, Address__c, Full_Address__c
-   //               WHERE Client_Names__c != null ORDER BY Client_Names__c )] :
-                [FIND :(query + '*') RETURNING Client_Household__c( Id, Client_Names__c, Address__c, Full_Address__c
-                    WHERE Client_Names__c != null AND Inactive__c != true ORDER BY Client_Names__c )];
+            [FIND :(query + '* OR ' + halfquery + '*') 
+                RETURNING Contact( 
+                    Name, Id_Number__c, MailingStreet,
+                    Account.Name, Account.Id
+                WHERE Account.Inactive__c != true 
+                ORDER BY Name)];
 
 // TODO: should not need to translate here
         for (sObject obj : resultList[0]) {
-            Client_Household__c rec = (Client_Household__c)obj;
+            Contact rec = (Contact)obj;
             ClientHousehold chh = new ClientHousehold();
-            chh.id = rec.Id;
-            chh.name = rec.Client_Names__c;
-            chh.value = rec.Client_Names__c + ((rec.Address__c != null) ? (' (' + rec.Address__c + ')') : '');
-            chh.addr = rec.Full_Address__c;
+            chh.id = rec.Account.Id;
+            chh.contactid = rec.Id;
+
+            // name and addr are displayed in UI for selection
+            chh.name = rec.Name;
+            chh.addr = rec.MailingStreet;
+
+            chh.value = 
+                ((rec.Id_Number__c != null) ? (' (' + rec.Id_Number__c + ')') : '')
+                + ((rec.MailingStreet != null) ? (' (' + rec.MailingStreet + ')') : '');
+
             hhRet.add( chh );
         }
+
         return hhRet;
     }
 
@@ -240,23 +329,36 @@ public with sharing class FoodBankManager {
     }
 
     @RemoteAction
-    public static Id logVisit( Id hhId, String boxType, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes ) {
+    public static Id logVisit( Id hhId, Id contactId, String boxType, Decimal checkoutWeight, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes ) {
 
         // get the HH detail
-        Client_Household__c[] hhs =
-            [select Id, Name, Adults__c, Children__c, Infants__c, Seniors__c, Homeless__c, Inactive__c
-                from Client_Household__c where id = :hhid];
+        Account[] hhs =
+            [select Id, Name, Adults__c, Children__c, Infants__c, Seniors__c, Homeless__c, Out_Of_Area__c, Inactive__c
+                from Account where id = :hhid];
 
         if ( hhs.isEmpty() ) {
             throw new FoodBankException('Household not found.');
-            return null;
         }
 
-        Client_Household__c hh = hhs[0];
+        Account hh = hhs[0];
 
         // TODO: validate remaining points? non-negative and under limit (unless setting allows exception)
 
         // TODO: activate inactive client? or disallow visit?
+
+        // remove the client from checkin list
+        Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
+        if (fbc != null) delete fbc;
+
+        // Validate Contact references are still valid because between the checkin time and log visit the Contact could have been deleted
+        list<Contact> c = [select id from Contact where id = :contactid];
+        if (c.isEmpty()) {
+            contactid = null;
+        }
+        c = [select id from Contact where id = :fbc.Visitor__c];
+        if (c.isEmpty()) {
+            fbc.Visitor__c = null;
+        }
 
         // log the visit
         Client_Visit__c cv = new Client_Visit__c(
@@ -266,9 +368,13 @@ public with sharing class FoodBankManager {
             Children__c = hh.Children__c,
             Infants__c = hh.Infants__c,
             Homeless__c = hh.Homeless__c,
+            Out_Of_Area__c = hh.Out_Of_Area__c,
             Points_Used__c = pointsUsed,
+            Checkout_Weight__c = checkoutWeight,
             Box_Type__c = boxType,
-            Notes__c = visitNotes
+            Notes__c = visitNotes,
+            Visit_Date__c = (fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : system.now(),
+            Visitor__c = (fbc != null && fbc.Visitor__c != null) ? fbc.Visitor__c : contactid
         );
         if (commodityUsage != null && !commodityUsage.isEmpty())
             cv.Commodity_Usage_JSON__c = JSON.serializePretty(commodityUsage);
@@ -276,10 +382,6 @@ public with sharing class FoodBankManager {
 
         // TODO: recalc and save the remaining points on household
         if (pointsUsed != null && pointsUsed > 0) {}
-
-        // remove the client from checkin list
-        Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
-        if (fbc != null) delete fbc;
 
         return cv.id;
     }

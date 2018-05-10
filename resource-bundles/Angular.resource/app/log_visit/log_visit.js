@@ -7,10 +7,14 @@ angular.module('logVisitController', [
   ]);
 
 angular.module('logVisitController')
-  .controller('logVisitController', ['$scope', '$routeParams', '$timeout', '$window', '$location', 'foundHousehold', 'foundSettings', 'fbLogVisit', '$alert',
-    function($scope, $routeParams, $timeout, $window, $location, foundHousehold, foundSettings, fbLogVisit, $alert) {
+  .controller('logVisitController', ['$scope', '$routeParams', '$timeout', '$window', '$location', 'foundHousehold', 'foundSettings', 'fbLogVisit', 'fbCustomLabel', '$alert',
+    function($scope, $routeParams, $timeout, $window, $location, foundHousehold, foundSettings, fbLogVisit, fbCustomLabel, $alert) {
 
-    $scope.household = foundHousehold;
+    $scope.contactid = $routeParams.clientContactId;
+      
+    $scope.data = {};
+    $scope.data.household = foundHousehold;
+
     $scope.settings = foundSettings;
     $scope.commodities = foundSettings.commodities;
 
@@ -18,6 +22,7 @@ angular.module('logVisitController')
     $scope.addressEdit = false;
 
     $scope.ptsUsed = 0;
+    $scope.checkoutWeight = 0.0;
     $scope.ptsRemaining = foundHousehold.currentPointsRemaining;
     $scope.ptsMonthly = foundHousehold.monthlyPointsAvailable;
     $scope.ratio =  Math.floor($scope.ptsRemaining * 100 / $scope.ptsMonthly);
@@ -26,6 +31,12 @@ angular.module('logVisitController')
 
     $scope.visitNotes = '';
     
+    fbCustomLabel.get( 'Box_Type__c' ).then(
+      function(result){
+        $scope.Label_Box_Type = result;
+      }
+    );
+
     $scope.recordVisit = function() {
 
       // gather the commodity usage for this visit        
@@ -37,7 +48,8 @@ angular.module('logVisitController')
       });
 
       $scope.logging = true;
-      fbLogVisit( $scope.household.id, $scope.boxType, $scope.ptsUsed, comms, $scope.visitNotes ).then(
+
+      fbLogVisit( $scope.data.household.id, $scope.contactid, $scope.boxType, $scope.checkoutWeight, $scope.ptsUsed, comms, $scope.visitNotes ).then(
         function(result){
           $scope.logging = false;
           $window.scrollTo(0,0);

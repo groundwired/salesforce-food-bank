@@ -1,18 +1,18 @@
 <!--
-- Visualforce landing page for the Food Bank Manager app
+- Visualforce landing page for the Food Bank Service app
 -
 - Loads the Angular.js libraries and our app code from a static resource
 - Uses Javascript remoting to query and save data from Salesforce
 -
 - If you open in a Salesforce tab or specify param header=1, you get the salesforce UI
 -->
-<apex:page controller="FoodBankManager" title="Food Bank Manager"
+<apex:page controller="FoodBankManager" title="Food Bank Service"
     standardStylesheets="false" sidebar="false" docType="html-5.0"
     showHeader="{!OR(NOT(ISBLANK($CurrentPage.parameters.sfdc.tabName)), AND(NOT(ISBLANK($CurrentPage.parameters.header)),$CurrentPage.parameters.header != '0'))}" >
 
     <html ng-app="foodBankApp">
         <head>
-            <title>Food Bank Manager</title>
+            <title>Food Bank Service</title>
 
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -63,7 +63,7 @@
                     <h1 style="margin-bottom: 5px;">
                         <img style="margin: 0 3px 7px 2px;" height="32" width="32"
                             ng-src="{{basePath}}/img/shoppingCart32.png" />
-                        Food Bank Manager
+                        Food Bank Service
                     </h1>
                 </div>
 

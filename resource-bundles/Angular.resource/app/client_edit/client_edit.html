@@ -37,11 +37,13 @@
                         <table class="table table-condensed" style="margin-bottom:12px;">
                             <thead>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th class="text-center">Age&nbsp;Group</th>
-                                    <th class="text-center">Age</th>
-                                    <!-- <th class="text-center">Birthdate</th> -->
+                                    <th>First</th>
+                                    <th>Last</th>
+                                    <th>Gender</th>
+                                    <th ng-show="settings.general.showIdNumber">Id</th>
+                                    <th>Group</th>
+                                    <th>Age</th>
+                                    <th>Birthdate</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -55,31 +57,35 @@
                                     <td>
                                         <input ng-model="person.memberData.lastName" type="text"
                                             class="form-control input-sm" name="lastname"
-                                            ng-maxlength="50" ng-required>
+                                            ng-maxlength="50" ng-required required>
                                     </td>
-                                    <td class="text-center">
-                                        <select ng-model="person.memberData.ageGroup" class="form-control input-sm"
-                                            name="ageGroup" ng-options="g for g in ['Adult','Senior','Child','Infant']">
-                                            <option value="">-Select-</option>
+                                    <td>
+                                        <select ng-model="person.memberData.gender" class="form-control input-sm"
+                                            name="gender" ng-options="g for g in ['Male','Female','Other','Unknown']">
+                                            <option value="">-</option>
                                         </select>
                                     </td>
-                                    <td class="text-center" style="width:50px;">
+                                    <td ng-show="settings.general.showIdNumber">
+                                        <input ng-model="person.memberData.Id_Number" type="text"
+                                            class="form-control input-sm" 
+                                            name="Id_Number" ng-maxlength="50" >
+                                    </td>
+                                    <td>
+                                        <select ng-model="person.memberData.ageGroup" class="form-control input-sm"
+                                            name="ageGroup" ng-options="g for g in ['Adult','Senior','Child','Infant']">
+                                            <option value="">-</option>
+                                        </select>
+                                    </td>
+                                    <td>
                                         <input ng-model="person.memberData.age" type="number"
                                             class="form-control input-sm"
-                                            name="age" style="width:50px;">
+                                            name="age">
                                     </td>
-                                    <!-- <td class="text-center" style="width:70px;">
-                                        <span class="input-group" ng-controller="datepickerCtrl">
-                                          <input type="text" class="form-control input-sm" datepicker-popup="M/dd/yyyy"
-                                            ng-model="person.memberData.birthdate" is-open="opened"
-                                            min="'1900-01-01'" show-weeks="false"
-                                            datepicker-options="{ 'show-button-bar': false }"
-                                            date-disabled="disabled(date, mode)" close-text="Close" style="min-width:80px;"/>
-                                          <span class="input-group-btn">
-                                            <button class="btn btn-default" ng-click="open($event)" style="padding: 4px 10px;"><i class="glyphicon glyphicon-calendar"></i></button>
-                                          </span>
-                                        </span>
-                                    </td> -->
+                                    <td>
+                                        <input type="date"
+                                            ng-model="person.memberData.birthdate"
+                                            placeholder="M/dd/yyyy" min="1900-01-01" />
+                                    </td>
 
                                     <td class="text-right" ng-show="data.memberList.length > 1">
                                         <button class="btn btn-danger btn-sm"
@@ -113,9 +119,13 @@
                                 ng-maxlength="50" ng-model="data.household.address"
                                 ng-disabled="data.household.homeless" autofocus="autofocus">
                         </div>
-                        <div class="form-group col-sm-4 text-right">
+                        <div class="form-group col-sm-4 text-left">
                             <input type="checkbox" name="homeless" ng-model="data.household.homeless"></input>&nbsp;
                             <label>Homeless</label>
+                        </div>
+                        <div class="form-group col-sm-4 text-left">
+                            <input type="checkbox" name="outofarea" ng-model="data.household.outofarea"></input>&nbsp;
+                            <label>Out of Area</label>
                         </div>
                         <div class="form-group col-sm-6">
                             <label>City</label>

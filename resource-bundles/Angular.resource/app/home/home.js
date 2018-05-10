@@ -21,9 +21,9 @@ angular.module('homeController')
       return fbHouseholdSearch.get(query, false);
     };
 
-    $scope.checkIn = function(cid) {
+    $scope.checkIn = function(cid, contactid) {
       if (cid) {
-        $location.url('/client/' + cid);
+        $location.url('/client/' + cid + '/' + contactid);
       }
     };
 
@@ -109,7 +109,7 @@ angular.module('homeController')
     function($scope, $window, fbCancelCheckIn) {
 
     $scope.cancelCheckIn = function() {
-      if ($window.confirm('Cancel visit for ' + $scope.client.clientName + '?')) {
+      if ($window.confirm('Cancel visit for ' + $scope.client.name + '?')) {
         fbCancelCheckIn($scope.client.clientId);
         $scope.$parent.refresh();
       }

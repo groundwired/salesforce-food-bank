@@ -4,16 +4,16 @@
         <div class="panel panel-info">
             <div class="panel-heading" >
 
-                <div class="btn-group pull-right" style="margin-top:12px;" ng-show="household">
-                    <a class="btn btn-success" href="#/edit_client/{{household.id}}/log_visit">Edit Client
+                <div class="btn-group pull-right" style="margin-top:12px;" ng-show="data.household">
+                    <a class="btn btn-success" href="#/edit_client/{{data.household.id}}/log_visit">Edit Client
                         &nbsp;<i class="fa fa-edit"></i></a>
                 </div>
 
                 <h4>Record Client Visit</h4>
 
-                <p ng-show="household">{{household.name}}<br>
-                    {{household.fullAddress}}<br />
-                    {{household.phone}}</p>
+                <p ng-show="data.household">{{data.household.name}}<br>
+                    {{data.household.fullAddress}}<br />
+                    {{data.household.phone}}</p>
                 </p>
             </div>
             <div class="panel-btnbar text-center">
@@ -30,9 +30,9 @@
                             <div class="panel-heading">
                                 Visit Detail
                             </div>
-                            <div class="panel-body" style="padding-right:16px;" ng-show="household">
+                            <div class="panel-body" style="padding-right:16px;" ng-show="data.household">
                                 <dl class="dl-horizontal" ng-if="settings.boxes" >
-                                  <dt style="margin-top:5px;">Box Type/Size</dt>
+                                  <dt style="margin-top:5px;">{{Label_Box_Type}}</dt>
                                   <dd>
                                     <div class="input-group" style="width:14em;">
                                       <select class="form-control" autofocus="autofocus" ng-model="boxType" 
@@ -40,6 +40,17 @@
                                     </div>
                                   </dd>
                                 </dl>
+                                <dl class="dl-horizontal" ng-show="settings.general.trackCheckoutWeight" >
+                                    <dt style="margin-top:5px;">Checkout Weight</dt>
+                                    <dd>
+                                      <div ng-class="{ 'input-group': true, 'input-group-small': true, 'has-error': visitForm.checkoutWeight.$invalid }">
+                                          <input class="form-control" type="decimal" ng-model="checkoutWeight" min="0.00" max="999.00" 
+                                              autofocus="autofocus" required="required" name="checkoutWeight" ></input>
+                                          <span ng-show="visitForm.checkoutWeight.$error.required" class="help-block">Please enter a number</span>
+                                          <span ng-show="visitForm.checkoutWeight.$error.min" class="help-block">Checkout weight cannot be negative</span>
+                                      </div>
+                                    </dd>
+                                  </dl>
                                 <dl class="dl-horizontal" style="margin-top:12px;" ng-if="settings.general.trackPoints" >
                                   <dt>Points Available</dt>
                                   <dd>
@@ -85,10 +96,10 @@
                                   </dd>
                                 </dl>
                                 <dl class="dl-horizontal">
-                                  <dt style="margin-top:5px;">Visit Notes</dt>
-                                  <dd>
-                                    <textarea class="form-control" style="height:7em;" ng-model="visitNotes"></textarea>
-                                  </dd>
+                                <dt style="margin-top:5px;">Visit Notes</dt>
+                                    <dd>
+                                        <textarea class="form-control" style="height:7em;" ng-model="visitNotes"></textarea>
+                                    </dd>
                                 </dl>
                             </div>
                         </div>
@@ -96,13 +107,13 @@
                     <div class="col-md-5" ng-if="commodities">
                         <div class="panel panel-default">
                             <div class="panel-heading">Commodities</div>
-                            <div class="panel-body" ng-show="household">
+                            <div class="panel-body" ng-show="data.household">
                                 <table class="table table-condensed" style="vertical-align:middle; font-size:13px; margin-top: 6px;">
                                     <thead>
                                         <tr>
                                             <th>Item</th>
                                             <th class="text-center">Available</th>
-                                            <th class="text-center">Used Today</th>
+                                            <th>Used Today</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -112,8 +123,8 @@
                                             
                                             <td style="vertical-align: middle;">{{comm.name}}</td>
                                             <td class="text-center" style="vertical-align: middle;">{{comm.remaining}}</td>
-                                            <td class="text-center">
-                                                <div ng-class="{ 'input-group': true, 'input-group-sm': true, 'has-error': commForm.ptsUsed.$invalid }" style="width:8em;margin-left:3em;">
+                                            <td>
+                                                <div ng-class="{ 'input-group': true, 'input-group-sm': true, 'has-error': commForm.ptsUsed.$invalid }">
                                                     <input class="form-control input-sm" type="number" 
                                                         ng-model="comm.ptsUsed" min="0" max="{{comm.remaining}}" name="ptsUsed"
                                                         required="required" ></input>

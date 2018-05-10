@@ -35,9 +35,13 @@
                 <input type="text" class="form-control" name="address" placeholder="0000 Main St"
                     ng-maxlength="50" ng-model="data.addressData.address" ng-disabled="data.addressData.homeless">
             </div>
-            <div class="form-group col-sm-4 text-right">
+            <div class="form-group col-sm-4 text-left">
                 <input type="checkbox" name="homeless" ng-model="data.addressData.homeless"></input>&nbsp;
                 <label>Homeless</label>
+            </div>
+            <div class="form-group col-sm-4 text-left">
+                <input type="checkbox" name="outofarea" ng-model="data.addressData.outofarea"></input>&nbsp;
+                <label>Out of Area</label>
             </div>
             <div class="form-group col-sm-6">
                 <label>City</label>

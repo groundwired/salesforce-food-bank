@@ -2,6 +2,18 @@
 /*global _*/
 /*global moment*/
 
+Object.defineProperties(Date, {
+  MIN_VALUE: {
+    value: -8640000000000000 // A number, not a date
+  },
+  MAX_VALUE: {
+    value: 8640000000000000
+  },
+  MIN_BIRTHDATE: {
+    value: new Date("1/1/1800").getTime()
+  }
+});
+
 /* Controllers for client view page */
 
 angular.module('clientController', [
@@ -15,6 +27,8 @@ angular.module('clientController')
     'fbSaveHouseholdAndMembers', 'fbCheckIn', 'fbVisitHistory',
   function($scope, $location, $timeout, $window, $routeParams, $alert, $q, foundSettings, foundHousehold,
     fbHouseholdDetail, fbSaveHousehold, fbSaveHouseholdMembers, fbSaveHouseholdAndMembers, fbCheckIn, fbVisitHistory) {
+
+    $scope.contactid = $routeParams.clientContactId;
 
     $scope.settings = foundSettings;
 
@@ -60,7 +74,9 @@ angular.module('clientController')
     $scope.visitorWarningMsg = function() {
       if (!$scope.data.household.mostRecentVisitDate) {
         return;
-      } else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'WEEKLY') {
+      } else if (typeof foundSettings.general.visitFrequencyLimit == 'undefined') {
+        return;
+      }else if (foundSettings.general.visitFrequencyLimit.toUpperCase() === 'WEEKLY') {
         //we assume weekly means a visit once per calendar week, with the week starting on Sunday
         //first determine the day of th week of today
         if (moment().week() === moment($scope.data.household.mostRecentVisitDate).week() &&
@@ -199,7 +215,7 @@ angular.module('clientController')
 
     $scope.checkIn = function() {
       $scope.saveAll().then(function() {
-        fbCheckIn($scope.data.household.id);
+        fbCheckIn($scope.data.household.id, $scope.contactid);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',
@@ -214,7 +230,7 @@ angular.module('clientController')
 
     $scope.recordVisit = function() {
       $scope.saveAll().then(function() {
-        $location.url('/log_visit/' + $scope.data.household.id);
+        $location.url('/log_visit/' + $scope.data.household.id + '/' + $scope.contactid);
       });
     };
 
@@ -227,6 +243,10 @@ angular.module('clientController')
 
     $scope.cancelEdit = function() {
       $location.url('/');  // might want to go somewhere based on routing param
+    };
+    
+    $scope.fullView = function () {
+      $window.open('/one/one.app#/sObject/' + $scope.data.household.id, '_blank');
     };
 
     $scope.queryVisits = function() {
@@ -272,6 +292,7 @@ angular.module('clientController')
         postalCode: $scope.data.household.postalCode,
         phone: $scope.data.household.phone,
         homeless: $scope.data.household.homeless,
+        outofarea: $scope.data.household.outofarea,
         proofOfAddress: $scope.data.household.proofOfAddress
       };
       $scope.status.editingAddress = true;
@@ -411,6 +432,20 @@ angular.module('clientController')
     $scope.status.editingMembers = false;
     $scope.status.savingMembers = false;
 
+    $scope.checkBirthdate = function (date) {
+      
+        try {
+          if (date.getTime() <= Date.MIN_BIRTHDATE) {
+            return null;
+          }
+        }
+        catch(err) {
+          return null;
+        }
+
+        return date;
+    };
+
     $scope.editMembers = function() {
       _.forEach($scope.data.memberList, function(v) {
         v.memberDataEditable = v.memberData;
@@ -452,15 +487,4 @@ angular.module('clientController')
     $scope.cancelMembers = function() {
       $scope.status.editingMembers = false;
     };
-  }]);
-
-angular.module('clientController')
-  .controller('datepickerCtrl', ['$scope', function($scope) {
-
-    $scope.openCal = function($event) {
-      $scope.status.calOpen = !$scope.status.calOpen;
-      $event.preventDefault();
-      $event.stopPropagation();
-    };
-
   }]);

@@ -20,7 +20,7 @@ describe('client_new', function() {
     beforeEach(inject(function($controller, fbSettings) {
       scope = $rootScope.$new();
       settings = fbSettings.translate(mockData('getAppSettings', 0));
-      household = {name: 'New Client', members: [{ firstName: 'John Doe', lastName: 'John Doe' }]};
+      household = {name: 'Doe Household', members: [{ firstName: 'John Doe', lastName: 'John Doe' }]};
       ctrl = $controller('clientEditController', {
         $scope: scope, 
         foundSettings: settings,

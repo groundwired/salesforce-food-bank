@@ -34,7 +34,7 @@ angular.module('foodBankApp', [
           }
         }
       })
-      .when('/client/:clientId/:action?', {
+      .when('/client/:clientId/:clientContactId/:action?', {
         templateUrl: basePath + '/app/client/client.html',
         controller: 'clientController',
         resolve: {
@@ -58,7 +58,7 @@ angular.module('foodBankApp', [
           }
         }
       })
-      .when('/new_client/:fullName?', {
+      .when('/new_client/', {
         templateUrl: basePath + '/app/client_edit/client_edit.html',
         controller: 'clientEditController',
         resolve: {
@@ -67,13 +67,12 @@ angular.module('foodBankApp', [
           },
           foundHousehold: function($q, $route) {
             var deferred = $q.defer();
-            var fullName = $route.current.params.fullName;
-            deferred.resolve({name: 'New Client', members: [{ firstName: fullName, lastName: fullName }]});
+            deferred.resolve({name: 'Unknown', members: [{ firstName: ''}]});
             return deferred.promise;
           }
         }
       })
-      .when('/log_visit/:clientId', {
+      .when('/log_visit/:clientId/:clientContactId', {
         templateUrl: basePath + '/app/log_visit/log_visit.html',
         controller: 'logVisitController',
         resolve: {

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Age_Entry_Date__c</fullName>
+        <description>Store this date so you can increment ages automatically even when you have no actual birthdate.</description>
+        <externalId>false</externalId>
+        <label>Age Entry Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Age_Group__c</fullName>
+        <description>You can set this field manually, but if you enter age or birthdate a trigger fills this field automatically (and overrides your setting).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>You can set this field manually, but if you enter age or birthdate a trigger fills this field automatically (and overrides your setting).</inlineHelpText>
+        <label>Group</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Adult</fullName>
+                    <default>false</default>
+                    <label>Adult</label>
+                </value>
+                <value>
+                    <fullName>Senior</fullName>
+                    <default>false</default>
+                    <label>Senior</label>
+                </value>
+                <value>
+                    <fullName>Child</fullName>
+                    <default>false</default>
+                    <label>Child</label>
+                </value>
+                <value>
+                    <fullName>Infant</fullName>
+                    <default>false</default>
+                    <label>Infant</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <label>Age</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Created_Date__c</fullName>
+        <description>Store the date the external entry was created.</description>
+        <externalId>false</externalId>
+        <label>External Created Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>External_Household_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>External Household Id</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Gender__c</fullName>
+        <externalId>false</externalId>
+        <label>Gender</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Male</fullName>
+                    <default>false</default>
+                    <label>Male</label>
+                </value>
+                <value>
+                    <fullName>Female</fullName>
+                    <default>false</default>
+                    <label>Female</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Id_Number__c</fullName>
+        <description>Created by 501 Commons</description>
+        <externalId>false</externalId>
+        <label>ID Number</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Id_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>ID Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Verified</fullName>
+                    <default>false</default>
+                    <label>Not Verified</label>
+                </value>
+                <value>
+                    <fullName>Drivers License</fullName>
+                    <default>false</default>
+                    <label>Drivers License</label>
+                </value>
+                <value>
+                    <fullName>WA ID</fullName>
+                    <default>false</default>
+                    <label>WA ID</label>
+                </value>
+                <value>
+                    <fullName>DSHS Card</fullName>
+                    <default>false</default>
+                    <label>DSHS Card</label>
+                </value>
+                <value>
+                    <fullName>Utility Bill</fullName>
+                    <default>false</default>
+                    <label>Utility Bill</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Passport</fullName>
+                    <default>false</default>
+                    <label>Passport</label>
+                </value>
+                <value>
+                    <fullName>Voters Registration</fullName>
+                    <default>false</default>
+                    <label>Voters Registration</label>
+                </value>
+                <value>
+                    <fullName>Medical Coupon</fullName>
+                    <default>false</default>
+                    <label>Medical Coupon</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Proof_of_Infant__c</fullName>
+        <externalId>false</externalId>
+        <label>Proof of Infant</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

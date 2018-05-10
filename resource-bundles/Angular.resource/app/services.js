@@ -2,6 +2,18 @@
 /*global _*/
 /*global moment*/
 
+Object.defineProperties(Date, {
+  MIN_VALUE: {
+    value: -8640000000000000 // A number, not a date
+  },
+  MAX_VALUE: {
+    value: 8640000000000000
+  },
+  MIN_BIRTHDATE: {
+    value: new Date("1/1/1800").getTime()
+  }
+});
+
 angular.module('appServices', ['appServerData']);
 
 /* Javascript Remoting Service */
@@ -68,6 +80,15 @@ angular.module('appServices')
 /* Remoting data methods */
 
 angular.module('appServices')
+  .factory('fbCustomLabel', ['jsRemoting', function(jsRemoting) {
+    return {
+      get : function( label ) {
+        return jsRemoting.invoke('getCustomLabel', label);
+      }
+    };
+  }]);
+
+angular.module('appServices')
   .factory('fbCheckInList', ['jsRemoting', function(jsRemoting) {
     return {
       get : function() {
@@ -119,7 +140,9 @@ angular.module('appServices')
         settings.general.proofOfAddressRequired = result.general.Proof_of_Address_Required__c;
         settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
         settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
+        settings.general.showIdNumber = result.general.Show_Id__c;
         settings.general.proofOfInfantRequired = result.general.Proof_of_Infant_Required__c;
+        settings.general.trackCheckoutWeight = result.general.Track_Checkout_Weight__c;
         settings.general.trackPoints = result.general.Track_Points__c;
         settings.general.visitFrequencyLimit = result.general.Visit_Frequency_Limit__c;
         settings.general.weeklyVisitLimit = result.general.Weekly_Visit_Limit__c;
@@ -159,17 +182,17 @@ angular.module('appServices')
       },
       getSObject: function( hh ) {
         var sobj = {
-          Client_Names__c: hh.name,
-          Full_Address__c: hh.fullAddress,
+          Name: hh.name,
           Total_Visits__c: hh.totalVisits,
           Monthly_Points_Available__c: hh.monthlyPointsAvailable,
           Tags__c: hh.tags ? hh.tags.join(';') : undefined,
-          Address__c: hh.address,
-          City__c: hh.city,
-          State__c: hh.state,
-          Postal_Code__c: hh.postalCode,
-          Phone__c: hh.phone,
+          BillingStreet: hh.address,
+          BillingCity: hh.city,
+          BillingState: hh.state,
+          BillingPostalCode: hh.postalCode,
+          Phone: hh.phone,
           Homeless__c: hh.homeless,
+          Out_Of_Area__c: hh.outofarea,
           Notes__c: hh.notes,
           Source__c: hh.source,
           External_ID__c: hh.externalId,
@@ -189,11 +212,13 @@ angular.module('appServices')
 
       getMemberSObject : function( mobj ) {
         var sobj = {
-          First_Name__c: mobj.firstName,
-          Last_Name__c: mobj.lastName,
+          FirstName: mobj.firstName,
+          LastName: mobj.lastName,
           Age_Group__c: mobj.ageGroup,
+          Id_Number__c: mobj.Id_Number,
+          Gender__c: mobj.gender,
           Age__c: mobj.age,
-          //Birthdate__c: new Date(mobj.birthdate),
+          birthdate: (mobj.birthdate) ? mobj.birthdate.getTime() : Date.MIN_BIRTHDATE,
           Proof_of_Infant__c: mobj.proofOfInfant
         };
         if (mobj.id) sobj.Id = mobj.id;
@@ -203,17 +228,22 @@ angular.module('appServices')
       translate : function( result ) {
         var client = {
           id: result.Id,
-          name: result.Client_Names__c,
-          fullAddress: result.Full_Address__c,
+          name: result.Name,
+          fullAddress: String.format('{0}, {1}, {2} {3}', 
+            (result.BillingStreet != null) ? result.BillingStreet : '',
+            (result.BillingCity != null) ? result.BillingCity : '',
+            (result.BillingState != null) ? result.BillingState : '',
+            (result.BillingPostalCode != null) ? result.BillingPostalCode : ''),
           totalVisits: result.Total_Visits__c,
           monthlyPointsAvailable: result.Monthly_Points_Available__c,
           tags: (result.Tags__c) ? (_.map(result.Tags__c.split(';'), _.trim)) : null,
-          address: result.Address__c,
-          city: result.City__c,
-          state: result.State__c,
-          postalCode: result.Postal_Code__c,
-          phone: result.Phone__c,
+          address: result.BillingStreet,
+          city: result.BillingCity,
+          state: result.BillingState,
+          postalCode: result.BillingPostalCode,
+          phone: result.Phone,
           homeless: result.Homeless__c,
+          outofarea: result.Out_Of_Area__c,
           notes: result.Notes__c,
           source: result.Source__c,
           externalId: result.External_ID__c,
@@ -238,15 +268,17 @@ angular.module('appServices')
 
         // build list of members
         client.members = [];
-        _.forEach( result.Clients__r, function(v) {
+        _.forEach( result.Contacts, function(v) {
           client.members.push({
             id: v.Id,
             name: v.Name,
-            firstName: v.First_Name__c,
-            lastName: v.Last_Name__c,
+            firstName: v.FirstName,
+            lastName: v.LastName,
             ageGroup: v.Age_Group__c,
+            Id_Number: v.Id_Number__c,
+            gender: v.Gender__c,
             age: v.Age__c,
-            birthdate: v.Birthdate__c,
+            birthdate: (v.Birthdate) ? new Date(v.Birthdate) : Date.MIN_BIRTHDATE,
             proofOfInfant: v.Proof_of_Infant__c
           });
         });
@@ -354,9 +386,9 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbCheckIn', ['jsRemoting', function(jsRemoting) {
-    return function( hhid ) {
-      return jsRemoting.invoke('checkIn', hhid);
-    };
+      return function( hhid, contactid ) {
+        return jsRemoting.invoke('checkIn', [hhid, contactid]);
+      };
   }]);
 
 angular.module('appServices')
@@ -367,8 +399,10 @@ angular.module('appServices')
         _.forEach(result, function(result){
           visits.push({
             'date': result.Visit_Date__c,
+            'visitor': (result.Visitor__r) ? result.Visitor__r.Name : '',
             'boxType': result.Box_Type__c,
             'ptsUsed': result.Points_Used__c,
+            'checkoutWeight' : result.Checkout_Weight__c,
             'notes': result.Notes__c
           });
         });
@@ -386,7 +420,7 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbLogVisit', ['jsRemoting', function(jsRemoting) {
-    return function( hhid, boxType, pointsUsed, commodities, notes ) {
-      return jsRemoting.invoke('logVisit', [hhid, boxType, pointsUsed, commodities, notes]);
+    return function( hhid, contactid, boxType, checkoutWeight, pointsUsed, commodities, notes ) {
+      return jsRemoting.invoke('logVisit', [hhid, contactid, boxType, checkoutWeight, pointsUsed, commodities, notes]);
     };
   }]);

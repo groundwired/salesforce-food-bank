@@ -23,10 +23,10 @@
         <type>DateTime</type>
     </fields>
     <fields>
-        <fullName>Client_Name__c</fullName>
+        <fullName>Visitor__c</fullName>
         <externalId>false</externalId>
-        <label>Client Name</label>
-        <length>255</length>
+        <label>Vistor</label>
+        <length>32</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
