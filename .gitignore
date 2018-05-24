@@ -15,3 +15,4 @@ salesforce-food-bank.sublime-workspace
 /resource-bundles/Angular.resource/bower_components*
 .sfdx/
 .vscode/
+test_results*

@@ -19,7 +19,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Amber Smith', household.Name, 'If there are no adult clients, treat the children as adults.');
+        System.assertEquals('Amber Smith', household.Name, 'If there are no adult clients, treat the children as adults.');
     }
 
     // there's just one person
@@ -36,7 +36,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Amber Smith', household.Name, 'Household name should match client name when there\'s only one person');
+        System.assertEquals('Amber Smith', household.Name, 'Household name should match client name when there\'s only one person');
     }
 
     // there's just one person with just a last name
@@ -53,7 +53,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Smith', household.Name, 'Household name should match client name when there\'s only one person and first name is missing');
+        System.assertEquals('Smith', household.Name, 'Household name should match client name when there\'s only one person and first name is missing');
     }
 
     // last names match
@@ -71,7 +71,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Amber and Joe Smith', household.Name, 'Name should be combined when last names match');
+        System.assertEquals('Amber and Joe Smith', household.Name, 'Name should be combined when last names match');
     }
     
     // last names don't match
@@ -89,7 +89,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Amber Smith and Joe Burns', household.Name, 'Name should not be combined when last names don\'t match');
+        System.assertEquals('Amber Smith and Joe Burns', household.Name, 'Name should not be combined when last names don\'t match');
     }
 
     // more than max number of names
@@ -112,7 +112,7 @@ private class FoodBankHouseholdsTest {
         FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Joe Burns and David Gonzalez', household.Name, 'Only the names of the two adults should be used');
+        System.assertEquals('Joe Burns and David Gonzalez', household.Name, 'Only the names of the two adults should be used');
     }
 
     // test scheduled job
@@ -139,13 +139,13 @@ private class FoodBankHouseholdsTest {
             NextFireTime
             FROM CronTrigger WHERE CronExpression = :cron];
 
-        //System.assertEquals(0, ct.TimesTriggered, 'Job should not have run yet');
-        //System.assertEquals('2099-03-15 00:00:00', String.valueOf(ct.NextFireTime), 'Next run should match time from cron expression');
+        System.assertEquals(0, ct.TimesTriggered, 'Job should not have run yet');
+        System.assertEquals('2099-03-15 00:00:00', String.valueOf(ct.NextFireTime), 'Next run should match time from cron expression');
         
         Test.stopTest();
 
         household = [ SELECT Name FROM Account WHERE Id = :household.Id ];
-        //System.assertEquals('Amber and Joe Smith', household.Name, 'Name should not be set yet');
+        System.assertEquals('Amber and Joe Smith', household.Name, 'Name should not be set yet');
  
     }
     
