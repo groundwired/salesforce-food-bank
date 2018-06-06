@@ -2,7 +2,6 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>salesforce-food-bank</fullName>
     <types>
-        <members>FoodBankHouseholds</members>
         <members>FoodBankHouseholdsTest</members>
         <members>FoodBankManager</members>
         <members>FoodBankManagerTest</members>

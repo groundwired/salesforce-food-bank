@@ -233,7 +233,7 @@
         <fullName>Notes__c</fullName>
         <externalId>false</externalId>
         <label>Notes</label>
-        <length>65534</length>
+        <length>4096</length>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>

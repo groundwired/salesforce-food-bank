@@ -1,6 +1,8 @@
 @isTest
 public with sharing class FoodBankTriggerTest {
 
+    // NPSP Settings - has options under Households for Contact Overrun Count, Household Naming Conventions, and Bulk jobs for applying any changes so don't need to validate functionality built by NPSP
+
 	@isTest
 	private static void testClientTrigger() {
 		Account hh = new Account(
@@ -11,45 +13,32 @@ public with sharing class FoodBankTriggerTest {
 		Contact c = new Contact( AccountId = hh.id, LastName = 'Test', Birthdate = system.today().addyears(-50) );
 		insert c;
 
-		Contact c1 = [select id, age__c, name, Account.Name from Contact where id =: c.id];
-		System.assertEquals('Test', c1.name );
-		System.assertEquals('Test', c1.Account.Name );
+		Contact c1 = [select id, age__c from Contact where id =: c.id];
 		System.assertEquals(50, c1.age__c ); 
-
-		c.FirstName = 'Jane';
 		c.Birthdate = system.today().addyears(-45);
 		update c;
 
-		Contact c2 = [select id, age__c, name, Account.Name from Contact where id =: c.id];
-		System.assertEquals('Jane Test', c2.name );
-		System.assertEquals('Jane Test', c2.Account.Name );	
+		Contact c2 = [select id, age__c from Contact where id =: c.id];
 		System.assertEquals(45, c2.age__c );
-
-		Contact c3 = new Contact(  AccountId = hh.id, FirstName = 'Bob', LastName = 'Test', age__c = 40 );
+		Contact c3 = new Contact(  AccountId = hh.id, LastName = 'Test', age__c = 40 );
 		insert c3;
 
-		Contact c4 = [select id, age__c, name, Account.Name from Contact where id =: c3.id];
-		System.assertEquals('Bob Test', c4.name );
-		System.assertEquals('Jane and Bob Test', c4.Account.Name );
+		Contact c4 = [select id, age__c, Account.Name from Contact where id =: c3.id];
 		System.assertEquals(40, c4.age__c );
 
-		Contact c5 = new Contact(  AccountId = hh.id, FirstName = 'Peter', LastName = 'Test', age__c = 5 );
-		Contact c6 = new Contact(  AccountId = hh.id, FirstName = 'Andrew', LastName = 'Testy' );
+		Contact c5 = new Contact(  AccountId = hh.id, LastName = 'Test', age__c = 5 );
+		Contact c6 = new Contact(  AccountId = hh.id, LastName = 'Testy' );
 		insert new list<Contact>{ c5, c6 };
 
-		Contact c7 = [select id, age__c, name, Account.Name, Account.adults__c, Account.children__c
+		Contact c7 = [select id, age__c, Account.adults__c, Account.children__c
 							from Contact where id =: c6.id];
-		System.assertEquals('Andrew Testy', c7.name );
-		System.assertEquals('Jane and Bob Test', c7.Account.Name );
 		System.assertEquals(3, c7.Account.adults__c );
 		System.assertEquals(1, c7.Account.children__c );
 
 		delete new list<Contact>{ c4, c5 };
 
-		Contact c8 = [select id, age__c, name, Account.Name, Account.adults__c, Account.children__c 
+		Contact c8 = [select id, age__c, Account.adults__c, Account.children__c 
 							from Contact where id =: c1.id];
-		System.assertEquals('Jane Test', c8.name );
-		System.assertEquals('Jane Test and Andrew Testy', c8.Account.Name );		
 		System.assertEquals(2, c8.Account.adults__c );
 		System.assertEquals(0, c8.Account.children__c );
 	}
@@ -82,7 +71,6 @@ public with sharing class FoodBankTriggerTest {
 
         Contact c1 = new Contact(
         	AccountId = household.Id, 
-        	FirstName = 'Amber', 
         	LastName = 'Smith', 
         	Age__c = 55
         ); 

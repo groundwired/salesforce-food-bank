@@ -131,14 +131,5 @@ public with sharing class FoodBankManagerTest {
 		List<Client_Visit__c> cV = FoodBankManager.getVisitHistory(household1.Id);
 		System.assert(cV.size() == 1);	
 	}	
-
-    @isTest
-    private static void testHHBatch() {
-        // New Household insert then update
-        Account cHh = new Account(
-            Name = 'Test Account'
-        );
-        insert(cHh);
-        FoodBankHouseholds.runBatchManually();
-     }
+    
 }

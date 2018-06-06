@@ -151,7 +151,7 @@
         <fullName>Notes__c</fullName>
         <externalId>false</externalId>
         <label>Notes</label>
-        <length>65534</length>
+        <length>4096</length>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -256,7 +256,7 @@
         <fullName>Staff_Notes__c</fullName>
         <externalId>false</externalId>
         <label>Staff Notes</label>
-        <length>65534</length>
+        <length>4096</length>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
