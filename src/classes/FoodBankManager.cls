@@ -1,6 +1,8 @@
 public with sharing class FoodBankManager {
 
     private static String Unknown = 'Unknown';
+    // Trigger NPSP Logic to update name based on NPSP Settings
+    private static String NPSPTriggerNameUpdate = 'REPLACE';
 
     public class FoodBankException extends Exception {}
 
@@ -94,8 +96,7 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static Account saveHousehold( Account hh ) {
 
-        if (hh.Name == null)
-            hh.Name = FoodBankManager.Unknown;
+        hh.Name = FoodBankManager.NPSPTriggerNameUpdate;
 
         if (hh.Id == null)
             insert hh;
@@ -109,13 +110,7 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static Account saveHouseholdAndMembers( Account hh, list<Contact> clients) {
 
-        if (hh.Name == null || hh.Name == FoodBankManager.Unknown)
-        {
-            if (!clients.isEmpty())
-                hh.Name = String.format('{0} Household', new String[]{clients[0].LastName});
-            else
-                hh.Name = FoodBankManager.Unknown;
-        }
+        hh.Name = FoodBankManager.NPSPTriggerNameUpdate;
 
         hh.Monthly_Points_Available__c = getMonthlyPoints( hh );  // is this by trigger?  how about the name?
         if (hh.Id == null)

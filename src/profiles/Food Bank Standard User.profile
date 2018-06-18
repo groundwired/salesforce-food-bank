@@ -6,10 +6,6 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>FoodBankHouseholds</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>FoodBankHouseholdsTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>

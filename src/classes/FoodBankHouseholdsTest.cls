@@ -18,8 +18,6 @@ private class FoodBankHouseholdsTest {
         clients.add(createClient(household.Id, 'Amber', 'Smith', 12));
         insert clients;
 
-        FoodBankHouseholds.runBatchManually();
-
         household = [ SELECT Infants__c, Children__c, Adults__c, Seniors__c FROM Account WHERE Id = :household.Id ];
         System.assertEquals(0, household.Infants__c, 'There are no infant clients');
         System.assertEquals(1, household.Children__c, 'There is 1 child client');
@@ -37,8 +35,6 @@ private class FoodBankHouseholdsTest {
         List<Contact> clients = new List<Contact>();
         clients.add(createClient(household.Id, 'Amber', 'Smith', 57));
         insert clients;
-
-        FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Infants__c, Children__c, Adults__c, Seniors__c FROM Account WHERE Id = :household.Id ];
         System.assertEquals(0, household.Infants__c, 'There are no infant clients');
@@ -58,8 +54,6 @@ private class FoodBankHouseholdsTest {
         clients.add(createClient(household.Id, 'Amber', 'Smith', 57));
         clients.add(createClient(household.Id, 'Joe', 'Smith', 55));
         insert clients;
-
-        FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Infants__c, Children__c, Adults__c, Seniors__c FROM Account WHERE Id = :household.Id ];
         System.assertEquals(0, household.Infants__c, 'There are no infant clients');
@@ -81,8 +75,6 @@ private class FoodBankHouseholdsTest {
         clients.add(createClient(household.Id, 'Amber', 'Smith', 1));
         clients.add(createClient(household.Id, 'David', 'Gonzalez', 55));
         insert clients;
-
-        FoodBankHouseholds.runBatchManually();
 
         household = [ SELECT Infants__c, Children__c, Adults__c, Seniors__c FROM Account WHERE Id = :household.Id ];
         System.assertEquals(1, household.Infants__c, 'There is 1 infant client');

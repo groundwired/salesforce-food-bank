@@ -278,7 +278,8 @@ angular.module('appServices')
             Id_Number: v.Id_Number__c,
             gender: v.Gender__c,
             age: v.Age__c,
-            birthdate: (v.Birthdate) ? new Date(v.Birthdate) : Date.MIN_BIRTHDATE,
+            // v.Birthdate + 12 hours to make sure rounding to correct day since Date parses the value as GMT then converts to Browser Time Zone (Pacific)
+            birthdate: (v.Birthdate) ? new Date(v.Birthdate + (12 * 60 * 60 * 1000)) : Date.MIN_BIRTHDATE,
             proofOfInfant: v.Proof_of_Infant__c
           });
         });
