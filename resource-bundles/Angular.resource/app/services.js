@@ -204,7 +204,9 @@ angular.module('appServices')
           First_Visit__c: hh.firstVisitDate,
           Most_Recent_Visit__c: hh.mostRecentVisitDate,
           Proof_of_Address__c: hh.proofOfAddress,
-          Inactive__c: hh.inactive
+          Inactive__c: hh.inactive,
+          Pending_Commodity_Usage_JSON__c: hh.Pending_Commodity_Usage_JSON__c,
+          Pending_Notes__c: hh.Pending_Notes__c
         };
         if (hh.id) sobj.Id = hh.id;
         return sobj;
@@ -256,7 +258,9 @@ angular.module('appServices')
           mostRecentVisitDate: result.Most_Recent_Visit__c,
           proofOfAddressDate: result.Proof_of_Address_Date__c,
           proofOfAddress: result.Proof_of_Address__c,
-          inactive: result.Inactive__c
+          inactive: result.Inactive__c,
+          pendingcommodityusage: result.Pending_Commodity_Usage_JSON__c,
+          pendingnotes: result.Pending_Notes__c
         };
 
         // add up the household members
@@ -305,6 +309,14 @@ angular.module('appServices')
           }
         });
 
+        // Check the checkin queue for pending commodities
+        client.commodityPending = {};
+        if (client.pendingcommodityusage != null) {
+          _.forEach( angular.fromJson( client.pendingcommodityusage ), function(v, k) {
+              client.commodityPending[k] = v;
+          });
+        }
+
         // subtract commodity usage to get the current available commodities
         fbSettings.get().then(
           function(settings){
@@ -312,6 +324,9 @@ angular.module('appServices')
             _.forEach( settings.commodities, function(v) {
               var comm = v;
               comm.ptsUsed = 0;
+              if( client.commodityPending && (v.name in client.commodityPending) ) {
+                comm.ptsUsed = client.commodityPending[v.name];
+              }
               comm.remaining = comm.monthlyLimit;
               if( client.commodityUsage && (v.name in client.commodityUsage) ) {
                 comm.remaining -= client.commodityUsage[v.name];
@@ -355,6 +370,7 @@ angular.module('appServices')
         return client;
       }
     };
+    
     return sdo;
   }]);
 
@@ -387,8 +403,8 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbCheckIn', ['jsRemoting', function(jsRemoting) {
-      return function( hhid, contactid ) {
-        return jsRemoting.invoke('checkIn', [hhid, contactid]);
+      return function( hhid, contactid, commodities, notes ) {
+        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes]);
       };
   }]);
 

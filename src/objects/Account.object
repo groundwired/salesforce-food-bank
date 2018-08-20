@@ -33,6 +33,22 @@
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Pending_Commodity_Usage_JSON__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>JSON data that records the pending usage of commodities related to checkin queue.</inlineHelpText>
+        <label>Pending Commodity Usage JSON</label>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pending_Notes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Pending notes related to checkin queue.</inlineHelpText>
+        <label>Notes</label>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Current_Points_Remaining__c</fullName>
         <description>Total points remaining in the month of the most recent visit.</description>
         <externalId>false</externalId>

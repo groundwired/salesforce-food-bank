@@ -68,6 +68,13 @@ public with sharing class FoodBankManager {
         if (FoodBankSettings.general.Track_Points__c)
             hh.Monthly_Points_Available__c = getMonthlyPoints( hh );
 
+        // Get any Checkin Commodities Pending
+        Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
+        if (fbc != null) {
+            hh.Pending_Commodity_Usage_JSON__c = fbc.Commodity_Usage_JSON__c; 
+            hh.Pending_Notes__c = fbc.Notes__c; 
+        }
+
         /*
         // if last visit date is not this month, recalculate points
         if (FoodBankSettings.general.Track_Points__c) {
@@ -207,7 +214,7 @@ public with sharing class FoodBankManager {
     }
 
     @RemoteAction
-    public static void checkIn( Id hhid, Id contactid) {
+    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes) {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
 
@@ -226,6 +233,12 @@ public with sharing class FoodBankManager {
 
             fbc.Check_In_Time__c = system.now();
             fbc.Visitor__c = contactid;
+
+            fbc.Notes__c = visitNotes;
+
+            if (commodityUsage != null && !commodityUsage.isEmpty()) {
+                fbc.Commodity_Usage_JSON__c = JSON.serializePretty(commodityUsage);
+            }
 
             insert fbc;
         }
@@ -341,15 +354,13 @@ public with sharing class FoodBankManager {
 
         // TODO: activate inactive client? or disallow visit?
 
-        // remove the client from checkin list
-        Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
-        if (fbc != null) delete fbc;
-
         // Validate Contact references are still valid because between the checkin time and log visit the Contact could have been deleted
         list<Contact> c = [select id from Contact where id = :contactid];
         if (c.isEmpty()) {
             contactid = null;
         }
+
+        Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
         c = [select id from Contact where id = :fbc.Visitor__c];
         if (c.isEmpty()) {
             fbc.Visitor__c = null;
@@ -373,10 +384,19 @@ public with sharing class FoodBankManager {
         );
         if (commodityUsage != null && !commodityUsage.isEmpty())
             cv.Commodity_Usage_JSON__c = JSON.serializePretty(commodityUsage);
-        insert cv;
 
-        // TODO: recalc and save the remaining points on household
-        if (pointsUsed != null && pointsUsed > 0) {}
+        try {
+            insert cv;
+
+            // TODO: recalc and save the remaining points on household
+            if (pointsUsed != null && pointsUsed > 0) {}
+
+            // remove the client from checkin list
+            if (fbc != null) delete fbc;
+
+        } catch (Exception ex) {
+            system.debug(ex.getMessage());
+        }
 
         return cv.id;
     }

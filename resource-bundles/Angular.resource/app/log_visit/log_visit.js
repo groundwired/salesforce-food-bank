@@ -30,6 +30,9 @@ angular.module('logVisitController')
     $scope.commodities = foundHousehold.commodityAvailability;
 
     $scope.visitNotes = '';
+    if (foundHousehold.pendingnotes != null && foundHousehold.pendingnotes.length > 0) {
+      $scope.visitNotes = foundHousehold.pendingnotes;
+    }
     
     fbCustomLabel.get( 'Box_Type__c' ).then(
       function(result){

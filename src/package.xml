@@ -45,6 +45,8 @@
         <members>Account.Most_Recent_Visit__c</members>
         <members>Account.Notes__c</members>
         <members>Account.Out_Of_Area__c</members>
+        <members>Account.Pending_Commodity_Usage_JSON__c</members>
+        <members>Account.Pending_Notes__c</members>
         <members>Account.Proof_of_Address_Date__c</members>
         <members>Account.Proof_of_Address__c</members>
         <members>Account.Seniors__c</members>
@@ -88,6 +90,8 @@
         <members>Food_Bank_Box_Settings__c.Minimum_Family_Size__c</members>
         <members>Food_Bank_Checkin__c.Box_Size__c</members>
         <members>Food_Bank_Checkin__c.Check_In_Time__c</members>
+        <members>Food_Bank_Checkin__c.Commodity_Usage_JSON__c</members>
+        <members>Food_Bank_Checkin__c.Notes__c</members>
         <members>Food_Bank_Checkin__c.Points_Remaining__c</members>
         <members>Food_Bank_Checkin__c.Visitor__c</members>
         <members>Food_Bank_Commodity__c.Allow_Overage__c</members>

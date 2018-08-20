@@ -43,4 +43,19 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>Commodity_Usage_JSON__c</fullName>
+        <externalId>false</externalId>
+        <label>Commodity Usage JSON</label>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
 </CustomObject>

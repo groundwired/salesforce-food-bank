@@ -36,7 +36,7 @@ angular.module('clientController')
     $scope.data.household = foundHousehold;
 
     $scope.status = {};
-    $scope.commodities = [];
+    $scope.data.commodities = foundSettings.commodities;
 
     if ($scope.settings.general.trackPoints) {
       $scope.data.ptsRemaining = foundHousehold.currentPointsRemaining;
@@ -44,6 +44,8 @@ angular.module('clientController')
       $scope.data.ratio =  Math.floor(foundHousehold.currentPointsRemaining * 100 / foundHousehold.monthlyPointsAvailable);
     }
     
+    $scope.data.visitNotes = '';
+
     $scope.data.boxType = foundHousehold.defaultBox;
     if (foundHousehold.commodityAvailability && foundHousehold.commodityAvailability.length > 0) {
       $scope.data.commodities = foundHousehold.commodityAvailability;      
@@ -214,8 +216,17 @@ angular.module('clientController')
     };
 
     $scope.checkIn = function() {
+
+      // gather the commodity usage for this visit        
+      var comms = {};
+      _.forEach( $scope.data.commodities, function(v) {
+        if (v.ptsUsed > 0) {
+          comms[v.name] = v.ptsUsed;
+        }
+      });
+
       $scope.saveAll().then(function() {
-        fbCheckIn($scope.data.household.id, $scope.contactid);
+        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',
@@ -247,6 +258,10 @@ angular.module('clientController')
     
     $scope.fullView = function () {
       $window.open('/one/one.app#/sObject/' + $scope.data.household.id, '_blank');
+    };
+
+    $scope.scheduleAppointment = function () {
+      $window.open('/flow/C501_Appointment_Schedule?varInputContactId=' + $scope.contactid, '_blank');
     };
 
     $scope.queryVisits = function() {
