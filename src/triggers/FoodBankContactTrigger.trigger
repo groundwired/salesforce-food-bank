@@ -1,4 +1,4 @@
-trigger ClientTrigger on Contact (before insert, before update, after insert, after update, after delete) {
+trigger FoodBankContactTrigger on Contact (before insert, before update, after insert, after update, after delete) {
 
 	if (Trigger.isBefore) {
 		FoodBankTrigger.get().updateContactAge( Trigger.New, Trigger.oldMap );

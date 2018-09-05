@@ -132,7 +132,7 @@ public with sharing class FoodBankManagerTest {
 		Id cVId = FoodBankManager.logVisit(household1.Id, contact.Id, 'small', 1.1, 5, commU, 'These are notes');
 		System.assert(cVId != null);
 
-		List<Client_Visit__c> cV = FoodBankManager.getVisitHistory(household1.Id);
+		List<Food_Bank_Visit__c> cV = FoodBankManager.getVisitHistory(household1.Id);
 		System.assert(cV.size() == 1);	
 	}	
     

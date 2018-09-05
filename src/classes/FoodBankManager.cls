@@ -82,7 +82,7 @@ public with sharing class FoodBankManager {
             if (hh.Most_Recent_Visit__c == null) {
                 hh.Current_Points_Used__c = 0;
             } else if (hh.Current_Points_Used__c == null || hh.Most_Recent_Visit__c.year() != system.today().year() || hh.Most_Recent_Visit__c.month() != system.today().month()) {
-                AggregateResult ar = [SELECT SUM(Points_Used__c) TotalPoints FROM Client_Visit__c WHERE Id = : hh.id AND Visit_Date__c = THIS_MONTH];
+                AggregateResult ar = [SELECT SUM(Points_Used__c) TotalPoints FROM Food_Bank_Visit__c WHERE Id = : hh.id AND Visit_Date__c = THIS_MONTH];
                 Decimal pu = (Decimal)(ar.get('TotalPoints'));
                 hh.Current_Points_Used__c = (pu == null) ? 0 : pu;
             }
@@ -92,10 +92,10 @@ public with sharing class FoodBankManager {
     }
 
     @RemoteAction
-    public static list<Client_Visit__c> getVisitHistory( Id hhid ) {
+    public static list<Food_Bank_Visit__c> getVisitHistory( Id hhid ) {
         return
             [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Checkout_Weight__c, Notes__c, Visitor__r.Name
-                from Client_Visit__c
+                from Food_Bank_Visit__c
                 where Household__c = :hhid
                 order by Visit_Date__c DESC limit 20];
     }
@@ -228,7 +228,7 @@ public with sharing class FoodBankManager {
         } else {
             fbc.name = hhid;
             fbc.Points_Remaining__c = getMonthlyPoints( hh );
-            for (Client_Visit__c cv : hh.Visits__r)
+            for (Food_Bank_Visit__c cv : hh.Visits__r)
                 if (cv.Points_Used__c != null) fbc.Points_Remaining__c -= cv.Points_Used__c;
 
             fbc.Check_In_Time__c = system.now();
@@ -367,7 +367,7 @@ public with sharing class FoodBankManager {
         }
 
         // log the visit
-        Client_Visit__c cv = new Client_Visit__c(
+        Food_Bank_Visit__c cv = new Food_Bank_Visit__c(
             Household__c = hh.Id,
             Adults__c = hh.Adults__c,
             Seniors__c = hh.Seniors__c,

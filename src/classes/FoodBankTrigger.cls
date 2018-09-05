@@ -158,24 +158,24 @@ public with sharing class FoodBankTrigger {
 		}		
 	}
 
-	public void setFirstVisitCheckbox( list<Client_Visit__c> visitList, map<Id, Client_Visit__c> oldMap ) {
+	public void setFirstVisitCheckbox( list<Food_Bank_Visit__c> visitList, map<Id, Food_Bank_Visit__c> oldMap ) {
 
 // TODO: if no visit date, assume the create date (or today for new records)
 
 		// short circuit if this update is from this trigger itself
 		if (nowUpdatingVisitCheckbox) return;
 
-		list<Client_Visit__c> visitsToUpdate = new list<Client_Visit__c>();
+		list<Food_Bank_Visit__c> visitsToUpdate = new list<Food_Bank_Visit__c>();
 
 		// organize visits in the trigger list by household and year
-		map<String, List<Client_Visit__c>> cvMap = new map<String, List<Client_Visit__c>>();
+		map<String, List<Food_Bank_Visit__c>> cvMap = new map<String, List<Food_Bank_Visit__c>>();
 		set<Integer> yearSet = new set<Integer>();
 		set<Id> hhSet = new set<Id>();
 
 		// in case of delete, need to set up to recalculate from existing records
 		if (visitList == null) {
-			visitList = new list<Client_Visit__c>();
-			for (Client_Visit__c cv : oldMap.values()) {
+			visitList = new list<Food_Bank_Visit__c>();
+			for (Food_Bank_Visit__c cv : oldMap.values()) {
 				if (cv.Visit_Date__c != null) {
 					hhSet.add(cv.Household__c);
 					yearSet.add(cv.Visit_Date__c.year());
@@ -184,7 +184,7 @@ public with sharing class FoodBankTrigger {
 		}
 
 		// collect visit years
-		for (Client_Visit__c cv : visitList) {
+		for (Food_Bank_Visit__c cv : visitList) {
 			hhSet.add(cv.Household__c);
 			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
 			yearSet.add(visitYear);
@@ -192,7 +192,7 @@ public with sharing class FoodBankTrigger {
 
 		// query for all existing visits for those HHs this year and add them to the map
 		set<Id> visitIdsOutsideTriggerSet = new set<Id>();
-		for (Client_Visit__c cv : [select id, Household__c, Visit_Date__c, First_Visit_This_Year__c from Client_Visit__c 
+		for (Food_Bank_Visit__c cv : [select id, Household__c, Visit_Date__c, First_Visit_This_Year__c from Food_Bank_Visit__c 
 												where Household__c in : hhSet and CALENDAR_YEAR(Visit_Date__c) in : yearSet 
 												and Id not in : visitList order by Id]) {
 
@@ -202,20 +202,20 @@ public with sharing class FoodBankTrigger {
 			if (cvMap.containsKey(mapKey))
 				cvMap.get(mapKey).add(cv);
 			else
-				cvMap.put(mapKey, new list<Client_Visit__c>{ cv });
+				cvMap.put(mapKey, new list<Food_Bank_Visit__c>{ cv });
 		}
 
 		// add visits being updated
-		for (Client_Visit__c cv : visitList) {
+		for (Food_Bank_Visit__c cv : visitList) {
 			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
 			String mapKey = String.valueOf(visitYear) + cv.Household__c;
 			if (cvMap.containsKey(mapKey))
 				cvMap.get(mapKey).add(cv);
 			else
-				cvMap.put(mapKey, new list<Client_Visit__c>{ cv });
+				cvMap.put(mapKey, new list<Food_Bank_Visit__c>{ cv });
 
 			if (oldMap != null) {
-				Client_Visit__c oldCv = oldMap.get(cv.Id);
+				Food_Bank_Visit__c oldCv = oldMap.get(cv.Id);
 				hhSet.add(oldCv.Household__c);
 				if (oldCv.Visit_Date__c != null)
 					yearSet.add(oldCv.Visit_Date__c.year());
@@ -224,13 +224,13 @@ public with sharing class FoodBankTrigger {
 
 		// for each client/year combo, find the first visit of the year and mark it as such
 		for (String mapKey : cvMap.keyset()) {
-			list<Client_Visit__c> cvListThisYear = cvMap.get(mapKey);
-			Client_Visit__c firstVisit;
-			for (Client_Visit__c cv : cvListThisYear) {
+			list<Food_Bank_Visit__c> cvListThisYear = cvMap.get(mapKey);
+			Food_Bank_Visit__c firstVisit;
+			for (Food_Bank_Visit__c cv : cvListThisYear) {
 				if (firstVisit == null || firstVisit.Visit_Date__c == null || cv.Visit_Date__c < firstVisit.Visit_Date__c)
 					firstVisit = cv;
 			}
-			for (Client_Visit__c cv : cvListThisYear) {
+			for (Food_Bank_Visit__c cv : cvListThisYear) {
 				// if the checkbox has the wrong value for this record, update it
 				if ((cv == firstVisit && !cv.First_Visit_This_Year__c) || (cv != firstVisit && cv.First_Visit_This_Year__c)) {
 					cv.First_Visit_This_Year__c = (cv == firstVisit);

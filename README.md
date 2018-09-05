@@ -44,7 +44,7 @@ Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
  * **Salesforce Instance Setup**
 
     ```
-    Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Client Visit & give View/Edit permissions on all fields
+    Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Food Bank Visit & give View/Edit permissions on all fields
     ```
 
  * **Open Food Bank App**
@@ -70,7 +70,7 @@ There is an alternate home page, as well as a Jasmine Test Runner page.  For exa
 
 ## Implementation Notes
 
-This unmanaged package is built on 3 primary custom objects; Client, Client Household, and Client Visit.  There is no dependency or integration with Salesforce NPSP (https://github.com/SalesforceFoundation/Cumulus) although that is a future goal.
+This unmanaged package is built on 3 primary custom objects; Client, Client Household, and Food Bank Visit.  There is no dependency or integration with Salesforce NPSP (https://github.com/SalesforceFoundation/Cumulus) although that is a future goal.
 
 ## Description of Files and Directories  
 

@@ -52,7 +52,7 @@ public with sharing class FoodBankStats {
 					'COUNT(Id) HHVisits, SUM(Adults__c) Adults, SUM(Children__c) Children, SUM(Infants__c) Infants, ' +
 					'SUM(Seniors__c) Seniors, SUM(Total_People__c) TotalPeople, SUM(More_Than_One_Person__c) MoreThanOnePerson, ' +
 					'SUM(Homeless_Counter__c) Homeless, SUM(Out_Of_Area_Counter__c) OutOfArea, SUM(Points_Used__c) TotalPoints ' +
-					'FROM Client_Visit__c WHERE Visit_Date__c = ' + timeframe +
+					'FROM Food_Bank_Visit__c WHERE Visit_Date__c = ' + timeframe +
 			 		' GROUP BY ROLLUP(First_Visit_This_Year__c)';
 
 		for (AggregateResult r : Database.query(q)) {

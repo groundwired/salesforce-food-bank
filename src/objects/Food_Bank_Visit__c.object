@@ -339,13 +339,13 @@
         <externalId>false</externalId>
         <label>Visitor</label>
         <referenceTo>Contact</referenceTo>
-        <relationshipLabel>Client Visits</relationshipLabel>
-        <relationshipName>Client_Visits</relationshipName>
+        <relationshipLabel>Food Bank Visits</relationshipLabel>
+        <relationshipName>Food_Bank_Visits</relationshipName>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
-    <label>Client Visit</label>
+    <label>Food Bank Visit</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
@@ -393,7 +393,7 @@
         <label>Visit Number</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Client Visits</pluralLabel>
+    <pluralLabel>Food Bank Visits</pluralLabel>
     <searchLayouts>
         <customTabListAdditionalFields>Household__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Visitor__c</customTabListAdditionalFields>

@@ -96,19 +96,19 @@ public with sharing class FoodBankTriggerTest {
 		);
 		insert hh;
 
-		Client_Visit__c cv = new Client_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset - 1));
+		Food_Bank_Visit__c cv = new Food_Bank_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset - 1));
 		insert cv;
 
-		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
 		System.assertEquals(true, cv.First_Visit_This_Year__c);
 
-		Client_Visit__c cv2 = new Client_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset));
+		Food_Bank_Visit__c cv2 = new Food_Bank_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset));
 		insert cv2;
 
-		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
 		System.assertEquals(true, cv.First_Visit_This_Year__c);
 
-		cv2 = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv2.Id ];
+		cv2 = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv2.Id ];
 		System.assertEquals(todayIsJan1, cv2.First_Visit_This_Year__c);
 	}
 
@@ -120,17 +120,17 @@ public with sharing class FoodBankTriggerTest {
 		);
 		insert hh;
 
-		Client_Visit__c cv = new Client_Visit__c(Household__c = hh.id);
+		Food_Bank_Visit__c cv = new Food_Bank_Visit__c(Household__c = hh.id);
 		insert cv;
 
-		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
+		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
 		System.assertEquals(true, cv.First_Visit_This_Year__c);
 
-		Client_Visit__c cv2 = new Client_Visit__c(Household__c = hh.id);
+		Food_Bank_Visit__c cv2 = new Food_Bank_Visit__c(Household__c = hh.id);
 		insert cv2;
 
-		cv = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv.Id ];
-		cv2 = [ SELECT First_Visit_This_Year__c FROM Client_Visit__c WHERE Id = :cv2.Id ];
+		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
+		cv2 = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv2.Id ];
 		System.assertEquals(true, cv.First_Visit_This_Year__c);
 		System.assertEquals(false, cv2.First_Visit_This_Year__c);
 	}

@@ -23,9 +23,9 @@
         <name>CustomApplication</name>
     </types>
     <types>
-        <members>ClientHouseholdTrigger</members>
-        <members>ClientTrigger</members>
-        <members>VisitTrigger</members>
+        <members>FoodBankAccountTrigger</members>
+        <members>FoodBankContactTrigger</members>
+        <members>FoodBankVisitTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
@@ -54,29 +54,29 @@
         <members>Account.Staff_Notes__c</members>
         <members>Account.Tags__c</members>
         <members>Account.Total_Visits__c</members>
-        <members>Client_Visit__c.Adults__c</members>
-        <members>Client_Visit__c.Box_Type__c</members>
-        <members>Client_Visit__c.Checkout_Weight__c</members>
-        <members>Client_Visit__c.Children__c</members>
-        <members>Client_Visit__c.Commodity_Usage_JSON__c</members>
-        <members>Client_Visit__c.External_Created_Date__c</members>
-        <members>Client_Visit__c.External_Household_Id__c</members>
-        <members>Client_Visit__c.External_Id__c</members>
-        <members>Client_Visit__c.First_Visit_This_Year__c</members>
-        <members>Client_Visit__c.Homeless_Counter__c</members>
-        <members>Client_Visit__c.Homeless__c</members>
-        <members>Client_Visit__c.Household__c</members>
-        <members>Client_Visit__c.Infants__c</members>
-        <members>Client_Visit__c.More_Than_One_Person__c</members>
-        <members>Client_Visit__c.Notes__c</members>
-        <members>Client_Visit__c.Out_Of_Area_Counter__c</members>
-        <members>Client_Visit__c.Out_Of_Area__c</members>
-        <members>Client_Visit__c.Points_Used__c</members>
-        <members>Client_Visit__c.Seniors__c</members>
-        <members>Client_Visit__c.Total_People__c</members>
-        <members>Client_Visit__c.Visit_Date__c</members>
-        <members>Client_Visit__c.Visit_Type__c</members>
-        <members>Client_Visit__c.Visitor__c</members>
+        <members>Food_Bank_Visit__c.Adults__c</members>
+        <members>Food_Bank_Visit__c.Box_Type__c</members>
+        <members>Food_Bank_Visit__c.Checkout_Weight__c</members>
+        <members>Food_Bank_Visit__c.Children__c</members>
+        <members>Food_Bank_Visit__c.Commodity_Usage_JSON__c</members>
+        <members>Food_Bank_Visit__c.External_Created_Date__c</members>
+        <members>Food_Bank_Visit__c.External_Household_Id__c</members>
+        <members>Food_Bank_Visit__c.External_Id__c</members>
+        <members>Food_Bank_Visit__c.First_Visit_This_Year__c</members>
+        <members>Food_Bank_Visit__c.Homeless_Counter__c</members>
+        <members>Food_Bank_Visit__c.Homeless__c</members>
+        <members>Food_Bank_Visit__c.Household__c</members>
+        <members>Food_Bank_Visit__c.Infants__c</members>
+        <members>Food_Bank_Visit__c.More_Than_One_Person__c</members>
+        <members>Food_Bank_Visit__c.Notes__c</members>
+        <members>Food_Bank_Visit__c.Out_Of_Area_Counter__c</members>
+        <members>Food_Bank_Visit__c.Out_Of_Area__c</members>
+        <members>Food_Bank_Visit__c.Points_Used__c</members>
+        <members>Food_Bank_Visit__c.Seniors__c</members>
+        <members>Food_Bank_Visit__c.Total_People__c</members>
+        <members>Food_Bank_Visit__c.Visit_Date__c</members>
+        <members>Food_Bank_Visit__c.Visit_Type__c</members>
+        <members>Food_Bank_Visit__c.Visitor__c</members>
         <members>Contact.Age_Entry_Date__c</members>
         <members>Contact.Age_Group__c</members>
         <members>Contact.Age__c</members>
@@ -125,7 +125,7 @@
         <name>CustomLabels</name>
     </types>
     <types>
-        <members>Client_Visit__c</members>
+        <members>Food_Bank_Visit__c</members>
         <members>Food_Bank_Box_Settings__c</members>
         <members>Food_Bank_Checkin__c</members>
         <members>Food_Bank_Commodity__c</members>
@@ -133,22 +133,22 @@
         <name>CustomObject</name>
     </types>
     <types>
-        <members>Client_Visit__c</members>
+        <members>Food_Bank_Visit__c</members>
         <members>Food_Bank_App</members>
         <members>Food_Bank_Stats</members>
         <name>CustomTab</name>
     </types>
     <types>
-        <members>Client_Visit__c-Client Visit Layout</members>
+        <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
         <name>Layout</name>
     </types>
     <types>
         <members>Account.Active</members>
         <members>Account.AllHH</members>
-        <members>Client_Visit__c.All</members>
-        <members>Client_Visit__c.All1</members>
-        <members>Client_Visit__c.Past7</members>
-        <members>Client_Visit__c.Visits_Today</members>
+        <members>Food_Bank_Visit__c.All</members>
+        <members>Food_Bank_Visit__c.All1</members>
+        <members>Food_Bank_Visit__c.Past7</members>
+        <members>Food_Bank_Visit__c.Visits_Today</members>
         <name>ListView</name>
     </types>
     <types>

@@ -100,8 +100,8 @@
         <fullName>First_Visit__c</fullName>
         <externalId>false</externalId>
         <label>First Visit</label>
-        <summarizedField>Client_Visit__c.Visit_Date__c</summarizedField>
-        <summaryForeignKey>Client_Visit__c.Household__c</summaryForeignKey>
+        <summarizedField>Food_Bank_Visit__c.Visit_Date__c</summarizedField>
+        <summaryForeignKey>Food_Bank_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>min</summaryOperation>
         <trackHistory>false</trackHistory>
         <type>Summary</type>
@@ -157,8 +157,8 @@
         <fullName>Most_Recent_Visit__c</fullName>
         <externalId>false</externalId>
         <label>Most Recent Visit</label>
-        <summarizedField>Client_Visit__c.Visit_Date__c</summarizedField>
-        <summaryForeignKey>Client_Visit__c.Household__c</summaryForeignKey>
+        <summarizedField>Food_Bank_Visit__c.Visit_Date__c</summarizedField>
+        <summaryForeignKey>Food_Bank_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>max</summaryOperation>
         <trackHistory>false</trackHistory>
         <type>Summary</type>
@@ -315,7 +315,7 @@
         <fullName>Total_Visits__c</fullName>
         <externalId>false</externalId>
         <label>Total Visits</label>
-        <summaryForeignKey>Client_Visit__c.Household__c</summaryForeignKey>
+        <summaryForeignKey>Food_Bank_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <type>Summary</type>
