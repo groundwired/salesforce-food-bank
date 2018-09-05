@@ -16,3 +16,4 @@ salesforce-food-bank.sublime-workspace
 .sfdx/
 .vscode/
 test_results*
+/temp
