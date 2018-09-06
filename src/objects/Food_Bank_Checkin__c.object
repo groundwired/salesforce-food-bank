@@ -2,8 +2,6 @@
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <customSettingsType>List</customSettingsType>
     <enableFeeds>false</enableFeeds>
-    <label>Food Bank Current Checkins</label>
-    <visibility>Protected</visibility>
     <fields>
         <fullName>Box_Size__c</fullName>
         <externalId>false</externalId>
@@ -23,14 +21,30 @@
         <type>DateTime</type>
     </fields>
     <fields>
-        <fullName>Visitor__c</fullName>
+        <fullName>Client_Name__c</fullName>
         <externalId>false</externalId>
-        <label>Vistor</label>
-        <length>32</length>
+        <label>Client Name</label>
+        <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Commodity_Usage_JSON__c</fullName>
+        <externalId>false</externalId>
+        <label>Commodity Usage JSON</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Points_Remaining__c</fullName>
@@ -44,18 +58,15 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Commodity_Usage_JSON__c</fullName>
+        <fullName>Visitor__c</fullName>
         <externalId>false</externalId>
-        <label>Commodity Usage JSON</label>
+        <label>Vistor</label>
+        <length>32</length>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>Text</type>
         <unique>false</unique>
     </fields>
-    <fields>
-        <fullName>Notes__c</fullName>
-        <externalId>false</externalId>
-        <label>Notes</label>
-        <trackTrending>false</trackTrending>
-        <type>TextArea</type>
-    </fields>
+    <label>Food Bank Current Checkins</label>
+    <visibility>Protected</visibility>
 </CustomObject>

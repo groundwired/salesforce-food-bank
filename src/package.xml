@@ -19,14 +19,14 @@
         <name>ApexPage</name>
     </types>
     <types>
-        <members>Food_Bank_Service</members>
-        <name>CustomApplication</name>
-    </types>
-    <types>
         <members>FoodBankAccountTrigger</members>
         <members>FoodBankContactTrigger</members>
         <members>FoodBankVisitTrigger</members>
         <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>Food_Bank_Service</members>
+        <name>CustomApplication</name>
     </types>
     <types>
         <members>Account.Adults__c</members>
@@ -54,29 +54,6 @@
         <members>Account.Staff_Notes__c</members>
         <members>Account.Tags__c</members>
         <members>Account.Total_Visits__c</members>
-        <members>Food_Bank_Visit__c.Adults__c</members>
-        <members>Food_Bank_Visit__c.Box_Type__c</members>
-        <members>Food_Bank_Visit__c.Checkout_Weight__c</members>
-        <members>Food_Bank_Visit__c.Children__c</members>
-        <members>Food_Bank_Visit__c.Commodity_Usage_JSON__c</members>
-        <members>Food_Bank_Visit__c.External_Created_Date__c</members>
-        <members>Food_Bank_Visit__c.External_Household_Id__c</members>
-        <members>Food_Bank_Visit__c.External_Id__c</members>
-        <members>Food_Bank_Visit__c.First_Visit_This_Year__c</members>
-        <members>Food_Bank_Visit__c.Homeless_Counter__c</members>
-        <members>Food_Bank_Visit__c.Homeless__c</members>
-        <members>Food_Bank_Visit__c.Household__c</members>
-        <members>Food_Bank_Visit__c.Infants__c</members>
-        <members>Food_Bank_Visit__c.More_Than_One_Person__c</members>
-        <members>Food_Bank_Visit__c.Notes__c</members>
-        <members>Food_Bank_Visit__c.Out_Of_Area_Counter__c</members>
-        <members>Food_Bank_Visit__c.Out_Of_Area__c</members>
-        <members>Food_Bank_Visit__c.Points_Used__c</members>
-        <members>Food_Bank_Visit__c.Seniors__c</members>
-        <members>Food_Bank_Visit__c.Total_People__c</members>
-        <members>Food_Bank_Visit__c.Visit_Date__c</members>
-        <members>Food_Bank_Visit__c.Visit_Type__c</members>
-        <members>Food_Bank_Visit__c.Visitor__c</members>
         <members>Contact.Age_Entry_Date__c</members>
         <members>Contact.Age_Group__c</members>
         <members>Contact.Age__c</members>
@@ -114,6 +91,29 @@
         <members>Food_Bank_Settings__c.Visit_Frequency_Limit__c</members>
         <members>Food_Bank_Settings__c.Welcome_Alert__c</members>
         <members>Food_Bank_Settings__c.Welcome_Message__c</members>
+        <members>Food_Bank_Visit__c.Adults__c</members>
+        <members>Food_Bank_Visit__c.Box_Type__c</members>
+        <members>Food_Bank_Visit__c.Checkout_Weight__c</members>
+        <members>Food_Bank_Visit__c.Children__c</members>
+        <members>Food_Bank_Visit__c.Commodity_Usage_JSON__c</members>
+        <members>Food_Bank_Visit__c.External_Created_Date__c</members>
+        <members>Food_Bank_Visit__c.External_Household_Id__c</members>
+        <members>Food_Bank_Visit__c.External_Id__c</members>
+        <members>Food_Bank_Visit__c.First_Visit_This_Year__c</members>
+        <members>Food_Bank_Visit__c.Homeless_Counter__c</members>
+        <members>Food_Bank_Visit__c.Homeless__c</members>
+        <members>Food_Bank_Visit__c.Household__c</members>
+        <members>Food_Bank_Visit__c.Infants__c</members>
+        <members>Food_Bank_Visit__c.More_Than_One_Person__c</members>
+        <members>Food_Bank_Visit__c.Notes__c</members>
+        <members>Food_Bank_Visit__c.Out_Of_Area_Counter__c</members>
+        <members>Food_Bank_Visit__c.Out_Of_Area__c</members>
+        <members>Food_Bank_Visit__c.Points_Used__c</members>
+        <members>Food_Bank_Visit__c.Seniors__c</members>
+        <members>Food_Bank_Visit__c.Total_People__c</members>
+        <members>Food_Bank_Visit__c.Visit_Date__c</members>
+        <members>Food_Bank_Visit__c.Visit_Type__c</members>
+        <members>Food_Bank_Visit__c.Visitor__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -125,17 +125,17 @@
         <name>CustomLabels</name>
     </types>
     <types>
-        <members>Food_Bank_Visit__c</members>
         <members>Food_Bank_Box_Settings__c</members>
         <members>Food_Bank_Checkin__c</members>
         <members>Food_Bank_Commodity__c</members>
         <members>Food_Bank_Settings__c</members>
+        <members>Food_Bank_Visit__c</members>
         <name>CustomObject</name>
     </types>
     <types>
-        <members>Food_Bank_Visit__c</members>
         <members>Food_Bank_App</members>
         <members>Food_Bank_Stats</members>
+        <members>Food_Bank_Visit__c</members>
         <name>CustomTab</name>
     </types>
     <types>
@@ -152,9 +152,9 @@
         <name>ListView</name>
     </types>
     <types>
-        <members>Food Bank Standard User</members>
-        <members>Food Bank Admin</members>
         <members>Admin</members>
+        <members>Food Bank Admin</members>
+        <members>Food Bank Standard User</members>
         <name>Profile</name>
     </types>
     <types>

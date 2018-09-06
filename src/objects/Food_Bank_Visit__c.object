@@ -314,7 +314,7 @@
         <type>Picklist</type>
         <valueSet>
             <valueSetDefinition>
-                <sorted>true</sorted>
+                <sorted>false</sorted>
                 <value>
                     <fullName>Baby Pantry</fullName>
                     <default>false</default>

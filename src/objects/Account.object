@@ -7,6 +7,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -18,6 +19,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -28,25 +30,10 @@
         <inlineHelpText>JSON data that records the total usage of commodities in the month of the most recent visit.</inlineHelpText>
         <label>Commodity Usage JSON</label>
         <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
-    </fields>
-    <fields>
-        <fullName>Pending_Commodity_Usage_JSON__c</fullName>
-        <externalId>false</externalId>
-        <inlineHelpText>JSON data that records the pending usage of commodities related to checkin queue.</inlineHelpText>
-        <label>Pending Commodity Usage JSON</label>
-        <trackHistory>false</trackHistory>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>Pending_Notes__c</fullName>
-        <externalId>false</externalId>
-        <inlineHelpText>Pending notes related to checkin queue.</inlineHelpText>
-        <label>Notes</label>
-        <trackHistory>false</trackHistory>
-        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Current_Points_Remaining__c</fullName>
@@ -72,6 +59,7 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -82,6 +70,7 @@
         <externalId>false</externalId>
         <label>External Created Date</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -92,6 +81,7 @@
         <label>External Id</label>
         <length>20</length>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>true</unique>
@@ -111,6 +101,7 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Homeless</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -119,6 +110,7 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Inactive</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -127,6 +119,7 @@
         <externalId>false</externalId>
         <label>Infant Card Expires</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -137,6 +130,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -149,6 +143,7 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -168,6 +163,7 @@
         <externalId>false</externalId>
         <label>Notes</label>
         <length>4096</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -177,14 +173,36 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Out of Area</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Pending_Commodity_Usage_JSON__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>JSON data that records the pending usage of commodities related to checkin queue.</inlineHelpText>
+        <label>Pending Commodity Usage JSON</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Pending_Notes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Pending notes related to checkin queue.</inlineHelpText>
+        <label>Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Proof_of_Address_Date__c</fullName>
         <externalId>false</externalId>
         <label>Proof of Address Date</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -195,6 +213,7 @@
         <label>Proof of Address</label>
         <length>50</length>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
@@ -206,6 +225,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -215,6 +235,7 @@
         <externalId>false</externalId>
         <label>Source</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
@@ -273,6 +294,7 @@
         <externalId>false</externalId>
         <label>Staff Notes</label>
         <length>4096</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -282,6 +304,7 @@
         <externalId>false</externalId>
         <label>Tags</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>MultiselectPicklist</type>
         <valueSet>

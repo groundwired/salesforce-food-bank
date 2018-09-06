@@ -105,6 +105,15 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Show_ID_Number_Field_on_Member_List__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Shows or hides the &apos;ID #&apos; column on the new member/edit members table.</inlineHelpText>
+        <label>Show ID Number Field on Member List</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Show_Id__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
