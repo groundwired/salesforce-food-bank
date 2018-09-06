@@ -85,8 +85,8 @@
         <members>Food_Bank_Settings__c.Proof_of_Address_Update_Interval__c</members>
         <members>Food_Bank_Settings__c.Proof_of_Infant_Required__c</members>
         <members>Food_Bank_Settings__c.Require_Unique_Address__c</members>
-        <members>Food_Bank_Settings__c.Show_Id__c</members>
         <members>Food_Bank_Settings__c.Show_ID_Number_Field_on_Member_List__c</members>
+        <members>Food_Bank_Settings__c.Show_Id__c</members>
         <members>Food_Bank_Settings__c.Tags__c</members>
         <members>Food_Bank_Settings__c.Track_Checkout_Weight__c</members>
         <members>Food_Bank_Settings__c.Track_Points__c</members>

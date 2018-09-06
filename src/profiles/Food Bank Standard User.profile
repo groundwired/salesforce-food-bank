@@ -54,7 +54,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Account.Current_Points_Remaining__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -74,7 +74,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Account.First_Visit__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -104,7 +104,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Account.Most_Recent_Visit__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -159,7 +159,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Account.Total_Visits__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -487,6 +487,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>SelectFilesFromSalesforce</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SendExternalEmailAvailable</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
