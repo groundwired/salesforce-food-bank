@@ -67,6 +67,7 @@
         <members>Food_Bank_Box_Settings__c.Minimum_Family_Size__c</members>
         <members>Food_Bank_Checkin__c.Box_Size__c</members>
         <members>Food_Bank_Checkin__c.Check_In_Time__c</members>
+        <members>Food_Bank_Checkin__c.Client_Name__c</members>
         <members>Food_Bank_Checkin__c.Commodity_Usage_JSON__c</members>
         <members>Food_Bank_Checkin__c.Notes__c</members>
         <members>Food_Bank_Checkin__c.Points_Remaining__c</members>
@@ -85,6 +86,7 @@
         <members>Food_Bank_Settings__c.Proof_of_Infant_Required__c</members>
         <members>Food_Bank_Settings__c.Require_Unique_Address__c</members>
         <members>Food_Bank_Settings__c.Show_Id__c</members>
+        <members>Food_Bank_Settings__c.Show_ID_Number_Field_on_Member_List__c</members>
         <members>Food_Bank_Settings__c.Tags__c</members>
         <members>Food_Bank_Settings__c.Track_Checkout_Weight__c</members>
         <members>Food_Bank_Settings__c.Track_Points__c</members>
