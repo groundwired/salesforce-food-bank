@@ -67,6 +67,9 @@ There is an alternate home page, as well as a Jasmine Test Runner page.  For exa
  * For the home page, open your web browser to: http://localhost:8000/
  * For the test runner, open to: http://localhost:8000/test/TestRunner.html
 
+## Instance Setup Steps  
+
+* Ensure the default record type for any profile using the Food Bank is set to Household.  Otherwise you'll receive an error trying to add new Accounts.
 
 ## Implementation Notes
 
