@@ -183,10 +183,7 @@
         <name>Layout</name>
     </types>
     <types>
-        <members>Account.Active</members>
-        <members>Account.AllHH</members>
         <members>Food_Bank_Visit__c.All</members>
-        <members>Food_Bank_Visit__c.All1</members>
         <members>Food_Bank_Visit__c.Past7</members>
         <members>Food_Bank_Visit__c.Visits_Today</members>
         <name>ListView</name>

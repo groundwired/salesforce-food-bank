@@ -359,11 +359,6 @@
         <label>All</label>
     </listViews>
     <listViews>
-        <fullName>All1</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
-    <listViews>
         <fullName>Past7</fullName>
         <columns>NAME</columns>
         <columns>Household__c</columns>
