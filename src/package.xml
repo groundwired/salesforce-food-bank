@@ -150,17 +150,6 @@
         <name>CustomField</name>
     </types>
     <types>
-        <members>Race</members>
-        <members>Survey_Response</members>
-        <name>GlobalValueSet</name>
-    </types>
-    <types>
-        <members>Contact-Contact Lightning Layout</members>
-        <members>Contact-FoodBank Layout</members>
-        <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
-        <name>Layout</name>
-    </types>
-    <types>
         <members>Food_Bank_Box_Type</members>
         <name>CustomLabel</name>
     </types>
@@ -181,6 +170,17 @@
         <members>Food_Bank_Stats</members>
         <members>Food_Bank_Visit__c</members>
         <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Race</members>
+        <members>Survey_Response</members>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>Contact-Contact Lightning Layout</members>
+        <members>Contact-FoodBank Layout</members>
+        <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
+        <name>Layout</name>
     </types>
     <types>
         <members>Account.Active</members>
