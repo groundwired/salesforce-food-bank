@@ -28,16 +28,16 @@
         <table class="table table-condensed" style="margin-bottom:12px;">
             <thead>
                 <tr>
-                    <th ng-if="!status.editingMembers">Name</th>
-                    <th ng-if="status.editingMembers">First</th>
-                    <th ng-if="status.editingMembers">Last</th>
-                    <th>Gender</th>
-                    <th ng-if="status.editingMembers" ng-show="settings.general.showIdNumber">Id</th>
-                    <th>Group</th>
-                    <th ng-if="status.editingMembers && status.hasInfant()">Proof of Infant</th>
-                    <th>Age</th>
-                    <th>Birthdate</th>
-                    <th></th>
+                    <th style="width:30%" ng-if="!status.editingMembers">Name</th>
+                    <th style="width:15%" ng-if="status.editingMembers">First</th>
+                    <th style="width:15%" ng-if="status.editingMembers">Last</th>
+                    <th style="width:14%">Gender</th>
+                    <th style="width:15%" ng-if="status.editingMembers" ng-show="settings.general.showIdNumber">Id</th>
+                    <th style="width:12%">Group</th>
+                    <th style="width:8%" ng-if="status.editingMembers && status.hasInfant()">Proof of Infant</th>
+                    <th style="width:8%">Age</th>
+                    <th style="width:15%">Birthdate</th>
+                    <th style="width:5%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -70,7 +70,7 @@
                             name="Id_Number" ng-maxlength="50" ng-required>
                     </td>
                     <td ng-if="status.editingMembers">
-                        <select ng-model="person.memberDataEditable.ageGroup" style="width:80px" class="form-control input-sm"
+                        <select ng-model="person.memberDataEditable.ageGroup" class="form-control input-sm"
                             name="ageGroup" ng-options="g for g in ['Adult','Senior','Child','Infant']">
                             <option value="">-</option>
                         </select>
@@ -81,14 +81,14 @@
                           type="text" class="form-control input-sm" name="proofOfInfant" ng-maxlength="50">
                     </td>
                     <td ng-if="status.editingMembers">
-                        <input ng-model="person.memberDataEditable.age" type="number" style="width:55px" class="form-control input-sm"
+                        <input ng-model="person.memberDataEditable.age" type="number" class="form-control input-sm"
                             name="age">
                     </td>
                     <td ng-if="status.editingMembers">
                         <input class="form-control input-sm"
                             type="date"
                             ng-model="person.memberDataEditable.birthdate"
-                            placeholder="M/dd/yyyy" min="1900-01-01" style="width:135px" required />
+                            placeholder="M/dd/yyyy" min="1900-01-01" required />
                     </td>
                     <td ng-if="status.editingMembers && data.memberList.length > 1" class="text-right">
                         <button class="btn btn-danger btn-sm"

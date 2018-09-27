@@ -37,14 +37,14 @@
                         <table class="table table-condensed" style="margin-bottom:12px;">
                             <thead>
                                 <tr>
-                                    <th>First</th>
-                                    <th>Last</th>
-                                    <th>Gender</th>
-                                    <th ng-show="settings.general.showIdNumber">Id</th>
-                                    <th>Group</th>
-                                    <th>Age</th>
-                                    <th>Birthdate</th>
-                                    <th></th>
+                                    <th style="width:15%">First</th>
+                                    <th style="width:15%">Last</th>
+                                    <th style="width:14%">Gender</th>
+                                    <th style="width:15%" ng-show="settings.general.showIdNumber">Id</th>
+                                    <th style="width:12%">Group</th>
+                                    <th style="width:8%">Age</th>
+                                    <th style="width:15%">Birthdate</th>
+                                    <th style="width:5%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,6 +83,7 @@
                                     </td>
                                     <td>
                                         <input type="date"
+                                            class="form-control input-sm"
                                             ng-model="person.memberData.birthdate"
                                             placeholder="M/dd/yyyy" min="1900-01-01" />
                                     </td>
