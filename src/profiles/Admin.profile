@@ -414,7 +414,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Food_Bank_Visit__c.Homeless_Counter__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -429,7 +429,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Food_Bank_Visit__c.More_Than_One_Person__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -439,7 +439,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Food_Bank_Visit__c.Out_Of_Area_Counter__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -459,7 +459,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Food_Bank_Visit__c.Total_People__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -512,7 +512,7 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Food_Bank_Visit__c</tab>
-        <visibility>Hidden</visibility>
+        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
