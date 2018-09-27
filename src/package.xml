@@ -177,7 +177,7 @@
         <name>GlobalValueSet</name>
     </types>
     <types>
-        <members>Contact-Contact Lightning Layout</members>
+        <members>Contact-Volunteer Layout</members>
         <members>Contact-FoodBank Layout</members>
         <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
         <name>Layout</name>
