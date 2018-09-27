@@ -5,6 +5,7 @@
         <externalId>false</externalId>
         <label>Address</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>TextArea</type>
     </fields>
@@ -15,6 +16,7 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -43,6 +45,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -53,6 +56,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <inlineHelpText>JSON data that records the total usage of commodities in the month of the most recent visit.</inlineHelpText>
         <label>Commodity Usage JSON</label>
         <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -81,6 +85,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -91,6 +96,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>External Created Date</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -101,6 +107,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <label>External Id</label>
         <length>20</length>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>true</unique>
@@ -120,6 +127,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Homeless</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -128,6 +136,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Inactive</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -136,6 +145,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>Infant Card Expires</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -146,6 +156,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -160,6 +171,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <relationshipLabel>Households</relationshipLabel>
         <relationshipName>Accounts</relationshipName>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
@@ -171,6 +183,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -190,6 +203,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>No Cook</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -198,6 +212,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>Notes</label>
         <length>4096</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -207,6 +222,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Out of Area</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -216,6 +232,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <inlineHelpText>JSON data that records the pending usage of commodities related to checkin queue.</inlineHelpText>
         <label>Pending Commodity Usage JSON</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>TextArea</type>
     </fields>
@@ -225,6 +242,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <inlineHelpText>Pending notes related to checkin queue.</inlineHelpText>
         <label>Notes</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>TextArea</type>
     </fields>
@@ -251,6 +269,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <relationshipLabel>Households (Previous Level)</relationshipLabel>
         <relationshipName>Accounts1</relationshipName>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
@@ -259,6 +278,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>Proof of Address Date</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -269,6 +289,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <label>Proof of Address</label>
         <length>50</length>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
@@ -280,6 +301,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -289,6 +311,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>Source</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
@@ -348,6 +371,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <inlineHelpText>Indicate dietary restrictions in notes field.</inlineHelpText>
         <label>Special Diet</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -356,6 +380,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>Staff Notes</label>
         <length>4096</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -365,6 +390,7 @@ LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
         <externalId>false</externalId>
         <label>Tags</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>MultiselectPicklist</type>
         <valueSet>
