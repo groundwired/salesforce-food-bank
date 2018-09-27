@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>salesforce-food-bank</fullName>
+    <fullName>intakefields</fullName>
     <types>
         <members>FoodBankHouseholdsTest</members>
         <members>FoodBankManager</members>
@@ -29,7 +29,9 @@
         <name>CustomApplication</name>
     </types>
     <types>
+        <members>Account.Address__c</members>
         <members>Account.Adults__c</members>
+        <members>Account.C501_Postal_Code__c</members>
         <members>Account.Children__c</members>
         <members>Account.Commodity_Usage_JSON__c</members>
         <members>Account.Current_Points_Remaining__c</members>
@@ -41,22 +43,28 @@
         <members>Account.Inactive__c</members>
         <members>Account.Infant_Card_Expires__c</members>
         <members>Account.Infants__c</members>
+        <members>Account.Level__c</members>
         <members>Account.Monthly_Points_Available__c</members>
         <members>Account.Most_Recent_Visit__c</members>
+        <members>Account.No_Cook__c</members>
         <members>Account.Notes__c</members>
         <members>Account.Out_Of_Area__c</members>
         <members>Account.Pending_Commodity_Usage_JSON__c</members>
         <members>Account.Pending_Notes__c</members>
+        <members>Account.Power_Of_1__c</members>
+        <members>Account.Previous_Level__c</members>
         <members>Account.Proof_of_Address_Date__c</members>
         <members>Account.Proof_of_Address__c</members>
         <members>Account.Seniors__c</members>
         <members>Account.Source__c</members>
+        <members>Account.Special_Diet__c</members>
         <members>Account.Staff_Notes__c</members>
         <members>Account.Tags__c</members>
         <members>Account.Total_Visits__c</members>
         <members>Contact.Age_Entry_Date__c</members>
         <members>Contact.Age_Group__c</members>
         <members>Contact.Age__c</members>
+        <members>Contact.Email_Alert_Data__c</members>
         <members>Contact.External_Created_Date__c</members>
         <members>Contact.External_Household_Id__c</members>
         <members>Contact.External_Id__c</members>
@@ -64,6 +72,29 @@
         <members>Contact.Id_Number__c</members>
         <members>Contact.Id_Type__c</members>
         <members>Contact.Proof_of_Infant__c</members>
+        <members>Contact.Survey_Educational_Level_Adults__c</members>
+        <members>Contact.Survey_Employment_Status_at_Intake__c</members>
+        <members>Contact.Survey_HUD_Category__c</members>
+        <members>Contact.Survey_HUD_Household_Persons__c</members>
+        <members>Contact.Survey_HUD_Income_Maximum__c</members>
+        <members>Contact.Survey_HUD_Income_Minimum__c</members>
+        <members>Contact.Survey_Homeless_Chronically__c</members>
+        <members>Contact.Survey_Homeless_How_Long_Most_Recently__c</members>
+        <members>Contact.Survey_Homeless_Long_Terms__c</members>
+        <members>Contact.Survey_Homeless_Times_Past_3_Year__c</members>
+        <members>Contact.Survey_Homeless__c</members>
+        <members>Contact.Survey_Household_Composition__c</members>
+        <members>Contact.Survey_Limited_English_Proficiency__c</members>
+        <members>Contact.Survey_Military_Minor_Dependents__c</members>
+        <members>Contact.Survey_Military_Served_Active_Duty__c</members>
+        <members>Contact.Survey_Military_Served__c</members>
+        <members>Contact.Survey_Military_Spouse_or_Partner__c</members>
+        <members>Contact.Survey_Military_Veteran_Discharge_Status__c</members>
+        <members>Contact.Survey_Partnered_Married__c</members>
+        <members>Contact.Survey_Persons_with_Disabilities__c</members>
+        <members>Contact.Survey_Refugee_Immigrant__c</members>
+        <members>Contact.Survey_Spanish_Hispanic_Latino__c</members>
+        <members>Contact.Survey__c</members>
         <members>Food_Bank_Box_Settings__c.Minimum_Family_Size__c</members>
         <members>Food_Bank_Checkin__c.Box_Size__c</members>
         <members>Food_Bank_Checkin__c.Check_In_Time__c</members>
@@ -119,6 +150,17 @@
         <name>CustomField</name>
     </types>
     <types>
+        <members>Race</members>
+        <members>Survey_Response</members>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>Contact-Contact Lightning Layout</members>
+        <members>Contact-FoodBank Layout</members>
+        <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
         <members>Food_Bank_Box_Type</members>
         <name>CustomLabel</name>
     </types>
@@ -139,11 +181,6 @@
         <members>Food_Bank_Stats</members>
         <members>Food_Bank_Visit__c</members>
         <name>CustomTab</name>
-    </types>
-    <types>
-        <members>Contact-FoodBank Layout</members>
-        <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
-        <name>Layout</name>
     </types>
     <types>
         <members>Account.Active</members>

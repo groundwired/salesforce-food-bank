@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
+        <fullName>Address__c</fullName>
+        <externalId>false</externalId>
+        <label>Address</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Adults__c</fullName>
         <externalId>false</externalId>
         <label>Adults</label>
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>C501_Postal_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>if (
+AND(LEN(BillingPostalCode) &lt; 5, LEN(ShippingPostalCode) &lt; 5), 
+&quot;Blank&quot;,
+if (ISNUMBER(LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5)), 
+LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
+&quot;Blank&quot;)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Postal Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
@@ -19,7 +43,6 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -30,7 +53,6 @@
         <inlineHelpText>JSON data that records the total usage of commodities in the month of the most recent visit.</inlineHelpText>
         <label>Commodity Usage JSON</label>
         <length>32768</length>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -59,7 +81,6 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -70,7 +91,6 @@
         <externalId>false</externalId>
         <label>External Created Date</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -81,7 +101,6 @@
         <label>External Id</label>
         <length>20</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>true</unique>
@@ -90,8 +109,8 @@
         <fullName>First_Visit__c</fullName>
         <externalId>false</externalId>
         <label>First Visit</label>
-        <summarizedField>Food_Bank_Visit__c.Visit_Date__c</summarizedField>
-        <summaryForeignKey>Food_Bank_Visit__c.Household__c</summaryForeignKey>
+        <summarizedField>FoodBank_Visit__c.Visit_Date__c</summarizedField>
+        <summaryForeignKey>FoodBank_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>min</summaryOperation>
         <trackHistory>false</trackHistory>
         <type>Summary</type>
@@ -101,7 +120,6 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Homeless</label>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -110,7 +128,6 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Inactive</label>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -119,7 +136,6 @@
         <externalId>false</externalId>
         <label>Infant Card Expires</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -130,10 +146,22 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Level__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Sample Level field for use with Level feature. May be deleted or edited as needed.</description>
+        <externalId>false</externalId>
+        <label>Level</label>
+        <referenceTo>npsp__Level__c</referenceTo>
+        <relationshipLabel>Households</relationshipLabel>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Monthly_Points_Available__c</fullName>
@@ -143,7 +171,6 @@
         <precision>3</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -152,18 +179,25 @@
         <fullName>Most_Recent_Visit__c</fullName>
         <externalId>false</externalId>
         <label>Most Recent Visit</label>
-        <summarizedField>Food_Bank_Visit__c.Visit_Date__c</summarizedField>
-        <summaryForeignKey>Food_Bank_Visit__c.Household__c</summaryForeignKey>
+        <summarizedField>FoodBank_Visit__c.Visit_Date__c</summarizedField>
+        <summaryForeignKey>FoodBank_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>max</summaryOperation>
         <trackHistory>false</trackHistory>
         <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>No_Cook__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>No Cook</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Notes__c</fullName>
         <externalId>false</externalId>
         <label>Notes</label>
         <length>4096</length>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -173,7 +207,6 @@
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
         <label>Out of Area</label>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Checkbox</type>
     </fields>
@@ -183,7 +216,6 @@
         <inlineHelpText>JSON data that records the pending usage of commodities related to checkin queue.</inlineHelpText>
         <label>Pending Commodity Usage JSON</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>TextArea</type>
     </fields>
@@ -193,16 +225,40 @@
         <inlineHelpText>Pending notes related to checkin queue.</inlineHelpText>
         <label>Notes</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Power_Of_1__c</fullName>
+        <externalId>false</externalId>
+        <formula>1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unduplicated</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_Level__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Sample Previous Level field for use with new Level feature. May be edited or deleted as needed.</description>
+        <externalId>false</externalId>
+        <label>Previous Level</label>
+        <referenceTo>npsp__Level__c</referenceTo>
+        <relationshipLabel>Households (Previous Level)</relationshipLabel>
+        <relationshipName>Accounts1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Proof_of_Address_Date__c</fullName>
         <externalId>false</externalId>
         <label>Proof of Address Date</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
@@ -213,7 +269,6 @@
         <label>Proof of Address</label>
         <length>50</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
@@ -225,7 +280,6 @@
         <precision>2</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
@@ -235,7 +289,6 @@
         <externalId>false</externalId>
         <label>Source</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
@@ -290,11 +343,19 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Special_Diet__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicate dietary restrictions in notes field.</inlineHelpText>
+        <label>Special Diet</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Staff_Notes__c</fullName>
         <externalId>false</externalId>
         <label>Staff Notes</label>
         <length>4096</length>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -304,7 +365,6 @@
         <externalId>false</externalId>
         <label>Tags</label>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>MultiselectPicklist</type>
         <valueSet>
@@ -338,35 +398,9 @@
         <fullName>Total_Visits__c</fullName>
         <externalId>false</externalId>
         <label>Total Visits</label>
-        <summaryForeignKey>Food_Bank_Visit__c.Household__c</summaryForeignKey>
+        <summaryForeignKey>FoodBank_Visit__c.Household__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
-    <listViews>
-        <fullName>Active</fullName>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.ADDRESS1_STREET</columns>
-        <columns>ACCOUNT.ADDRESS1_CITY</columns>
-        <columns>First_Visit__c</columns>
-        <columns>Most_Recent_Visit__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>Inactive__c</field>
-            <operation>notEqual</operation>
-            <value>1</value>
-        </filters>
-        <label>Active Households</label>
-    </listViews>
-    <listViews>
-        <fullName>AllHH</fullName>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.ADDRESS1_STREET</columns>
-        <columns>ACCOUNT.ADDRESS1_CITY</columns>
-        <columns>First_Visit__c</columns>
-        <columns>Most_Recent_Visit__c</columns>
-        <columns>Inactive__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>All Households</label>
-    </listViews>
 </CustomObject>
