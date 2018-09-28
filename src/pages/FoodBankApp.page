@@ -6,7 +6,7 @@
 -
 - If you open in a Salesforce tab or specify param header=1, you get the salesforce UI
 -->
-<apex:page controller="FoodBankManager" title="Food Bank Service"
+<apex:page controller="FoodBankService" title="Food Bank Service"
     standardStylesheets="false" sidebar="false" docType="html-5.0"
     showHeader="{!OR(NOT(ISBLANK($CurrentPage.parameters.sfdc.tabName)), AND(NOT(ISBLANK($CurrentPage.parameters.header)),$CurrentPage.parameters.header != '0'))}" >
 
@@ -52,7 +52,7 @@
             <script>
                 angular.module('appServerData', [])
                     .constant('basePath', '{!URLFOR($Resource.Angular, "")}'.split('?')[0])
-                    .constant('controllerName', 'FoodBankManager');
+                    .constant('controllerName', 'FoodBankService');
             </script>
         </head>
         <div class="bootstrap">

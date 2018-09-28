@@ -1,4 +1,4 @@
-public with sharing class FoodBankManager {
+public with sharing class FoodBankService {
 
     private static String Unknown = 'Unknown';
     // Trigger NPSP Logic to update name based on NPSP Settings
@@ -30,7 +30,7 @@ public with sharing class FoodBankManager {
             ClientCheckin cc = new ClientCheckin();
             cc.clientId = fbc.name;
             cc.clientContactId = fbc.Visitor__c;
-            cc.name = String.format('{0} Household', new String[]{FoodBankManager.getContactName(fbc.Visitor__c)});
+            cc.name = String.format('{0} Household', new String[]{FoodBankService.getContactName(fbc.Visitor__c)});
             cc.pointsRemaining = fbc.Points_Remaining__c;
             cc.boxSize = fbc.Box_Size__c;
             cc.checkInTime = fbc.Check_In_Time__c;
@@ -62,7 +62,7 @@ public with sharing class FoodBankManager {
                 Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c,
                 (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Gender__c, Id_Number__c
                     from Contacts),
-                (select Points_Used__c, Commodity_Usage_JSON__c from Visits__r where Visit_Date__c = THIS_MONTH)
+                (select Points_Used__c, Commodity_Usage_JSON__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
                 from Account where id = :hhid];
 
         if (FoodBankSettings.general.Track_Points__c)
@@ -103,7 +103,7 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static Account saveHousehold( Account hh ) {
 
-        hh.Name = FoodBankManager.NPSPTriggerNameUpdate;
+        hh.Name = FoodBankService.NPSPTriggerNameUpdate;
 
         if (hh.Id == null)
             insert hh;
@@ -117,7 +117,7 @@ public with sharing class FoodBankManager {
     @RemoteAction
     public static Account saveHouseholdAndMembers( Account hh, list<Contact> clients) {
 
-        hh.Name = FoodBankManager.NPSPTriggerNameUpdate;
+        hh.Name = FoodBankService.NPSPTriggerNameUpdate;
 
         hh.Monthly_Points_Available__c = getMonthlyPoints( hh );  // is this by trigger?  how about the name?
         if (hh.Id == null)
@@ -191,7 +191,7 @@ public with sharing class FoodBankManager {
     static String getContactName(Id contactid){
         
         if (contactId == null) {
-            return FoodBankManager.Unknown;
+            return FoodBankService.Unknown;
         }
 
 		//Contact c = [select id, name from Contact where id =: contactid];
@@ -200,7 +200,7 @@ public with sharing class FoodBankManager {
             return c[0].Name;
         }
 
-        return FoodBankManager.Unknown;
+        return FoodBankService.Unknown;
     }
 
 
@@ -220,7 +220,7 @@ public with sharing class FoodBankManager {
 
         Account hh =
             [select id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
-                (select Points_Used__c from Visits__r where Visit_Date__c = THIS_MONTH)
+                (select Points_Used__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
                 from Account where id = :hhid];
 
         if (Food_Bank_Checkin__c.getInstance( hhid ) != null) {
@@ -228,7 +228,7 @@ public with sharing class FoodBankManager {
         } else {
             fbc.name = hhid;
             fbc.Points_Remaining__c = getMonthlyPoints( hh );
-            for (Food_Bank_Visit__c cv : hh.Visits__r)
+            for (Food_Bank_Visit__c cv : hh.FoodBankVisits__r)
                 if (cv.Points_Used__c != null) fbc.Points_Remaining__c -= cv.Points_Used__c;
 
             fbc.Check_In_Time__c = system.now();

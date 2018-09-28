@@ -15,7 +15,7 @@ public with sharing class FoodBankStatsTest {
 			Lastname = 'Test Lastname'
 			);
 
-        hh = FoodBankManager.saveHousehold(hh);
+        hh = FoodBankService.saveHousehold(hh);
 
 		Food_Bank_Checkin__c checkin1 = new Food_Bank_Checkin__c(
 			Name = hh.Id,
@@ -27,7 +27,7 @@ public with sharing class FoodBankStatsTest {
 		insert checkin1;
 		
         Map<String, Integer> commU = new Map<String, Integer>();
-        Id cVId = FoodBankManager.logVisit(hh.Id, contact.Id, 'small', 1.5, 5, commU, 'These are notes');
+        Id cVId = FoodBankService.logVisit(hh.Id, contact.Id, 'small', 1.5, 5, commU, 'These are notes');
 
 		ApexPages.CurrentPage().getParameters().put('tfcode','TODAY');
 		FoodBankStats fbs = new FoodBankStats();

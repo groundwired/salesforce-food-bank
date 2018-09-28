@@ -291,8 +291,8 @@ angular.module('appServices')
         // add up points and commodities used in previous visits this month
         var pointsUsed = 0;
         client.commodityUsage = {};
-        client.visitsThisMonth = (result.Visits__r ? result.Visits__r.length : 0);
-        _.forEach( result.Visits__r, function(v) {
+        client.visitsThisMonth = (result.FoodBankVisits__r ? result.FoodBankVisits__r.length : 0);
+        _.forEach( result.FoodBankVisits__r, function(v) {
           if (v.Points_Used__c) {
             pointsUsed += v.Points_Used__c;
           }

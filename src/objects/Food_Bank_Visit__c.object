@@ -196,7 +196,7 @@
         <externalId>false</externalId>
         <label>Household</label>
         <referenceTo>Account</referenceTo>
-        <relationshipName>Visits</relationshipName>
+        <relationshipName>FoodBankVisits</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
