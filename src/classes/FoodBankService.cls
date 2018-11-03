@@ -361,11 +361,9 @@ public with sharing class FoodBankService {
         }
 
         Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
-        if (fbc != null) {
-            c = [select id from Contact where id = :fbc.C501_IS_Visitor__c];
-            if (!c.isEmpty()) {
-                fbc.C501_IS_Visitor__c = null;
-            }
+        c = [select id from Contact where id = :fbc.Visitor__c];
+        if (c.isEmpty()) {
+            fbc.Visitor__c = null;
         }
 
         // log the visit

@@ -14,7 +14,8 @@
     <tabs>Food_Bank_Visit__c</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
-    <tabs>standard-report</tabs>
     <tabs>npsp__Contact_Merge</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

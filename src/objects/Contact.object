@@ -317,22 +317,22 @@
                 <value>
                     <fullName>Category A</fullName>
                     <default>false</default>
-                    <label>Category A</label>
+                    <label>30% HUD</label>
                 </value>
                 <value>
                     <fullName>Category B</fullName>
                     <default>false</default>
-                    <label>Category B</label>
+                    <label>50% HUD</label>
                 </value>
                 <value>
                     <fullName>Category C</fullName>
                     <default>false</default>
-                    <label>Category C</label>
+                    <label>80% HUD</label>
                 </value>
                 <value>
                     <fullName>Category D</fullName>
                     <default>false</default>
-                    <label>Category D</label>
+                    <label>Above 80% HUD</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -548,12 +548,12 @@
                 <value>
                     <fullName>Female</fullName>
                     <default>false</default>
-                    <label>Female</label>
+                    <label>Single Female Parent</label>
                 </value>
                 <value>
                     <fullName>Male</fullName>
                     <default>false</default>
-                    <label>Male</label>
+                    <label>Single Male Parent</label>
                 </value>
                 <value>
                     <fullName>Unknown</fullName>
