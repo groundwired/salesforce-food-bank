@@ -1,52 +1,60 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Available This Month
-    </div>
-    <div class="panel-body" ng-show="data.household">
-        <div ng-if="settings.general.trackPoints" style="margin-bottom:24px;">
-            <p><b>Food Bank Points</b></p>
-            <div class="progress" ng-show="data.ptsRemaining > 0 && data.ratio >= 25">
-              <div class="progress-bar progress-bar-success" 
-                    role="progressbar" aria-valuenow="{{data.ratio}}" aria-valuemin="0" aria-valuemax="100" 
-                    style="width: {{data.ratio}}%;">
-                <span class="sr-only" style="position:static;">
-                    {{data.ptsRemaining}} / {{data.ptsMonthly}}
-                </span>
-              </div>
-            </div>
-            <div class="progress" ng-show="data.ptsRemaining > 0 && data.ratio < 25">
-              <div class="progress-bar progress-bar-warning" 
-                    role="progressbar" aria-valuenow="{{data.ratio}}" aria-valuemin="0" aria-valuemax="100" 
-                    style="width: {{data.ratio}}%;">
-                <span class="sr-only" style="position:static;">
-                    {{data.ptsRemaining}}
-                </span>
-              </div>
-            </div>
-            <div class="progress" ng-show="data.ptsRemaining == 0">
-              <div class="progress-bar progress-bar-danger" 
-                    role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" 
-                    style="width: 100%;">
-                <span class="sr-only" style="position:static;">0 / {{data.ptsMonthly}}</span>
-              </div>
-            </div>
+<div class="col-md-12" id="checkInBox">
+    <form name="visitForm">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Visit Notes
+                            </div>
+                            <div class="panel-body" ng-show="data.household">
+                                <textarea class="form-control" style="height:7em;" ng-model="data.visitNotes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7" ng-if="data.commodities">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Commodities</div>
+                            <div class="panel-body" ng-show="data.household">
+                                <table ng-if="data.commodities" class="table table-condensed" style="margin-top:6px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th class="text-center">Available</th>
+                                            <th class="text-center">Monthly Limit</th>
+                                            <th>Used Today</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="comm in data.commodities" 
+                                            ng-class="{danger: !comm.remaining, warning: (comm.remaining > 0 && comm.remaining < comm.monthlyLimit)}"
+                                            ng-form="commForm">
+                                            
+                                            <td>{{comm.name}}</td>
+                                            <td class="text-center">{{comm.remaining}}</td>
+                                            <td class="text-center">{{comm.monthlyLimit}}</td>
+                                            <td>
+                                                <div ng-class="{ 'input-group': true, 'input-group-sm': true, 'has-error': commForm.ptsUsed.$invalid }">
+                                                    <input class="form-control input-sm" type="number" 
+                                                        ng-model="comm.ptsUsed" min="0" max="{{comm.remaining}}" name="ptsUsed"
+                                                        required="required" style="width:50px" ></input>
+                                                    <span ng-show="commForm.ptsUsed.$error.required" class="help-block">Enter a number</span>
+                                                    <span ng-show="commForm.ptsUsed.$error.min" class="help-block">Cannot be negative</span>
+                                                    <span ng-show="commForm.ptsUsed.$error.max" class="help-block">Only {{comm.remaining}} available</span>
+                                                    <!--<select class="form-control" ng-model="comm.ptsUsed" 
+                                                        ng-options="v for v in rangeFromZeroTo(comm.remaining)" style="height:30px;" ng-disabled="!comm.remaining"></select> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
         </div>
-        <table ng-if="data.commodities" class="table table-condensed" style="margin-top:6px;">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th class="text-center">Available</th>
-                    <th class="text-center">Monthly Limit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="comm in data.commodities" 
-                    ng-class="{danger: !comm.remaining, warning: (comm.remaining > 0 && comm.remaining < comm.monthlyLimit) }">
-                    <td>{{comm.name}}</td>
-                    <td class="text-center">{{comm.remaining}}</td>
-                    <td class="text-center">{{comm.monthlyLimit}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    </form>    
 </div>
+    

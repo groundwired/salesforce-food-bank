@@ -16,7 +16,9 @@
                 <thead>
                     <tr>
                         <th style="min-width:148px;">Date</th>
+                        <th class="text-center" >Visitor</th>
                         <th class="text-center" ng-if="settings.boxes">Box Type/Size</th>
+                        <th class="text-center" ng-if="settings.general.trackCheckoutWeight">Checkout Weight</th>
                         <th class="text-center" ng-if="settings.general.trackPoints">Points Used</th>
                         <th>Notes</th>
                     </tr>
@@ -24,7 +26,9 @@
                 <tbody>
                     <tr ng-repeat="visit in data.visits" >
                         <td>{{visit.date | date:'MMMM dd, yyyy' }}</td>
+                        <td class="text-center" ng-if="settings.boxes">{{visit.visitor}}</td>
                         <td class="text-center" ng-if="settings.boxes">{{visit.boxType}}</td>
+                        <td class="text-center" ng-if="settings.general.trackCheckoutWeight">{{visit.checkoutWeight}}</td>
                         <td class="text-center" ng-if="settings.general.trackPoints">{{visit.ptsUsed}}</td>
                         <td>{{visit.notes}}</td>
                     </tr>

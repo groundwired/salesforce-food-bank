@@ -2,3 +2,5 @@ project:
     name: salesforce-food-bank
     package:
         name: salesforce-food-bank
+    dependencies:
+        - github: https://github.com/SalesforceFoundation/Cumulus

@@ -21,6 +21,8 @@
         <div class="panel-btnbar text-center" ng-show="data.household">
             <a ng-if="settings.general.checkInRequired" class="btn btn-primary" ng-click="checkIn()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Check In</a>
             <a class="btn btn-success" ng-click="recordVisit()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
+            <a class="btn btn-info" ng-click="fullView()">Full View...</a>
+            <a class="btn btn-info" ng-click="scheduleAppointment()">Schedule...</a>
             <a class="btn btn-default" ng-click="cancelEdit()">Cancel</a>
         </div>
         <div class="panel-body" ng-show="data.household">
@@ -31,13 +33,11 @@
                   {{visitorWarningMsg()}}
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-lg-8">
                 <div ng-include="basePath + '/app/client/address.html'"></div>
                 <div ng-include="basePath + '/app/client/members.html'"></div>
                 <div ng-include="basePath + '/app/client/notes.html'" ng-if="data.commodities || settings.general.trackPoints"></div>
                 <div ng-include="basePath + '/app/client/history.html'"></div>
-            </div>
-            <div class="col-md-5">
                 <div ng-include="basePath + '/app/client/tags.html'" ng-if="settings.tags"></div>
                 <div ng-include="basePath + '/app/client/available.html'" ng-if="data.commodities || settings.general.trackPoints"></div>
                 <div ng-include="basePath + '/app/client/notes.html'" ng-if="!(data.commodities || settings.general.trackPoints)"></div>
@@ -45,7 +45,9 @@
         </div>
         <div class="panel-footer text-center" ng-show="data.household">
             <a ng-if="settings.general.checkInRequired" class="btn btn-primary" ng-click="checkIn()" ng-disabled="status.loading || (data.ptsRemaining == 0)">Check In</a>
-            <a class="btn btn-success" ng-href="#/log_visit/{{data.household.id}}" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
+            <a class="btn btn-success" ng-href="#/log_visit/{{data.household.id}}/{{contactid}}" ng-disabled="status.loading || (data.ptsRemaining == 0)">Record Visit</a>
+            <a class="btn btn-info" ng-click="fullView()">Full View...</a>
+            <a class="btn btn-info" ng-click="scheduleAppointment()">Schedule...</a>
             <a class="btn btn-default" ng-click="cancelEdit()">Cancel</a>
         </div>
     </div>

@@ -1,4 +1,10 @@
-body { margin:0px; }
+body {
+  margin:0px;
+}
+table, th, td {
+  white-space: normal !important;
+}
+
 .nav, .pagination, .carousel, .panel-title a, .dropdown-menu a { cursor: pointer; }
 .center-overlay {
   position: fixed;
@@ -47,6 +53,9 @@ body { margin:0px; }
 }
 .bootstrap .panel .table {
   margin-bottom: 20px;
+  table-layout: fixed; width: 100%;
+  word-wrap: normal;
+  white-space: normal !important;
 }
 .bootstrap .panel .table .warning {
   font-weight: normal;

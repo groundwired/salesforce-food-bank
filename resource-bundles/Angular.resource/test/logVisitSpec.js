@@ -12,7 +12,7 @@ describe('log_visit', function() {
     $rootScope = _$rootScope_;
 
     mockData = function(method, index) {
-      return Visualforce.remoting.mockData['FoodBankManager.' + method][index].result;
+      return Visualforce.remoting.mockData['FoodBankService.' + method][index].result;
     };
   }));
 

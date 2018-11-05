@@ -80,6 +80,10 @@
                     <th class="text-right" style="padding-top:9px;">Homeless</th>
                     <td ng-repeat="t in [0,1,2]" class="text-center" style="padding-top:10px;">{{stats.homeless[t]}}</td>
                 </tr>
+                <tr data-field="outofarea">
+                    <th class="text-right" style="padding-top:9px;">Out of Area</th>
+                    <td ng-repeat="t in [0,1,2]" class="text-center" style="padding-top:10px;">{{stats.outofarea[t]}}</td>
+                </tr>
             </tfooter>
           </table>
           <div ng-if="settings.general.trackPoints">

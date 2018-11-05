@@ -27,16 +27,16 @@
                         typeahead-template-url="customTemplate.html"
                         typeahead-loading="loadingClients" 
                         autofocus="true"
-                        ng-enter="checkIn(selected.id)"
+                        ng-enter="checkIn(selected.id, selected.contactid)"
                          />
                         <!-- typeahead-on-select="checkIn(selected.id)" -->
 
                 </div>
               </div>
               <div class="form-group text-center">
-                <a ng-if="settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Check In</a>
-                <a ng-if="!settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}" ng-disabled="!(selected.id)">Record Visit</a>
-                <a class="btn btn-success" href="#/new_client/{{selected}}">New Client</a>
+                <a ng-if="settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}/{{selected.contactid}}" ng-disabled="!(selected.id)">Check In</a>
+                <a ng-if="!settings.general.checkInRequired" class="btn btn-primary" href="#/client/{{selected.id}}/{{selected.contactid}}" ng-disabled="!(selected.id)">Record Visit</a>
+                <a class="btn btn-success" href="#/new_client/">New Client</a>
               </div>
             </form>
         </div>
@@ -62,7 +62,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="client in checkedInClients">
-                            <th class="text-left" style="vertical-align:middle;">{{client.clientName}}</th>
+                            <td class="text-left" style="vertical-align:middle;">{{client.name}}</td>
                             <td style="vertical-align:middle;">{{client.pointsRemaining}}</td>
                             <td style="vertical-align:middle;">{{client.checkInTime | date:'shortTime'}}
                                 <span ng-show="client.checkinNotToday">
@@ -70,7 +70,7 @@
                                 </span>
                             </td>
                             <td ng-controller="checkInController" >
-                                <a ng-href="#/log_visit/{{client.clientId}}" class="btn btn-sm btn-success">Check Out</a>
+                                <a ng-href="#/log_visit/{{client.clientId}}/{{client.clientContactId}}" class="btn btn-sm btn-success">Check Out</a>
                                 <a ng-click="cancelCheckIn()" class="btn btn-sm">Cancel</a>
                             </td>
                         </tr>

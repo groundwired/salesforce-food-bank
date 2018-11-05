@@ -1,7 +1,7 @@
 salesforce-food-bank
 ====================
 
-Food Bank Manager built on Salesforce using Angular.js
+Food Bank Service built on Salesforce using Angular.js
 
 This is a Salesforce.com and AngularJS application that tracks clients and service delivery for food banks.
 
@@ -44,7 +44,7 @@ Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
  * **Salesforce Instance Setup**
 
     ```
-    Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Client Visit & give View/Edit permissions on all fields
+    Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Food Bank Visit & give View/Edit permissions on all fields
     ```
 
  * **Open Food Bank App**
@@ -67,10 +67,13 @@ There is an alternate home page, as well as a Jasmine Test Runner page.  For exa
  * For the home page, open your web browser to: http://localhost:8000/
  * For the test runner, open to: http://localhost:8000/test/TestRunner.html
 
+## Instance Setup Steps  
+
+* Ensure the default record type for any profile using the Food Bank is set to Household.  Otherwise you'll receive an error trying to add new Accounts.
 
 ## Implementation Notes
 
-This unmanaged package is built on 3 primary custom objects; Client, Client Household, and Client Visit.  There is no dependency or integration with Salesforce NPSP (https://github.com/SalesforceFoundation/Cumulus) although that is a future goal.
+This unmanaged package is built on 3 primary custom objects; Client, Client Household, and Food Bank Visit.  There is no dependency or integration with Salesforce NPSP (https://github.com/SalesforceFoundation/Cumulus) although that is a future goal.
 
 ## Description of Files and Directories  
 

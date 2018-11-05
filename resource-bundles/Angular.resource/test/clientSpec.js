@@ -6,7 +6,7 @@ describe('client', function() {
   var $rootScope, settingsData, householdData;
   
   var mockData = function(method, index) {
-    return Visualforce.remoting.mockData['FoodBankManager.' + method][index].result;
+    return Visualforce.remoting.mockData['FoodBankService.' + method][index].result;
   };
   
   beforeEach(module('foodBankApp'));

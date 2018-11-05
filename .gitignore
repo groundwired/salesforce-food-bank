@@ -12,6 +12,9 @@ salesforce-food-bank.sublime-workspace
 /resource-bundles/.DS_Store
 /resource-bundles/Angular.resource/mmui.log
 /resource-bundles/Angular.resource/mmst.log
-/resource-bundles/Angular.resource/bower_components
+/resource-bundles/Angular.resource/bower_components*
 .sfdx/
 .vscode/
+test_results*
+/temp
+~*

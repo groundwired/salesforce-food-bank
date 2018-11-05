@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Age_Entry_Date__c</fullName>
+        <description>Store this date so you can increment ages automatically even when you have no actual birthdate.</description>
+        <externalId>false</externalId>
+        <label>Age Entry Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Age_Group__c</fullName>
+        <description>You can set this field manually, but if you enter age or birthdate a trigger fills this field automatically (and overrides your setting).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>You can set this field manually, but if you enter age or birthdate a trigger fills this field automatically (and overrides your setting).</inlineHelpText>
+        <label>Group</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Adult</fullName>
+                    <default>false</default>
+                    <label>Adult</label>
+                </value>
+                <value>
+                    <fullName>Senior</fullName>
+                    <default>false</default>
+                    <label>Senior</label>
+                </value>
+                <value>
+                    <fullName>Child</fullName>
+                    <default>false</default>
+                    <label>Child</label>
+                </value>
+                <value>
+                    <fullName>Infant</fullName>
+                    <default>false</default>
+                    <label>Infant</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <label>Age</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Alert_Data__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Alert Data</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Created_Date__c</fullName>
+        <description>Store the date the external entry was created.</description>
+        <externalId>false</externalId>
+        <label>External Created Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>External_Household_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>External Household Id</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>20</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Gender__c</fullName>
+        <externalId>false</externalId>
+        <label>Gender</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Male</fullName>
+                    <default>false</default>
+                    <label>Male</label>
+                </value>
+                <value>
+                    <fullName>Female</fullName>
+                    <default>false</default>
+                    <label>Female</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Id_Number__c</fullName>
+        <description>Created by 501 Commons</description>
+        <externalId>false</externalId>
+        <label>ID Number</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Id_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>ID Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Verified</fullName>
+                    <default>false</default>
+                    <label>Not Verified</label>
+                </value>
+                <value>
+                    <fullName>Drivers License</fullName>
+                    <default>false</default>
+                    <label>Drivers License</label>
+                </value>
+                <value>
+                    <fullName>WA ID</fullName>
+                    <default>false</default>
+                    <label>WA ID</label>
+                </value>
+                <value>
+                    <fullName>DSHS Card</fullName>
+                    <default>false</default>
+                    <label>DSHS Card</label>
+                </value>
+                <value>
+                    <fullName>Utility Bill</fullName>
+                    <default>false</default>
+                    <label>Utility Bill</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Passport</fullName>
+                    <default>false</default>
+                    <label>Passport</label>
+                </value>
+                <value>
+                    <fullName>Voters Registration</fullName>
+                    <default>false</default>
+                    <label>Voters Registration</label>
+                </value>
+                <value>
+                    <fullName>Medical Coupon</fullName>
+                    <default>false</default>
+                    <label>Medical Coupon</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Proof_of_Infant__c</fullName>
+        <externalId>false</externalId>
+        <label>Proof of Infant</label>
+        <length>50</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Survey_Educational_Level_Adults__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Educational Level Adults</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Less than High School graduate</fullName>
+                    <default>false</default>
+                    <label>Less than High School graduate</label>
+                </value>
+                <value>
+                    <fullName>High School diploma or GED</fullName>
+                    <default>false</default>
+                    <label>High School diploma or GED</label>
+                </value>
+                <value>
+                    <fullName>Some college - no degree or certificate</fullName>
+                    <default>false</default>
+                    <label>Some college - no degree or certificate</label>
+                </value>
+                <value>
+                    <fullName>Certificate from business school or other professional program</fullName>
+                    <default>false</default>
+                    <label>Certificate from business school or other professional program</label>
+                </value>
+                <value>
+                    <fullName>Associated Degree</fullName>
+                    <default>false</default>
+                    <label>Associated Degree</label>
+                </value>
+                <value>
+                    <fullName>Bachelor&apos;s Degree or above</fullName>
+                    <default>false</default>
+                    <label>Bachelor&apos;s Degree or above</label>
+                </value>
+                <value>
+                    <fullName>Child under 18</fullName>
+                    <default>false</default>
+                    <label>Child under 18</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Employment_Status_at_Intake__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Employment Status at Intake</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+                <value>
+                    <fullName>Full-time Permanent</fullName>
+                    <default>false</default>
+                    <label>Full-time Permanent</label>
+                </value>
+                <value>
+                    <fullName>Part-time Permanent</fullName>
+                    <default>false</default>
+                    <label>Part-time Permanent</label>
+                </value>
+                <value>
+                    <fullName>Seasonal - Day employment</fullName>
+                    <default>false</default>
+                    <label>Seasonal - Day employment</label>
+                </value>
+                <value>
+                    <fullName>Not employed - Seeking</fullName>
+                    <default>false</default>
+                    <label>Not employed - Seeking</label>
+                </value>
+                <value>
+                    <fullName>Not employed - Not Seeking</fullName>
+                    <default>false</default>
+                    <label>Not employed - Not Seeking</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_HUD_Category__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey HUD Category</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Category A</fullName>
+                    <default>false</default>
+                    <label>30% HUD</label>
+                </value>
+                <value>
+                    <fullName>Category B</fullName>
+                    <default>false</default>
+                    <label>50% HUD</label>
+                </value>
+                <value>
+                    <fullName>Category C</fullName>
+                    <default>false</default>
+                    <label>80% HUD</label>
+                </value>
+                <value>
+                    <fullName>Category D</fullName>
+                    <default>false</default>
+                    <label>Above 80% HUD</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_HUD_Household_Persons__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey HUD Household Persons</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_HUD_Income_Maximum__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;1&quot;, 20200
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;2&quot;, 23050
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;3&quot;, 25950
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;4&quot;, 28800
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;5&quot;, 31150
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;6&quot;, 33450
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;7&quot;, 37140
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;8&quot;, 41320
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;1&quot;, 33600
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;2&quot;, 38400
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;3&quot;, 43200
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;4&quot;, 48000
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;5&quot;, 51850
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;6&quot;, 55700
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;7&quot;, 59550
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;8&quot;, 63400
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;1&quot;, 50400
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;2&quot;, 57600
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;3&quot;, 64800
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;4&quot;, 72000
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;5&quot;, 77800
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;6&quot;, 83550
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;7&quot;, 89300
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;8&quot;, 95050
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot;, 99999
+,0.0)))))))))))))))))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Survey HUD Income Maximum</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Survey_HUD_Income_Minimum__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(TEXT(Survey_HUD_Category__c) = &quot;Category A&quot;, 0.0
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;1&quot;, 20201
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;2&quot;, 23051
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;3&quot;, 25951
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;4&quot;, 28801
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;5&quot;, 31151
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;6&quot;, 33451
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;7&quot;, 37141
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category B&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;8&quot;, 41321
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;1&quot;, 33601
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;2&quot;, 38401
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;3&quot;, 43201
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;4&quot;, 48001
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;5&quot;, 51851
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;6&quot;, 55701
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;7&quot;, 59551
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category C&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;8&quot;, 63401
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;1&quot;, 50401
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;2&quot;, 57601
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;3&quot;, 64801
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;4&quot;, 72001
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;5&quot;, 77801
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;6&quot;, 83551
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;7&quot;, 89301
+,IF(TEXT(Survey_HUD_Category__c) = &quot;Category D&quot; &amp;&amp; TEXT(Survey_HUD_Household_Persons__c) = &quot;8&quot;, 95051
+,0.0)))))))))))))))))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Survey HUD Income Minimum</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Survey_Homeless_Chronically__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Homeless Chronically</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Homeless_How_Long_Most_Recently__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Homeless How Long Most Recently</label>
+        <length>32</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Survey_Homeless_Long_Terms__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Homeless Long Terms</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Homeless_Times_Past_3_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Homeless Times Past 3 Year</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Survey_Homeless__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Homeless</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Household_Composition__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Household Composition</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Single Parent</fullName>
+                    <default>false</default>
+                    <label>Not Single Parent</label>
+                </value>
+                <value>
+                    <fullName>Female</fullName>
+                    <default>false</default>
+                    <label>Single Female Parent</label>
+                </value>
+                <value>
+                    <fullName>Male</fullName>
+                    <default>false</default>
+                    <label>Single Male Parent</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Limited_English_Proficiency__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Limited English Proficiency</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Military_Minor_Dependents__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Military Minor Dependents</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Military_Served_Active_Duty__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Military Served Active Duty</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Military_Served__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Military Served</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Military_Spouse_or_Partner__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Military Spouse or Partner</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Military_Veteran_Discharge_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Military Veteran Discharge Status</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Honorable</fullName>
+                    <default>false</default>
+                    <label>Honorable</label>
+                </value>
+                <value>
+                    <fullName>General</fullName>
+                    <default>false</default>
+                    <label>General</label>
+                </value>
+                <value>
+                    <fullName>Medical</fullName>
+                    <default>false</default>
+                    <label>Medical</label>
+                </value>
+                <value>
+                    <fullName>Bad Conduct</fullName>
+                    <default>false</default>
+                    <label>Bad Conduct</label>
+                </value>
+                <value>
+                    <fullName>Dishonorable</fullName>
+                    <default>false</default>
+                    <label>Dishonorable</label>
+                </value>
+                <value>
+                    <fullName>Not Discharged - NO Active Duty or Still Active</fullName>
+                    <default>false</default>
+                    <label>Not Discharged - NO Active Duty or Still Active</label>
+                </value>
+                <value>
+                    <fullName>No Selection</fullName>
+                    <default>false</default>
+                    <label>No Selection</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Partnered_Married__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Partnered Married</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Persons_with_Disabilities__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Persons with Disabilities</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Refugee_Immigrant__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Refugee Immigrant</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey_Spanish_Hispanic_Latino__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Spanish Hispanic Latino</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Survey_Response</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Survey__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Race</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Race</valueSetName>
+        </valueSet>
+    </fields>
+</CustomObject>

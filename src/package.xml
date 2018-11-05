@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>salesforce-food-bank</fullName>
+    <fullName>intakefields</fullName>
     <types>
-        <members>FoodBankHouseholds</members>
         <members>FoodBankHouseholdsTest</members>
-        <members>FoodBankManager</members>
-        <members>FoodBankManagerTest</members>
+        <members>FoodBankService</members>
+        <members>FoodBankServiceTest</members>
         <members>FoodBankSettings</members>
         <members>FoodBankStats</members>
         <members>FoodBankStatsTest</members>
@@ -20,72 +19,90 @@
         <name>ApexPage</name>
     </types>
     <types>
-        <members>ClientHouseholdTrigger</members>
-        <members>ClientTrigger</members>
-        <members>VisitTrigger</members>
+        <members>FoodBankAccountTrigger</members>
+        <members>FoodBankContactTrigger</members>
+        <members>FoodBankVisitTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>Client_Household__c.Address__c</members>
-        <members>Client_Household__c.Adults__c</members>
-        <members>Client_Household__c.Children__c</members>
-        <members>Client_Household__c.City__c</members>
-        <members>Client_Household__c.Client_Names__c</members>
-        <members>Client_Household__c.Commodity_Usage_JSON__c</members>
-        <members>Client_Household__c.Current_Points_Remaining__c</members>
-        <members>Client_Household__c.Current_Points_Used__c</members>
-        <members>Client_Household__c.External_ID__c</members>
-        <members>Client_Household__c.First_Visit__c</members>
-        <members>Client_Household__c.Full_Address__c</members>
-        <members>Client_Household__c.Homeless__c</members>
-        <members>Client_Household__c.Inactive__c</members>
-        <members>Client_Household__c.Infant_Card_Expires__c</members>
-        <members>Client_Household__c.Infants__c</members>
-        <members>Client_Household__c.Monthly_Points_Available__c</members>
-        <members>Client_Household__c.Most_Recent_Visit__c</members>
-        <members>Client_Household__c.No_Cook__c</members>
-        <members>Client_Household__c.Notes__c</members>
-        <members>Client_Household__c.Phone__c</members>
-        <members>Client_Household__c.Postal_Code__c</members>
-        <members>Client_Household__c.Proof_of_Address_Date__c</members>
-        <members>Client_Household__c.Proof_of_Address__c</members>
-        <members>Client_Household__c.Seniors__c</members>
-        <members>Client_Household__c.Source__c</members>
-        <members>Client_Household__c.Special_Diet__c</members>
-        <members>Client_Household__c.Staff_Notes__c</members>
-        <members>Client_Household__c.State__c</members>
-        <members>Client_Household__c.Tags__c</members>
-        <members>Client_Household__c.Total_Visits__c</members>
-        <members>Client_Visit__c.Adults__c</members>
-        <members>Client_Visit__c.Box_Type__c</members>
-        <members>Client_Visit__c.Children__c</members>
-        <members>Client_Visit__c.Commodity_Usage_JSON__c</members>
-        <members>Client_Visit__c.External_ID__c</members>
-        <members>Client_Visit__c.First_Visit_This_Year__c</members>
-        <members>Client_Visit__c.Homeless_Counter__c</members>
-        <members>Client_Visit__c.Homeless__c</members>
-        <members>Client_Visit__c.Household__c</members>
-        <members>Client_Visit__c.Infants__c</members>
-        <members>Client_Visit__c.More_Than_One_Person__c</members>
-        <members>Client_Visit__c.Notes__c</members>
-        <members>Client_Visit__c.Points_Used__c</members>
-        <members>Client_Visit__c.Seniors__c</members>
-        <members>Client_Visit__c.Total_People__c</members>
-        <members>Client_Visit__c.Visit_Date__c</members>
-        <members>Client__c.Age_Entry_Date__c</members>
-        <members>Client__c.Age_Group__c</members>
-        <members>Client__c.Age__c</members>
-        <members>Client__c.Birthdate__c</members>
-        <members>Client__c.Client_Household__c</members>
-        <members>Client__c.External_Id__c</members>
-        <members>Client__c.First_Name__c</members>
-        <members>Client__c.Last_Name__c</members>
-        <members>Client__c.Proof_of_Infant__c</members>
+        <members>Food_Bank_Service</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Account.Address__c</members>
+        <members>Account.Adults__c</members>
+        <members>Account.C501_Postal_Code__c</members>
+        <members>Account.Children__c</members>
+        <members>Account.Commodity_Usage_JSON__c</members>
+        <members>Account.Current_Points_Remaining__c</members>
+        <members>Account.Current_Points_Used__c</members>
+        <members>Account.External_Created_Date__c</members>
+        <members>Account.External_Id__c</members>
+        <members>Account.First_Visit__c</members>
+        <members>Account.Homeless__c</members>
+        <members>Account.Inactive__c</members>
+        <members>Account.Infant_Card_Expires__c</members>
+        <members>Account.Infants__c</members>
+        <members>Account.Level__c</members>
+        <members>Account.Monthly_Points_Available__c</members>
+        <members>Account.Most_Recent_Visit__c</members>
+        <members>Account.No_Cook__c</members>
+        <members>Account.Notes__c</members>
+        <members>Account.Out_Of_Area__c</members>
+        <members>Account.Pending_Commodity_Usage_JSON__c</members>
+        <members>Account.Pending_Notes__c</members>
+        <members>Account.Power_Of_1__c</members>
+        <members>Account.Previous_Level__c</members>
+        <members>Account.Proof_of_Address_Date__c</members>
+        <members>Account.Proof_of_Address__c</members>
+        <members>Account.Seniors__c</members>
+        <members>Account.Source__c</members>
+        <members>Account.Special_Diet__c</members>
+        <members>Account.Staff_Notes__c</members>
+        <members>Account.Tags__c</members>
+        <members>Account.Total_Visits__c</members>
+        <members>Contact.Age_Entry_Date__c</members>
+        <members>Contact.Age_Group__c</members>
+        <members>Contact.Age__c</members>
+        <members>Contact.Email_Alert_Data__c</members>
+        <members>Contact.External_Created_Date__c</members>
+        <members>Contact.External_Household_Id__c</members>
+        <members>Contact.External_Id__c</members>
+        <members>Contact.Gender__c</members>
+        <members>Contact.Id_Number__c</members>
+        <members>Contact.Id_Type__c</members>
+        <members>Contact.Proof_of_Infant__c</members>
+        <members>Contact.Survey_Educational_Level_Adults__c</members>
+        <members>Contact.Survey_Employment_Status_at_Intake__c</members>
+        <members>Contact.Survey_HUD_Category__c</members>
+        <members>Contact.Survey_HUD_Household_Persons__c</members>
+        <members>Contact.Survey_HUD_Income_Maximum__c</members>
+        <members>Contact.Survey_HUD_Income_Minimum__c</members>
+        <members>Contact.Survey_Homeless_Chronically__c</members>
+        <members>Contact.Survey_Homeless_How_Long_Most_Recently__c</members>
+        <members>Contact.Survey_Homeless_Long_Terms__c</members>
+        <members>Contact.Survey_Homeless_Times_Past_3_Year__c</members>
+        <members>Contact.Survey_Homeless__c</members>
+        <members>Contact.Survey_Household_Composition__c</members>
+        <members>Contact.Survey_Limited_English_Proficiency__c</members>
+        <members>Contact.Survey_Military_Minor_Dependents__c</members>
+        <members>Contact.Survey_Military_Served_Active_Duty__c</members>
+        <members>Contact.Survey_Military_Served__c</members>
+        <members>Contact.Survey_Military_Spouse_or_Partner__c</members>
+        <members>Contact.Survey_Military_Veteran_Discharge_Status__c</members>
+        <members>Contact.Survey_Partnered_Married__c</members>
+        <members>Contact.Survey_Persons_with_Disabilities__c</members>
+        <members>Contact.Survey_Refugee_Immigrant__c</members>
+        <members>Contact.Survey_Spanish_Hispanic_Latino__c</members>
+        <members>Contact.Survey__c</members>
         <members>Food_Bank_Box_Settings__c.Minimum_Family_Size__c</members>
         <members>Food_Bank_Checkin__c.Box_Size__c</members>
         <members>Food_Bank_Checkin__c.Check_In_Time__c</members>
         <members>Food_Bank_Checkin__c.Client_Name__c</members>
+        <members>Food_Bank_Checkin__c.Commodity_Usage_JSON__c</members>
+        <members>Food_Bank_Checkin__c.Notes__c</members>
         <members>Food_Bank_Checkin__c.Points_Remaining__c</members>
+        <members>Food_Bank_Checkin__c.Visitor__c</members>
         <members>Food_Bank_Commodity__c.Allow_Overage__c</members>
         <members>Food_Bank_Commodity__c.Monthly_Limit__c</members>
         <members>Food_Bank_Commodity__c.Sort_Order__c</members>
@@ -99,33 +116,86 @@
         <members>Food_Bank_Settings__c.Proof_of_Address_Update_Interval__c</members>
         <members>Food_Bank_Settings__c.Proof_of_Infant_Required__c</members>
         <members>Food_Bank_Settings__c.Require_Unique_Address__c</members>
+        <members>Food_Bank_Settings__c.Show_ID_Number_Field_on_Member_List__c</members>
+        <members>Food_Bank_Settings__c.Show_Id__c</members>
         <members>Food_Bank_Settings__c.Tags__c</members>
+        <members>Food_Bank_Settings__c.Track_Checkout_Weight__c</members>
         <members>Food_Bank_Settings__c.Track_Points__c</members>
         <members>Food_Bank_Settings__c.Visit_Frequency_Limit__c</members>
         <members>Food_Bank_Settings__c.Welcome_Alert__c</members>
         <members>Food_Bank_Settings__c.Welcome_Message__c</members>
+        <members>Food_Bank_Visit__c.Adults__c</members>
+        <members>Food_Bank_Visit__c.Box_Type__c</members>
+        <members>Food_Bank_Visit__c.Checkout_Weight__c</members>
+        <members>Food_Bank_Visit__c.Children__c</members>
+        <members>Food_Bank_Visit__c.Commodity_Usage_JSON__c</members>
+        <members>Food_Bank_Visit__c.External_Created_Date__c</members>
+        <members>Food_Bank_Visit__c.External_Household_Id__c</members>
+        <members>Food_Bank_Visit__c.External_Id__c</members>
+        <members>Food_Bank_Visit__c.First_Visit_This_Year__c</members>
+        <members>Food_Bank_Visit__c.Homeless_Counter__c</members>
+        <members>Food_Bank_Visit__c.Homeless__c</members>
+        <members>Food_Bank_Visit__c.Household__c</members>
+        <members>Food_Bank_Visit__c.Infants__c</members>
+        <members>Food_Bank_Visit__c.More_Than_One_Person__c</members>
+        <members>Food_Bank_Visit__c.Notes__c</members>
+        <members>Food_Bank_Visit__c.Out_Of_Area_Counter__c</members>
+        <members>Food_Bank_Visit__c.Out_Of_Area__c</members>
+        <members>Food_Bank_Visit__c.Points_Used__c</members>
+        <members>Food_Bank_Visit__c.Seniors__c</members>
+        <members>Food_Bank_Visit__c.Total_People__c</members>
+        <members>Food_Bank_Visit__c.Visit_Date__c</members>
+        <members>Food_Bank_Visit__c.Visit_Type__c</members>
+        <members>Food_Bank_Visit__c.Visitor__c</members>
         <name>CustomField</name>
     </types>
     <types>
-        <members>Client_Household__c</members>
-        <members>Client_Visit__c</members>
-        <members>Client__c</members>
+        <members>Food_Bank_Box_Type</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
+    </types>
+    <types>
         <members>Food_Bank_Box_Settings__c</members>
         <members>Food_Bank_Checkin__c</members>
         <members>Food_Bank_Commodity__c</members>
         <members>Food_Bank_Settings__c</members>
+        <members>Food_Bank_Visit__c</members>
         <name>CustomObject</name>
     </types>
     <types>
-        <members>Client_Household__c.Active</members>
-        <members>Client_Household__c.AllHH</members>
-        <members>Client_Visit__c.All</members>
-        <members>Client_Visit__c.Past7</members>
+        <members>Food_Bank_App</members>
+        <members>Food_Bank_Stats</members>
+        <members>Food_Bank_Visit__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Race</members>
+        <members>Survey_Response</members>
+        <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>Contact-FoodBank Layout</members>
+        <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Food_Bank_Visit__c.All</members>
+        <members>Food_Bank_Visit__c.Past7</members>
+        <members>Food_Bank_Visit__c.Visits_Today</members>
         <name>ListView</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <members>Food Bank Admin</members>
+        <members>Food Bank Standard User</members>
+        <name>Profile</name>
     </types>
     <types>
         <members>Angular</members>
         <name>StaticResource</name>
     </types>
-    <version>38.0</version>
+    <version>42.0</version>
 </Package>
