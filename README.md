@@ -29,12 +29,7 @@ Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
  
     https://github.com/SalesforceFoundation/CumulusCI
 
- * **Deploy to Scratch Org**
 
-    ```
-    cci deploy run task
-    ```
-     
  * **Open Scratch Org**
 
     ```
@@ -44,9 +39,18 @@ Here is a 5-minute video introduction: http://youtu.be/vzvGtpBY08E
  * **Salesforce Instance Setup**
 
     ```
-    Edit System Administrator Profile > Field-Level Security for custom objects Client, Client Household, and Food Bank Visit & give View/Edit permissions on all fields
+    * Go to Setup > Object Manager > Accounts > Fields &amp; Relationships > Field History Tracking, check Enable History Tracking, and then click Save
+    * Edit System Administrator Profile > Field-Level Security for objects Account, Contact, and Food Bank Visit and grant Read/Edit permissions on all fields (or Read permission on read-only fields)
     ```
 
+ * **Deploy to Scratch Org**
+    This initial deploy of the NPSP will take some time; be patient.
+
+    ```
+    cci flow run dev_org
+    sfdx force:org:open
+    ```
+     
  * **Open Food Bank App**
 
     ```
@@ -70,10 +74,6 @@ There is an alternate home page, as well as a Jasmine Test Runner page.  For exa
 ## Instance Setup Steps  
 
 * Ensure the default record type for any profile using the Food Bank is set to Household.  Otherwise you'll receive an error trying to add new Accounts.
-
-## Implementation Notes
-
-This unmanaged package is built on 3 primary custom objects; Client, Client Household, and Food Bank Visit.  There is no dependency or integration with Salesforce NPSP (https://github.com/SalesforceFoundation/Cumulus) although that is a future goal.
 
 ## Description of Files and Directories  
 

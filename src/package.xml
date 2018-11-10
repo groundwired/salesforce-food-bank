@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>intakefields</fullName>
+    <fullName>salesforce-food-bank</fullName>
     <types>
         <members>FoodBankHouseholdsTest</members>
         <members>FoodBankService</members>
@@ -192,6 +192,10 @@
         <members>Food Bank Admin</members>
         <members>Food Bank Standard User</members>
         <name>Profile</name>
+    </types>
+    <types>
+        <members>SendEmail</members>
+        <name>QuickAction</name>
     </types>
     <types>
         <members>Angular</members>

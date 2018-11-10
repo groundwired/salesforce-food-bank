@@ -498,11 +498,6 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>Appointment_Info__c</fields>
-        <relatedList>C501_Appointment_Scheduled__c.C501_Contact__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <relatedLists>
