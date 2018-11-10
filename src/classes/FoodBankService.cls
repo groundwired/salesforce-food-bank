@@ -103,7 +103,7 @@ public with sharing class FoodBankService {
     @RemoteAction
     public static Account saveHousehold( Account hh ) {
 
-        hh.Name = FoodBankService.NPSPTriggerNameUpdate;
+        //hh.Name = FoodBankService.NPSPTriggerNameUpdate;
 
         if (hh.Id == null)
             insert hh;
@@ -117,7 +117,7 @@ public with sharing class FoodBankService {
     @RemoteAction
     public static Account saveHouseholdAndMembers( Account hh, list<Contact> clients) {
 
-        hh.Name = FoodBankService.NPSPTriggerNameUpdate;
+        //hh.Name = FoodBankService.NPSPTriggerNameUpdate;
 
         hh.Monthly_Points_Available__c = getMonthlyPoints( hh );  // is this by trigger?  how about the name?
         if (hh.Id == null)
