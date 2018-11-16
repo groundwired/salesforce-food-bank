@@ -20,23 +20,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>C501_Postal_Code__c</fullName>
-        <externalId>false</externalId>
-        <formula>if (
-AND(LEN(BillingPostalCode) &lt; 5, LEN(ShippingPostalCode) &lt; 5), 
-&quot;Blank&quot;,
-if (ISNUMBER(LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5)), 
-LEFT(BLANKVALUE(BillingPostalCode, ShippingPostalCode), 5),
-&quot;Blank&quot;)
-)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Postal Code</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Children__c</fullName>
         <externalId>false</externalId>
         <label>Children</label>

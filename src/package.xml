@@ -31,7 +31,6 @@
     <types>
         <members>Account.Address__c</members>
         <members>Account.Adults__c</members>
-        <members>Account.C501_Postal_Code__c</members>
         <members>Account.Children__c</members>
         <members>Account.Commodity_Usage_JSON__c</members>
         <members>Account.Current_Points_Remaining__c</members>
