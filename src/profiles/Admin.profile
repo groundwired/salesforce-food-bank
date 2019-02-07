@@ -360,11 +360,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Survey__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Food_Bank_Visit__c.Adults__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -444,6 +439,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Visit__c.People_Served_Household_Members__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Food_Bank_Visit__c.Points_Used__c</field>
         <readable>true</readable>
@@ -464,8 +464,18 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Visit__c.Visit_Month__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Food_Bank_Visit__c.Visit_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Visit__c.Visit_Year__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -516,6 +526,14 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ActivateOrder</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ActivitiesAccess</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>AddDirectMessageMembers</name>
     </userPermissions>
     <userPermissions>
@@ -560,11 +578,19 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ChangeDashboardColors</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>ChatterEditOwnPost</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
         <name>ChatterEditOwnRecordPost</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterFileLink</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -596,11 +622,27 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>CreateCustomizeDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>CreateCustomizeFilters</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>CreateCustomizeReports</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateDashboardFolders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>CreatePackaging</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateReportFolders</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -632,6 +674,18 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>DistributeFromPersWksp</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditActivatedOrders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditBillingInfo</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>EditBrandTemplates</name>
     </userPermissions>
     <userPermissions>
@@ -645,6 +699,14 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>EditHtmlTemplates</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditMyDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditMyReports</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -780,6 +842,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ManageDashbdsInPubFolders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>ManageDataCategories</name>
     </userPermissions>
     <userPermissions>
@@ -852,7 +918,15 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ManageReportsInPubFolders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>ManageRoles</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageSandboxes</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -865,6 +939,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageSynonyms</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageTranslation</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -905,6 +983,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>Packaging2</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>Packaging2PromoteVersion</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -949,6 +1031,18 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>SubmitMacrosAllowed</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SubscribeDashboardToOtherUsers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SubscribeReportToOtherUsers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>SubscribeReportsRunAsUser</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -1009,6 +1103,14 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewMyTeamsDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewPublicDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewPublicReports</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>

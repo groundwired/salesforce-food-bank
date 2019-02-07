@@ -360,11 +360,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Survey__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Food_Bank_Visit__c.Adults__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -444,6 +439,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Visit__c.People_Served_Household_Members__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Food_Bank_Visit__c.Points_Used__c</field>
         <readable>true</readable>
@@ -464,8 +464,18 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Visit__c.Visit_Month__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Food_Bank_Visit__c.Visit_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Visit__c.Visit_Year__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -483,15 +493,6 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Food_Bank_Visit__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Account</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <pageAccesses>
@@ -521,6 +522,10 @@
     <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ActivitiesAccess</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>AddDirectMessageMembers</name>
     </userPermissions>
     <userPermissions>
@@ -542,6 +547,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ChatterEditOwnPost</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterFileLink</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -569,11 +578,19 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>CreateCustomizeReports</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>CreateTopics</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
         <name>CustomizeApplication</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>DistributeFromPersWksp</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -637,6 +654,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ManageTranslation</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>MassInlineEdit</name>
     </userPermissions>
     <userPermissions>
@@ -678,6 +699,14 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewMyTeamsDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewPublicDashboards</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewPublicReports</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>

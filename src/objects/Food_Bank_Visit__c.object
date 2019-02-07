@@ -263,6 +263,19 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>People_Served_Household_Members__c</fullName>
+        <externalId>false</externalId>
+        <formula>Household__r.npsp__Number_of_Household_Members__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Individuals Served (Household Members)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Points_Used__c</fullName>
         <externalId>false</externalId>
         <label>Points Used</label>
@@ -307,6 +320,28 @@
         <type>DateTime</type>
     </fields>
     <fields>
+        <fullName>Visit_Month__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(MONTH(DATEVALUE( Visit_Date__c )) = 1, &quot;January&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 2, &quot;February&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 3, &quot;March&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 4, &quot;April&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 5, &quot;May&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 6, &quot;June&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 7, &quot;July&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 8, &quot;August&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 9, &quot;September&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 10, &quot;October&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 11, &quot;November&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 12, &quot;December&quot;,
+NULL))))))))))))</formula>
+        <label>Visit Month</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Visit_Type__c</fullName>
         <externalId>false</externalId>
         <label>Visit Type</label>
@@ -333,6 +368,17 @@
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Visit_Year__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR(DATEVALUE( Visit_Date__c )))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visit Year</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Visitor__c</fullName>

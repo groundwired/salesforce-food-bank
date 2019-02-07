@@ -727,15 +727,4 @@
             <valueSetName>Survey_Response</valueSetName>
         </valueSet>
     </fields>
-    <fields>
-        <fullName>Survey__c</fullName>
-        <externalId>false</externalId>
-        <label>Survey Race</label>
-        <required>false</required>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>Race</valueSetName>
-        </valueSet>
-    </fields>
 </CustomObject>
