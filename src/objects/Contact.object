@@ -122,6 +122,22 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Grade__c</fullName>
+        <externalId>false</externalId>
+        <label>Grade</label>
+        <length>64</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Head_Of_Household__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Head Of Household</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Id_Number__c</fullName>
         <description>Created by 501 Commons</description>
         <externalId>false</externalId>
@@ -190,6 +206,36 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Inactive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Inactive</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Disabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Disabled</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Language__c</fullName>
+        <externalId>false</externalId>
+        <label>Language</label>
+        <length>64</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Proof_of_Infant__c</fullName>
         <externalId>false</externalId>
         <label>Proof of Infant</label>
@@ -197,6 +243,92 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Race__c</fullName>
+        <externalId>false</externalId>
+        <label>Race</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Race</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Relationship__c</fullName>
+        <externalId>false</externalId>
+        <label>Relationship</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Child</fullName>
+                    <default>false</default>
+                    <label>Child</label>
+                </value>
+                <value>
+                    <fullName>Foster Child</fullName>
+                    <default>false</default>
+                    <label>Foster Child</label>
+                </value>
+                <value>
+                    <fullName>Friend</fullName>
+                    <default>false</default>
+                    <label>Friend</label>
+                </value>
+                <value>
+                    <fullName>Grand Child</fullName>
+                    <default>false</default>
+                    <label>Grand Child</label>
+                </value>
+                <value>
+                    <fullName>Grand Parent</fullName>
+                    <default>false</default>
+                    <label>Grand Parent</label>
+                </value>
+                <value>
+                    <fullName>Head of Household</fullName>
+                    <default>false</default>
+                    <label>Head of Household</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Parent</fullName>
+                    <default>false</default>
+                    <label>Parent</label>
+                </value>
+                <value>
+                    <fullName>Relative</fullName>
+                    <default>false</default>
+                    <label>Relative</label>
+                </value>
+                <value>
+                    <fullName>Spouse/Significant Other</fullName>
+                    <default>false</default>
+                    <label>Spouse/Significant Other</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Special_Diet__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Special Diet</label>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Survey_Educational_Level_Adults__c</fullName>

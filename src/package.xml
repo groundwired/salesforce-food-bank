@@ -3,6 +3,8 @@
     <fullName>intakefields</fullName>
     <types>
         <members>FoodBankHouseholdsTest</members>
+        <members>FoodBankManager</members>
+        <members>FoodBankManagerTest</members>
         <members>FoodBankService</members>
         <members>FoodBankServiceTest</members>
         <members>FoodBankSettings</members>
@@ -22,6 +24,7 @@
         <members>FoodBankAccountTrigger</members>
         <members>FoodBankContactTrigger</members>
         <members>FoodBankVisitTrigger</members>
+        <members>VisitTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
@@ -68,9 +71,18 @@
         <members>Contact.External_Household_Id__c</members>
         <members>Contact.External_Id__c</members>
         <members>Contact.Gender__c</members>
+        <members>Contact.Grade__c</members>
+        <members>Contact.Head_Of_Household__c</members>
         <members>Contact.Id_Number__c</members>
         <members>Contact.Id_Type__c</members>
+        <members>Contact.Inactive__c</members>
+        <members>Contact.Is_Disabled__c</members>
+        <members>Contact.Language__c</members>
+        <members>Contact.Notes__c</members>
         <members>Contact.Proof_of_Infant__c</members>
+        <members>Contact.Race__c</members>
+        <members>Contact.Relationship__c</members>
+        <members>Contact.Special_Diet__c</members>
         <members>Contact.Survey_Educational_Level_Adults__c</members>
         <members>Contact.Survey_Employment_Status_at_Intake__c</members>
         <members>Contact.Survey_HUD_Category__c</members>
@@ -93,7 +105,6 @@
         <members>Contact.Survey_Persons_with_Disabilities__c</members>
         <members>Contact.Survey_Refugee_Immigrant__c</members>
         <members>Contact.Survey_Spanish_Hispanic_Latino__c</members>
-        <members>Contact.Survey__c</members>
         <members>Food_Bank_Box_Settings__c.Minimum_Family_Size__c</members>
         <members>Food_Bank_Checkin__c.Box_Size__c</members>
         <members>Food_Bank_Checkin__c.Check_In_Time__c</members>
@@ -140,11 +151,14 @@
         <members>Food_Bank_Visit__c.Notes__c</members>
         <members>Food_Bank_Visit__c.Out_Of_Area_Counter__c</members>
         <members>Food_Bank_Visit__c.Out_Of_Area__c</members>
+        <members>Food_Bank_Visit__c.People_Served_Household_Members__c</members>
         <members>Food_Bank_Visit__c.Points_Used__c</members>
         <members>Food_Bank_Visit__c.Seniors__c</members>
         <members>Food_Bank_Visit__c.Total_People__c</members>
         <members>Food_Bank_Visit__c.Visit_Date__c</members>
+        <members>Food_Bank_Visit__c.Visit_Month__c</members>
         <members>Food_Bank_Visit__c.Visit_Type__c</members>
+        <members>Food_Bank_Visit__c.Visit_Year__c</members>
         <members>Food_Bank_Visit__c.Visitor__c</members>
         <name>CustomField</name>
     </types>
@@ -187,7 +201,6 @@
         <name>ListView</name>
     </types>
     <types>
-        <members>Admin</members>
         <members>Food Bank Admin</members>
         <members>Food Bank Standard User</members>
         <name>Profile</name>
