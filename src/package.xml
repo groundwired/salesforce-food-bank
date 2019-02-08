@@ -34,15 +34,21 @@
     <types>
         <members>Account.Address__c</members>
         <members>Account.Adults__c</members>
+        <members>Account.Annual_Income__c</members>
+        <members>Account.C501_Minors__c</members>
+        <members>Account.C501_Parents__c</members>
         <members>Account.Children__c</members>
         <members>Account.Commodity_Usage_JSON__c</members>
         <members>Account.Current_Points_Remaining__c</members>
         <members>Account.Current_Points_Used__c</members>
+        <members>Account.Ethnic_Speaking__c</members>
         <members>Account.External_Created_Date__c</members>
         <members>Account.External_Id__c</members>
         <members>Account.First_Visit__c</members>
+        <members>Account.HUD_Category__c</members>
         <members>Account.Homeless__c</members>
         <members>Account.Inactive__c</members>
+        <members>Account.Income_Verified_Date__c</members>
         <members>Account.Infant_Card_Expires__c</members>
         <members>Account.Infants__c</members>
         <members>Account.Level__c</members>
@@ -58,9 +64,13 @@
         <members>Account.Proof_of_Address_Date__c</members>
         <members>Account.Proof_of_Address__c</members>
         <members>Account.Seniors__c</members>
+        <members>Account.Seniors__c</members>
+        <members>Account.Single_Head_Of_Household__c</members>
         <members>Account.Source__c</members>
         <members>Account.Special_Diet__c</members>
         <members>Account.Staff_Notes__c</members>
+        <members>Account.Staff_Notes__c</members>
+        <members>Account.Tags__c</members>
         <members>Account.Tags__c</members>
         <members>Account.Total_Visits__c</members>
         <members>Contact.Age_Entry_Date__c</members>
@@ -119,6 +129,7 @@
         <members>Food_Bank_Settings__c.Allow_Box_Size_Override__c</members>
         <members>Food_Bank_Settings__c.Allow_Overage__c</members>
         <members>Food_Bank_Settings__c.Check_in_Required__c</members>
+        <members>Food_Bank_Settings__c.Create_Visit_Every_Household_Member__c</members>
         <members>Food_Bank_Settings__c.Monthly_Base_Points__c</members>
         <members>Food_Bank_Settings__c.Monthly_Points_Per_Adult__c</members>
         <members>Food_Bank_Settings__c.Monthly_Points_Per_Child__c</members>
@@ -159,6 +170,7 @@
         <members>Food_Bank_Visit__c.Visit_Month__c</members>
         <members>Food_Bank_Visit__c.Visit_Type__c</members>
         <members>Food_Bank_Visit__c.Visit_Year__c</members>
+        <members>Food_Bank_Visit__c.Visitor_Related__c</members>
         <members>Food_Bank_Visit__c.Visitor__c</members>
         <name>CustomField</name>
     </types>
@@ -190,6 +202,7 @@
         <name>GlobalValueSet</name>
     </types>
     <types>
+        <members>Account-Household Food Bank Layout</members>
         <members>Contact-FoodBank Layout</members>
         <members>Food_Bank_Visit__c-Food Bank Visit Layout</members>
         <name>Layout</name>

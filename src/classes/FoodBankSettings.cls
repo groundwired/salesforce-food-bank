@@ -32,6 +32,7 @@ public with sharing class FoodBankSettings {
                     general.Proof_of_Infant_Required__c = true;
                     general.Track_Checkout_Weight__c = true;
                     general.Track_Points__c = true;
+                    general.Create_Visit_Every_Household_Member__c = false;
                     general.Tags__c = 'Special Diet; Spanish Speaker';
                     general.Welcome_Alert__c = 'Hello!';
                     general.Welcome_Message__c = 'Welcome to the food bank.';

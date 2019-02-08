@@ -31,6 +31,15 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Create_Visit_Every_Household_Member__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box to create a visit for every household member.  Set to True if you want to track individuals served.</inlineHelpText>
+        <label>Create Visit Every Household Member</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Monthly_Base_Points__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>Number of monthly points for a one-person household.  Leave blank if you do not limit points.</inlineHelpText>

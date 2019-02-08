@@ -20,6 +20,40 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Annual_Income__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Income</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>C501_Minors__c</fullName>
+        <description>Used in Declarative Rollups</description>
+        <externalId>false</externalId>
+        <label>Minors</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>C501_Parents__c</fullName>
+        <description>Calculates number of contacts in Household with &quot;Parent&quot; indicated. Using DLRS.</description>
+        <externalId>false</externalId>
+        <label>Parents</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Children__c</fullName>
         <externalId>false</externalId>
         <label>Children</label>
@@ -69,6 +103,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Ethnic_Speaking__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Ethnic Speaking</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>External_Created_Date__c</fullName>
         <description>Store the date the external entry was created.</description>
         <externalId>false</externalId>
@@ -99,6 +141,40 @@
         <type>Summary</type>
     </fields>
     <fields>
+        <fullName>HUD_Category__c</fullName>
+        <externalId>false</externalId>
+        <label>HUD Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Very Low</fullName>
+                    <default>false</default>
+                    <label>Very Low</label>
+                </value>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                    <label>Low</label>
+                </value>
+                <value>
+                    <fullName>Moderate</fullName>
+                    <default>false</default>
+                    <label>Moderate</label>
+                </value>
+                <value>
+                    <fullName>Above Moderate</fullName>
+                    <default>false</default>
+                    <label>Above Moderate</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Homeless__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -113,6 +189,14 @@
         <label>Inactive</label>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Income_Verified_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Income Verified Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Infant_Card_Expires__c</fullName>
@@ -266,6 +350,14 @@
         <trackHistory>true</trackHistory>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Single_Head_Of_Household__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Single Head Of Household</label>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Source__c</fullName>

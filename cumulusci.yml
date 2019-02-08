@@ -4,3 +4,4 @@ project:
         name: salesforce-food-bank
     dependencies:
         - github: https://github.com/SalesforceFoundation/Cumulus
+        - github: https://github.com/SalesforceFoundation/Volunteers-for-Salesforce

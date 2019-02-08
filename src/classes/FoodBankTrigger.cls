@@ -158,9 +158,9 @@ public with sharing class FoodBankTrigger {
 		}		
 	}
 
-	public void setFirstVisitCheckbox( list<Food_Bank_Visit__c> visitList, map<Id, Food_Bank_Visit__c> oldMap ) {
+	public void setFirstVisitCheckbox( list<Food_Bank_Visit__c> visitList, map<Id, Food_Bank_Visit__c> oldMap, Boolean isInsert) {
 
-// TODO: if no visit date, assume the create date (or today for new records)
+		// TODO: if no visit date, assume the create date (or today for new records)
 
 		// short circuit if this update is from this trigger itself
 		if (nowUpdatingVisitCheckbox) return;
@@ -246,5 +246,69 @@ public with sharing class FoodBankTrigger {
 		if (!visitsToUpdate.isEmpty())
 			update visitsToUpdate;
 		nowUpdatingVisitCheckbox = false;
+
+		// Create visits for each person in the household
+		system.debug('***** FoodBankTrigger::setFirstVisitCheckbox isInsert: ' + isInsert + ' Create_Visit_Every_Household_Member__c: ' + FoodBankSettings.general.Create_Visit_Every_Household_Member__c);
+		if (isInsert && FoodBankSettings.general.Create_Visit_Every_Household_Member__c) {
+
+			Map<Id, List<Id>> contacts = new Map<Id, List<Id>>();
+			for (Contact contact : [
+				SELECT Id, AccountId
+				FROM Contact
+				WHERE AccountId in :hhSet]) {
+				
+				if (contacts.containsKey(contact.AccountId)) {
+					List<Id> accountContacts = contacts.remove(contact.AccountId);
+					accountContacts.add(contact.Id);
+					contacts.put(contact.AccountId, accountContacts);
+				}
+				else {
+				   contacts.put(contact.AccountId, new List<Id> { contact.Id });
+				}
+			}
+
+			List<Food_Bank_Visit__c> additionalVisits = new List<Food_Bank_Visit__c>();
+			for (Food_Bank_Visit__c cv : visitList) {
+
+				if (cv.Visitor_Related__c) {
+					continue;
+				}
+
+				if (contacts.containsKey(cv.Household__c)) {
+
+					List<Id> accountContacts = contacts.get(cv.Household__c);
+
+					for (Id contactId :accountContacts) {
+						if (contactId != cv.Visitor__c) {
+							additionalVisits.add( new Food_Bank_Visit__c(
+								Visit_Date__c = cv.Visit_Date__c,
+								Household__c = cv.Household__c,
+								Visit_Type__c = cv.Visit_Type__c,
+								Visitor__c = contactId,
+								Visitor_Related__c = true
+							));
+						}
+					}
+				}
+			}
+
+			if (!additionalVisits.isEmpty()) {
+				insert additionalVisits;	
+			}
+
+			// Check to delete Vistor Related records
+			// NOTE: Salesforce 2019 release might be increasing storage from 1GB to 10GB which would mean don't need to worry about deleting old visits
+/*
+			DateTime visitDateThreshold = system.now().addMonths(-14);
+			List<Food_Bank_Visit__c> deleteVisits = [
+				SELECT Id
+				FROM Food_Bank_Visit__c
+				WHERE Visit_Date < :visitDateThreshold];
+
+			if (!deleteVisits.isEmpty()) {
+				delete deleteVisits;
+			}
+*/
+		}
 	}
 }

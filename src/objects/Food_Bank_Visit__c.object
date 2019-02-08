@@ -381,6 +381,15 @@ NULL))))))))))))</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Visitor_Related__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Visitor related is a household member that is served by the visit by virtue of being in the same household as the visitor.</inlineHelpText>
+        <label>First Visit This Year</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Visitor__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
