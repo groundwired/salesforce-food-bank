@@ -49,7 +49,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.Address__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -144,7 +144,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.Level__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -159,7 +159,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.No_Cook__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -184,12 +184,12 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.Power_Of_1__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.Previous_Level__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -219,7 +219,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Account.Special_Diet__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -254,7 +254,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Email_Alert_Data__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -569,7 +569,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Food_Bank_Visit__c.Visitor_Related__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>

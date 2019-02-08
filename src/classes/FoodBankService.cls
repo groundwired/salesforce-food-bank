@@ -96,7 +96,7 @@ public with sharing class FoodBankService {
         return
             [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Checkout_Weight__c, Notes__c, Visitor__r.Name
                 from Food_Bank_Visit__c
-                where Household__c = :hhid
+                where Household__c = :hhid and Visitor_Related__c = false
                 order by Visit_Date__c DESC limit 20];
     }
 
