@@ -205,8 +205,28 @@ public with sharing class FoodBankTrigger {
 				cvMap.put(mapKey, new list<Food_Bank_Visit__c>{ cv });
 		}
 
+		Date date12MonthsAgo = system.today().addYears(-1);
+		List<Food_Bank_Service_Day__c> foodBankServiceDays = [SELECT Service_Day__c FROM Food_Bank_Service_Day__c WHERE Service_Day__c > :date12MonthsAgo];
+		Set<Date> serviceDays = new Set<Date>();
+		for (Food_Bank_Service_Day__c serviceDay :foodBankServiceDays) {
+			serviceDays.add(serviceDay.Service_Day__c);
+		}
+		List<Food_Bank_Service_Day__c> insertServiceDays = new List<Food_Bank_Service_Day__c>();
+
 		// add visits being updated
 		for (Food_Bank_Visit__c cv : visitList) {
+
+			// Check to add Service Day
+			Date visitDay = date.newinstance(cv.Visit_Date__c.year(), cv.Visit_Date__c.month(), cv.Visit_Date__c.day());
+			if (!serviceDays.contains(visitDay)) {
+
+				serviceDays.add(visitDay);
+				insertServiceDays.add( new Food_Bank_Service_Day__c(
+					Name = String.valueOf(visitDay),
+					Service_Day__c = visitDay
+				));
+			}
+
 			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
 			String mapKey = String.valueOf(visitYear) + cv.Household__c;
 			if (cvMap.containsKey(mapKey))
@@ -220,6 +240,10 @@ public with sharing class FoodBankTrigger {
 				if (oldCv.Visit_Date__c != null)
 					yearSet.add(oldCv.Visit_Date__c.year());
 			}
+		}
+
+		if (!insertServiceDays.isEmpty()) {
+			insert insertServiceDays;
 		}
 
 		// for each client/year combo, find the first visit of the year and mark it as such
