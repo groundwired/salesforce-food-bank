@@ -391,13 +391,13 @@ NULL))))))))))))</formula>
     </fields>
     <fields>
         <fullName>Visitor__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
+        <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
         <label>Visitor</label>
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Food Bank Visits</relationshipLabel>
         <relationshipName>Food_Bank_Visits</relationshipName>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>

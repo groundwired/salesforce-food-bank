@@ -48,11 +48,35 @@
     <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
-    <enableReports>false</enableReports>
+    <enableReports>true</enableReports>
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Month_Year__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(MONTH( Service_Day__c ) = 1, &quot;January&quot;,
+IF(MONTH( Service_Day__c ) = 2, &quot;February&quot;,
+IF(MONTH( Service_Day__c ) = 3, &quot;March&quot;,
+IF(MONTH( Service_Day__c ) = 4, &quot;April&quot;,
+IF(MONTH( Service_Day__c ) = 5, &quot;May&quot;,
+IF(MONTH( Service_Day__c ) = 6, &quot;June&quot;,
+IF(MONTH( Service_Day__c ) = 7, &quot;July&quot;,
+IF(MONTH( Service_Day__c ) = 8, &quot;August&quot;,
+IF(MONTH( Service_Day__c ) = 9, &quot;September&quot;,
+IF(MONTH( Service_Day__c ) = 10, &quot;October&quot;,
+IF(MONTH( Service_Day__c ) = 11, &quot;November&quot;,
+IF(MONTH( Service_Day__c ) = 12, &quot;December&quot;,
+&quot;&quot;))))))))))))
+
+&amp; &quot; &quot; &amp; TEXT(YEAR( Service_Day__c ))</formula>
+        <label>Service Day&apos;s Month Year</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <fields>
         <fullName>Service_Day__c</fullName>
         <externalId>false</externalId>

@@ -447,6 +447,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Food_Bank_Service_Day__c.Month_Year__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Food_Bank_Service_Day__c.Service_Day__c</field>
         <readable>true</readable>
@@ -574,11 +579,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Food_Bank_Visit__c.Visitor_Related__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Food_Bank_Visit__c.Visitor__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>

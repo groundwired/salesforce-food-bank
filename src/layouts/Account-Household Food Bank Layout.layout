@@ -298,10 +298,9 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Visitor__c</fields>
         <fields>Visit_Date__c</fields>
-        <fields>Total_People__c</fields>
-        <fields>Points_Used__c</fields>
+        <fields>Visitor__c</fields>
+        <fields>Visitor_Related__c</fields>
         <fields>Checkout_Weight__c</fields>
         <relatedList>Food_Bank_Visit__c.Household__c</relatedList>
     </relatedLists>
