@@ -48,24 +48,66 @@ public with sharing class FoodBankStats {
 	}
 
 	public void queryStats( String timeframe ) {
-		String q = 'SELECT First_Visit_This_Year__c Unduplicated, ' +
-					'COUNT(Id) HHVisits, SUM(Adults__c) Adults, SUM(Children__c) Children, SUM(Infants__c) Infants, ' +
-					'SUM(Seniors__c) Seniors, SUM(Total_People__c) TotalPeople, SUM(More_Than_One_Person__c) MoreThanOnePerson, ' +
+
+		// Households Served Stats
+		// 	Not able to use Aggregrate because there is not DISTINCT Count in SOQL for Household__c
+		String queryHouseholds = 'SELECT First_Visit_This_Year__c, ' +
+					'More_Than_One_Person__c, ' +
+					'Household__c ' +
+					'FROM Food_Bank_Visit__c WHERE Visit_Date__c = ' + timeframe;
+
+		Set<Id> householdOnePersonTotalVisits = new Set<Id>();
+		Set<Id> householdOnePersonFirstVisits = new Set<Id>();
+		Set<Id> householdMoreThanOnePersonTotalVisits = new Set<Id>();
+		Set<Id> householdMoreThanOnePersonFirstVisits = new Set<Id>();
+		for (Food_Bank_Visit__c visit : Database.query(queryHouseholds)) {
+			if (visit.First_Visit_This_Year__c) {
+				if (visit.More_Than_One_Person__c == 0.0) {
+					householdOnePersonFirstVisits.add(visit.Household__c);
+				 } else {
+					householdMoreThanOnePersonFirstVisits.add(visit.Household__c);
+				 }
+			} else {
+				if (visit.More_Than_One_Person__c == 0.0) {
+					householdOnePersonTotalVisits.add(visit.Household__c);
+				 } else {
+					householdMoreThanOnePersonTotalVisits.add(visit.Household__c);
+				 }
+			}
+
+		}		
+
+		// Household - First Visit Stats
+		onePerson[0] = householdOnePersonFirstVisits.size();
+		overOnePerson[0] = householdMoreThanOnePersonFirstVisits.size();
+		hhVisits[0] = onePerson[0] + overOnePerson[0];
+
+		// Household - Duplicated Stats
+		onePerson[1] = householdOnePersonTotalVisits.size();
+		overOnePerson[1] = householdMoreThanOnePersonTotalVisits.size();
+		hhVisits[1] = onePerson[1] + overOnePerson[1];
+
+		// Household - Total Stats
+		onePerson[2] = onePerson[0] + onePerson[1];
+		overOnePerson[2] = overOnePerson[0] + overOnePerson[1];
+		hhVisits[2] = onePerson[2] + overOnePerson[2];
+
+		// Invididuals Served Stats
+		String queryIndividuals = 'SELECT First_Visit_This_Year__c Unduplicated, ' +
+					'SUM(Adults__c) Adults, SUM(Children__c) Children, SUM(Infants__c) Infants, ' +
+					'SUM(Seniors__c) Seniors, ' +
 					'SUM(Homeless_Counter__c) Homeless, SUM(Out_Of_Area_Counter__c) OutOfArea, SUM(Points_Used__c) TotalPoints ' +
 					'FROM Food_Bank_Visit__c WHERE Visit_Date__c = ' + timeframe +
 			 		' GROUP BY ROLLUP(First_Visit_This_Year__c)';
 
-		for (AggregateResult r : Database.query(q)) {
+		for (AggregateResult r : Database.query(queryIndividuals)) {
 			Boolean undup = (Boolean)(r.get('Unduplicated'));
 			Integer i = (undup == true) ? 0 : (undup == false) ? 1 : 2;
-			hhVisits[i] = grabFromResult(r, 'HHVisits');
-			overOnePerson[i] = grabFromResult(r, 'MoreThanOnePerson');
-			onePerson[i] = hhVisits[i] - overOnePerson[i];
 			adults[i] = grabFromResult(r, 'Adults');
 			children[i] = grabFromResult(r, 'Children');
 			infants[i] = grabFromResult(r, 'Infants');
 			seniors[i] = grabFromResult(r, 'Seniors');
-			total[i] = grabFromResult(r, 'TotalPeople');
+			total[i] = adults[i] + children[i] + infants[i] + seniors[i];
 			homeless[i] = grabFromResult(r, 'Homeless');
 			outofarea[i] = grabFromResult(r, 'OutOfArea');
 			if (i == 2) pointsUsed = grabFromResult(r, 'TotalPoints');

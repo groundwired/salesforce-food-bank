@@ -52,7 +52,6 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
         <fullName>Adults__c</fullName>
         <externalId>false</externalId>
@@ -300,7 +299,7 @@
     <fields>
         <fullName>Total_People__c</fullName>
         <externalId>false</externalId>
-        <formula>Adults__c + Children__c + Seniors__c + Infants__c</formula>
+        <formula>Household__r.npsp__Number_of_Household_Members__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Total People</label>
         <precision>18</precision>

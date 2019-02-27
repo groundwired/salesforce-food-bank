@@ -126,6 +126,7 @@
         <members>Food_Bank_Commodity__c.Allow_Overage__c</members>
         <members>Food_Bank_Commodity__c.Monthly_Limit__c</members>
         <members>Food_Bank_Commodity__c.Sort_Order__c</members>
+        <members>Food_Bank_Service_Day__c.Month_Year__c</members>
         <members>Food_Bank_Service_Day__c.Service_Day__c</members>
         <members>Food_Bank_Settings__c.Allow_Box_Size_Override__c</members>
         <members>Food_Bank_Settings__c.Allow_Overage__c</members>

@@ -88,13 +88,15 @@ public with sharing class FoodBankServiceTest {
 			Inactive__c = false
 		);
 		
-		// insert a contact
-        Contact contact = new Contact(
-			Lastname = 'Test Lastname'
-			);
-        
 		// Check insert of Household
 		household1 = FoodBankService.saveHousehold(household1);
+
+		// insert a contact
+        Contact contact = new Contact(
+			Lastname = 'Test Lastname',
+            AccountId = household1.Id
+			);
+        insert contact;
 
 		Food_Bank_Checkin__c checkin1 = new Food_Bank_Checkin__c(
 			Name = household1.Id,
