@@ -67,6 +67,16 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>Visit_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Vistor</label>
+        <length>64</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Food Bank Current Checkins</label>
     <visibility>Protected</visibility>
 </CustomObject>

@@ -27,7 +27,7 @@ public with sharing class FoodBankStatsTest {
 		insert checkin1;
 		
         Map<String, Integer> commU = new Map<String, Integer>();
-        Id cVId = FoodBankService.logVisit(hh.Id, contact.Id, 'small', 1.5, 5, commU, 'These are notes');
+        Id cVId = FoodBankService.logVisit(hh.Id, contact.Id, 'small', 1.5, 5, commU, 'These are notes', 'Food Bank');
 
 		ApexPages.CurrentPage().getParameters().put('tfcode','TODAY');
 		FoodBankStats fbs = new FoodBankStats();

@@ -141,6 +141,7 @@ angular.module('appServices')
         settings.general.proofOfAddressUpdateInterval = result.general.Proof_of_Address_Update_Interval__c;
         settings.general.requireUniqueAddress = result.general.Require_Unique_Address__c;
         settings.general.showIdNumber = result.general.Show_Id__c;
+        settings.general.showStatistics = result.general.Show_Statistics__c;
         settings.general.proofOfInfantRequired = result.general.Proof_of_Infant_Required__c;
         settings.general.trackCheckoutWeight = result.general.Track_Checkout_Weight__c;
         settings.general.trackPoints = result.general.Track_Points__c;
@@ -405,8 +406,8 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbCheckIn', ['jsRemoting', function(jsRemoting) {
-      return function( hhid, contactid, commodities, notes ) {
-        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes]);
+      return function( hhid, contactid, commodities, notes, visitType ) {
+        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes, visittype]);
       };
   }]);
 
@@ -422,7 +423,8 @@ angular.module('appServices')
             'boxType': result.Box_Type__c,
             'ptsUsed': result.Points_Used__c,
             'checkoutWeight' : result.Checkout_Weight__c,
-            'notes': result.Notes__c
+            'notes': result.Notes__c,
+            'visitType': result.Visit_Type__c
           });
         });
         return visits;
@@ -439,7 +441,7 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbLogVisit', ['jsRemoting', function(jsRemoting) {
-    return function( hhid, contactid, boxType, checkoutWeight, pointsUsed, commodities, notes ) {
-      return jsRemoting.invoke('logVisit', [hhid, contactid, boxType, checkoutWeight, pointsUsed, commodities, notes]);
+    return function( hhid, contactid, boxType, checkoutWeight, pointsUsed, commodities, notes, visitType ) {
+      return jsRemoting.invoke('logVisit', [hhid, contactid, boxType, checkoutWeight, pointsUsed, commodities, notes, visitType]);
     };
   }]);

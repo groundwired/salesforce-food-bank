@@ -132,6 +132,15 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Show_Statistics__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Show the statistics on the right at the intake home.</inlineHelpText>
+        <label>Show Statistics</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Tags__c</fullName>
         <description>Semi-colon delimited list of tags for client households.</description>
         <externalId>false</externalId>
