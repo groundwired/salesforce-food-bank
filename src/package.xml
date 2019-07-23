@@ -149,6 +149,7 @@
         <members>Food_Bank_Settings__c.Welcome_Message__c</members>
         <members>Food_Bank_Visit__c.Adults__c</members>
         <members>Food_Bank_Visit__c.Box_Type__c</members>
+        <members>Food_Bank_Visit__c.C501_Visit_Date_Text__c</members>
         <members>Food_Bank_Visit__c.Checkout_Weight__c</members>
         <members>Food_Bank_Visit__c.Children__c</members>
         <members>Food_Bank_Visit__c.Commodity_Usage_JSON__c</members>

@@ -37,6 +37,7 @@
                         <table class="table table-condensed" style="margin-bottom:12px;">
                             <thead>
                                 <tr>
+                                    <th style="width:14%">Status</th>
                                     <th style="width:15%">First</th>
                                     <th style="width:15%">Last</th>
                                     <th style="width:14%">Gender</th>
@@ -44,11 +45,20 @@
                                     <th style="width:12%">Group</th>
                                     <th style="width:11%">Age</th>
                                     <th style="width:25%">Birthdate</th>
+<!--                                    
                                     <th style="width:5%"></th>
+-->
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="person in data.memberList" >
+                                    <td>
+                                        <select ng-model="person.memberData.inactive" class="form-control input-sm"
+                                            name="inactive" ng-options="i for i in ['Active','Inactive']">
+                                            <option value="">-</option>
+                                        </select>
+                                    </td>
+
                                     <td>
                                         <input ng-model="person.memberData.firstName" type="text"
                                             class="form-control input-sm" name="firstname"
@@ -87,8 +97,8 @@
                                             ng-model="person.memberData.birthdate"
                                             placeholder="M/dd/yyyy" min="1900-01-01" />
                                     </td>
-
-                                    <td class="text-right" ng-show="data.memberList.length > 1">
+               
+                                    <td class="text-right" ng-show="false && data.memberList.length > 1">
                                         <button class="btn btn-danger btn-sm"
                                             style="font-size: 12px; padding: 4px 8px;"
                                             ng-click="deleteMember( $index );"><i class="fa fa-minus"></i>

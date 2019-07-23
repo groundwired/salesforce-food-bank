@@ -79,7 +79,7 @@ public with sharing class FoodBankTrigger {
 		for ( Account hh : 
 				[select Id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
 					(select Id, Name, FirstName, LastName, Age__c, Age_Entry_Date__c, Birthdate, 
-						AccountId, Id_Number__c from Contacts
+						AccountId, Id_Number__c, Inactive__c from Contacts
 						where Id not in : clientList order by createdDate, Id, Age__c desc)
 					from Account where id in : triggerHHMap.keyset()] ) {
 
@@ -149,12 +149,16 @@ public with sharing class FoodBankTrigger {
 		hh.Infants__c = 0;
 
 		// add up the clients by age
-		for ( Contact c : clist ) {				
-			if ( c.Age__c == null )	  hh.Adults__c += 1;
+		for ( Contact c : clist ) {	
+
+			if (c.Inactive__c) {
+				continue;
+			}			
+			else if ( c.Age__c == null ) hh.Adults__c += 1;
 			else if ( c.Age__c > 60 ) hh.Seniors__c += 1;
-			else if ( c.Age__c < 2 )  hh.Infants__c += 1;
+			else if ( c.Age__c < 2 ) hh.Infants__c += 1;
 			else if ( c.Age__c < 13 ) hh.Children__c += 1;
-			else                      hh.Adults__c += 1;
+			else hh.Adults__c += 1;
 		}		
 	}
 
@@ -279,7 +283,7 @@ public with sharing class FoodBankTrigger {
 			for (Contact contact : [
 				SELECT Id, AccountId
 				FROM Contact
-				WHERE AccountId in :hhSet]) {
+				WHERE AccountId in :hhSet AND Inactive__c = false]) {
 				
 				if (contacts.containsKey(contact.AccountId)) {
 					List<Id> accountContacts = contacts.remove(contact.AccountId);

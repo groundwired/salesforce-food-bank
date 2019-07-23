@@ -291,7 +291,10 @@
     </relatedContent>
     <relatedLists>
         <fields>FULL_NAME</fields>
-        <fields>CONTACT.TITLE</fields>
+        <fields>Gender__c</fields>
+        <fields>Age_Group__c</fields>
+        <fields>Age__c</fields>
+        <fields>CONTACT.BIRTHDATE</fields>
         <fields>CONTACT.EMAIL</fields>
         <fields>CONTACT.PHONE1</fields>
         <relatedList>RelatedContactList</relatedList>

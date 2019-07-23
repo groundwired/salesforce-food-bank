@@ -98,6 +98,41 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>C501_Visit_Date_Text__c</fullName>
+        <description>Converts date/time of Visit Date into text (mainly for reporting purposes)</description>
+        <externalId>false</externalId>
+        <formula>IF(MONTH(DATEVALUE( Visit_Date__c )) = 1, &quot;January&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 2, &quot;February&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 3, &quot;March&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 4, &quot;April&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 5, &quot;May&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 6, &quot;June&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 7, &quot;July&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 8, &quot;August&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 9, &quot;September&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 10, &quot;October&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 11, &quot;November&quot;,
+IF(MONTH(DATEVALUE( Visit_Date__c )) = 12, &quot;December&quot;,
+NULL))))))))))))
+
+&amp;&quot; &quot;&amp;
+
+TEXT(DAY(DATEVALUE( Visit_Date__c )))
+
+&amp;&quot;, &quot;&amp;
+
+TEXT(YEAR(DATEVALUE( Visit_Date__c )))
+
+&amp;&quot; &quot;&amp;
+
+IF( OR( VALUE( MID( TEXT( Visit_Date__c - 7/24 ), 12, 2 ) ) = 0, VALUE( MID( TEXT( Visit_Date__c - 7/24 ), 12, 2 ) ) = 12 ), &quot;12&quot;, TEXT( VALUE( MID( TEXT( Visit_Date__c - 7/24 ), 12, 2 ) ) - IF( VALUE( MID( TEXT( Visit_Date__c - 7/24 ), 12, 2 ) ) &lt; 12, 0, 12 ) ) ) &amp; &quot;:&quot; &amp; MID( TEXT( Visit_Date__c - 7/24 ), 15, 2 ) &amp; &quot; &quot; &amp; IF( VALUE( MID( TEXT( Visit_Date__c - 7/24 ), 12, 2 ) ) &lt; 12, &quot;AM&quot;, &quot;PM&quot; )</formula>
+        <label>Visit Date (Text Format)</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Checkout_Weight__c</fullName>
         <externalId>false</externalId>
         <label>Checkout Weight</label>
@@ -412,6 +447,11 @@ NULL))))))))))))</formula>
         <columns>Points_Used__c</columns>
         <columns>Checkout_Weight__c</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>Visit_Type__c</field>
+            <operation>equals</operation>
+            <value>Mobile</value>
+        </filters>
         <label>All</label>
     </listViews>
     <listViews>

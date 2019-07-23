@@ -60,8 +60,8 @@ public with sharing class FoodBankService {
                 Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c,
                 Children__c, Infants__c, Seniors__c, Tags__c,
                 Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c,
-                (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Gender__c, Id_Number__c
-                    from Contacts),
+                (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Inactive__c, Gender__c, Id_Number__c
+                    from Contacts order by Inactive__c ASC, Age__c DESC),
                 (select Points_Used__c, Commodity_Usage_JSON__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
                 from Account where id = :hhid];
 
@@ -296,7 +296,7 @@ public with sharing class FoodBankService {
                 RETURNING Contact( 
                     Name, Id_Number__c, MailingStreet,
                     Account.Name, Account.Id
-                WHERE Account.Inactive__c != true 
+                WHERE Account.Inactive__c != true                    
                 ORDER BY Name)];
 
 // TODO: should not need to translate here
