@@ -45,7 +45,6 @@ angular.module('clientController')
     }
     
     $scope.data.visitNotes = '';
-    $scope.data.visitType = 'Select Option';
 
     $scope.data.boxType = foundHousehold.defaultBox;
     if (foundHousehold.commodityAvailability && foundHousehold.commodityAvailability.length > 0) {
@@ -218,16 +217,6 @@ angular.module('clientController')
 
     $scope.checkIn = function() {
 
-      if ($scope.data.visitType == 'Select Option') {
-        $alert({
-          title: 'Visit Type field required!',
-          type: 'danger',
-          duration: 5
-        });
-
-        return;
-      }
-
       // gather the commodity usage for this visit        
       var comms = {};
       _.forEach( $scope.data.commodities, function(v) {
@@ -238,17 +227,7 @@ angular.module('clientController')
 
       $scope.saveAll().then(function() {
 
-        if ($scope.data.visitType == 'Select Option') {
-          $alert({
-            title: 'Visit Type field required!',
-            type: 'danger',
-            duration: 5
-          });
-  
-          return;
-        }
-  
-        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.visitType);
+        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',

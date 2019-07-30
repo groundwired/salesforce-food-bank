@@ -406,8 +406,8 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbCheckIn', ['jsRemoting', function(jsRemoting) {
-      return function( hhid, contactid, commodities, notes, visitType ) {
-        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes, visitType]);
+      return function( hhid, contactid, commodities, notes ) {
+        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes]);
       };
   }]);
 

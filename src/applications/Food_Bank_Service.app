@@ -9,10 +9,7 @@
     <label>Food Bank Service</label>
     <navType>Standard</navType>
     <tabs>standard-Event</tabs>
-    <tabs>Food_Bank_App</tabs>
     <tabs>Food_Bank_App_Page</tabs>
-    <tabs>Food_Bank_Stats</tabs>
-    <tabs>Food_Bank_Visit__c</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>npsp__Contact_Merge</tabs>

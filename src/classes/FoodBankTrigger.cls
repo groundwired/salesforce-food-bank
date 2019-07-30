@@ -302,6 +302,11 @@ public with sharing class FoodBankTrigger {
 					continue;
 				}
 
+				if (cv.Visit_Type__c <> null && cv.Visit_Type__c == 'Baby Pantry') {
+					// To Do: Fix this in the future so not looking at static Baby Pantry name, have a list of something for types not to create visits on all HH members
+					continue;
+				}
+
 				if (contacts.containsKey(cv.Household__c)) {
 
 					List<Id> accountContacts = contacts.get(cv.Household__c);

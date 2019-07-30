@@ -13,7 +13,6 @@ public with sharing class FoodBankService {
         public Id clientContactId { get; private set; }
         public String name { get; private set; }
         public Decimal pointsRemaining { get; private set; }
-        public String visitType { get; private set; }
         public String boxSize { get; private set; }
         public DateTime checkInTime { get; private set; }
         public Boolean checkinNotToday { get; private set; }
@@ -33,7 +32,6 @@ public with sharing class FoodBankService {
             cc.clientContactId = fbc.Visitor__c;
             cc.name = String.format('{0} Household', new String[]{FoodBankService.getContactName(fbc.Visitor__c)});
             cc.pointsRemaining = fbc.Points_Remaining__c;
-            cc.visitType = fbc.Visit_Type__c;
             cc.boxSize = fbc.Box_Size__c;
             cc.checkInTime = fbc.Check_In_Time__c;
             cc.checkinNotToday = (cc.checkInTime != null && cc.checkInTime.date() != system.today());
@@ -216,7 +214,7 @@ public with sharing class FoodBankService {
     }
 
     @RemoteAction
-    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes, String visitType) {
+    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes) {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
 
@@ -236,7 +234,6 @@ public with sharing class FoodBankService {
             fbc.Check_In_Time__c = system.now();
             fbc.Visitor__c = contactid;
             fbc.Notes__c = visitNotes;
-            fbc.Visit_Type__c = visitType;
 
             if (commodityUsage != null && !commodityUsage.isEmpty()) {
                 fbc.Commodity_Usage_JSON__c = JSON.serializePretty(commodityUsage);
