@@ -468,6 +468,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Food_Bank_Visit__c.C501_Household_Count_for_Reports__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Food_Bank_Visit__c.C501_Visit_Date_Text__c</field>
         <readable>true</readable>
     </fieldPermissions>

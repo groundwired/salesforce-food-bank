@@ -123,7 +123,6 @@
         <members>Food_Bank_Checkin__c.Notes__c</members>
         <members>Food_Bank_Checkin__c.Points_Remaining__c</members>
         <members>Food_Bank_Checkin__c.Visitor__c</members>
-        <members>Food_Bank_Checkin__c.Visit_Type__c</members>
         <members>Food_Bank_Commodity__c.Allow_Overage__c</members>
         <members>Food_Bank_Commodity__c.Monthly_Limit__c</members>
         <members>Food_Bank_Commodity__c.Sort_Order__c</members>
@@ -151,6 +150,7 @@
         <members>Food_Bank_Settings__c.Welcome_Message__c</members>
         <members>Food_Bank_Visit__c.Adults__c</members>
         <members>Food_Bank_Visit__c.Box_Type__c</members>
+        <members>Food_Bank_Visit__c.C501_Household_Count_for_Reports__c</members>
         <members>Food_Bank_Visit__c.C501_Visit_Date_Text__c</members>
         <members>Food_Bank_Visit__c.Checkout_Weight__c</members>
         <members>Food_Bank_Visit__c.Children__c</members>

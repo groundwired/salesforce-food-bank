@@ -58,20 +58,20 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Visitor__c</fullName>
+        <fullName>Visit_Type__c</fullName>
         <externalId>false</externalId>
         <label>Vistor</label>
-        <length>32</length>
+        <length>64</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Visit_Type__c</fullName>
+        <fullName>Visitor__c</fullName>
         <externalId>false</externalId>
         <label>Vistor</label>
-        <length>64</length>
+        <length>32</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>

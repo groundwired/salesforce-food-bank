@@ -98,6 +98,20 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>C501_Household_Count_for_Reports__c</fullName>
+        <description>1 count for initial visitor, 0 count for relatives/household members</description>
+        <externalId>false</externalId>
+        <formula>IF( Visitor_Related__c = true, 0, 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Household Count for Reports</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>C501_Visit_Date_Text__c</fullName>
         <description>Converts date/time of Visit Date into text (mainly for reporting purposes)</description>
         <externalId>false</externalId>
