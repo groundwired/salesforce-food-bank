@@ -663,39 +663,6 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>Survey_Household_Composition__c</fullName>
-        <externalId>false</externalId>
-        <label>Survey Household Composition</label>
-        <required>false</required>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Not Single Parent</fullName>
-                    <default>false</default>
-                    <label>Not Single Parent</label>
-                </value>
-                <value>
-                    <fullName>Female</fullName>
-                    <default>false</default>
-                    <label>Single Female Parent</label>
-                </value>
-                <value>
-                    <fullName>Male</fullName>
-                    <default>false</default>
-                    <label>Single Male Parent</label>
-                </value>
-                <value>
-                    <fullName>Unknown</fullName>
-                    <default>false</default>
-                    <label>Unknown</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
         <fullName>Survey_Limited_English_Proficiency__c</fullName>
         <externalId>false</externalId>
         <label>Survey Limited English Proficiency</label>

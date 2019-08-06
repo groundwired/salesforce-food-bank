@@ -35,6 +35,8 @@ angular.module('clientController')
     $scope.data = {};
     $scope.data.household = foundHousehold;
 
+    $scope.data.householdComposition = foundHousehold.householdComposition;
+
     $scope.status = {};
     $scope.data.commodities = foundSettings.commodities;
 
@@ -217,6 +219,13 @@ angular.module('clientController')
 
     $scope.checkIn = function() {
 
+      if ($scope.data.householdComposition == 'Select Option') {
+        $alert({
+          title: 'Household Composition field required!',
+          type: 'danger',
+          duration: 5
+        });
+
       // gather the commodity usage for this visit        
       var comms = {};
       _.forEach( $scope.data.commodities, function(v) {
@@ -227,7 +236,7 @@ angular.module('clientController')
 
       $scope.saveAll().then(function() {
 
-        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes);
+        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.householdComposition);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',

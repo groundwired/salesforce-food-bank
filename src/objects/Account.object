@@ -309,6 +309,69 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Household_Composition__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Household Composition</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Household with Minors</fullName>
+                    <default>false</default>
+                    <label>Household with Minors</label>
+                </value>
+                <value>
+                    <fullName>Other Related</fullName>
+                    <default>false</default>
+                    <label>Other Related</label>
+                </value>
+                <value>
+                    <fullName>Partnered/Married</fullName>
+                    <default>false</default>
+                    <label>Partnered/Married</label>
+                </value>
+                <value>
+                    <fullName>Single Female</fullName>
+                    <default>false</default>
+                    <label>Single Female</label>
+                </value>
+                <value>
+                    <fullName>Single Female Parent</fullName>
+                    <default>false</default>
+                    <label>Single Female Parent</label>
+                </value>
+                <value>
+                    <fullName>Single Male</fullName>
+                    <default>false</default>
+                    <label>Single Male</label>
+                </value>
+                <value>
+                    <fullName>Single Male Parent</fullName>
+                    <default>false</default>
+                    <label>Single Male Parent</label>
+                </value>
+                <value>
+                    <fullName>Single Unknown</fullName>
+                    <default>false</default>
+                    <label>Single Unknown</label>
+                </value>
+                <value>
+                    <fullName>Two Parent</fullName>
+                    <default>false</default>
+                    <label>Two Parent</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Previous_Level__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Sample Previous Level field for use with new Level feature. May be edited or deleted as needed.</description>

@@ -207,7 +207,8 @@ angular.module('appServices')
           Proof_of_Address__c: hh.proofOfAddress,
           Inactive__c: hh.inactive,
           Pending_Commodity_Usage_JSON__c: hh.Pending_Commodity_Usage_JSON__c,
-          Pending_Notes__c: hh.Pending_Notes__c
+          Pending_Notes__c: hh.Pending_Notes__c,
+          Household_Composition__c: (hh.Household_Composition__c == '' ? 'Select Option' : hh.Household_Composition__c)
         };
         if (hh.id) sobj.Id = hh.id;
         return sobj;
@@ -262,7 +263,8 @@ angular.module('appServices')
           proofOfAddress: result.Proof_of_Address__c,
           inactive: result.Inactive__c,
           pendingcommodityusage: result.Pending_Commodity_Usage_JSON__c,
-          pendingnotes: result.Pending_Notes__c
+          pendingnotes: result.Pending_Notes__c,
+          householdComposition: result.Household_Composition__c
         };
 
         // add up the household members
@@ -406,8 +408,8 @@ angular.module('appServices')
 
 angular.module('appServices')
   .factory('fbCheckIn', ['jsRemoting', function(jsRemoting) {
-      return function( hhid, contactid, commodities, notes ) {
-        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes]);
+      return function( hhid, contactid, commodities, notes, householdComposition ) {
+        return jsRemoting.invoke('checkIn', [hhid, contactid, commodities, notes, householdComposition]);
       };
   }]);
 

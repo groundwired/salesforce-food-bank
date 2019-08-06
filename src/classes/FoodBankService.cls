@@ -59,7 +59,7 @@ public with sharing class FoodBankService {
                 Total_Visits__c, Homeless__c, Out_Of_Area__c, BillingStreet, BillingCity, BillingState, BillingPostalCode,
                 Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c,
                 Children__c, Infants__c, Seniors__c, Tags__c,
-                Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c,
+                Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c, Household_Composition__c,
                 (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Inactive__c, Gender__c, Id_Number__c
                     from Contacts order by Inactive__c ASC, Age__c DESC),
                 (select Points_Used__c, Commodity_Usage_JSON__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
@@ -214,7 +214,7 @@ public with sharing class FoodBankService {
     }
 
     @RemoteAction
-    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes) {
+    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes, String householdComposition) {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
 
@@ -222,6 +222,9 @@ public with sharing class FoodBankService {
             [select id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
                 (select Points_Used__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
                 from Account where id = :hhid];
+
+        hh.Household_Composition__c = householdComposition;
+        update hh;
 
         if (Food_Bank_Checkin__c.getInstance( hhid ) != null) {
             throw new FoodBankException('Already checked in.');

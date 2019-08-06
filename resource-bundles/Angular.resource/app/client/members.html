@@ -25,6 +25,17 @@
         </div>
     </div>
     <div class="panel-body">
+        <form name="householdForm">
+            <label class="col-sm-2 control-label">Household Composition</label>
+            <div class="col-sm-3">
+                <select ng-model="data.householdComposition" class="form-control input-sm"
+                    name="visitType" 
+                    ng-options="g for g in ['Select Option', 'Household with Minors', 'Other Related', 'Partnered/Married', 'Single Female', 'Single Female Parent', 'Single Male', 'Single Male Parent', 'Single Unknown', 'Two Parent', 'Unknown']">
+                </select>
+            </div>
+        </form>
+    </div>    
+    <div class="panel-body">
         <table class="table table-condensed" style="margin-bottom:12px;">
             <thead>
                 <tr>

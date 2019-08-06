@@ -393,7 +393,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Survey_Household_Composition__c</field>
+        <field>Account.Household_Composition__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

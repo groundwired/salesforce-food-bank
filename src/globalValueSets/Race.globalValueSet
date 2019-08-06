@@ -1,114 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>African American/Black</fullName>
+        <fullName>American Indian or Alaska Native</fullName>
         <default>false</default>
-        <label>African American/Black</label>
+        <label>American Indian or Alaska Native</label>
     </customValue>
     <customValue>
-        <fullName>Alaska native, Aleut, Eskimo</fullName>
+        <fullName>Asian, Asian American</fullName>
         <default>false</default>
-        <label>Alaska native, Aleut, Eskimo</label>
+        <label>Asian, Asian American</label>
     </customValue>
     <customValue>
-        <fullName>American Indian/Alaskan Native</fullName>
+        <fullName>Black, African-American, Other African</fullName>
         <default>false</default>
-        <label>American Indian/Alaskan Native</label>
+        <label>Black, African-American, Other African</label>
     </customValue>
     <customValue>
-        <fullName>American Indian/Alaskan Native &amp; White</fullName>
+        <fullName>Native Hawaiian or Pacific Islander</fullName>
         <default>false</default>
-        <label>American Indian/Alaskan Native &amp; White</label>
+        <label>Native Hawaiian or Pacific Islander</label>
     </customValue>
     <customValue>
-        <fullName>American Indian (U.S. Tribe)</fullName>
+        <fullName>White or Caucasian</fullName>
         <default>false</default>
-        <label>American Indian (U.S. Tribe)</label>
-    </customValue>
-    <customValue>
-        <fullName>Amer Indian/Alaska Nat &amp; Black/African Amer</fullName>
-        <default>false</default>
-        <label>Amer Indian/Alaska Nat &amp; Black/African Amer</label>
-    </customValue>
-    <customValue>
-        <fullName>Arab/Iranian or Middle Eastern</fullName>
-        <default>false</default>
-        <label>Arab/Iranian or Middle Eastern</label>
-    </customValue>
-    <customValue>
-        <fullName>Asian</fullName>
-        <default>false</default>
-        <label>Asian</label>
-    </customValue>
-    <customValue>
-        <fullName>Asian &amp; White</fullName>
-        <default>false</default>
-        <label>Asian &amp; White</label>
-    </customValue>
-    <customValue>
-        <fullName>Asian Indian</fullName>
-        <default>false</default>
-        <label>Asian Indian</label>
-    </customValue>
-    <customValue>
-        <fullName>Black/African American</fullName>
-        <default>false</default>
-        <label>Black/African American</label>
-    </customValue>
-    <customValue>
-        <fullName>Black/African American &amp; White</fullName>
-        <default>false</default>
-        <label>Black/African American &amp; White</label>
-    </customValue>
-    <customValue>
-        <fullName>Cambodian</fullName>
-        <default>false</default>
-        <label>Cambodian</label>
-    </customValue>
-    <customValue>
-        <fullName>Chinese, Except Taiwanese</fullName>
-        <default>false</default>
-        <label>Chinese, Except Taiwanese</label>
-    </customValue>
-    <customValue>
-        <fullName>Filipino</fullName>
-        <default>false</default>
-        <label>Filipino</label>
-    </customValue>
-    <customValue>
-        <fullName>Hawaiian Native</fullName>
-        <default>false</default>
-        <label>Hawaiian Native</label>
-    </customValue>
-    <customValue>
-        <fullName>Indigenous African/Black</fullName>
-        <default>false</default>
-        <label>Indigenous African/Black</label>
-    </customValue>
-    <customValue>
-        <fullName>Indigenous of Americas (other than U.S.)</fullName>
-        <default>false</default>
-        <label>Indigenous of Americas (other than U.S.)</label>
-    </customValue>
-    <customValue>
-        <fullName>Japanese</fullName>
-        <default>false</default>
-        <label>Japanese</label>
-    </customValue>
-    <customValue>
-        <fullName>Korean</fullName>
-        <default>false</default>
-        <label>Korean</label>
-    </customValue>
-    <customValue>
-        <fullName>Micronesian</fullName>
-        <default>false</default>
-        <label>Micronesian</label>
-    </customValue>
-    <customValue>
-        <fullName>Native Hawaiian/ Other Pacific Islander</fullName>
-        <default>false</default>
-        <label>Native Hawaiian/ Other Pacific Islander</label>
+        <label>White or Caucasian</label>
     </customValue>
     <customValue>
         <fullName>Other</fullName>
@@ -116,39 +31,9 @@
         <label>Other</label>
     </customValue>
     <customValue>
-        <fullName>Other Asian</fullName>
+        <fullName>Multi-racial</fullName>
         <default>false</default>
-        <label>Other Asian</label>
-    </customValue>
-    <customValue>
-        <fullName>Other Black</fullName>
-        <default>false</default>
-        <label>Other Black</label>
-    </customValue>
-    <customValue>
-        <fullName>Other Pacific Islander</fullName>
-        <default>false</default>
-        <label>Other Pacific Islander</label>
-    </customValue>
-    <customValue>
-        <fullName>Other White/Causcasian</fullName>
-        <default>false</default>
-        <label>Other White/Causcasian</label>
-    </customValue>
-    <customValue>
-        <fullName>Polynesian</fullName>
-        <default>false</default>
-        <label>Polynesian</label>
-    </customValue>
-    <customValue>
-        <fullName>Refugee/immigrant</fullName>
-        <default>false</default>
-        <label>Refugee/immigrant</label>
-    </customValue>
-    <customValue>
-        <fullName>Undisclosed</fullName>
-        <default>false</default>
-        <label>Undisclosed</label>
+        <label>Multi-racial</label>
     </customValue>
     <customValue>
         <fullName>Unknown</fullName>
@@ -156,14 +41,189 @@
         <label>Unknown</label>
     </customValue>
     <customValue>
-        <fullName>Vietnamese</fullName>
+        <fullName>Refugee/immigrant</fullName>
         <default>false</default>
-        <label>Vietnamese</label>
+        <label>Refugee/immigrant</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Asian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Other Asian</label>
+    </customValue>
+    <customValue>
+        <fullName>Indigenous African/Black</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Indigenous African/Black</label>
+    </customValue>
+    <customValue>
+        <fullName>African American/Black</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>African American/Black</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Black</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Other Black</label>
+    </customValue>
+    <customValue>
+        <fullName>Hawaiian Native</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hawaiian Native</label>
+    </customValue>
+    <customValue>
+        <fullName>Polynesian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Polynesian</label>
+    </customValue>
+    <customValue>
+        <fullName>Micronesian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Micronesian</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Pacific Islander</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Other Pacific Islander</label>
+    </customValue>
+    <customValue>
+        <fullName>Arab/Iranian or Middle Eastern</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arab/Iranian or Middle Eastern</label>
+    </customValue>
+    <customValue>
+        <fullName>Other White/Causcasian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Other White/Causcasian</label>
     </customValue>
     <customValue>
         <fullName>White</fullName>
         <default>false</default>
+        <isActive>false</isActive>
         <label>White</label>
+    </customValue>
+    <customValue>
+        <fullName>Black/African American</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Black/African American</label>
+    </customValue>
+    <customValue>
+        <fullName>Asian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asian</label>
+    </customValue>
+    <customValue>
+        <fullName>American Indian/Alaskan Native</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>American Indian/Alaskan Native</label>
+    </customValue>
+    <customValue>
+        <fullName>Native Hawaiian/ Other Pacific Islander</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Native Hawaiian/ Other Pacific Islander</label>
+    </customValue>
+    <customValue>
+        <fullName>American Indian/Alaskan Native &amp; White</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>American Indian/Alaskan Native &amp; White</label>
+    </customValue>
+    <customValue>
+        <fullName>Asian &amp; White</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asian &amp; White</label>
+    </customValue>
+    <customValue>
+        <fullName>Black/African American &amp; White</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Black/African American &amp; White</label>
+    </customValue>
+    <customValue>
+        <fullName>Amer Indian/Alaska Nat &amp; Black/African Amer</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Amer Indian/Alaska Nat &amp; Black/African Amer</label>
+    </customValue>
+    <customValue>
+        <fullName>Undisclosed</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Undisclosed</label>
+    </customValue>
+    <customValue>
+        <fullName>Vietnamese</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Vietnamese</label>
+    </customValue>
+    <customValue>
+        <fullName>Korean</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Korean</label>
+    </customValue>
+    <customValue>
+        <fullName>Japanese</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Japanese</label>
+    </customValue>
+    <customValue>
+        <fullName>Filipino</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Filipino</label>
+    </customValue>
+    <customValue>
+        <fullName>Chinese, Except Taiwanese</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Chinese, Except Taiwanese</label>
+    </customValue>
+    <customValue>
+        <fullName>Cambodian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cambodian</label>
+    </customValue>
+    <customValue>
+        <fullName>Asian Indian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Asian Indian</label>
+    </customValue>
+    <customValue>
+        <fullName>Indigenous of Americas (other than U.S.)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Indigenous of Americas (other than U.S.)</label>
+    </customValue>
+    <customValue>
+        <fullName>American Indian (U.S. Tribe)</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>American Indian (U.S. Tribe)</label>
+    </customValue>
+    <customValue>
+        <fullName>Alaska native, Aleut, Eskimo</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Alaska native, Aleut, Eskimo</label>
     </customValue>
     <masterLabel>Race</masterLabel>
     <sorted>false</sorted>
