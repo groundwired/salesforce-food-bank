@@ -208,7 +208,7 @@ angular.module('appServices')
           Inactive__c: hh.inactive,
           Pending_Commodity_Usage_JSON__c: hh.Pending_Commodity_Usage_JSON__c,
           Pending_Notes__c: hh.Pending_Notes__c,
-          Household_Composition__c: (hh.Household_Composition__c == '' ? 'Select Option' : hh.Household_Composition__c)
+          Household_Composition__c: hh.Household_Composition__c
         };
         if (hh.id) sobj.Id = hh.id;
         return sobj;

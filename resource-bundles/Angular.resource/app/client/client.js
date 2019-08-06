@@ -36,6 +36,9 @@ angular.module('clientController')
     $scope.data.household = foundHousehold;
 
     $scope.data.householdComposition = foundHousehold.householdComposition;
+    if (foundHousehold.householdComposition == null || foundHousehold.householdComposition.length <= 0) {
+      $scope.data.householdComposition = 'Select Option';
+    }
 
     $scope.status = {};
     $scope.data.commodities = foundSettings.commodities;
@@ -225,6 +228,9 @@ angular.module('clientController')
           type: 'danger',
           duration: 5
         });
+
+        return;
+      }
 
       // gather the commodity usage for this visit        
       var comms = {};

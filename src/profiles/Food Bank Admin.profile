@@ -122,6 +122,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.Household_Composition__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Account.Inactive__c</field>
         <readable>true</readable>
@@ -389,11 +394,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Survey_Homeless__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Account.Household_Composition__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
