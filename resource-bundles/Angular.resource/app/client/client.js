@@ -223,13 +223,10 @@ angular.module('clientController')
     $scope.checkIn = function() {
 
       if ($scope.data.householdComposition == 'Select Option') {
-        $alert({
-          title: 'Household Composition field required!',
-          type: 'danger',
-          duration: 5
-        });
-
-        return;
+        $scope.data.householdComposition = foundHousehold.householdComposition;
+        if (foundHousehold.householdComposition == null || foundHousehold.householdComposition.length <= 0) {
+          $scope.data.householdComposition = '';
+        }
       }
 
       // gather the commodity usage for this visit        

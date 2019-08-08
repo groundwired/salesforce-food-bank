@@ -41,9 +41,10 @@
         <label>Unknown</label>
     </customValue>
     <customValue>
-        <fullName>Refugee/immigrant</fullName>
+        <fullName>Vietnamese</fullName>
         <default>false</default>
-        <label>Refugee/immigrant</label>
+        <isActive>false</isActive>
+        <label>Vietnamese</label>
     </customValue>
     <customValue>
         <fullName>Other Asian</fullName>
@@ -166,10 +167,10 @@
         <label>Undisclosed</label>
     </customValue>
     <customValue>
-        <fullName>Vietnamese</fullName>
+        <fullName>Refugee/immigrant</fullName>
         <default>false</default>
         <isActive>false</isActive>
-        <label>Vietnamese</label>
+        <label>Refugee/immigrant</label>
     </customValue>
     <customValue>
         <fullName>Korean</fullName>

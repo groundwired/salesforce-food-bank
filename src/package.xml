@@ -122,8 +122,8 @@
         <members>Food_Bank_Checkin__c.Commodity_Usage_JSON__c</members>
         <members>Food_Bank_Checkin__c.Notes__c</members>
         <members>Food_Bank_Checkin__c.Points_Remaining__c</members>
-        <members>Food_Bank_Checkin__c.Visitor__c</members>
         <members>Food_Bank_Checkin__c.Visit_Type__c</members>
+        <members>Food_Bank_Checkin__c.Visitor__c</members>
         <members>Food_Bank_Commodity__c.Allow_Overage__c</members>
         <members>Food_Bank_Commodity__c.Monthly_Limit__c</members>
         <members>Food_Bank_Commodity__c.Sort_Order__c</members>
