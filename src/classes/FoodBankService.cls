@@ -34,7 +34,7 @@ public with sharing class FoodBankService {
             cc.pointsRemaining = fbc.Points_Remaining__c;
             cc.boxSize = fbc.Box_Size__c;
             cc.checkInTime = fbc.Check_In_Time__c;
-            cc.checkinNotToday = (cc.checkInTime != null && cc.checkInTime.date() != system.today());
+            cc.checkinNotToday = (cc.checkInTime != null && cc.checkInTime.date() != Date.today());
             chkList.add( cc );
         }
 
@@ -214,9 +214,11 @@ public with sharing class FoodBankService {
     }
 
     @RemoteAction
-    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes, String householdComposition) {
+    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes, String visitType, String visitDate, String householdComposition) {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
+
+        System.debug('*****FoodBankService::checkIn visittype: ' + visitType + ' visitDate: ' + visitDate);
 
         Account hh =
             [select id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
@@ -234,9 +236,19 @@ public with sharing class FoodBankService {
             for (Food_Bank_Visit__c cv : hh.FoodBankVisits__r)
                 if (cv.Points_Used__c != null) fbc.Points_Remaining__c -= cv.Points_Used__c;
 
-            fbc.Check_In_Time__c = system.now();
+            Datetime currentDatetime = Datetime.now();
+            Date currentDate = currentDatetime.date();
+            Date visitDateIncoming = Date.parse(visitDate);
+            Integer dayDifference = currentDate.daysBetween(visitDateIncoming);
+
+            Datetime visitDatetime = currentDatetime.addDays(dayDifference);
+
+            System.debug('*****FoodBankService::checkIn visitDatetime: ' + visitDatetime + 'dayDifference: ' + dayDifference);
+
+            fbc.Check_In_Time__c = visitDatetime;
             fbc.Visitor__c = contactid;
             fbc.Notes__c = visitNotes;
+            fbc.Visit_Type__c = visitType;
 
             if (commodityUsage != null && !commodityUsage.isEmpty()) {
                 fbc.Commodity_Usage_JSON__c = JSON.serializePretty(commodityUsage);
@@ -298,7 +310,7 @@ public with sharing class FoodBankService {
                 RETURNING Contact( 
                     Name, Id_Number__c, MailingStreet,
                     Account.Name, Account.Id
-                WHERE Account.Inactive__c != true                    
+                WHERE Account.Inactive__c != true
                 ORDER BY Name)];
 
 // TODO: should not need to translate here
@@ -339,7 +351,7 @@ public with sharing class FoodBankService {
     }
 
     @RemoteAction
-    public static Id logVisit( Id hhId, Id contactId, String boxType, Decimal checkoutWeight, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes, String visitType ) {
+    public static Id logVisit( Id hhId, Id contactId, String boxType, Decimal checkoutWeight, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes) {
 
         // get the HH detail
         Account[] hhs =
@@ -370,6 +382,8 @@ public with sharing class FoodBankService {
             }
         }
 
+        System.debug('*****FoodBankService::logVisit Check_In_Time__c: ' + ((fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : Datetime.now()));
+
         // log the visit
         Food_Bank_Visit__c cv = new Food_Bank_Visit__c(
             Household__c = hh.Id,
@@ -383,8 +397,8 @@ public with sharing class FoodBankService {
             Checkout_Weight__c = checkoutWeight,
             Box_Type__c = boxType,
             Notes__c = visitNotes,
-            Visit_Type__c = (visitType == '' && fbc != null && fbc.Visit_Type__c != null) ? fbc.Visit_Type__c : visitType,
-            Visit_Date__c = (fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : system.now(),
+            Visit_Type__c = (fbc != null && fbc.Visit_Type__c != null) ? fbc.Visit_Type__c : 'Food Bank',
+            Visit_Date__c = (fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : Datetime.now(),
             Visitor__c = (fbc != null && fbc.Visitor__c != null) ? fbc.Visitor__c : contactid
         );
         if (commodityUsage != null && !commodityUsage.isEmpty())

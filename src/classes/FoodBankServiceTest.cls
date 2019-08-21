@@ -20,12 +20,12 @@ public with sharing class FoodBankServiceTest {
         commU.put('Bread', 1);
 
         // Test CheckIn & CheckOut
-        FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Unknown');
+        FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Food Bank', '01/01/2019', 'Unknown');
         System.assert(Food_Bank_Checkin__c.getInstance(cHh.Id) != null);
 
         // Attempt to CheckIn again should throw error
         try {
-            FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Unknown');
+            FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Food Bank', '01/01/2019', 'Unknown');
             System.assert(false, 'Error should have occured');
         } catch (Exception ex) {
             // Nothing to see here
@@ -131,7 +131,7 @@ public with sharing class FoodBankServiceTest {
 		Map<String, Integer> commU = new Map<String, Integer>();
 		commU.put('Meat', 2);
 		commU.put('Bread', 1);
-		Id cVId = FoodBankService.logVisit(household1.Id, contact.Id, 'small', 1.1, 5, commU, 'These are notes', 'Food Bank');
+		Id cVId = FoodBankService.logVisit(household1.Id, contact.Id, 'small', 1.1, 5, commU, 'These are notes');
 		System.assert(cVId != null);
 
 		List<Food_Bank_Visit__c> cV = FoodBankService.getVisitHistory(household1.Id);

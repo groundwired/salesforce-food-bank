@@ -50,6 +50,8 @@ angular.module('clientController')
     }
     
     $scope.data.visitNotes = '';
+    $scope.data.visitType = 'Select Option';
+    $scope.data.visitDate = new Date();   
 
     $scope.data.boxType = foundHousehold.defaultBox;
     if (foundHousehold.commodityAvailability && foundHousehold.commodityAvailability.length > 0) {
@@ -229,6 +231,10 @@ angular.module('clientController')
         }
       }
 
+      if ($scope.data.visitType == 'Select Option') {
+        $scope.data.visitType = 'Food Bank';
+      }
+
       // gather the commodity usage for this visit        
       var comms = {};
       _.forEach( $scope.data.commodities, function(v) {
@@ -239,7 +245,12 @@ angular.module('clientController')
 
       $scope.saveAll().then(function() {
 
-        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.householdComposition);
+        var dd = String($scope.data.visitDate.getDate()).padStart(2, '0');
+        var mm = String($scope.data.visitDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = $scope.data.visitDate.getFullYear();
+        var visitDate = mm + '/' + dd + '/' + yyyy;
+
+        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.visitType, visitDate, $scope.data.householdComposition);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',
