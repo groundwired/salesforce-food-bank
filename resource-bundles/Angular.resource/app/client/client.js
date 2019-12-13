@@ -35,11 +35,6 @@ angular.module('clientController')
     $scope.data = {};
     $scope.data.household = foundHousehold;
 
-    $scope.data.householdComposition = foundHousehold.householdComposition;
-    if (foundHousehold.householdComposition == null || foundHousehold.householdComposition.length <= 0) {
-      $scope.data.householdComposition = 'Select Option';
-    }
-
     $scope.status = {};
     $scope.data.commodities = foundSettings.commodities;
 
@@ -224,13 +219,6 @@ angular.module('clientController')
 
     $scope.checkIn = function() {
 
-      if ($scope.data.householdComposition == 'Select Option') {
-        $scope.data.householdComposition = foundHousehold.householdComposition;
-        if (foundHousehold.householdComposition == null || foundHousehold.householdComposition.length <= 0) {
-          $scope.data.householdComposition = '';
-        }
-      }
-
       if ($scope.data.visitType == 'Select Option') {
         $scope.data.visitType = 'Food Bank';
       }
@@ -250,7 +238,7 @@ angular.module('clientController')
         var yyyy = $scope.data.visitDate.getFullYear();
         var visitDate = mm + '/' + dd + '/' + yyyy;
 
-        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.visitType, visitDate, $scope.data.householdComposition);
+        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.visitType, visitDate, $scope.data.household.householdComposition);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',
@@ -331,6 +319,7 @@ angular.module('clientController')
         postalCode: $scope.data.household.postalCode,
         phone: $scope.data.household.phone,
         homeless: $scope.data.household.homeless,
+        householdComposition: $scope.data.household.householdComposition,
         outofarea: $scope.data.household.outofarea,
         proofOfAddress: $scope.data.household.proofOfAddress
       };

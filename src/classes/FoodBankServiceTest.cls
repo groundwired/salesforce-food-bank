@@ -20,12 +20,12 @@ public with sharing class FoodBankServiceTest {
         commU.put('Bread', 1);
 
         // Test CheckIn & CheckOut
-        FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Food Bank', '01/01/2019', 'Unknown');
+        FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Food Bank', '01/01/2019', 'Unknown Household Composition');
         System.assert(Food_Bank_Checkin__c.getInstance(cHh.Id) != null);
 
         // Attempt to CheckIn again should throw error
         try {
-            FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Food Bank', '01/01/2019', 'Unknown');
+            FoodBankService.checkIn(cHh.Id, cContact.Id, commU, 'Notes', 'Food Bank', '01/01/2019', 'Unknown Household Composition');
             System.assert(false, 'Error should have occured');
         } catch (Exception ex) {
             // Nothing to see here

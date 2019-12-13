@@ -193,6 +193,7 @@ angular.module('appServices')
           BillingPostalCode: hh.postalCode,
           Phone: hh.phone,
           Homeless__c: hh.homeless,
+          Household_Composition__c: hh.householdComposition,
           Out_Of_Area__c: hh.outofarea,
           Notes__c: hh.notes,
           Source__c: hh.source,
@@ -207,8 +208,7 @@ angular.module('appServices')
           Proof_of_Address__c: hh.proofOfAddress,
           Inactive__c: hh.inactive,
           Pending_Commodity_Usage_JSON__c: hh.Pending_Commodity_Usage_JSON__c,
-          Pending_Notes__c: hh.Pending_Notes__c,
-          Household_Composition__c: hh.Household_Composition__c
+          Pending_Notes__c: hh.Pending_Notes__c
         };
         if (hh.id) sobj.Id = hh.id;
         return sobj;
@@ -248,7 +248,8 @@ angular.module('appServices')
           postalCode: result.BillingPostalCode,
           phone: result.Phone,
           homeless: result.Homeless__c,
-          outofarea: result.Out_Of_Area__c,
+          householdComposition: result.Household_Composition__c,
+          outofarea: result.Out_Of_Area__c,          
           notes: result.Notes__c,
           source: result.Source__c,
           externalId: result.External_ID__c,
@@ -263,8 +264,7 @@ angular.module('appServices')
           proofOfAddress: result.Proof_of_Address__c,
           inactive: result.Inactive__c,
           pendingcommodityusage: result.Pending_Commodity_Usage_JSON__c,
-          pendingnotes: result.Pending_Notes__c,
-          householdComposition: result.Household_Composition__c
+          pendingnotes: result.Pending_Notes__c
         };
 
         // add up the household members

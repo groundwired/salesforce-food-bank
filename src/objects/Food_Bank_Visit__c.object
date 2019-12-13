@@ -150,7 +150,7 @@ IF( OR( VALUE( MID( TEXT( Visit_Date__c - 7/24 ), 12, 2 ) ) = 0, VALUE( MID( TEX
         <fullName>Checkout_Weight__c</fullName>
         <externalId>false</externalId>
         <label>Checkout Weight</label>
-        <precision>6</precision>
+        <precision>7</precision>
         <required>false</required>
         <scale>2</scale>
         <trackTrending>false</trackTrending>

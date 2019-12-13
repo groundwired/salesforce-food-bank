@@ -152,23 +152,34 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
+                    <fullName>30% Extremely Low</fullName>
+                    <default>false</default>
+                    <label>30% Extremely Low</label>
+                </value>
+                <value>
                     <fullName>Very Low</fullName>
                     <default>false</default>
-                    <label>Very Low</label>
+                    <label>50% Very Low</label>
                 </value>
                 <value>
                     <fullName>Low</fullName>
                     <default>false</default>
-                    <label>Low</label>
+                    <label>80% Low</label>
                 </value>
                 <value>
                     <fullName>Moderate</fullName>
                     <default>false</default>
-                    <label>Moderate</label>
+                    <label>100% Moderate</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
                 </value>
                 <value>
                     <fullName>Above Moderate</fullName>
                     <default>false</default>
+                    <isActive>false</isActive>
                     <label>Above Moderate</label>
                 </value>
             </valueSetDefinition>
@@ -192,21 +203,36 @@
         <valueSet>
             <restricted>true</restricted>
             <valueSetDefinition>
-                <sorted>true</sorted>
+                <sorted>false</sorted>
                 <value>
-                    <fullName>Household with Minors</fullName>
+                    <fullName>With Minors Two Parent</fullName>
                     <default>false</default>
-                    <label>Household with Minors</label>
+                    <label>With Minors Two Parent</label>
                 </value>
                 <value>
-                    <fullName>Other Related</fullName>
+                    <fullName>With Minors Single Female Parent</fullName>
                     <default>false</default>
-                    <label>Other Related</label>
+                    <label>With Minors Single Female Parent</label>
                 </value>
                 <value>
-                    <fullName>Partnered/Married</fullName>
+                    <fullName>With Minors Single Male Parent</fullName>
                     <default>false</default>
-                    <label>Partnered/Married</label>
+                    <label>With Minors Single Male Parent</label>
+                </value>
+                <value>
+                    <fullName>With Minors Other Related</fullName>
+                    <default>false</default>
+                    <label>With Minors Other Related</label>
+                </value>
+                <value>
+                    <fullName>Without Minors Partnered/Married</fullName>
+                    <default>false</default>
+                    <label>Without Minors Partnered/Married</label>
+                </value>
+                <value>
+                    <fullName>Without Minors Other Related</fullName>
+                    <default>false</default>
+                    <label>Without Minors Other Related</label>
                 </value>
                 <value>
                     <fullName>Single Female</fullName>
@@ -214,34 +240,35 @@
                     <label>Single Female</label>
                 </value>
                 <value>
-                    <fullName>Single Female Parent</fullName>
-                    <default>false</default>
-                    <label>Single Female Parent</label>
-                </value>
-                <value>
                     <fullName>Single Male</fullName>
                     <default>false</default>
                     <label>Single Male</label>
                 </value>
                 <value>
-                    <fullName>Single Male Parent</fullName>
+                    <fullName>Single Minor</fullName>
                     <default>false</default>
-                    <label>Single Male Parent</label>
+                    <label>Single Minor</label>
+                </value>
+                <value>
+                    <fullName>Single Other</fullName>
+                    <default>false</default>
+                    <label>Single Other</label>
+                </value>
+                <value>
+                    <fullName>Unknown Household Composition</fullName>
+                    <default>false</default>
+                    <label>Unknown Household Composition</label>
+                </value>
+                <value>
+                    <fullName>Other Household Composition</fullName>
+                    <default>false</default>
+                    <label>Other Household Composition</label>
                 </value>
                 <value>
                     <fullName>Single Unknown</fullName>
                     <default>false</default>
+                    <isActive>false</isActive>
                     <label>Single Unknown</label>
-                </value>
-                <value>
-                    <fullName>Two Parent</fullName>
-                    <default>false</default>
-                    <label>Two Parent</label>
-                </value>
-                <value>
-                    <fullName>Unknown</fullName>
-                    <default>false</default>
-                    <label>Unknown</label>
                 </value>
             </valueSetDefinition>
         </valueSet>

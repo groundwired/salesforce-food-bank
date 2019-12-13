@@ -56,10 +56,10 @@ public with sharing class FoodBankService {
     public static Account getHouseholdDetail( Id hhid ) {
         Account hh =
             [select Id, Name, CreatedDate, LastModifiedDate, First_Visit__c, Most_Recent_Visit__c,
-                Total_Visits__c, Homeless__c, Out_Of_Area__c, BillingStreet, BillingCity, BillingState, BillingPostalCode,
+                Total_Visits__c, Homeless__c, Household_Composition__c, Out_Of_Area__c, BillingStreet, BillingCity, BillingState, BillingPostalCode,
                 Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c,
                 Children__c, Infants__c, Seniors__c, Tags__c,
-                Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c, Household_Composition__c,
+                Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c,
                 (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Inactive__c, Gender__c, Id_Number__c
                     from Contacts order by Inactive__c ASC, Age__c DESC),
                 (select Points_Used__c, Commodity_Usage_JSON__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
