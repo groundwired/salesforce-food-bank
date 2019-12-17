@@ -112,7 +112,7 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Household_Composition__c</field>
             </layoutItems>
             <layoutItems>

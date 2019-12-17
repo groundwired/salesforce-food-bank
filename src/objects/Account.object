@@ -195,9 +195,10 @@
     </fields>
     <fields>
         <fullName>Household_Composition__c</fullName>
+        <defaultValue>&quot;Unknown Household Composition&quot;</defaultValue>
         <externalId>false</externalId>
         <label>Household Composition</label>
-        <required>false</required>
+        <required>true</required>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
         <valueSet>
