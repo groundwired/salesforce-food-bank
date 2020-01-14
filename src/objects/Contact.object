@@ -109,6 +109,11 @@
                     <label>Female</label>
                 </value>
                 <value>
+                    <fullName>Transgender</fullName>
+                    <default>false</default>
+                    <label>Transgender</label>
+                </value>
+                <value>
                     <fullName>Other</fullName>
                     <default>false</default>
                     <label>Other</label>

@@ -418,7 +418,7 @@
         <externalId>false</externalId>
         <label>Proof of Address Date</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
