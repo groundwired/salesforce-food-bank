@@ -406,9 +406,19 @@ NULL))))))))))))</formula>
                     <label>Baby Pantry</label>
                 </value>
                 <value>
+                    <fullName>Emergency Bag</fullName>
+                    <default>false</default>
+                    <label>Emergency Bag</label>
+                </value>
+                <value>
                     <fullName>Food Bank</fullName>
                     <default>true</default>
                     <label>Food Bank</label>
+                </value>
+                <value>
+                    <fullName>Food Bank plus Baby Pantry</fullName>
+                    <default>false</default>
+                    <label>Food Bank plus Baby Pantry</label>
                 </value>
                 <value>
                     <fullName>Mobile</fullName>

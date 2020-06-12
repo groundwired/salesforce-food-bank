@@ -9,17 +9,16 @@
     <div class="panel-body">
         <form name="visitForm">
             <label class="col-sm-2 control-label">Visit Type</label>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <select ng-model="data.visitType" class="form-control input-sm"
                     name="visitType" 
-                    ng-options="g for g in ['Select Option', 'Baby Pantry', 'Food Bank', 'Mobile']">
+                    ng-options="g for g in ['Select Option', 'Baby Pantry', 'Emergency Bag', 'Food Bank', 'Food Bank plus Baby Pantry', 'Mobile']">
                 </select>
             </div>
             <label class="col-sm-2 control-label">Visit Date</label>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <input class="form-control input-sm"
                     type="date"
-                    style="width:100px"
                     ng-model="data.visitDate"
                     placeholder="M/dd/yyyy" min="1900-01-01" required />
             </div>
