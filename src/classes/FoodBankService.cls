@@ -26,11 +26,24 @@ public with sharing class FoodBankService {
         //    delete fbc;
         //}
 
+        // Get all the Visitor Names
+        List<Id> contactIds = new List<Id>();
         for (Food_Bank_Checkin__c fbc : Food_Bank_Checkin__c.getAll().values()) {
+            contactIds.add(fbc.Visitor__c);
+        }
+
+        Map<String, String> contactNames = FoodBankService.getContactNames(contactIds);
+
+        for (Food_Bank_Checkin__c fbc : Food_Bank_Checkin__c.getAll().values()) {
+
             ClientCheckin cc = new ClientCheckin();
             cc.clientId = fbc.name;
+            if (contactNames.containsKey(fbc.Visitor__c)) {
+                cc.name = String.format('{0} Household', new String[]{contactNames.get(fbc.Visitor__c)});
+            } else {
+                cc.name = 'Unknown Household';
+            }
             cc.clientContactId = fbc.Visitor__c;
-            cc.name = String.format('{0} Household', new String[]{FoodBankService.getContactName(fbc.Visitor__c)});
             cc.pointsRemaining = fbc.Points_Remaining__c;
             cc.boxSize = fbc.Box_Size__c;
             cc.checkInTime = fbc.Check_In_Time__c;
@@ -39,8 +52,10 @@ public with sharing class FoodBankService {
         }
 
         // Sort List
-        for (Integer i =0; i < chkList.size(); i++) {
+        for (Integer i = 0; i < chkList.size(); i++) {
+
             for (Integer j = i; j > 0; j--) {
+
                 if (chkList[j-1].checkInTime < chkList[j].checkInTime){
                     ClientCheckin temp = chkList[j];
                     chkList[j] = chkList[j-1];
@@ -186,6 +201,20 @@ public with sharing class FoodBankService {
                 pts += (FoodBankSettings.general.Monthly_points_per_Child__c * hh.Infants__c);
         }
         return pts;
+    }
+
+    static Map<String, String> getContactNames(List<Id> contactids){
+        
+        if (contactIds == null || contactids.isEmpty()) {
+            return new Map<String, String>();
+        }
+
+		Map<String, String> contactNames = new Map<String, String>();
+        for (Contact contactRecord :[select Id, AccountId, Name from Contact where id in :contactids]) {
+            contactNames.put(contactRecord.Id, contactRecord.Name);
+        }
+
+        return contactNames;
     }
 
     static String getContactName(Id contactid){
