@@ -96,13 +96,19 @@ public with sharing class FoodBankTriggerTest {
 		);
 		insert hh;
 
-		Food_Bank_Visit__c cv = new Food_Bank_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset - 1));
+        Contact contact = new Contact(
+			Lastname = 'Test Lastname',
+            AccountId = hh.Id
+			);
+        insert contact;
+
+		Food_Bank_Visit__c cv = new Food_Bank_Visit__c(Household__c = hh.id, Visitor__c = contact.Id, Visit_Date__c = System.today().addDays(dateOffset - 1));
 		insert cv;
 
 		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
 		System.assertEquals(true, cv.First_Visit_This_Year__c);
 
-		Food_Bank_Visit__c cv2 = new Food_Bank_Visit__c(Household__c = hh.id, Visit_Date__c = System.today().addDays(dateOffset));
+		Food_Bank_Visit__c cv2 = new Food_Bank_Visit__c(Household__c = hh.id, Visitor__c = contact.Id, Visit_Date__c = System.today().addDays(dateOffset));
 		insert cv2;
 
 		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
@@ -120,13 +126,19 @@ public with sharing class FoodBankTriggerTest {
 		);
 		insert hh;
 
-		Food_Bank_Visit__c cv = new Food_Bank_Visit__c(Household__c = hh.id);
+        Contact contact = new Contact(
+			Lastname = 'Test Lastname',
+            AccountId = hh.Id
+			);
+        insert contact;
+
+		Food_Bank_Visit__c cv = new Food_Bank_Visit__c(Household__c = hh.id, Visitor__c = contact.Id);
 		insert cv;
 
 		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];
 		System.assertEquals(true, cv.First_Visit_This_Year__c);
 
-		Food_Bank_Visit__c cv2 = new Food_Bank_Visit__c(Household__c = hh.id);
+		Food_Bank_Visit__c cv2 = new Food_Bank_Visit__c(Household__c = hh.id, Visitor__c = contact.Id);
 		insert cv2;
 
 		cv = [ SELECT First_Visit_This_Year__c FROM Food_Bank_Visit__c WHERE Id = :cv.Id ];

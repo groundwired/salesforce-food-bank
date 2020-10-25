@@ -29,9 +29,10 @@ angular.module('logVisitController')
     $scope.boxType = foundHousehold.defaultBox;
     $scope.commodities = foundHousehold.commodityAvailability;
 
-    $scope.visitNotes = '';
+    $scope.data.visitNotes = '';
+    
     if (foundHousehold.pendingnotes != null && foundHousehold.pendingnotes.length > 0) {
-      $scope.visitNotes = foundHousehold.pendingnotes;
+      $scope.data.visitNotes = foundHousehold.pendingnotes;
     }
     
     fbCustomLabel.get( 'Box_Type__c' ).then(
@@ -52,7 +53,7 @@ angular.module('logVisitController')
 
       $scope.logging = true;
 
-      fbLogVisit( $scope.data.household.id, $scope.contactid, $scope.boxType, $scope.checkoutWeight, $scope.ptsUsed, comms, $scope.visitNotes ).then(
+      fbLogVisit( $scope.data.household.id, $scope.contactid, $scope.boxType, $scope.checkoutWeight, $scope.ptsUsed, comms, $scope.data.visitNotes ).then(
         function(result){
           $scope.logging = false;
           $window.scrollTo(0,0);

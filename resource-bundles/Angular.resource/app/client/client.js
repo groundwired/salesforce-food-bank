@@ -45,6 +45,8 @@ angular.module('clientController')
     }
     
     $scope.data.visitNotes = '';
+    $scope.data.visitType = 'Select Option';
+    $scope.data.visitDate = new Date();   
 
     $scope.data.boxType = foundHousehold.defaultBox;
     if (foundHousehold.commodityAvailability && foundHousehold.commodityAvailability.length > 0) {
@@ -217,6 +219,10 @@ angular.module('clientController')
 
     $scope.checkIn = function() {
 
+      if ($scope.data.visitType == 'Select Option') {
+        $scope.data.visitType = 'Food Bank';
+      }
+
       // gather the commodity usage for this visit        
       var comms = {};
       _.forEach( $scope.data.commodities, function(v) {
@@ -226,7 +232,13 @@ angular.module('clientController')
       });
 
       $scope.saveAll().then(function() {
-        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes);
+
+        var dd = String($scope.data.visitDate.getDate()).padStart(2, '0');
+        var mm = String($scope.data.visitDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = $scope.data.visitDate.getFullYear();
+        var visitDate = mm + '/' + dd + '/' + yyyy;
+
+        fbCheckIn($scope.data.household.id, $scope.contactid, comms, $scope.data.visitNotes, $scope.data.visitType, visitDate, $scope.data.household.householdComposition);
         $window.scrollTo(0,0);
         $alert({
           title: 'Checked in!',
@@ -307,6 +319,7 @@ angular.module('clientController')
         postalCode: $scope.data.household.postalCode,
         phone: $scope.data.household.phone,
         homeless: $scope.data.household.homeless,
+        householdComposition: $scope.data.household.householdComposition,
         outofarea: $scope.data.household.outofarea,
         proofOfAddress: $scope.data.household.proofOfAddress
       };

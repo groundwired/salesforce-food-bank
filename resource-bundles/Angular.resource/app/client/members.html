@@ -28,6 +28,7 @@
         <table class="table table-condensed" style="margin-bottom:12px;">
             <thead>
                 <tr>
+                    <th style="width:14%">Status</th>
                     <th style="width:30%" ng-if="!status.editingMembers">Name</th>
                     <th style="width:15%" ng-if="status.editingMembers">First</th>
                     <th style="width:15%" ng-if="status.editingMembers">Last</th>
@@ -37,13 +38,17 @@
                     <th style="width:11%" ng-if="status.editingMembers && status.hasInfant()">Proof of Infant</th>
                     <th style="width:11%">Age</th>
                     <th style="width:25%">Birthdate</th>
+<!--                                    
                     <th style="width:5%"></th>
+-->
                 </tr>
             </thead>
             <tbody>
                 <tr class="{success: person.memberData.age >= 18, warning: person.memberData.age < 18}"
                         ng-repeat="person in data.memberList" >
 
+                    <td bgcolor="#FF0000" ng-if="!status.editingMembers && person.memberData.inactive == 'Inactive'">{{person.memberData.inactive}}</td>
+                    <td ng-if="!status.editingMembers && person.memberData.inactive == 'Active'">{{person.memberData.inactive}}</td>
                     <td ng-if="!status.editingMembers">{{person.memberData.name}}</td>
                     <td ng-if="!status.editingMembers">{{person.memberData.gender}}</td>
                     <td ng-if="!status.editingMembers">{{person.memberData.ageGroup}}</td>
@@ -51,6 +56,12 @@
                     <td ng-if="!status.editingMembers">
                         {{checkBirthdate(person.memberData.birthdate) | date:'M/dd/yyyy'}}</td>
 
+                    <td ng-if="status.editingMembers">
+                        <select ng-model="person.memberDataEditable.inactive" class="form-control input-sm"
+                            name="inactive" ng-options="i for i in ['Active','Inactive']">
+                            <option value="">-</option>
+                        </select>
+                    </td>
                     <td ng-if="status.editingMembers">
                         <input ng-model="person.memberDataEditable.firstName" type="text" class="form-control input-sm"
                             name="firstname" ng-maxlength="50" ng-setfocus="$last">
@@ -61,7 +72,7 @@
                     </td>
                     <td ng-if="status.editingMembers">
                         <select ng-model="person.memberDataEditable.gender" class="form-control input-sm"
-                            name="gender" ng-options="g for g in ['Male','Female','Other','Unknown']">
+                            name="gender" ng-options="g for g in ['Male','Female','Transgender','Other','Unknown']">
                             <option value="">-</option>
                         </select>
                     </td>
@@ -90,7 +101,7 @@
                             ng-model="person.memberDataEditable.birthdate"
                             placeholder="M/dd/yyyy" min="1900-01-01" required />
                     </td>
-                    <td ng-if="status.editingMembers && data.memberList.length > 1" class="text-right">
+                    <td ng-if="false && status.editingMembers && data.memberList.length > 1" class="text-right">
                         <button class="btn btn-danger btn-sm"
                             style="font-size: 12px; padding: 6px 4px 4px 6px; position: relative; right: -15px;"
                             ng-click="deleteMember( $index );"

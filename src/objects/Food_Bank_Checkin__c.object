@@ -22,13 +22,14 @@
     </fields>
     <fields>
         <fullName>Client_Name__c</fullName>
+        <caseSensitive>false</caseSensitive>
         <externalId>false</externalId>
         <label>Client Name</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
-        <unique>false</unique>
+        <unique>true</unique>
     </fields>
     <fields>
         <fullName>Commodity_Usage_JSON__c</fullName>
@@ -58,14 +59,25 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Visit_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Vistor</label>
+        <length>64</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Visitor__c</fullName>
+        <caseSensitive>false</caseSensitive>
         <externalId>false</externalId>
         <label>Vistor</label>
         <length>32</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
-        <unique>false</unique>
+        <unique>true</unique>
     </fields>
     <label>Food Bank Current Checkins</label>
     <visibility>Protected</visibility>

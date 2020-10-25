@@ -79,7 +79,7 @@ public with sharing class FoodBankTrigger {
 		for ( Account hh : 
 				[select Id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
 					(select Id, Name, FirstName, LastName, Age__c, Age_Entry_Date__c, Birthdate, 
-						AccountId, Id_Number__c from Contacts
+						AccountId, Id_Number__c, Inactive__c from Contacts
 						where Id not in : clientList order by createdDate, Id, Age__c desc)
 					from Account where id in : triggerHHMap.keyset()] ) {
 
@@ -149,18 +149,22 @@ public with sharing class FoodBankTrigger {
 		hh.Infants__c = 0;
 
 		// add up the clients by age
-		for ( Contact c : clist ) {				
-			if ( c.Age__c == null )	  hh.Adults__c += 1;
+		for ( Contact c : clist ) {	
+
+			if (c.Inactive__c) {
+				continue;
+			}			
+			else if ( c.Age__c == null ) hh.Adults__c += 1;
 			else if ( c.Age__c > 60 ) hh.Seniors__c += 1;
-			else if ( c.Age__c < 2 )  hh.Infants__c += 1;
+			else if ( c.Age__c < 2 ) hh.Infants__c += 1;
 			else if ( c.Age__c < 13 ) hh.Children__c += 1;
-			else                      hh.Adults__c += 1;
+			else hh.Adults__c += 1;
 		}		
 	}
 
-	public void setFirstVisitCheckbox( list<Food_Bank_Visit__c> visitList, map<Id, Food_Bank_Visit__c> oldMap ) {
+	public void setFirstVisitCheckbox( list<Food_Bank_Visit__c> visitList, map<Id, Food_Bank_Visit__c> oldMap, Boolean isInsert) {
 
-// TODO: if no visit date, assume the create date (or today for new records)
+		// TODO: if no visit date, assume the create date (or today for new records)
 
 		// short circuit if this update is from this trigger itself
 		if (nowUpdatingVisitCheckbox) return;
@@ -205,8 +209,28 @@ public with sharing class FoodBankTrigger {
 				cvMap.put(mapKey, new list<Food_Bank_Visit__c>{ cv });
 		}
 
+		Date date12MonthsAgo = system.today().addYears(-1);
+		List<Food_Bank_Service_Day__c> foodBankServiceDays = [SELECT Service_Day__c FROM Food_Bank_Service_Day__c WHERE Service_Day__c > :date12MonthsAgo];
+		Set<Date> serviceDays = new Set<Date>();
+		for (Food_Bank_Service_Day__c serviceDay :foodBankServiceDays) {
+			serviceDays.add(serviceDay.Service_Day__c);
+		}
+		List<Food_Bank_Service_Day__c> insertServiceDays = new List<Food_Bank_Service_Day__c>();
+
 		// add visits being updated
 		for (Food_Bank_Visit__c cv : visitList) {
+
+			// Check to add Service Day
+			Date visitDay = date.newinstance(cv.Visit_Date__c.year(), cv.Visit_Date__c.month(), cv.Visit_Date__c.day());
+			if (!serviceDays.contains(visitDay)) {
+
+				serviceDays.add(visitDay);
+				insertServiceDays.add( new Food_Bank_Service_Day__c(
+					Name = String.valueOf(visitDay),
+					Service_Day__c = visitDay
+				));
+			}
+
 			Integer visitYear = (cv.Visit_Date__c == null) ? system.today().year() : cv.Visit_Date__c.year();
 			String mapKey = String.valueOf(visitYear) + cv.Household__c;
 			if (cvMap.containsKey(mapKey))
@@ -220,6 +244,10 @@ public with sharing class FoodBankTrigger {
 				if (oldCv.Visit_Date__c != null)
 					yearSet.add(oldCv.Visit_Date__c.year());
 			}
+		}
+
+		if (!insertServiceDays.isEmpty()) {
+			insert insertServiceDays;
 		}
 
 		// for each client/year combo, find the first visit of the year and mark it as such
@@ -246,5 +274,74 @@ public with sharing class FoodBankTrigger {
 		if (!visitsToUpdate.isEmpty())
 			update visitsToUpdate;
 		nowUpdatingVisitCheckbox = false;
+
+		// Create visits for each person in the household
+		system.debug('***** FoodBankTrigger::setFirstVisitCheckbox isInsert: ' + isInsert + ' Create_Visit_Every_Household_Member__c: ' + FoodBankSettings.general.Create_Visit_Every_Household_Member__c);
+		if (isInsert && FoodBankSettings.general.Create_Visit_Every_Household_Member__c) {
+
+			Map<Id, List<Id>> contacts = new Map<Id, List<Id>>();
+			for (Contact contact : [
+				SELECT Id, AccountId
+				FROM Contact
+				WHERE AccountId in :hhSet AND Inactive__c = false]) {
+				
+				if (contacts.containsKey(contact.AccountId)) {
+					List<Id> accountContacts = contacts.remove(contact.AccountId);
+					accountContacts.add(contact.Id);
+					contacts.put(contact.AccountId, accountContacts);
+				}
+				else {
+				   contacts.put(contact.AccountId, new List<Id> { contact.Id });
+				}
+			}
+
+			List<Food_Bank_Visit__c> additionalVisits = new List<Food_Bank_Visit__c>();
+			for (Food_Bank_Visit__c cv : visitList) {
+
+				if (cv.Visitor_Related__c) {
+					continue;
+				}
+
+				if (cv.Visit_Type__c <> null && cv.Visit_Type__c == 'Baby Pantry') {
+					// To Do: Fix this in the future so not looking at static Baby Pantry name, have a list of something for types not to create visits on all HH members
+					continue;
+				}
+
+				if (contacts.containsKey(cv.Household__c)) {
+
+					List<Id> accountContacts = contacts.get(cv.Household__c);
+
+					for (Id contactId :accountContacts) {
+						if (contactId != cv.Visitor__c) {
+							additionalVisits.add( new Food_Bank_Visit__c(
+								Visit_Date__c = cv.Visit_Date__c,
+								Household__c = cv.Household__c,
+								Visit_Type__c = cv.Visit_Type__c,
+								Visitor__c = contactId,
+								Visitor_Related__c = true
+							));
+						}
+					}
+				}
+			}
+
+			if (!additionalVisits.isEmpty()) {
+				insert additionalVisits;	
+			}
+
+			// Check to delete Vistor Related records
+			// NOTE: Salesforce 2019 release might be increasing storage from 1GB to 10GB which would mean don't need to worry about deleting old visits
+/*
+			DateTime visitDateThreshold = system.now().addMonths(-14);
+			List<Food_Bank_Visit__c> deleteVisits = [
+				SELECT Id
+				FROM Food_Bank_Visit__c
+				WHERE Visit_Date < :visitDateThreshold];
+
+			if (!deleteVisits.isEmpty()) {
+				delete deleteVisits;
+			}
+*/
+		}
 	}
 }

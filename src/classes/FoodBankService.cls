@@ -26,21 +26,36 @@ public with sharing class FoodBankService {
         //    delete fbc;
         //}
 
+        // Get all the Visitor Names
+        List<Id> contactIds = new List<Id>();
         for (Food_Bank_Checkin__c fbc : Food_Bank_Checkin__c.getAll().values()) {
+            contactIds.add(fbc.Visitor__c);
+        }
+
+        Map<String, String> contactNames = FoodBankService.getContactNames(contactIds);
+
+        for (Food_Bank_Checkin__c fbc : Food_Bank_Checkin__c.getAll().values()) {
+
             ClientCheckin cc = new ClientCheckin();
             cc.clientId = fbc.name;
+            if (contactNames.containsKey(fbc.Visitor__c)) {
+                cc.name = String.format('{0} Household', new String[]{contactNames.get(fbc.Visitor__c)});
+            } else {
+                cc.name = 'Unknown Household';
+            }
             cc.clientContactId = fbc.Visitor__c;
-            cc.name = String.format('{0} Household', new String[]{FoodBankService.getContactName(fbc.Visitor__c)});
             cc.pointsRemaining = fbc.Points_Remaining__c;
             cc.boxSize = fbc.Box_Size__c;
             cc.checkInTime = fbc.Check_In_Time__c;
-            cc.checkinNotToday = (cc.checkInTime != null && cc.checkInTime.date() != system.today());
+            cc.checkinNotToday = (cc.checkInTime != null && cc.checkInTime.date() != Date.today());
             chkList.add( cc );
         }
 
         // Sort List
-        for (Integer i =0; i < chkList.size(); i++) {
+        for (Integer i = 0; i < chkList.size(); i++) {
+
             for (Integer j = i; j > 0; j--) {
+
                 if (chkList[j-1].checkInTime < chkList[j].checkInTime){
                     ClientCheckin temp = chkList[j];
                     chkList[j] = chkList[j-1];
@@ -56,12 +71,12 @@ public with sharing class FoodBankService {
     public static Account getHouseholdDetail( Id hhid ) {
         Account hh =
             [select Id, Name, CreatedDate, LastModifiedDate, First_Visit__c, Most_Recent_Visit__c,
-                Total_Visits__c, Homeless__c, Out_Of_Area__c, BillingStreet, BillingCity, BillingState, BillingPostalCode,
+                Total_Visits__c, Homeless__c, Household_Composition__c, Out_Of_Area__c, BillingStreet, BillingCity, BillingState, BillingPostalCode,
                 Inactive__c, Notes__c, Source__c, External_ID__c, Adults__c,
                 Children__c, Infants__c, Seniors__c, Tags__c,
                 Staff_Notes__c, Phone, Proof_of_Address__c, Proof_of_Address_Date__c,
-                (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Gender__c, Id_Number__c
-                    from Contacts),
+                (select Id, Name, FirstName, LastName, Age_Group__c, Age__c, Birthdate, Proof_of_Infant__c, Inactive__c, Gender__c, Id_Number__c
+                    from Contacts order by Inactive__c ASC, Age__c DESC),
                 (select Points_Used__c, Commodity_Usage_JSON__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
                 from Account where id = :hhid];
 
@@ -94,9 +109,9 @@ public with sharing class FoodBankService {
     @RemoteAction
     public static list<Food_Bank_Visit__c> getVisitHistory( Id hhid ) {
         return
-            [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Checkout_Weight__c, Notes__c, Visitor__r.Name
+            [select Id, Visit_Date__c, Box_Type__c, Points_Used__c, Checkout_Weight__c, Notes__c, Visitor__r.Name, Visit_Type__c
                 from Food_Bank_Visit__c
-                where Household__c = :hhid
+                where Household__c = :hhid and Visitor_Related__c = false
                 order by Visit_Date__c DESC limit 20];
     }
 
@@ -188,6 +203,20 @@ public with sharing class FoodBankService {
         return pts;
     }
 
+    static Map<String, String> getContactNames(List<Id> contactids){
+        
+        if (contactIds == null || contactids.isEmpty()) {
+            return new Map<String, String>();
+        }
+
+		Map<String, String> contactNames = new Map<String, String>();
+        for (Contact contactRecord :[select Id, AccountId, Name from Contact where id in :contactids]) {
+            contactNames.put(contactRecord.Id, contactRecord.Name);
+        }
+
+        return contactNames;
+    }
+
     static String getContactName(Id contactid){
         
         if (contactId == null) {
@@ -214,14 +243,19 @@ public with sharing class FoodBankService {
     }
 
     @RemoteAction
-    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes) {
+    public static void checkIn( Id hhid, Id contactid, Map<String, Integer> commodityUsage, String visitNotes, String visitType, String visitDate, String householdComposition) {
 
         Food_Bank_Checkin__c fbc = new Food_Bank_Checkin__c();
+
+        System.debug('*****FoodBankService::checkIn visittype: ' + visitType + ' visitDate: ' + visitDate);
 
         Account hh =
             [select id, Name, Adults__c, Seniors__c, Children__c, Infants__c,
                 (select Points_Used__c from FoodBankVisits__r where Visit_Date__c = THIS_MONTH)
                 from Account where id = :hhid];
+
+        hh.Household_Composition__c = householdComposition;
+        update hh;
 
         if (Food_Bank_Checkin__c.getInstance( hhid ) != null) {
             throw new FoodBankException('Already checked in.');
@@ -231,10 +265,19 @@ public with sharing class FoodBankService {
             for (Food_Bank_Visit__c cv : hh.FoodBankVisits__r)
                 if (cv.Points_Used__c != null) fbc.Points_Remaining__c -= cv.Points_Used__c;
 
-            fbc.Check_In_Time__c = system.now();
-            fbc.Visitor__c = contactid;
+            Datetime currentDatetime = Datetime.now();
+            Date currentDate = currentDatetime.date();
+            Date visitDateIncoming = Date.parse(visitDate);
+            Integer dayDifference = currentDate.daysBetween(visitDateIncoming);
 
+            Datetime visitDatetime = currentDatetime.addDays(dayDifference);
+
+            System.debug('*****FoodBankService::checkIn visitDatetime: ' + visitDatetime + 'dayDifference: ' + dayDifference);
+
+            fbc.Check_In_Time__c = visitDatetime;
+            fbc.Visitor__c = contactid;
             fbc.Notes__c = visitNotes;
+            fbc.Visit_Type__c = visitType;
 
             if (commodityUsage != null && !commodityUsage.isEmpty()) {
                 fbc.Commodity_Usage_JSON__c = JSON.serializePretty(commodityUsage);
@@ -296,7 +339,7 @@ public with sharing class FoodBankService {
                 RETURNING Contact( 
                     Name, Id_Number__c, MailingStreet,
                     Account.Name, Account.Id
-                WHERE Account.Inactive__c != true 
+                WHERE Account.Inactive__c != true
                 ORDER BY Name)];
 
 // TODO: should not need to translate here
@@ -337,7 +380,7 @@ public with sharing class FoodBankService {
     }
 
     @RemoteAction
-    public static Id logVisit( Id hhId, Id contactId, String boxType, Decimal checkoutWeight, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes ) {
+    public static Id logVisit( Id hhId, Id contactId, String boxType, Decimal checkoutWeight, Integer pointsUsed, Map<String, Integer> commodityUsage, String visitNotes) {
 
         // get the HH detail
         Account[] hhs =
@@ -361,10 +404,14 @@ public with sharing class FoodBankService {
         }
 
         Food_Bank_Checkin__c fbc = Food_Bank_Checkin__c.getInstance( hhid );
-        c = [select id from Contact where id = :fbc.Visitor__c];
-        if (c.isEmpty()) {
-            fbc.Visitor__c = null;
+        if (fbc != null && fbc.Visitor__c != null) {
+            c = [select id from Contact where id = :fbc.Visitor__c];
+            if (c.isEmpty()) {
+                fbc.Visitor__c = null;
+            }
         }
+
+        System.debug('*****FoodBankService::logVisit Check_In_Time__c: ' + ((fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : Datetime.now()));
 
         // log the visit
         Food_Bank_Visit__c cv = new Food_Bank_Visit__c(
@@ -379,7 +426,8 @@ public with sharing class FoodBankService {
             Checkout_Weight__c = checkoutWeight,
             Box_Type__c = boxType,
             Notes__c = visitNotes,
-            Visit_Date__c = (fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : system.now(),
+            Visit_Type__c = (fbc != null && fbc.Visit_Type__c != null) ? fbc.Visit_Type__c : 'Food Bank',
+            Visit_Date__c = (fbc != null && fbc.Check_In_Time__c != null) ? fbc.Check_In_Time__c : Datetime.now(),
             Visitor__c = (fbc != null && fbc.Visitor__c != null) ? fbc.Visitor__c : contactid
         );
         if (commodityUsage != null && !commodityUsage.isEmpty())
